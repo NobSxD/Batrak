@@ -1,0 +1,4285 @@
+{
+  "type": "ASK",
+  "originalAmount": 0.00119000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:12 PM",
+  "id": "3314610834",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258266"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00066000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:12 PM",
+  "id": "3314610835",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258315"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00676000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:12 PM",
+  "id": "3314610836",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258342"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00025000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:12 PM",
+  "id": "3314610837",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258380"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00027000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:13 PM",
+  "id": "3314610838",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258398"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00026000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:13 PM",
+  "id": "3314610839",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258403"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00028000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:13 PM",
+  "id": "3314610840",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258405"
+}{
+  "type": "BID",
+  "originalAmount": 0.00102000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:13 PM",
+  "id": "3314610841",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258418"
+}{
+  "type": "BID",
+  "originalAmount": 0.00110000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:13 PM",
+  "id": "3314610842",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258422"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00220000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:14 PM",
+  "id": "3314610843",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258449"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00017000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:15 PM",
+  "id": "3314610844",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258458"
+}{
+  "type": "BID",
+  "originalAmount": 0.00100000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:15 PM",
+  "id": "3314610845",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258460"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00043000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:15 PM",
+  "id": "3314610846",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258462"
+}{
+  "type": "BID",
+  "originalAmount": 0.00225000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:15 PM",
+  "id": "3314610847",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258470"
+}{
+  "type": "BID",
+  "originalAmount": 0.01579000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:15 PM",
+  "id": "3314610848",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258475"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00053000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:15 PM",
+  "id": "3314610849",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258477"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00025000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:16 PM",
+  "id": "3314610850",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258543"
+}{
+  "type": "BID",
+  "originalAmount": 0.00259000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610851",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258556"
+}{
+  "type": "BID",
+  "originalAmount": 0.00478000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610852",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258557"
+}{
+  "type": "BID",
+  "originalAmount": 0.00048000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610853",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258564"
+}{
+  "type": "ASK",
+  "originalAmount": 0.03351000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610854",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258566"
+}{
+  "type": "BID",
+  "originalAmount": 0.00014000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610855",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258568"
+}{
+  "type": "BID",
+  "originalAmount": 0.00030000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610856",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258572"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00032000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610857",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258574"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00124000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:17 PM",
+  "id": "3314610858",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258583"
+}{
+  "type": "ASK",
+  "originalAmount": 0.01140000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:19 PM",
+  "id": "3314610859",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258692"
+}{
+  "type": "BID",
+  "originalAmount": 0.00097000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:19 PM",
+  "id": "3314610860",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258706"
+}{
+  "type": "BID",
+  "originalAmount": 0.00157000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:19 PM",
+  "id": "3314610861",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258710"
+}{
+  "type": "BID",
+  "originalAmount": 0.01067000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:19 PM",
+  "id": "3314610862",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258717"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00112000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:20 PM",
+  "id": "3314610863",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258719"
+}{
+  "type": "BID",
+  "originalAmount": 0.00093000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:20 PM",
+  "id": "3314610864",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258722"
+}{
+  "type": "BID",
+  "originalAmount": 0.00036000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:20 PM",
+  "id": "3314610865",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258725"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00114000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:20 PM",
+  "id": "3314610866",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258727"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00046000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:21 PM",
+  "id": "3314610867",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258765"
+}{
+  "type": "BID",
+  "originalAmount": 0.00599000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:21 PM",
+  "id": "3314610868",
+  "makerOrderId": "23664257290",
+  "takerOrderId": "23664258766"
+}{
+  "type": "BID",
+  "originalAmount": 0.04191000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:21 PM",
+  "id": "3314610869",
+  "makerOrderId": "23664257295",
+  "takerOrderId": "23664258766"
+}{
+  "type": "BID",
+  "originalAmount": 0.00143000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:22 PM",
+  "id": "3314610870",
+  "makerOrderId": "23664257295",
+  "takerOrderId": "23664258794"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00065000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:23 PM",
+  "id": "3314610871",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258813"
+}{
+  "type": "BID",
+  "originalAmount": 0.00498000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:23 PM",
+  "id": "3314610872",
+  "makerOrderId": "23664257295",
+  "takerOrderId": "23664258828"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00236000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:24 PM",
+  "id": "3314610873",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258870"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00050000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:24 PM",
+  "id": "3314610874",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664258888"
+}{
+  "type": "BID",
+  "originalAmount": 0.40168000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:26 PM",
+  "id": "3314610875",
+  "makerOrderId": "23664257295",
+  "takerOrderId": "23664258994"
+}{
+  "type": "BID",
+  "originalAmount": 0.14800000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:26 PM",
+  "id": "3314610876",
+  "makerOrderId": "23664257305",
+  "takerOrderId": "23664258994"
+}{
+  "type": "BID",
+  "originalAmount": 0.00025000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:26 PM",
+  "id": "3314610877",
+  "makerOrderId": "23664257305",
+  "takerOrderId": "23664259006"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00014000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:26 PM",
+  "id": "3314610878",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664259018"
+}{
+  "type": "BID",
+  "originalAmount": 0.00230000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:26 PM",
+  "id": "3314610879",
+  "makerOrderId": "23664257305",
+  "takerOrderId": "23664259019"
+}{
+  "type": "BID",
+  "originalAmount": 0.00014000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.95000000,
+  "timestamp": "Dec 10, 2023, 10:06:26 PM",
+  "id": "3314610880",
+  "makerOrderId": "23664257305",
+  "takerOrderId": "23664259023"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00081000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610881",
+  "makerOrderId": "23664257065",
+  "takerOrderId": "23664259029"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00045000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610882",
+  "makerOrderId": "23664257782",
+  "takerOrderId": "23664259068"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00045000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610883",
+  "makerOrderId": "23664258096",
+  "takerOrderId": "23664259068"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00250000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610884",
+  "makerOrderId": "23664258442",
+  "takerOrderId": "23664259068"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00045000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610885",
+  "makerOrderId": "23664258547",
+  "takerOrderId": "23664259068"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00045000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43857.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610886",
+  "makerOrderId": "23664258894",
+  "takerOrderId": "23664259068"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43858.02000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610887",
+  "makerOrderId": "23664215866",
+  "takerOrderId": "23664259139"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43858.08000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610888",
+  "makerOrderId": "23664217455",
+  "takerOrderId": "23664259139"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00541000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43858.09000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610889",
+  "makerOrderId": "23664243572",
+  "takerOrderId": "23664259139"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00050000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43858.11000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610890",
+  "makerOrderId": "23664258569",
+  "takerOrderId": "23664259139"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43858.52000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610891",
+  "makerOrderId": "23664215881",
+  "takerOrderId": "23664259139"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43858.56000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610892",
+  "makerOrderId": "23664217464",
+  "takerOrderId": "23664259139"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00541000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43858.92000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610893",
+  "makerOrderId": "23664243579",
+  "takerOrderId": "23664259250"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.02000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610894",
+  "makerOrderId": "23664215896",
+  "takerOrderId": "23664259250"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.04000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610895",
+  "makerOrderId": "23664217475",
+  "takerOrderId": "23664259250"
+}{
+  "type": "BID",
+  "originalAmount": 0.00200000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.51000000,
+  "timestamp": "Dec 10, 2023, 10:06:27 PM",
+  "id": "3314610896",
+  "makerOrderId": "23664259286",
+  "takerOrderId": "23664259387"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.52000000,
+  "timestamp": "Dec 10, 2023, 10:06:28 PM",
+  "id": "3314610897",
+  "makerOrderId": "23664215904",
+  "takerOrderId": "23664259548"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.52000000,
+  "timestamp": "Dec 10, 2023, 10:06:28 PM",
+  "id": "3314610898",
+  "makerOrderId": "23664217486",
+  "takerOrderId": "23664259548"
+}{
+  "type": "ASK",
+  "originalAmount": 0.09355000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.52000000,
+  "timestamp": "Dec 10, 2023, 10:06:28 PM",
+  "id": "3314610899",
+  "makerOrderId": "23664259356",
+  "takerOrderId": "23664259548"
+}{
+  "type": "ASK",
+  "originalAmount": 0.05703000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.52000000,
+  "timestamp": "Dec 10, 2023, 10:06:28 PM",
+  "id": "3314610900",
+  "makerOrderId": "23664259383",
+  "takerOrderId": "23664259548"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00541000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.75000000,
+  "timestamp": "Dec 10, 2023, 10:06:28 PM",
+  "id": "3314610901",
+  "makerOrderId": "23664243587",
+  "takerOrderId": "23664259548"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00018000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:28 PM",
+  "id": "3314610902",
+  "makerOrderId": "23664216070",
+  "takerOrderId": "23664259711"
+}{
+  "type": "BID",
+  "originalAmount": 0.00020000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:28 PM",
+  "id": "3314610903",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259713"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00015000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:29 PM",
+  "id": "3314610904",
+  "makerOrderId": "23664216070",
+  "takerOrderId": "23664259745"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00148000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:29 PM",
+  "id": "3314610905",
+  "makerOrderId": "23664217498",
+  "takerOrderId": "23664259745"
+}{
+  "type": "BID",
+  "originalAmount": 0.00059000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:29 PM",
+  "id": "3314610906",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259772"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00022000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:30 PM",
+  "id": "3314610907",
+  "makerOrderId": "23664217498",
+  "takerOrderId": "23664259797"
+}{
+  "type": "BID",
+  "originalAmount": 0.00028000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:30 PM",
+  "id": "3314610908",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259813"
+}{
+  "type": "BID",
+  "originalAmount": 0.00228000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:30 PM",
+  "id": "3314610909",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259817"
+}{
+  "type": "BID",
+  "originalAmount": 0.00050000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:30 PM",
+  "id": "3314610910",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259821"
+}{
+  "type": "BID",
+  "originalAmount": 0.00068000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:32 PM",
+  "id": "3314610911",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259935"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00036000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:32 PM",
+  "id": "3314610912",
+  "makerOrderId": "23664217498",
+  "takerOrderId": "23664259936"
+}{
+  "type": "BID",
+  "originalAmount": 0.00032000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:33 PM",
+  "id": "3314610913",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259971"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00007000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:33 PM",
+  "id": "3314610914",
+  "makerOrderId": "23664217498",
+  "takerOrderId": "23664259978"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00228000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:33 PM",
+  "id": "3314610915",
+  "makerOrderId": "23664255915",
+  "takerOrderId": "23664259978"
+}{
+  "type": "BID",
+  "originalAmount": 0.00044000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:33 PM",
+  "id": "3314610916",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664259979"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00014000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:34 PM",
+  "id": "3314610917",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260007"
+}{
+  "type": "ASK",
+  "originalAmount": 0.13704000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:34 PM",
+  "id": "3314610918",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260008"
+}{
+  "type": "ASK",
+  "originalAmount": 0.01646000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:35 PM",
+  "id": "3314610919",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260053"
+}{
+  "type": "BID",
+  "originalAmount": 0.00013000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:35 PM",
+  "id": "3314610920",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664260056"
+}{
+  "type": "BID",
+  "originalAmount": 0.00731000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:36 PM",
+  "id": "3314610921",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664260084"
+}{
+  "type": "ASK",
+  "originalAmount": 0.04058000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:36 PM",
+  "id": "3314610922",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260085"
+}{
+  "type": "BID",
+  "originalAmount": 0.00147000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:36 PM",
+  "id": "3314610923",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664260111"
+}{
+  "type": "BID",
+  "originalAmount": 0.00532000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:37 PM",
+  "id": "3314610924",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664260134"
+}{
+  "type": "BID",
+  "originalAmount": 0.00398000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:37 PM",
+  "id": "3314610925",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664260150"
+}{
+  "type": "ASK",
+  "originalAmount": 0.02460000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:38 PM",
+  "id": "3314610926",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260184"
+}{
+  "type": "BID",
+  "originalAmount": 0.00227000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610927",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664260191"
+}{
+  "type": "BID",
+  "originalAmount": 0.00030000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43859.99000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610928",
+  "makerOrderId": "23664259548",
+  "takerOrderId": "23664260192"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00059000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610929",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260193"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00060000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610930",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260197"
+}{
+  "type": "ASK",
+  "originalAmount": 0.14620000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610931",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260200"
+}{
+  "type": "ASK",
+  "originalAmount": 0.22778000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610932",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260209"
+}{
+  "type": "ASK",
+  "originalAmount": 0.27403000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610933",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260210"
+}{
+  "type": "ASK",
+  "originalAmount": 0.07306000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610934",
+  "makerOrderId": "23664259034",
+  "takerOrderId": "23664260211"
+}{
+  "type": "ASK",
+  "originalAmount": 0.03340000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610935",
+  "makerOrderId": "23664259639",
+  "takerOrderId": "23664260211"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00453000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610936",
+  "makerOrderId": "23664259639",
+  "takerOrderId": "23664260222"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00045000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610937",
+  "makerOrderId": "23664259965",
+  "takerOrderId": "23664260222"
+}{
+  "type": "ASK",
+  "originalAmount": 0.22280000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610938",
+  "makerOrderId": "23664259980",
+  "takerOrderId": "23664260222"
+}{
+  "type": "ASK",
+  "originalAmount": 0.09637000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.00000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610939",
+  "makerOrderId": "23664259980",
+  "takerOrderId": "23664260241"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.02000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610940",
+  "makerOrderId": "23664215912",
+  "takerOrderId": "23664260241"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00020000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.12000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610941",
+  "makerOrderId": "23664212079",
+  "takerOrderId": "23664260241"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.48000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610942",
+  "makerOrderId": "23664217506",
+  "takerOrderId": "23664260291"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.52000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610943",
+  "makerOrderId": "23664215914",
+  "takerOrderId": "23664260291"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00541000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.58000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610944",
+  "makerOrderId": "23664243608",
+  "takerOrderId": "23664260291"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43860.96000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610945",
+  "makerOrderId": "23664217519",
+  "takerOrderId": "23664260291"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.02000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610946",
+  "makerOrderId": "23664215922",
+  "takerOrderId": "23664260291"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00577000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.10000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610947",
+  "makerOrderId": "23664213607",
+  "takerOrderId": "23664260463"
+}{
+  "type": "ASK",
+  "originalAmount": 0.06263000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.10000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610948",
+  "makerOrderId": "23664213607",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00240000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.16000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610949",
+  "makerOrderId": "23664212053",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00541000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.41000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610950",
+  "makerOrderId": "23664243617",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.44000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610951",
+  "makerOrderId": "23664217538",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.52000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610952",
+  "makerOrderId": "23664215792",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00213000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43861.92000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610953",
+  "makerOrderId": "23664217438",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00216000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43862.02000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610954",
+  "makerOrderId": "23664215830",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00541000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43862.24000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610955",
+  "makerOrderId": "23664243626",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.02279000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43862.31000000,
+  "timestamp": "Dec 10, 2023, 10:06:39 PM",
+  "id": "3314610956",
+  "makerOrderId": "23664218388",
+  "takerOrderId": "23664260556"
+}{
+  "type": "ASK",
+  "originalAmount": 0.00168000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43862.32000000,
+  "timestamp": "Dec 10, 2023, 10:06:40 PM",
+  "id": "3314610957",
+  "makerOrderId": "23664207363",
+  "takerOrderId": "23664260710"
+}{
+  "type": "BID",
+  "originalAmount": 0.00920000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43862.31000000,
+  "timestamp": "Dec 10, 2023, 10:06:40 PM",
+  "id": "3314610958",
+  "makerOrderId": "23664260556",
+  "takerOrderId": "23664260744"
+}{
+  "type": "BID",
+  "originalAmount": 0.00683000,
+  "instrument": {
+    "base": {
+      "code": "BTC",
+      "attributes": {
+        "codes": [
+          "BTC",
+          "XBT"
+        ],
+        "isoCode": "XBT",
+        "commonCode": "BTC",
+        "name": "Bitcoin",
+        "unicode": "BTC"
+      }
+    },
+    "counter": {
+      "code": "USDT",
+      "attributes": {
+        "codes": [
+          "USDT"
+        ],
+        "commonCode": "USDT",
+        "name": "Tether USD Anchor",
+        "unicode": "USDT"
+      }
+    }
+  },
+  "price": 43862.31000000,
+  "timestamp": "Dec 10, 2023, 10:06:41 PM",
+  "id": "3314610959",
+  "makerOrderId": "23664260556",
+  "takerOrderId": "23664260775"
+}

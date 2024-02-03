@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>treadeBot</artifactId>
+    <version>5.1.2-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>treadeBot</name>
+    <description>treadeBot</description>
+    <modules>
+        <module>telegram</module>
+        <module>XChange</module>
+        <module>security</module>
+        <module>node</module>
+        <module>XChange/Binance</module>
+        <module>common-rabbitmq</module>
+    </modules>
+    <properties>
+        <java.version>17</java.version>
+        <project.version>5.1.2</project.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <version.assertj>3.24.2</version.assertj>
+        <version.commons.lang3>3.14.0</version.commons.lang3>
+        <version.fasterxml>2.14.3</version.fasterxml>
+        <version.github.mmazi>3.0</version.github.mmazi>
+        <version.resilience4j>1.7.0</version.resilience4j>
+        <version.junit>5.9.3</version.junit>
+        <version.lombok>1.18.26</version.lombok>
+        <version.knowm.xchart>3.8.6</version.knowm.xchart>
+        <version.qos.logback>1.4.12</version.qos.logback>
+        <version.reflections>0.10.2</version.reflections>
+        <version.slf4j>1.7.0</version.slf4j>
+        <version.crypto>5.0.0</version.crypto>
+        <version.java-jwt>4.4.0</version.java-jwt>
+        <version.wiremock>3.2.0</version.wiremock>
+        <project.groupId>org.knowm.xchange</project.groupId>
+        <telegrambot.starter.version>6.7.0</telegrambot.starter.version>
+        <log4j.version>1.2.17</log4j.version>
+        <version.mysql>8.0.29</version.mysql>
+        <skipIntegrationTests>true</skipIntegrationTests>
+        <hibernate-types.version>2.2.2</hibernate-types.version>
+        <hashids.version>1.0.1</hashids.version>
+        <javax-mail.version>1.4</javax-mail.version>
+        <version-SNAPSHOT>5.1.2-SNAPSHOT</version-SNAPSHOT>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
+            <dependency>
+                <groupId>com.pubnub</groupId>
+                <artifactId>pubnub-gson</artifactId>
+                <version>4.31.3</version>
+            </dependency>
+
+
+       <dependency>
+           <groupId>log4j</groupId>
+           <artifactId>log4j</artifactId>
+           <version>${log4j.version}</version>
+       </dependency>
+
+
+   </dependencies>
+   <repositories>
+       <repository>
+           <id>sonatype-oss-snapshot</id>
+           <snapshots/>
+           <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+       </repository>
+   </repositories>
+
+   <build>
+       <plugins>
+           <plugin>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-maven-plugin</artifactId>
+               <configuration>
+                   <excludes>
+                       <exclude>
+                           <groupId>org.projectlombok</groupId>
+                           <artifactId>lombok</artifactId>
+                       </exclude>
+                   </excludes>
+               </configuration>
+           </plugin>
+       </plugins>
+   </build>
+
+
+</project>
