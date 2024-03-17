@@ -2,11 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example</groupId>
+        <groupId>org.example</groupId>
         <artifactId>treadeBot</artifactId>
         <version>5.1.2-SNAPSHOT</version>
     </parent>
-    <groupId>com.example</groupId>
     <artifactId>node</artifactId>
     <version>5.1.2-SNAPSHOT</version>
     <name>node</name>
@@ -29,17 +28,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
-        <dependency>
-            <groupId>com.vladmihalcea</groupId>
-            <artifactId>hibernate-types-52</artifactId>
-            <version>${hibernate-types.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>ChangeFiltr</artifactId>
-            <version>${version-SNAPSHOT}</version>
-        </dependency>
-
 
 
         <dependency>
@@ -57,48 +45,17 @@
             <artifactId>telegrambots-spring-boot-starter</artifactId>
             <version>${telegrambot.starter.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambotsextensions</artifactId>
-            <version>${telegrambot.starter.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>common-rabbitmq</artifactId>
             <version>${version-SNAPSHOT}</version>
         </dependency>
         <dependency>
-            <groupId>org.hashids</groupId>
-            <artifactId>hashids</artifactId>
-            <version>${hashids.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>${javax-mail.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.example</groupId>
-            <artifactId>Binance</artifactId>
+            <artifactId>common-jpa</artifactId>
             <version>${version-SNAPSHOT}</version>
         </dependency>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>security</artifactId>
-            <version>${version}</version>
-        </dependency>
-
-
-
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

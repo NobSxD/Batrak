@@ -1,0 +1,16 @@
+package org.example.entity.enams;
+
+public enum UserState {
+	ACCOUNT_NAME,
+	ACCOUNT_USER,
+	BASIC_STATE,
+	CANCEL,
+	CHANGE,
+	CHOICE,
+	EMAIL,
+	HELP,
+	INFO_ACCOUNT,
+	PUBLIC_API,
+	SECRET_API,
+	WAIT_FOR_EMAIL_STATE;
+}

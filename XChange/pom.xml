@@ -1,31 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>XChange</artifactId>
+    <groupId>org.knowm.xchange</groupId>
+    <version>5.1.2-SNAPSHOT</version>
+    <name>XChange</name>
+    <description>XChange</description>
     <parent>
-        <groupId>com.example</groupId>
+        <groupId>org.example</groupId>
         <artifactId>treadeBot</artifactId>
         <version>5.1.2-SNAPSHOT</version>
     </parent>
-    <groupId>org.example</groupId>
-    <artifactId>XChange</artifactId>
-    <packaging>pom</packaging>
-    <name>Archetype - XChange</name>
-    <url>http://knowm.org/open-source/xchange/</url>
-    <organization>
-        <name>Knowm Inc.</name>
-        <url>http://knowm.org/open-source/xchange/</url>
-    </organization>
-    <modules>
-        <module>ChangeFiltr</module>
-    </modules>
-
+    <properties>
+        <project.version>5.1.2-SNAPSHOT</project.version>
+        <version.lombok>1.18.26</version.lombok>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
     <dependencies>
-
-
         <!-- xchange -->
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-binance</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-mexc</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -43,12 +47,32 @@
             <artifactId>xchange-stream-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>3.1.3</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>common-jpa</artifactId>
+            <version>5.1.2-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
+    
+
 </project>
-
-

@@ -2,15 +2,15 @@ package ches.controller;
 
 import ches.service.UpdateProducer;
 import ches.utils.MessageUtils;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import static org.example.model.RabbitQueue.*;
+import static org.example.model.RabbitQueue.TEXT_MESSAGE_UPDATE;
 
 @Component
-@Log4j
+@Log4j2
 public class UpdateController {
     private TelegramBot telegramBot;
     private final MessageUtils messageUtils;
@@ -30,28 +30,15 @@ public class UpdateController {
             log.error("Received update is null");
             return;
         }
-        if (update.getMessage() != null){
-            distributeMessagesByType(update);
-        }if (update.getCallbackQuery() != null){
-            distributeMessagesByTypeButton(update);
-        }
-        else {
-            log.error("Received unsupported message type" + update);
-        }
-    }
-    private void distributeMessagesByTypeButton(Update update){
-        var message  = update.getCallbackQuery().getData();
-        if (message != null){
-            processTextMessageButton(update);
-        }else {
-            setUnsupportedMessageTypeView(update);
-        }
+        distributeMessagesByType(update);
 
     }
+
 
     private void distributeMessagesByType(Update update) {
-        var message = update.getMessage().getText();
-        if (message != null){
+        var message = update.getMessage();
+        var text = update.getCallbackQuery();
+        if (message != null || text != null){
             processTextMessage(update);
         } else {
             setUnsupportedMessageTypeView(update);
@@ -72,7 +59,5 @@ public class UpdateController {
     private void processTextMessage(Update update) {
         updateProducer.produce(TEXT_MESSAGE_UPDATE, update);
     }
-    private void processTextMessageButton(Update update){
-        updateProducer.button(TEXT_BUTTON, update);
-    }
+
 }
