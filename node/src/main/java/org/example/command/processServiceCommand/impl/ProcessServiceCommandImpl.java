@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static org.example.entity.enams.UserState.*;
+
 
 @Component
 @Data
@@ -36,14 +38,19 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 			nodeUser.setState(CHANGE);
 			nodeUserDAO.save(nodeUser);
 			menuButtonChange(update.getMessage().getChatId(), "выбирите биржу");
-		} else if (serviceCommand.equals(ServiceCommand.HELP)) {
+		}else if (change == null){
+			nodeUser.setState(CHANGE);
+			nodeUserDAO.save(nodeUser);
+			menuButtonChange(update.getMessage().getChatId(), "Вы не выбрали биржу, для продолжение выбирите биржу что бы продолжить"); // Доп проверка, что бы пользователь обезательно выбрал биржу
+		}
+
+		else if (serviceCommand.equals(ServiceCommand.HELP)) {
 			nodeUser.setState(HELP);
 			nodeUserDAO.save(nodeUser);
 		} else if (serviceCommand.equals(ServiceCommand.CANCEL)) {
 			nodeUser.setState(CANCEL);
 			nodeUserDAO.save(nodeUser);
 		}
-
 
 	}
 
@@ -92,13 +99,11 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 
 	@Override
 	public void registerAccount(NodeUser nodeUser){
-		if (change == null){
-			menuButtonChange(nodeUser.getChatId(), "Вы не выбрали биржу, для продолжение выбирите что бы продолжить");
-		}
+
 		Account account = change.getAccount();
-		account.setNameChange(nodeUser.getAccountName());
-		account.setPublicApiKey(nodeUser.getPublicApi());
-		account.setSecretApiKey(nodeUser.getSecretApi());
+		account.setNameChange(nodeUser.getAccount().getNameChange());
+		account.setPublicApiKey(nodeUser.getAccount().getPublicApiKey());
+		account.setSecretApiKey(nodeUser.getAccount().getSecretApiKey());
 		nodeUser.setState(ACCOUNT_USER);
 		nodeUserDAO.save(nodeUser);
 		change.saveAccount(account, nodeUser);

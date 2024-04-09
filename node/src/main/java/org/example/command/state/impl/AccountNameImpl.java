@@ -16,7 +16,12 @@ public class AccountNameImpl implements State {
 
 	@Override
 	public String send(NodeUser nodeUser, String text) {
-		nodeUser.setAccountName(text);
+		Account account = nodeUser.getAccount();
+		if (account == null){
+			account = new Account();
+		}
+		account.setNameChange(text);
+		nodeUser.setAccount(account);
 		nodeUser.setState(UserState.PUBLIC_API);
 		nodeUserDAO.save(nodeUser);
 		return "Вы вели имя аккаунта. Теперь введите публичный ключ";

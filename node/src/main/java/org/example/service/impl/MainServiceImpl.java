@@ -1,17 +1,18 @@
 package org.example.service.impl;
 
-import org.example.command.menu2.Menu2Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
+import org.example.command.menu2.menuService.Menu2Service;
 import org.example.command.processServiceCommand.ProcessServiceCommand;
 import org.example.command.state.StateService;
+import org.example.dao.NodeUserDAO;
+import org.example.entity.NodeUser;
 import org.example.entity.RawData;
 import org.example.entity.enums.MenuEnums2;
 import org.example.service.MainService;
 import org.example.service.ProducerService;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j2;
-import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -36,6 +37,7 @@ public class MainServiceImpl implements MainService {
 
 	@Override
 	public void defines(Update update) {
+
 		if (update.getMessage() != null) {
 			processTextMessage(update);
 		}
@@ -49,24 +51,21 @@ public class MainServiceImpl implements MainService {
 	@Transactional
 	public void processTextButton(Update update) {
 		String text = update.getCallbackQuery().getData();
-		var userMain = findOrSaveAppUser(update);
-		var userState = userMain.getState();
+		var nodeUser = findOrSaveAppUser(update);
+		var userState = nodeUser.getState();
 		long chatId = update.getCallbackQuery().getMessage().getChatId();
 		if (userState.equals(CHANGE)) {
-			processServiceCommand.changeAction(userMain, text);
+			processServiceCommand.changeAction(nodeUser, text);
 			processServiceCommand.menuButtonAction(text, chatId);
 		} else if (userState.equals(ACCOUNT_USER)) {
-			menuAction(userMain, text);
+			var textMenu = MenuEnums2.fromValue(text);
+			assert textMenu != null;
+			String send = menu2Service.send(textMenu, nodeUser);
+			processServiceCommand.sendAnswer(send, nodeUser.getChatId());
 		}
 
 	}
 
-	public void menuAction(NodeUser nodeUser, String text) {
-		var textMenu = MenuEnums2.fromValue(text);
-		assert textMenu != null;
-		String send = menu2Service.send(textMenu, nodeUser);
-		processServiceCommand.sendAnswer(send, nodeUser.getChatId());
-	}
 
 	@Transactional
 	public void processTextMessage(Update update) {

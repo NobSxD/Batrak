@@ -1,9 +1,10 @@
 package org.example.entity;
 
+import lombok.*;
+import org.example.entity.account.Account;
 import org.example.entity.account.AccountBinance;
 import org.example.entity.account.AccountMexc;
 import org.example.entity.enams.UserState;
-import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -39,10 +40,9 @@ public class NodeUser {
 
 	private Boolean isActive;
 
-	//Account
-	private String accountName;
-	private String publicApi;
-	private String secretApi;
+
+	@Transient
+	private Account account;
 
 
 	@Enumerated(EnumType.STRING)

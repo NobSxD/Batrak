@@ -1,14 +1,16 @@
 package org.example.entity.account;
 
-import org.example.entity.NodeUser;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.example.entity.NodeUser;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.*;
+
 
 @Entity
 @Inheritance(
