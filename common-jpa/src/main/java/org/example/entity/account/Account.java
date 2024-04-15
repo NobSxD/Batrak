@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.example.entity.NodeUser;
-import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.*;
 
@@ -21,17 +20,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @SuperBuilder
-@NoRepositoryBean
-public class Account {
+
+public abstract class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
+	protected long id;
 
-	private String nameChange;
-	private String publicApiKey;
-	private String secretApiKey;
+	protected String nameChange;
+	protected String publicApiKey;
+	protected String secretApiKey;
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	private NodeUser nodeUser;
 }

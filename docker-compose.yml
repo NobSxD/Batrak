@@ -10,7 +10,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /home/site/db:/var/lib/mysql
+      - D:/volume/db:/var/lib/mysql
 
 
   phpmyadmin:
@@ -30,6 +30,6 @@ services:
       - 5672:5672
       - 15672:15672
     volumes:
-      - /home/site/rabbitmq:/var/lib/rabbitmq
+      - D:/volume/rabbitmq:/var/lib/rabbitmq
 
     restart: unless-stopped

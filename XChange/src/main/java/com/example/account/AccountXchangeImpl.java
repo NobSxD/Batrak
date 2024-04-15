@@ -10,9 +10,9 @@ public class AccountXchangeImpl implements  AccountXchange {
 	@Override
 	public Exchange instance(NodeUser nodeUser, BaseExchange baseExchange) {
 		ExchangeSpecification exSpec = baseExchange.getDefaultExchangeSpecification();
-		exSpec.setUserName(nodeUser.getAccountName());
-		exSpec.setApiKey(nodeUser.getPublicApi());
-		exSpec.setSecretKey(nodeUser.getSecretApi());
+//		exSpec.setUserName(nodeUser.getAccountName());
+//		exSpec.setApiKey(nodeUser.getPublicApi());
+//		exSpec.setSecretKey(nodeUser.getSecretApi());
 		return ExchangeFactory.INSTANCE.createExchange(exSpec);
 	}
 }

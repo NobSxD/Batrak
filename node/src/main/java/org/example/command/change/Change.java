@@ -1,7 +1,7 @@
 package org.example.command.change;
 
 
-import org.example.entity.enums.ChangeEnums;
+import org.example.entity.enums.Menu1Enums;
 import org.example.entity.NodeUser;
 import org.example.entity.account.Account;
 
@@ -16,5 +16,5 @@ public interface Change {
 	void saveAccount(Account account, NodeUser nodeUser);
 
 	Account getAccount();
-	ChangeEnums getType();
+	Menu1Enums getType();
 }

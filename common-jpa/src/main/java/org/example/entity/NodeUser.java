@@ -41,16 +41,20 @@ public class NodeUser {
 	private Boolean isActive;
 
 
-	@Transient
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "account_id")
 	private Account account;
 
 
 	@Enumerated(EnumType.STRING)
 	private UserState state;
 
-	@OneToMany(mappedBy = "nodeUser")
+	@Enumerated(EnumType.STRING)
+	private UserState menuState;
+
+	@OneToMany(mappedBy = "nodeUserBINANCE")
 	private List<AccountBinance> accountBinances;
 
-	@OneToMany(mappedBy = "nodeUser")
+	@OneToMany(mappedBy = "nodeUserMEXC")
 	private List<AccountMexc> accountMexcs;
 }

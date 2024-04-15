@@ -1,7 +1,7 @@
 package org.example.command.change.impl;
 
 import org.example.command.change.Change;
-import org.example.entity.enums.ChangeEnums;
+import org.example.entity.enums.Menu1Enums;
 import org.example.dao.AccountBinanceDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.account.Account;
@@ -43,7 +43,7 @@ public class ChangeBinanceImpl implements Change {
 	}
 
 	@Override
-	public ChangeEnums getType() {
-		return ChangeEnums.Binance;
+	public Menu1Enums getType() {
+		return Menu1Enums.Binance;
 	}
 }

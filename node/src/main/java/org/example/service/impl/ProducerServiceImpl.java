@@ -1,7 +1,7 @@
 package org.example.service.impl;
 
-import org.example.entity.enums.ChangeEnums;
-import org.example.entity.enums.MenuEnums2;
+import org.example.entity.enums.Menu1Enums;
+import org.example.entity.enums.Menu2Enums;
 import org.example.service.ProducerService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -29,12 +29,12 @@ public class ProducerServiceImpl implements ProducerService {
 	}
 
 	public void producerChangeEnumsButton(SendMessage sendMessages) {
-		ChangeEnums[] changeEnums = ChangeEnums.values(); //список бирж для добавление
+		Menu1Enums[] changeEnums = Menu1Enums.values(); //список бирж для добавление
 
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
-		for (ChangeEnums addChangeEnums : changeEnums) {
+		for (Menu1Enums addChangeEnums : changeEnums) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.toString()));
 			rowList.add(keyboardButtonsRow);
@@ -50,12 +50,12 @@ public class ProducerServiceImpl implements ProducerService {
 
 	@Override
 	public void producerMenuEnumsButton(SendMessage sendMessage) {
-		MenuEnums2[] menuEnum2s = MenuEnums2.values(); //список бирж для добавление
+		Menu2Enums[] menuEnum2s = Menu2Enums.values(); //список бирж для добавление
 
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
-		for (MenuEnums2 addChangeEnums : menuEnum2s) {
+		for (Menu2Enums addChangeEnums : menuEnum2s) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.toString()));
 			rowList.add(keyboardButtonsRow);

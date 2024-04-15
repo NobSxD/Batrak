@@ -4,21 +4,20 @@ package org.example.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import org.example.command.menu2.menuService.Menu2Service;
-import org.example.command.processServiceCommand.ProcessServiceCommand;
-import org.example.command.state.StateService;
+import org.example.command.CommandService;
 import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
 import org.example.entity.RawData;
-import org.example.entity.enums.MenuEnums2;
+import org.example.entity.enams.UserState;
+import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.MainService;
-import org.example.service.ProducerService;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.example.entity.enams.UserState.*;
 
@@ -28,12 +27,9 @@ import static org.example.entity.enams.UserState.*;
 @RequiredArgsConstructor
 public class MainServiceImpl implements MainService {
 
-	private final ProducerService producerService;
 	private final NodeUserDAO nodeUserDAO;
-	private final Menu2Service menu2Service;
-	private final StateService stateService;
 	private final ProcessServiceCommand processServiceCommand;
-
+	private final CommandService commandService;
 
 	@Override
 	public void defines(Update update) {
@@ -51,34 +47,46 @@ public class MainServiceImpl implements MainService {
 	@Transactional
 	public void processTextButton(Update update) {
 		String text = update.getCallbackQuery().getData();
-		var nodeUser = findOrSaveAppUser(update);
-		var userState = nodeUser.getState();
+		saveRawData(update);
+		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
 		long chatId = update.getCallbackQuery().getMessage().getChatId();
-		if (userState.equals(CHANGE)) {
-			processServiceCommand.changeAction(nodeUser, text);
-			processServiceCommand.menuButtonAction(text, chatId);
-		} else if (userState.equals(ACCOUNT_USER)) {
-			var textMenu = MenuEnums2.fromValue(text);
-			assert textMenu != null;
-			String send = menu2Service.send(textMenu, nodeUser);
-			processServiceCommand.sendAnswer(send, nodeUser.getChatId());
+		UserState userState = clickButton(text);
+		if (userState != null){
+			nodeUser.setState(userState);
 		}
+		String send = commandService.send(nodeUser, text);
+		processServiceCommand.sendAnswer(send, chatId);
 
 	}
 
 
 	@Transactional
 	public void processTextMessage(Update update) {
+		String text = update.getMessage().getText();
 		saveRawData(update);
-		var nodeUser = findOrSaveAppUser(update);
+		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
 		long chatId = update.getMessage().getChatId();
-		nodeUser.setChatId(chatId);
-		processServiceCommand.processServiceCommand(nodeUser, update);
+		UserState userState = clickButton(text);
+		if (userState != null){
+			nodeUser.setState(userState);
+		}
+		String send = commandService.send(nodeUser, text);
+		processServiceCommand.sendAnswer(send, chatId);
 
-		var output = stateService.send(nodeUser, update.getMessage().getText());
+	}
 
-		processServiceCommand.sendAnswer(output, chatId);
-
+	private UserState clickButton(String textButton){
+		Map<String, UserState> userStateMap = new HashMap<>();
+		userStateMap.put("/cancel", CANCEL);
+		userStateMap.put("отмена", CANCEL);
+		userStateMap.put("/start", START);
+		userStateMap.put("/help", HELP);
+		userStateMap.put("выбор аккаунта", ACCOUNT_SELECTION);
+		userStateMap.put("регистрация", REGISTER_ACCOUNT);
+		userStateMap.put("Настрайки трейдинга", MANAGER_TRADE);
+		userStateMap.put("запуск трейдинга", TRADE_START);
+		userStateMap.put("остановить трейдинг", TRADE_STOP);
+		return userStateMap.get(textButton);
 	}
 
 
@@ -103,28 +111,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 
-	private boolean isNotAllowToSendContent(Long chatId, NodeUser appUser) {
-		var userState = appUser.getState();
-		if (! appUser.getIsActive()) {
-			var error = "Зарегистрируйтесь или активируйте " + "свою учетную запись для загрузки контента.";
-			processServiceCommand.sendAnswer(error, chatId);
-			return true;
-		} else if (! BASIC_STATE.equals(userState)) {
-			var error = "Отмените текущую команду с помощью /cancel для отправки файлов.";
-			processServiceCommand.sendAnswer(error, chatId);
-			return true;
-		}
-		return false;
-	}
 
-	private NodeUser findOrSaveAppUser(Update update) {
 
-		var telegramUser = update.getMessage() == null ? update.getCallbackQuery().getFrom() : update.getMessage().getFrom();
-		var appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId());
-		if (appUserOpt.isEmpty()) {
-			NodeUser transientAppUser = NodeUser.builder().telegramUserId(telegramUser.getId()).username(telegramUser.getUserName()).firstName(telegramUser.getFirstName()).lastName(telegramUser.getLastName()).isActive(false).state(BASIC_STATE).build();
-			return nodeUserDAO.save(transientAppUser);
-		}
-		return appUserOpt.get();
-	}
+
 }

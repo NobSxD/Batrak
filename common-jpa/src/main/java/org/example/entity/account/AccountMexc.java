@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.example.entity.NodeUser;
 
 import javax.persistence.*;
 
@@ -18,4 +19,7 @@ public class AccountMexc extends Account{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
+
+	@ManyToOne
+	private NodeUser nodeUserMEXC;
 }

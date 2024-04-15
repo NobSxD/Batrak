@@ -1,7 +1,7 @@
 package org.example.command.change;
 
-import org.example.entity.enums.ChangeEnums;
+import org.example.entity.enums.Menu1Enums;
 
 public interface ChangeServiceNode {
-	Change change(ChangeEnums type);
+	Change change(Menu1Enums type);
 }
