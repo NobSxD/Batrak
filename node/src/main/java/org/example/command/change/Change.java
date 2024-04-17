@@ -16,5 +16,8 @@ public interface Change {
 	void saveAccount(Account account, NodeUser nodeUser);
 
 	Account getAccount();
+
+	List<Account> getAccounts();
 	Menu1Enums getType();
+	Account getAccount(String nameChange);
 }

@@ -10,6 +10,7 @@ import org.example.entity.account.AccountMexc;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -44,7 +45,18 @@ public class ChangeMexcImpl implements Change {
 	}
 
 	@Override
+	public List<Account> getAccounts() {
+		List<AccountMexc> all = accountMexcDAO.findAll();
+		return new ArrayList<>(all);
+	}
+
+	@Override
 	public Menu1Enums getType() {
 		return Menu1Enums.Mex;
+	}
+
+	@Override
+	public Account getAccount(String nameChange){
+		return accountMexcDAO.findByNameChange(nameChange);
 	}
 }

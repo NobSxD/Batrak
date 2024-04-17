@@ -1,5 +1,6 @@
 package org.example.service.impl;
 
+import org.example.entity.account.Account;
 import org.example.entity.enums.Menu1Enums;
 import org.example.entity.enums.Menu2Enums;
 import org.example.service.ProducerService;
@@ -58,6 +59,27 @@ public class ProducerServiceImpl implements ProducerService {
 		for (Menu2Enums addChangeEnums : menuEnum2s) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.toString()));
+			rowList.add(keyboardButtonsRow);
+		}
+
+
+		inlineKeyboardMarkup.setKeyboard(rowList);
+
+		sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+		rabbitTemplate.convertAndSend(ANSWER_MESSAGE, sendMessage);
+
+	}
+
+	@Override
+	public void producerAccountButton(List<Account> accounts, SendMessage sendMessage) {
+
+
+		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+
+		for (Account addChangeEnums : accounts  ) {
+			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
+			keyboardButtonsRow.add(button(addChangeEnums.getNameChange()));
 			rowList.add(keyboardButtonsRow);
 		}
 

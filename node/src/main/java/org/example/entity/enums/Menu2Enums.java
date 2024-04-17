@@ -1,13 +1,14 @@
 package org.example.entity.enums;
 
 public enum Menu2Enums {
-	Cancel("отмена"),
+
 	ChoiceAccount("выбор аккаунта"),
 	RegisterAccount("регистрация"),
 
 	Trade("Настрайки трейдинга"),
 	TradeStart("запуск трейдинга"),
-	TradeStop("остановить трейдинг");
+	TradeStop("остановить трейдинг"),
+	Cancel("отмена");
 
 
 

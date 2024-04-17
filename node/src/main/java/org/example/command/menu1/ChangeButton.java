@@ -5,6 +5,7 @@ import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
+import org.example.processServiceCommand.ProcessServiceChangeCommands;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +16,12 @@ import static org.example.entity.enams.UserState.ACCOUNT_USER;
 @RequiredArgsConstructor
 public class ChangeButton implements Command {
 	private final ProcessServiceCommand processServiceCommand;
+	private final ProcessServiceChangeCommands processServiceChangeCommands;
 	private final NodeUserDAO nodeUserDAO;
 
 	@Override
 	public String send(NodeUser nodeUser, String nameChange) {
-		processServiceCommand.changeAction(nodeUser, nameChange);
+		processServiceChangeCommands.changeAction(nodeUser, nameChange);
 
 		nodeUser.setState(ACCOUNT_USER);
 		nodeUserDAO.save(nodeUser);

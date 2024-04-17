@@ -32,6 +32,7 @@ public class MainServiceImpl implements MainService {
 	private final CommandService commandService;
 
 	@Override
+	@Transactional
 	public void defines(Update update) {
 
 		if (update.getMessage() != null) {
@@ -44,7 +45,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 
-	@Transactional
+
 	public void processTextButton(Update update) {
 		String text = update.getCallbackQuery().getData();
 		saveRawData(update);
@@ -60,7 +61,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 
-	@Transactional
+
 	public void processTextMessage(Update update) {
 		String text = update.getMessage().getText();
 		saveRawData(update);

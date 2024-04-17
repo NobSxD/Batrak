@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.example.entity.NodeUser;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -20,6 +22,4 @@ public class AccountBinance extends Account{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 
-	@ManyToOne
-	private NodeUser nodeUserBINANCE;
 }

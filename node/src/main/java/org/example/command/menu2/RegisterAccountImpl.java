@@ -6,6 +6,7 @@ import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.account.Account;
 import org.example.entity.enams.UserState;
+import org.example.processServiceCommand.ProcessServiceChangeCommands;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ public class RegisterAccountImpl implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	private final PasswordEncoder passwordEncoder;
 	private final ProcessServiceCommand processServiceCommand;
+	private final ProcessServiceChangeCommands processServiceChangeCommands;
 
 
 
@@ -32,6 +34,7 @@ public class RegisterAccountImpl implements Command {
 		if (nodeUser.getMenuState() == null) {
 			return accountName(nodeUser);
 		} else if (nodeUser.getMenuState().equals(ACCOUNT_NAME)) {
+			nodeUser.setAccount(processServiceChangeCommands.getChangeAccount());
 			return accountName(nodeUser, text);
 		} else if (nodeUser.getMenuState().equals(PUBLIC_API)) {
 			return publicApi(nodeUser, text);
@@ -48,14 +51,21 @@ public class RegisterAccountImpl implements Command {
 		return "Ведите имя аккаунта";
 	}
 	public String accountName(NodeUser nodeUser, String text) {
+		if (text == null){
+			return "Вы не ввели имя акканта, пожалуйста повторите ввод";
+		}
 		Account account = nodeUser.getAccount();
 		account.setNameChange(text);
 		nodeUser.setMenuState(PUBLIC_API);
+		processServiceChangeCommands.saveAccount(account, nodeUser);
 		nodeUserDAO.save(nodeUser);
 		return "Ведите публичный ключ";
 	}
 
 	public String publicApi(NodeUser nodeUser, String text) { // пришло имя аккаунта
+		if (text == null){
+			return "Вы не ввели публичный ключ, пожалуйста повторите ввод";
+		}
 		String encode = passwordEncoder.encode(text);
 		try {
 			Account account = nodeUser.getAccount();
@@ -75,6 +85,9 @@ public class RegisterAccountImpl implements Command {
 	}
 
 	public String secretApi(NodeUser nodeUser, String text) { // пришел публичный ключ
+		if (text == null){
+			return "Вы не ввели секретный ключ, пожалуйста повторите ввод";
+		}
 		String encode = passwordEncoder.encode(text);
 		try {
 			Account account = nodeUser.getAccount();
@@ -82,7 +95,7 @@ public class RegisterAccountImpl implements Command {
 			nodeUser.setState(UserState.ACCOUNT_USER);
 			nodeUser.setMenuState(null);
 			nodeUser.setAccount(account);
-			processServiceCommand.registerAccount(nodeUser);
+			processServiceChangeCommands.registerAccount(nodeUser);
 			processServiceCommand.menu2Selection("Вы успешго добавили аккаунт - " + account.getNameChange(), nodeUser.getChatId());
 			nodeUserDAO.save(nodeUser);
 

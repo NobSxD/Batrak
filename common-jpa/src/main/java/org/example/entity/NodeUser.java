@@ -2,14 +2,11 @@ package org.example.entity;
 
 import lombok.*;
 import org.example.entity.account.Account;
-import org.example.entity.account.AccountBinance;
-import org.example.entity.account.AccountMexc;
 import org.example.entity.enams.UserState;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -42,7 +39,6 @@ public class NodeUser {
 
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "account_id")
 	private Account account;
 
 
@@ -52,9 +48,5 @@ public class NodeUser {
 	@Enumerated(EnumType.STRING)
 	private UserState menuState;
 
-	@OneToMany(mappedBy = "nodeUserBINANCE")
-	private List<AccountBinance> accountBinances;
 
-	@OneToMany(mappedBy = "nodeUserMEXC")
-	private List<AccountMexc> accountMexcs;
 }

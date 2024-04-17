@@ -1,19 +1,15 @@
 package org.example.processServiceCommand.impl;
 
 import lombok.Data;
-import org.example.command.change.Change;
 import org.example.command.change.ChangeServiceNode;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
-import org.example.entity.account.Account;
-import org.example.entity.enums.Menu1Enums;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.ProducerService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import static org.example.entity.enams.UserState.ACCOUNT_USER;
 import static org.example.entity.enams.UserState.BASIC_STATE;
 
 
@@ -23,31 +19,8 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 	private final NodeUserDAO nodeUserDAO;
 	private final ProducerService producerService;
 	private final ChangeServiceNode changeServiceNode;
-	private Change change;
-
-	@Override
-	public void changeAction(NodeUser nodeUser, String text) {
-		change = change(text);
-		nodeUser.setAccount(change.getAccount());
-		nodeUser.setState(ACCOUNT_USER);
-		change.saveAccount(change.getAccount(), nodeUser);
-		nodeUserDAO.save(nodeUser);
-
-	}
 
 
-	@Override
-	public Account getChangeAccount(){
-		return change.getAccount();
-	}
-
-
-	@Override
-	public Change change(String nameChange) {
-		Menu1Enums changeEnums = Menu1Enums.fromValue(nameChange);
-		change = changeServiceNode.change(changeEnums);
-		return change;
-	}
 
 	@Override
 	public void menu1ChoosingAnExchange(Long chatId, String message) {
@@ -77,13 +50,6 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 
 	}
 
-	@Override
-	public void registerAccount(NodeUser nodeUser){
-		Account account = nodeUser.getAccount();
-		nodeUser.setState(ACCOUNT_USER);
-		change.saveAccount(account, nodeUser);
-		nodeUserDAO.save(nodeUser);
-	}
 
 	@Override
 	public void sendAnswer(String output, Long chatId) {
@@ -118,6 +84,7 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 		}
 		return appUserOpt.get();
 	}
+
 
 
 
