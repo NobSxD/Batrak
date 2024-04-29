@@ -27,7 +27,7 @@
         <version.github.mmazi>3.0</version.github.mmazi>
         <version.resilience4j>1.7.0</version.resilience4j>
         <version.junit>5.9.3</version.junit>
-        <version.lombok>1.18.30</version.lombok>
+        <version.lombok>1.18.26</version.lombok>
         <version.knowm.xchart>3.8.6</version.knowm.xchart>
         <version.qos.logback>1.4.12</version.qos.logback>
         <version.reflections>0.10.2</version.reflections>
@@ -57,6 +57,12 @@
             <groupId>com.pubnub</groupId>
             <artifactId>pubnub-gson</artifactId>
             <version>4.31.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
 

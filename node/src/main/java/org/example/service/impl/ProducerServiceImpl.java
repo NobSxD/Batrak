@@ -1,8 +1,8 @@
 package org.example.service.impl;
 
 import org.example.entity.account.Account;
-import org.example.entity.enums.Menu1Enums;
-import org.example.entity.enums.Menu2Enums;
+import org.example.entity.enams.Menu1Enums;
+import org.example.entity.enams.Menu2Enums;
 import org.example.service.ProducerService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;

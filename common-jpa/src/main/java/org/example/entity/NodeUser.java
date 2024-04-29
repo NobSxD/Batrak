@@ -1,12 +1,15 @@
 package org.example.entity;
 
 import lombok.*;
+import org.example.change.Change;
 import org.example.entity.account.Account;
+import org.example.entity.enams.Menu1Enums;
 import org.example.entity.enams.UserState;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,9 +41,20 @@ public class NodeUser {
 	private Boolean isActive;
 
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne
 	private Account account;
 
+
+
+	@Transient
+	private Change change;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List <Account> accounts;
+
+
+	@Enumerated(EnumType.STRING)
+	private Menu1Enums menu1Enums;
 
 	@Enumerated(EnumType.STRING)
 	private UserState state;

@@ -1,12 +1,16 @@
 package org.example.command.menu2;
 
+
+import org.example.change.ChangeServiceNode;
+import org.example.change.impl.ChangeBinanceImpl;
+import org.example.dao.AccountBinanceDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.account.Account;
 import org.example.entity.account.AccountBinance;
 import org.example.entity.enams.UserState;
-import org.example.processServiceCommand.ProcessServiceChangeCommands;
 import org.example.processServiceCommand.ProcessServiceCommand;
+import org.example.service.ProducerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,25 +22,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @ExtendWith(MockitoExtension.class)
-class RegisterAccountImplTest {
-	@Mock
-	private NodeUserDAO nodeUserDAO;
 
+class RegisterAccountImplTest {
+	private Account account;
 	private PasswordEncoder passwordEncoder;
 
 	@Mock
+	private NodeUserDAO nodeUserDAO;
+	@Mock
 	private ProcessServiceCommand processServiceCommand;
 	@Mock
-	private ProcessServiceChangeCommands processServiceChangeCommands;
-
+	private ProducerService producerService;
+	@Mock
+	private ChangeServiceNode changeServiceNode;
+	@Mock
+	private AccountBinanceDAO accountBinanceDAO;
 	@Mock
 	private NodeUser nodeUser;
-	Account account;
+
 
 
 
 	@BeforeEach
 	void setUp() {
+
+
 		 nodeUser = new NodeUser();
 		 passwordEncoder = new BCryptPasswordEncoder(8);
 		 account = new AccountBinance();
@@ -46,16 +56,16 @@ class RegisterAccountImplTest {
 	}
 
 
-//	@Test
-//	void nameChangeSend() {
-//		RegisterAccountImpl registerAccount = new RegisterAccountImpl(nodeUserDAO, passwordEncoder, processServiceCommand, processServiceChangeCommands);
-//		nodeUser.setAccount(account);
-//		nodeUser.setMenuState(UserState.ACCOUNT_NAME);
-//		String send = registerAccount.send(nodeUser, "Имя аккаунта");
-//		Assertions.assertEquals(send, "Ведите публичный ключ");
-//		Assertions.assertEquals(nodeUser.getAccount().getNameChange(), "Имя аккаунта");
-//
-//	}
+	@Test
+	void nameChangeSend() {
+		RegisterAccountImpl registerAccount = new RegisterAccountImpl(nodeUserDAO, passwordEncoder, processServiceCommand, processServiceChangeCommands);
+		nodeUser.setAccount(account);
+		nodeUser.setMenuState(UserState.ACCOUNT_NAME);
+		String send = registerAccount.send(nodeUser, "Имя аккаунта");
+		Assertions.assertEquals(send, "Ведите публичный ключ");
+		Assertions.assertEquals(nodeUser.getAccount().getNameChange(), "Имя аккаунта");
+
+	}
 
 	@Test
 	void publicApiKeyChangeSend() {
@@ -84,7 +94,7 @@ class RegisterAccountImplTest {
 		RegisterAccountImpl registerAccount = new RegisterAccountImpl(nodeUserDAO, passwordEncoder, processServiceCommand, processServiceChangeCommands);
 		nodeUser.setMenuState(null);
 		String send = registerAccount.send(nodeUser, "Имя аккаунта");
-		Assertions.assertEquals(send, "Ведите имя аккаунта");
+		Assertions.assertEquals(send, "Ведите уникальное имя аккаунта");
 		Assertions.assertNull(nodeUser.getAccount());
 
 	}
@@ -105,7 +115,7 @@ class RegisterAccountImplTest {
 		String s = registerAccount.accountName(nodeUser);
 		nodeUser.setAccount(account);
 		Assertions.assertEquals(nodeUser.getMenuState(), UserState.ACCOUNT_NAME);
-		Assertions.assertEquals(s, "Ведите имя аккаунта");
+		Assertions.assertEquals(s, "Ведите уникальное имя аккаунта");
 	}
 
 	@Test

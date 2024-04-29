@@ -16,6 +16,7 @@
     <properties>
         <project.version>5.1.2-SNAPSHOT</project.version>
         <version.lombok>1.18.26</version.lombok>
+        <version.slf4j>2.0.6</version.slf4j>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
@@ -51,19 +52,21 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.1</version>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-common</artifactId>
-            <version>3.1.3</version>
-            <scope>test</scope>
-        </dependency>
+
+
 
         <dependency>
             <groupId>org.example</groupId>
@@ -73,6 +76,6 @@
 
 
     </dependencies>
-    
+
 
 </project>

@@ -6,8 +6,8 @@ import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.account.Account;
 import org.example.entity.enams.UserState;
-import org.example.processServiceCommand.ProcessServiceChangeCommands;
 import org.example.processServiceCommand.ProcessServiceCommand;
+import org.example.service.impl.LoggerInFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class RegisterAccountImpl implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	private final PasswordEncoder passwordEncoder;
 	private final ProcessServiceCommand processServiceCommand;
-	private final ProcessServiceChangeCommands processServiceChangeCommands;
+
 
 
 
@@ -31,15 +31,20 @@ public class RegisterAccountImpl implements Command {
 	@Override
 	@Transactional
 	public String send(NodeUser nodeUser, String text) {
-		if (nodeUser.getMenuState() == null) {
-			return accountName(nodeUser);
-		} else if (nodeUser.getMenuState().equals(ACCOUNT_NAME)) {
-			nodeUser.setAccount(processServiceChangeCommands.getChangeAccount());
-			return accountName(nodeUser, text);
-		} else if (nodeUser.getMenuState().equals(PUBLIC_API)) {
-			return publicApi(nodeUser, text);
-		} else if (nodeUser.getMenuState().equals(SECRET_API)) {
-			return secretApi(nodeUser, text);
+		try {
+			if (nodeUser.getMenuState() == null) {
+				return accountName(nodeUser);
+			} else if (nodeUser.getMenuState().equals(ACCOUNT_NAME)) {
+				nodeUser.setAccount(nodeUser.getChange().newAccount());
+				return accountName(nodeUser, text);
+			} else if (nodeUser.getMenuState().equals(PUBLIC_API)) {
+				return publicApi(nodeUser, text);
+			} else if (nodeUser.getMenuState().equals(SECRET_API)) {
+				return secretApi(nodeUser, text);
+			}
+		} catch (Exception e){
+			LoggerInFile.saveLogInFile(e.getMessage(), "RegisterAccountImpl.txt");
+			return "во время регистрации произошла ошибка, обратитесь к администратору системы.";
 		}
 		return "Регистрация не успешна";
 	}
@@ -48,18 +53,23 @@ public class RegisterAccountImpl implements Command {
 		nodeUser.setState(REGISTER_ACCOUNT);
 		nodeUser.setMenuState(ACCOUNT_NAME);
 		nodeUserDAO.save(nodeUser);
-		return "Ведите имя аккаунта";
+		return "Ведите уникальное имя аккаунта";
 	}
 	public String accountName(NodeUser nodeUser, String text) {
 		if (text == null){
 			return "Вы не ввели имя акканта, пожалуйста повторите ввод";
 		}
-		Account account = nodeUser.getAccount();
-		account.setNameChange(text);
-		nodeUser.setMenuState(PUBLIC_API);
-		processServiceChangeCommands.saveAccount(account, nodeUser);
-		nodeUserDAO.save(nodeUser);
-		return "Ведите публичный ключ";
+		Account changeAccount = nodeUser.getChange().newAccount();
+		if (changeAccount == null) {
+			Account account = nodeUser.getAccount();
+			account.setNameChange(text);
+			nodeUser.setMenuState(PUBLIC_API);
+			nodeUser.getChange().saveAccount(account, nodeUser);
+			nodeUserDAO.save(nodeUser);
+			return "Ведите публичный ключ";
+		}else {
+			return "Данное имя уже используеться, пожалайста укажите уникальное имя аккаунта";
+		}
 	}
 
 	public String publicApi(NodeUser nodeUser, String text) { // пришло имя аккаунта
@@ -95,7 +105,10 @@ public class RegisterAccountImpl implements Command {
 			nodeUser.setState(UserState.ACCOUNT_USER);
 			nodeUser.setMenuState(null);
 			nodeUser.setAccount(account);
-			processServiceChangeCommands.registerAccount(nodeUser);
+			nodeUser.setState(BASIC_STATE);
+			nodeUser.getChange().saveAccount(account, nodeUser);
+			nodeUserDAO.save(nodeUser);
+
 			processServiceCommand.menu2Selection("Вы успешго добавили аккаунт - " + account.getNameChange(), nodeUser.getChatId());
 			nodeUserDAO.save(nodeUser);
 

@@ -1,7 +1,7 @@
 package org.example.processServiceCommand.impl;
 
 import lombok.Data;
-import org.example.command.change.ChangeServiceNode;
+import org.example.change.ChangeServiceNode;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.processServiceCommand.ProcessServiceCommand;

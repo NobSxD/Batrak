@@ -31,6 +31,9 @@ public abstract class Account {
 	protected String secretApiKey;
 
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
 	private NodeUser nodeUser;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private NodeUser nodeUsers;
 }

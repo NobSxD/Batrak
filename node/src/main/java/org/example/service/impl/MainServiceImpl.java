@@ -4,9 +4,11 @@ package org.example.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
+import org.example.change.Change;
+import org.example.change.ChangeServiceNode;
 import org.example.command.CommandService;
-import org.example.dao.NodeUserDAO;
 import org.example.entity.RawData;
+import org.example.entity.enams.Menu1Enums;
 import org.example.entity.enams.UserState;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.MainService;
@@ -27,7 +29,7 @@ import static org.example.entity.enams.UserState.*;
 @RequiredArgsConstructor
 public class MainServiceImpl implements MainService {
 
-	private final NodeUserDAO nodeUserDAO;
+	private final ChangeServiceNode changeServiceNode;
 	private final ProcessServiceCommand processServiceCommand;
 	private final CommandService commandService;
 
@@ -50,6 +52,11 @@ public class MainServiceImpl implements MainService {
 		String text = update.getCallbackQuery().getData();
 		saveRawData(update);
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
+		Menu1Enums changeEnums = nodeUser.getMenu1Enums();
+		if (changeEnums != null) {
+			Change change = changeServiceNode.change(changeEnums);
+			nodeUser.setChange(change);
+		}
 		long chatId = update.getCallbackQuery().getMessage().getChatId();
 		UserState userState = clickButton(text);
 		if (userState != null){
@@ -66,6 +73,11 @@ public class MainServiceImpl implements MainService {
 		String text = update.getMessage().getText();
 		saveRawData(update);
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
+		Menu1Enums changeEnums = nodeUser.getMenu1Enums();
+		if (changeEnums != null) {
+			Change change = changeServiceNode.change(changeEnums);
+			nodeUser.setChange(change);
+		}
 		long chatId = update.getMessage().getChatId();
 		UserState userState = clickButton(text);
 		if (userState != null){
@@ -110,6 +122,8 @@ public class MainServiceImpl implements MainService {
 
 
 	}
+
+
 
 
 

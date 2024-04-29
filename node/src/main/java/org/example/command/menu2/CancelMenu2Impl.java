@@ -5,6 +5,7 @@ import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
+import org.example.service.impl.LoggerInFile;
 import org.springframework.stereotype.Component;
 
 import static org.example.entity.enams.UserState.BASIC_STATE;
@@ -16,8 +17,13 @@ public class CancelMenu2Impl implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	@Override
 	public String send(NodeUser nodeUser , String text) {
-		nodeUser.setState(BASIC_STATE);
-		nodeUserDAO.save(nodeUser);
+		try {
+			nodeUser.setState(BASIC_STATE);
+			nodeUserDAO.save(nodeUser);
+		}catch (Exception e){
+			LoggerInFile.saveLogInFile(e.getMessage(), "CancelMenu2Impl");
+			return "во время отмены произошла ошибка, обратитесь к администратору системы.";
+		}
 		return "Команда отменена!";
 
 	}
