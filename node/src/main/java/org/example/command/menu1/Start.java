@@ -21,8 +21,9 @@ public class Start implements Command {
 		try {
 			nodeUser.setState(CHANGE);
 			nodeUserDAO.save(nodeUser);
-			processServiceCommand.menu1ChoosingAnExchange(nodeUser.getChatId(), "выбирите биржу");
+			processServiceCommand.menu1ChoosingAnExchange( "выбирите биржу", nodeUser.getChatId());
 		}catch (Exception e){
+			System.out.println(e.getMessage());
 			LoggerInFile.saveLogInFile(e.getMessage(), "Start.txt");
 		}
 		return "";

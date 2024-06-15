@@ -9,6 +9,7 @@ public interface ProducerService {
     void producerAnswer(SendMessage sendMessage);
     void producerChangeEnumsButton(SendMessage sendMessage);
     void producerMenuEnumsButton(SendMessage sendMessage);
+    void producerMenuTradeEnumsButton(SendMessage sendMessage);
     void producerAccountButton(List<Account> accounts, SendMessage sendMessage);
 
 }

@@ -4,11 +4,8 @@ package org.example.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import org.example.change.Change;
-import org.example.change.ChangeServiceNode;
 import org.example.command.CommandService;
 import org.example.entity.RawData;
-import org.example.entity.enams.Menu1Enums;
 import org.example.entity.enams.UserState;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.MainService;
@@ -29,7 +26,6 @@ import static org.example.entity.enams.UserState.*;
 @RequiredArgsConstructor
 public class MainServiceImpl implements MainService {
 
-	private final ChangeServiceNode changeServiceNode;
 	private final ProcessServiceCommand processServiceCommand;
 	private final CommandService commandService;
 
@@ -52,16 +48,15 @@ public class MainServiceImpl implements MainService {
 		String text = update.getCallbackQuery().getData();
 		saveRawData(update);
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
-		Menu1Enums changeEnums = nodeUser.getMenu1Enums();
-		if (changeEnums != null) {
-			Change change = changeServiceNode.change(changeEnums);
-			nodeUser.setChange(change);
-		}
+
+
 		long chatId = update.getCallbackQuery().getMessage().getChatId();
-		UserState userState = clickButton(text);
+		nodeUser.setChatId(chatId);
+		UserState userState = buttonCommand(text);
 		if (userState != null){
 			nodeUser.setState(userState);
 		}
+
 		String send = commandService.send(nodeUser, text);
 		processServiceCommand.sendAnswer(send, chatId);
 
@@ -73,32 +68,37 @@ public class MainServiceImpl implements MainService {
 		String text = update.getMessage().getText();
 		saveRawData(update);
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
-		Menu1Enums changeEnums = nodeUser.getMenu1Enums();
-		if (changeEnums != null) {
-			Change change = changeServiceNode.change(changeEnums);
-			nodeUser.setChange(change);
-		}
 		long chatId = update.getMessage().getChatId();
-		UserState userState = clickButton(text);
+		nodeUser.setChatId(chatId);
+		UserState userState = textCommand(text);
 		if (userState != null){
 			nodeUser.setState(userState);
 		}
+
 		String send = commandService.send(nodeUser, text);
 		processServiceCommand.sendAnswer(send, chatId);
 
 	}
 
-	private UserState clickButton(String textButton){
+	private UserState buttonCommand(String textButton){
 		Map<String, UserState> userStateMap = new HashMap<>();
-		userStateMap.put("/cancel", CANCEL);
-		userStateMap.put("отмена", CANCEL);
-		userStateMap.put("/start", START);
-		userStateMap.put("/help", HELP);
 		userStateMap.put("выбор аккаунта", ACCOUNT_SELECTION);
 		userStateMap.put("регистрация", REGISTER_ACCOUNT);
 		userStateMap.put("Настрайки трейдинга", MANAGER_TRADE);
 		userStateMap.put("запуск трейдинга", TRADE_START);
 		userStateMap.put("остановить трейдинг", TRADE_STOP);
+		userStateMap.put("отмена", CANCEL);
+
+		return userStateMap.get(textButton);
+	}
+
+
+
+	private UserState textCommand(String textButton){
+		Map<String, UserState> userStateMap = new HashMap<>();
+		userStateMap.put("/cancel", CANCEL);
+		userStateMap.put("/start", START);
+		userStateMap.put("/help", HELP);
 		return userStateMap.get(textButton);
 	}
 

@@ -10,13 +10,10 @@ import org.springframework.stereotype.Component;
 @Data
 public class InfoAccountImpl implements Command {
 
-
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		return "";
 	}
-
-
 
 	@Override
 	public UserState getType() {

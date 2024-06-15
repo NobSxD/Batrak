@@ -1,23 +1,42 @@
 package org.example.entity.enams;
 
 public enum UserState {
-	ACCOUNT_NAME,
-	ACCOUNT_USER,
-	BASIC_STATE,
-	CANCEL,
+
+
+	//---------------- Запуск бота
+	START,
 	CHANGE,
-	CHOICE,
-	EMAIL,
+
+	//----------------Базовое состояние
+	BASIC_STATE,
+
+	//--------------- команды бота
+	CANCEL,
 	HELP,
+
+	//--------------- акаунт
+	ACCOUNT_SELECTION,
+	SELECT,
 	INFO_ACCOUNT,
+
+	//--------------- Почта
+	EMAIL,
+	WAIT_FOR_EMAIL_STATE,
+
+
+	//---------------- Добавление аккаунта
+	REGISTER_ACCOUNT,
+	ACCOUNT_NAME,
 	PUBLIC_API,
 	SECRET_API,
-	WAIT_FOR_EMAIL_STATE,
-	START,
-	REGISTER_ACCOUNT,
-	TRADE,
-	TRADE_START,
+
+	//---------------- Трейдинг
 	MANAGER_TRADE,
-	ACCOUNT_SELECTION,
-	TRADE_STOP;
+	TRADE_START,
+	TRADE_STOP,
+
+	//---------------- Найстройка трейдинга
+	NAME_PAIR,
+	AMOUNT_ORDER,
+	DEPTH_GLASS;
 }

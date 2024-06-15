@@ -7,8 +7,7 @@ public enum Menu2Enums {
 
 	Trade("Настрайки трейдинга"),
 	TradeStart("запуск трейдинга"),
-	TradeStop("остановить трейдинг"),
-	Cancel("отмена");
+	TradeStop("остановить трейдинг");
 
 
 

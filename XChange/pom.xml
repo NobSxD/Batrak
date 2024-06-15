@@ -14,39 +14,69 @@
         <version>5.1.2-SNAPSHOT</version>
     </parent>
     <properties>
-        <project.version>5.1.2-SNAPSHOT</project.version>
+        <change.version>5.2.0</change.version>
         <version.lombok>1.18.26</version.lombok>
         <version.slf4j>2.0.6</version.slf4j>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <dependencies>
+        <!-- rabit -->
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>common-rabbitmq</artifactId>
+            <version>${version-SNAPSHOT}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-spring-boot-starter</artifactId>
+            <version>${telegrambot.starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <!-- xchange -->
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-binance</artifactId>
-            <version>${project.version}</version>
+            <version>${change.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-bybit</artifactId>
+            <version>${change.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-mexc</artifactId>
+            <version>${change.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.knowm.xchange</groupId>
-            <artifactId>xchange-mexc</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-core</artifactId>
-            <version>${project.version}</version>
+            <version>${change.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.knowm.xchart</groupId>
+            <artifactId>xchart</artifactId>
+            <version>${version.knowm.xchart}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-stream-binance</artifactId>
-            <version>${project.version}</version>
+            <version>${change.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-stream-core</artifactId>
-            <version>${project.version}</version>
+            <version>${change.version}</version>
         </dependency>
 
         <dependency>
@@ -60,11 +90,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>jakarta.ws.rs</groupId>
-            <artifactId>jakarta.ws.rs-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
 
 
 

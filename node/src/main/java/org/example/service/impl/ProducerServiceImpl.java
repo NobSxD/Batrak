@@ -1,8 +1,9 @@
 package org.example.service.impl;
 
 import org.example.entity.account.Account;
-import org.example.entity.enams.Menu1Enums;
+import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.Menu2Enums;
+import org.example.entity.enams.Menu3Enums;
 import org.example.service.ProducerService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,12 @@ public class ProducerServiceImpl implements ProducerService {
 	}
 
 	public void producerChangeEnumsButton(SendMessage sendMessages) {
-		Menu1Enums[] changeEnums = Menu1Enums.values(); //список бирж для добавление
+		ChangeType[] changeEnums = ChangeType.values(); //список бирж для добавление
 
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
-		for (Menu1Enums addChangeEnums : changeEnums) {
+		for (ChangeType addChangeEnums : changeEnums) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.toString()));
 			rowList.add(keyboardButtonsRow);
@@ -51,12 +52,33 @@ public class ProducerServiceImpl implements ProducerService {
 
 	@Override
 	public void producerMenuEnumsButton(SendMessage sendMessage) {
-		Menu2Enums[] menuEnum2s = Menu2Enums.values(); //список бирж для добавление
+		Menu2Enums[] menuEnum2s = Menu2Enums.values(); //список главного меню
 
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
 		for (Menu2Enums addChangeEnums : menuEnum2s) {
+			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
+			keyboardButtonsRow.add(button(addChangeEnums.toString()));
+			rowList.add(keyboardButtonsRow);
+		}
+
+
+		inlineKeyboardMarkup.setKeyboard(rowList);
+
+		sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+		rabbitTemplate.convertAndSend(ANSWER_MESSAGE, sendMessage);
+
+	}
+
+	@Override
+	public void producerMenuTradeEnumsButton(SendMessage sendMessage) {
+		Menu3Enums[] menuEnum3s = Menu3Enums.values(); //список главного меню
+
+		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+
+		for (Menu3Enums addChangeEnums : menuEnum3s) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.toString()));
 			rowList.add(keyboardButtonsRow);
@@ -79,7 +101,7 @@ public class ProducerServiceImpl implements ProducerService {
 
 		for (Account addChangeEnums : accounts  ) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
-			keyboardButtonsRow.add(button(addChangeEnums.getNameChange()));
+			keyboardButtonsRow.add(button(addChangeEnums.getNameAccount()));
 			rowList.add(keyboardButtonsRow);
 		}
 

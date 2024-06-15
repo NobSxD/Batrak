@@ -1,9 +1,12 @@
 package org.example.processServiceCommand.impl;
 
 import lombok.Data;
-import org.example.change.ChangeServiceNode;
 import org.example.dao.NodeUserDAO;
+import org.example.dao.SettingsTradeDAO;
+import org.example.dao.StatisticsTradeDAO;
 import org.example.entity.NodeUser;
+import org.example.entity.SettingsTrade;
+import org.example.entity.Statistics;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.ProducerService;
 import org.springframework.stereotype.Component;
@@ -18,17 +21,19 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 	private final NodeUserDAO nodeUserDAO;
 	private final ProducerService producerService;
-	private final ChangeServiceNode changeServiceNode;
-
+	private final SettingsTradeDAO settingsTradeDAO;
+	private final StatisticsTradeDAO statisticsTradeDAO;
 
 
 	@Override
-	public void menu1ChoosingAnExchange(Long chatId, String message) {
+	public void menu1ChoosingAnExchange(String output, Long chatId) {
 		var sendMessage = new SendMessage();
 		sendMessage.setChatId(chatId);
-		sendMessage.setText(message);
+		sendMessage.setText(output);
 		producerService.producerChangeEnumsButton(sendMessage);
 	}
+
+
 	@Override
 	public void menu2Selection(String output, Long chatId) {
 		var sendMessage = new SendMessage();
@@ -37,7 +42,14 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 		producerService.producerMenuEnumsButton(sendMessage);
 	}
 
+	@Override
+	public void menu3TradeSettings(String output, Long chatId) {
+		var sendMessage = new SendMessage();
+		sendMessage.setChatId(chatId);
+		sendMessage.setText(output);
+		producerService.producerMenuTradeEnumsButton(sendMessage);
 
+	}
 
 	@Override
 	public String helpAccount() {
@@ -49,7 +61,6 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 				""";
 
 	}
-
 
 	@Override
 	public void sendAnswer(String output, Long chatId) {
@@ -79,7 +90,23 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 		var telegramUser = update.getMessage() == null ? update.getCallbackQuery().getFrom() : update.getMessage().getFrom();
 		var appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId());
 		if (appUserOpt.isEmpty()) {
-			NodeUser transientAppUser = NodeUser.builder().telegramUserId(telegramUser.getId()).username(telegramUser.getUserName()).firstName(telegramUser.getFirstName()).lastName(telegramUser.getLastName()).isActive(false).state(BASIC_STATE).build();
+			var settingsTrade = new SettingsTrade();
+			var statistic = new Statistics();
+			NodeUser transientAppUser = NodeUser.builder()
+					.telegramUserId(telegramUser.getId())
+					.username(telegramUser.getUserName())
+					.firstName(telegramUser.getFirstName())
+					.lastName(telegramUser.getLastName())
+					.isActive(false).state(BASIC_STATE)
+					.build();
+
+			settingsTrade.setNodeUser(transientAppUser);
+			statistic.setNodeUser(transientAppUser);
+
+			transientAppUser.setStatistics(statistic);
+			transientAppUser.setSettingsTrade(settingsTrade);
+			statisticsTradeDAO.save(statistic);
+			settingsTradeDAO.save(settingsTrade);
 			return nodeUserDAO.save(transientAppUser);
 		}
 		return appUserOpt.get();

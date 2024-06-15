@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class EmailImpl implements Command {
-
-
-
-
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		return "";

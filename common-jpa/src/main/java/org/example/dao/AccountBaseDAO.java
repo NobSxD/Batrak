@@ -1,12 +1,16 @@
 package org.example.dao;
 
 
+import org.example.entity.NodeUser;
 import org.example.entity.account.Account;
+import org.example.entity.enams.ChangeType;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
 
-@NoRepositoryBean
-public interface AccountBaseDAO<T extends Account> extends JpaRepository<T,Long> {
-	T findByNameChange(String nameChange);
-	//T findBySecretApiKey(String key);
+import java.util.List;
+
+
+public interface AccountBaseDAO extends JpaRepository<Account,Long> {
+	Account findByNameAccountAndChangeTypeAndNodeUser(String nameAccount, ChangeType type, NodeUser nodeUser);
+	List<Account> findAllByChangeTypeAndNodeUser(ChangeType type, NodeUser nodeUser);
+
 }

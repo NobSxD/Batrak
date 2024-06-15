@@ -38,6 +38,8 @@
         <version.mysql>8.0.29</version.mysql>
         <skipIntegrationTests>true</skipIntegrationTests>
         <version-SNAPSHOT>5.1.2-SNAPSHOT</version-SNAPSHOT>
+        <version.knowm.xchart>3.8.7</version.knowm.xchart>
+        <hashids.version>1.0.1</hashids.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -58,12 +60,24 @@
             <artifactId>pubnub-gson</artifactId>
             <version>4.31.3</version>
         </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
 
 
 

@@ -1,9 +1,9 @@
 package org.example.entity;
 
 import lombok.*;
-import org.example.change.Change;
 import org.example.entity.account.Account;
-import org.example.entity.enams.Menu1Enums;
+import org.example.entity.enams.ChangeType;
+import org.example.entity.enams.TradeState;
 import org.example.entity.enams.UserState;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -39,28 +39,34 @@ public class NodeUser {
 	private String email;
 
 	private Boolean isActive;
+	private String nameStrategy;
 
 
 	@OneToOne
 	private Account account;
 
+	private String nameAccount;
 
-
-	@Transient
-	private Change change;
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUsers")
 	private List <Account> accounts;
 
 
 	@Enumerated(EnumType.STRING)
-	private Menu1Enums menu1Enums;
+	private ChangeType changeType;
 
 	@Enumerated(EnumType.STRING)
 	private UserState state;
 
 	@Enumerated(EnumType.STRING)
-	private UserState menuState;
+	private TradeState stateTrade;
+
+	@OneToOne
+	private SettingsTrade settingsTrade;
+
+	@OneToOne
+	private Statistics statistics;
+
+	private boolean tradeStartOrStop;
 
 
 }

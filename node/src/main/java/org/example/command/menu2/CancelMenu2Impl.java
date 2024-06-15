@@ -21,6 +21,7 @@ public class CancelMenu2Impl implements Command {
 			nodeUser.setState(BASIC_STATE);
 			nodeUserDAO.save(nodeUser);
 		}catch (Exception e){
+			System.out.println(e.getMessage());
 			LoggerInFile.saveLogInFile(e.getMessage(), "CancelMenu2Impl");
 			return "во время отмены произошла ошибка, обратитесь к администратору системы.";
 		}
