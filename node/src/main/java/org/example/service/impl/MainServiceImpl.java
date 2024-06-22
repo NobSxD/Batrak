@@ -6,6 +6,9 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.example.command.CommandService;
 import org.example.entity.RawData;
+import org.example.entity.enams.ChangeType;
+import org.example.entity.enams.MainMenu;
+import org.example.entity.enams.SettingUpTrading;
 import org.example.entity.enams.UserState;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.MainService;
@@ -81,13 +84,22 @@ public class MainServiceImpl implements MainService {
 	}
 
 	private UserState buttonCommand(String textButton){
+		ChangeType[] changeEnums = ChangeType.values(); //выбор биржи
+		MainMenu[] mainMenus = MainMenu.values(); // главное меню
+		SettingUpTrading[] settings = SettingUpTrading.values(); // настройка трейдинга
+
 		Map<String, UserState> userStateMap = new HashMap<>();
+		//-------Основное меню
 		userStateMap.put("выбор аккаунта", ACCOUNT_SELECTION);
 		userStateMap.put("регистрация", REGISTER_ACCOUNT);
 		userStateMap.put("Настрайки трейдинга", MANAGER_TRADE);
 		userStateMap.put("запуск трейдинга", TRADE_START);
 		userStateMap.put("остановить трейдинг", TRADE_STOP);
 		userStateMap.put("отмена", CANCEL);
+		//--------Настройки трейдинга
+		userStateMap.put("Выбор торговой пары", NAME_PAIR);
+		userStateMap.put("Укажите цену ордера", AMOUNT_ORDER);
+		userStateMap.put("Глубина размера стакана", DEPTH_GLASS);
 
 		return userStateMap.get(textButton);
 	}

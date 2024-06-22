@@ -2,8 +2,8 @@ package org.example.service.impl;
 
 import org.example.entity.account.Account;
 import org.example.entity.enams.ChangeType;
-import org.example.entity.enams.Menu2Enums;
-import org.example.entity.enams.Menu3Enums;
+import org.example.entity.enams.MainMenu;
+import org.example.entity.enams.SettingUpTrading;
 import org.example.service.ProducerService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -52,12 +52,12 @@ public class ProducerServiceImpl implements ProducerService {
 
 	@Override
 	public void producerMenuEnumsButton(SendMessage sendMessage) {
-		Menu2Enums[] menuEnum2s = Menu2Enums.values(); //список главного меню
+		MainMenu[] menuEnum2s = MainMenu.values(); //список главного меню
 
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
-		for (Menu2Enums addChangeEnums : menuEnum2s) {
+		for (MainMenu addChangeEnums : menuEnum2s) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.toString()));
 			rowList.add(keyboardButtonsRow);
@@ -73,12 +73,12 @@ public class ProducerServiceImpl implements ProducerService {
 
 	@Override
 	public void producerMenuTradeEnumsButton(SendMessage sendMessage) {
-		Menu3Enums[] menuEnum3s = Menu3Enums.values(); //список главного меню
+		SettingUpTrading[] menuEnum3s = SettingUpTrading.values(); //список главного меню
 
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
-		for (Menu3Enums addChangeEnums : menuEnum3s) {
+		for (SettingUpTrading addChangeEnums : menuEnum3s) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.toString()));
 			rowList.add(keyboardButtonsRow);

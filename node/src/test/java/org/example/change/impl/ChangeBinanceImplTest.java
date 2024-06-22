@@ -4,7 +4,6 @@ import org.example.change.Change;
 import org.example.dao.NodeUserDAO;
 import org.example.dao.StatisticsTradeDAO;
 import org.example.entity.NodeUser;
-import org.example.service.ProducerServiceExchange;
 import org.example.xchange.BasicChangeInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +17,7 @@ import static org.mockito.Mockito.when;
 class ChangeBinanceImplTest {
 	private Change tradeService;
 
-	@Mock
-	private AccountBinanceDAO accountBinanceDAO;
 
-	@Mock
-	private ProducerServiceExchange producerServiceExchange;
 	@Mock
 	StatisticsTradeDAO statisticsTradeDAO;
 

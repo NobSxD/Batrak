@@ -45,7 +45,9 @@ public class NodeUser {
 	@OneToOne
 	private Account account;
 
-	private String nameAccount;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUser")
+	private List <NodeOrder> orders;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUsers")
 	private List <Account> accounts;

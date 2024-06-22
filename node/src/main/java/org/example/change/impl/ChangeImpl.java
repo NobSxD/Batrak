@@ -7,6 +7,7 @@ import org.example.dao.AccountBaseDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.account.Account;
+import org.example.entity.enams.TradeState;
 import org.example.service.Strategy;
 import org.example.xchange.BasicChangeInterface;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class ChangeImpl implements Change {
 
 	@Override
 	public void tradeStart(NodeUser nodeUser) {
+		nodeUser.setTradeStartOrStop(true);
+		nodeUserDAO.save(nodeUser);
 		TradeThread trade = new TradeThread(nodeUser, strategy);
 		Thread thread = new Thread(trade);
 		thread.start();
@@ -60,20 +63,24 @@ public class ChangeImpl implements Change {
 	public void deleteFindId(long id) {
 		accountBaseDAO.deleteById(id);
 	}
-}
-class TradeThread implements Runnable{
-    NodeUser nodeUser;
-	BasicChangeInterface change;
-	Strategy strategy;
-	public TradeThread(NodeUser nodeUser, Strategy strategy) {
-		this.nodeUser = nodeUser;
-		this.strategy = strategy;
-		change = ChangeFactory.createChange(nodeUser);
-	}
 
-	@Override
-	public void run() {
+	class TradeThread implements Runnable {
+		NodeUser nodeUser;
+		BasicChangeInterface change;
+		Strategy strategy;
 
-		strategy.slidingProtectiveOrder(nodeUser, change);
+		public TradeThread(NodeUser nodeUser, Strategy strategy) {
+			this.nodeUser = nodeUser;
+			this.strategy = strategy;
+			change = ChangeFactory.createChange(nodeUser);
+		}
+
+		@Override
+		public void run() {
+			while (nodeUser.isTradeStartOrStop()) {
+				nodeUser.setStateTrade(TradeState.BAY);
+				strategy.slidingProtectiveOrder(nodeUser, change);
+			}
+		}
 	}
 }

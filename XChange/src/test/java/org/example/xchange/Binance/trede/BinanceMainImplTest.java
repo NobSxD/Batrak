@@ -25,10 +25,10 @@ class BinanceMainImplTest {
 	@BeforeEach
 	void setAp(){
 		nodeUser = new NodeUser();
-		account = new AccountBinance();
+		account = new Account();
 		SettingsTrade settingsTrade  = new SettingsTrade();
 		CryptoUtils cryptoUtils = new CryptoUtils();
-		account.setNameChange("Bot");
+		account.setNameAccount("Bot");
 		account.setPublicApiKey(cryptoUtils.encryptMessage(System.getenv("pKey")));
 		account.setSecretApiKey(cryptoUtils.encryptMessage(System.getenv("sKey")));
 		nodeUser.setSettingsTrade(settingsTrade);

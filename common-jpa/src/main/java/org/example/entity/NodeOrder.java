@@ -26,4 +26,7 @@ public class NodeOrder {
 	private String pair;
 	private Date createDate;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	private NodeUser nodeUser;
+
 }

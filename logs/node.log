@@ -137,3 +137,30 @@
 2024-06-13 22:14:21 INFO  ProfitCalculator:53 - Наибольшее originalAmount: 1.92813000
 2024-06-13 22:14:21 INFO  ProfitCalculator:54 - Цена: 67321.97000000
 2024-06-13 22:14:21 INFO  ProfitCalculator:64 - Цена ордера: 67321.98000000
+2024-06-15 23:50:32 ERROR StrategyImpl:76 - Cannot invoke "org.example.entity.enams.TradeState.equals(Object)" because the return value of "org.example.entity.NodeUser.getStateTrade()" is null
+2024-06-15 23:53:08 ERROR StrategyImpl:76 - Cannot invoke "org.example.entity.enams.TradeState.equals(Object)" because the return value of "org.example.entity.NodeUser.getStateTrade()" is null
+2024-06-16 16:10:32 INFO  ProfitCalculator:53 - Наибольшее originalAmount: 10.61990000
+2024-06-16 16:10:32 INFO  ProfitCalculator:54 - Цена: 3551.80000000
+2024-06-16 16:10:32 INFO  ProfitCalculator:64 - Цена ордера: 3551.82000000
+2024-06-16 16:10:33 ERROR StrategyImpl:126 - Filter failure: LOT_SIZE (HTTP status code: 400)
+2024-06-16 16:11:01 ERROR StrategyImpl:79 - Entity must not be null.; nested exception is java.lang.IllegalArgumentException: Entity must not be null.
+2024-06-16 16:21:15 INFO  ProfitCalculator:53 - Наибольшее originalAmount: 12.20780000
+2024-06-16 16:21:15 INFO  ProfitCalculator:54 - Цена: 3554.40000000
+2024-06-16 16:21:15 INFO  ProfitCalculator:64 - Цена ордера: 3554.40000000
+2024-06-16 16:23:53 ERROR StrategyImpl:126 - Filter failure: LOT_SIZE (HTTP status code: 400)
+2024-06-16 16:23:53 ERROR StrategyImpl:79 - Entity must not be null.; nested exception is java.lang.IllegalArgumentException: Entity must not be null.
+2024-06-16 16:25:13 INFO  ProfitCalculator:53 - Наибольшее originalAmount: 10.20913000
+2024-06-16 16:25:13 INFO  ProfitCalculator:54 - Цена: 66347.36000000
+2024-06-16 16:25:13 INFO  ProfitCalculator:64 - Цена ордера: 66347.36000000
+2024-06-16 16:26:38 ERROR StrategyImpl:120 - Account has insufficient balance for requested action. (HTTP status code: 400)
+2024-06-16 16:26:38 ERROR StrategyImpl:79 - Entity must not be null.; nested exception is java.lang.IllegalArgumentException: Entity must not be null.
+2024-06-16 16:27:20 INFO  ProfitCalculator:53 - Наибольшее originalAmount: 4.70741000
+2024-06-16 16:27:20 INFO  ProfitCalculator:54 - Цена: 66362.16000000
+2024-06-16 16:27:20 INFO  ProfitCalculator:64 - Цена ордера: 66362.16000000
+2024-06-16 16:27:20 ERROR StrategyImpl:120 - Account has insufficient balance for requested action. (HTTP status code: 400)
+2024-06-16 16:27:20 ERROR StrategyImpl:79 - Entity must not be null.; nested exception is java.lang.IllegalArgumentException: Entity must not be null.
+2024-06-16 16:37:30 INFO  ProfitCalculator:53 - Наибольшее originalAmount: 2.30421000
+2024-06-16 16:37:30 INFO  ProfitCalculator:54 - Цена: 66340.00000000
+2024-06-16 16:37:30 INFO  ProfitCalculator:64 - Цена ордера: 66340.00000000
+2024-06-16 16:37:30 ERROR StrategyImpl:120 - Account has insufficient balance for requested action. (HTTP status code: 400)
+2024-06-16 16:37:30 ERROR StrategyImpl:79 - Entity must not be null.; nested exception is java.lang.IllegalArgumentException: Entity must not be null.
