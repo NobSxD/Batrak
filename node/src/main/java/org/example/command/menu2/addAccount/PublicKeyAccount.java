@@ -10,8 +10,8 @@ import org.example.entity.account.Account;
 import org.example.entity.enams.UserState;
 import org.springframework.stereotype.Component;
 
-import static org.example.entity.enams.UserState.ACCOUNT_NAME;
-import static org.example.entity.enams.UserState.SECRET_API;
+import static org.example.entity.enams.UserState.ACCOUNT_ADD_NAME;
+import static org.example.entity.enams.UserState.ACCOUNT_ADD_SECRET_API;
 
 @Component
 @RequiredArgsConstructor
@@ -24,13 +24,13 @@ public class PublicKeyAccount implements Command {
 		String pKey = cryptoUtils.encryptMessage(text);
 		try {
 			Account changeAccount = nodeUser.getAccount();
-			nodeUser.setState(SECRET_API);
+			nodeUser.setState(ACCOUNT_ADD_SECRET_API);
 			changeAccount.setPublicApiKey(pKey);
 			nodeUser.setAccount(changeAccount);
 
 			if (changeAccount.getNameAccount() == null || changeAccount.getPublicApiKey() == null){
 				change.deleteFindId(changeAccount.getId());
-				nodeUser.setState(ACCOUNT_NAME);
+				nodeUser.setState(ACCOUNT_ADD_NAME);
 				nodeUserDAO.save(nodeUser);
 				return "Имя акаунта или публичный ключ не были введены, пожалуйста повторите попытку +\n" +
 						"Введит имя аккаунта";
@@ -48,6 +48,6 @@ public class PublicKeyAccount implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.PUBLIC_API;
+		return UserState.ACCOUNT_ADD_PUBLIC_API;
 	}
 }

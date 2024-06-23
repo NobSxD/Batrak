@@ -7,11 +7,14 @@ import org.example.dao.StatisticsTradeDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.SettingsTrade;
 import org.example.entity.Statistics;
+import org.example.entity.account.Account;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.ProducerService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.util.List;
 
 import static org.example.entity.enams.UserState.BASIC_STATE;
 
@@ -50,6 +53,24 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 		producerService.producerMenuTradeEnumsButton(sendMessage);
 
 	}
+	@Override
+	public void listStrategy(String output, Long chatId) {
+		var sendMessage = new SendMessage();
+		sendMessage.setChatId(chatId);
+		sendMessage.setText(output);
+		producerService.producerMenuListStrategy(sendMessage);
+
+	}
+
+	@Override
+	public void listAccount(List<Account> accounts, String output, Long chatId) {
+		var sendMessage = new SendMessage();
+		sendMessage.setChatId(chatId);
+		sendMessage.setText(output);
+		producerService.producerMenuListAccount(accounts,sendMessage);
+
+	}
+
 
 	@Override
 	public String helpAccount() {

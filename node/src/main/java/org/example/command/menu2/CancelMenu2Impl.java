@@ -31,7 +31,7 @@ public class CancelMenu2Impl implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.CANCEL;
+		return UserState.BOT_CANCEL;
 	}
 
 

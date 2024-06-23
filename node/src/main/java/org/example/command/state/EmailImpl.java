@@ -16,7 +16,7 @@ public class EmailImpl implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.EMAIL;
+		return UserState.MAIL_EMAIL;
 	}
 
 

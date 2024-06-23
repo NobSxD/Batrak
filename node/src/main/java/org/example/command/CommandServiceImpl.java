@@ -15,7 +15,7 @@ public class CommandServiceImpl implements CommandService{
 
 
 
-	public CommandServiceImpl(List<Command> commands, List<Command> commands2) {
+	public CommandServiceImpl(List<Command> commands) {
 		this.stateMap = commands.stream().collect(Collectors.toMap(Command::getType, Function.identity()));
 
 	}

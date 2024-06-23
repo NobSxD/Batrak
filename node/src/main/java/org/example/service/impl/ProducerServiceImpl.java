@@ -4,6 +4,7 @@ import org.example.entity.account.Account;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.MainMenu;
 import org.example.entity.enams.SettingUpTrading;
+import org.example.entity.enams.StrategyEnams;
 import org.example.service.ProducerService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -93,8 +94,27 @@ public class ProducerServiceImpl implements ProducerService {
 	}
 
 	@Override
-	public void producerAccountButton(List<Account> accounts, SendMessage sendMessage) {
+	public void producerMenuListStrategy(SendMessage sendMessage) {
+		StrategyEnams[] strategy = StrategyEnams.values();
 
+		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+
+		for (StrategyEnams addStrategyEnums : strategy) {
+			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
+			keyboardButtonsRow.add(button(addStrategyEnums.toString()));
+			rowList.add(keyboardButtonsRow);
+		}
+
+		inlineKeyboardMarkup.setKeyboard(rowList);
+
+		sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+		rabbitTemplate.convertAndSend(ANSWER_MESSAGE, sendMessage);
+
+	}
+
+	@Override
+	public void producerMenuListAccount(List<Account> accounts, SendMessage sendMessage) {
 
 		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
@@ -112,6 +132,8 @@ public class ProducerServiceImpl implements ProducerService {
 		rabbitTemplate.convertAndSend(ANSWER_MESSAGE, sendMessage);
 
 	}
+
+
 
 	private InlineKeyboardButton button(String text) {
 		return InlineKeyboardButton.builder()

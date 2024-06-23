@@ -3,6 +3,7 @@ package org.example.entity.enams;
 public enum MainMenu {
 
 	ChoiceAccount("выбор аккаунта"),
+	DeleteAccount("Удаление аккаунта"),
 	RegisterAccount("регистрация"),
 
 	Trade("Настрайки трейдинга"),

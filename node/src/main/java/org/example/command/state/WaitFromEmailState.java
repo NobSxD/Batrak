@@ -17,7 +17,7 @@ public class WaitFromEmailState implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.WAIT_FOR_EMAIL_STATE;
+		return UserState.MAIL_WAIT_FOR_EMAIL_STATE;
 	}
 
 

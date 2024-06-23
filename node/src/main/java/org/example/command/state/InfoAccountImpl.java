@@ -17,7 +17,7 @@ public class InfoAccountImpl implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.INFO_ACCOUNT;
+		return UserState.ACCOUNT_INFO;
 	}
 
 

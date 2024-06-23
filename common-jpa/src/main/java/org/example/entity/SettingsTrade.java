@@ -2,6 +2,7 @@ package org.example.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.entity.enams.StrategyEnams;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,6 +24,8 @@ public class SettingsTrade {
 	private BigDecimal amountOrder = BigDecimal.valueOf(11);
 
 	private int depthGlass = 25;
+
+	private StrategyEnams strategy = StrategyEnams.SlidingProtectiveOrder;
 
 	@OneToOne
 	private NodeUser nodeUser;

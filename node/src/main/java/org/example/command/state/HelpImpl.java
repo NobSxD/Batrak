@@ -19,7 +19,7 @@ public class HelpImpl implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.HELP;
+		return UserState.BOT_HELP;
 	}
 
 

@@ -23,14 +23,13 @@ public class SelectionChange implements Command {
 		nodeUser.setChangeType(ChangeType.fromValue(nameChange));
 		nodeUser.setState(BASIC_STATE);
 		nodeUserDAO.save(nodeUser);
-
 		processServiceCommand.menu2Selection(nameChange, nodeUser.getChatId());
 		return "";
 	}
 
 	@Override
 	public UserState getType() {
-		return UserState.CHANGE;
+		return UserState.BOT_CHANGE;
 	}
 
 

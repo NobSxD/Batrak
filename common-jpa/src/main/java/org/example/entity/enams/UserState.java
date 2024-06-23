@@ -4,39 +4,47 @@ public enum UserState {
 
 
 	//---------------- Запуск бота
-	START,
-	CHANGE,
+	BOT_START,
+	BOT_CHANGE,
 
 	//----------------Базовое состояние
 	BASIC_STATE,
 
 	//--------------- команды бота
-	CANCEL,
-	HELP,
+	BOT_CANCEL,
+	BOT_HELP,
+	BOT_BACK,
+	BOT_MAIN_MENU,
 
 	//--------------- акаунт
-	ACCOUNT_SELECTION,
-	SELECT,
-	INFO_ACCOUNT,
-
-	//--------------- Почта
-	EMAIL,
-	WAIT_FOR_EMAIL_STATE,
-
+	ACCOUNT_LIST,
+	ACCOUNT_SELECT,
+	ACCOUNT_INFO,
+	ACCOUNT_DELETE,
 
 	//---------------- Добавление аккаунта
-	REGISTER_ACCOUNT,
-	ACCOUNT_NAME,
-	PUBLIC_API,
-	SECRET_API,
+	ACCOUNT_ADD_REGISTER,
+	ACCOUNT_ADD_NAME,
+	ACCOUNT_ADD_PUBLIC_API,
+	ACCOUNT_ADD_SECRET_API,
+
+	//--------------- Почта
+	MAIL_EMAIL,
+	MAIL_WAIT_FOR_EMAIL_STATE,
+
 
 	//---------------- Трейдинг
-	MANAGER_TRADE,
+	TRADE_MANAGER,
 	TRADE_START,
 	TRADE_STOP,
 
 	//---------------- Найстройка трейдинга
-	NAME_PAIR,
-	AMOUNT_ORDER,
-	DEPTH_GLASS;
+	SETTINGS_NAME_PAIR,
+	SETTINGS_SAVE_NAME_PAIR,
+	SETTINGS_AMOUNT_ORDER,
+	SETTINGS_SAVE_AMOUNT_ORDER,
+	SETTINGS_DEPTH_GLASS,
+	SETTINGS_SAVE_DEPTH_GLASS,
+	SETTINGS_NAME_STRATEGY,
+	SETTINGS_SAVE_NAME_STRATEGY;
 }

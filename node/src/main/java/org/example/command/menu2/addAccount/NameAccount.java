@@ -9,7 +9,7 @@ import org.example.entity.account.Account;
 import org.example.entity.enams.UserState;
 import org.springframework.stereotype.Component;
 
-import static org.example.entity.enams.UserState.PUBLIC_API;
+import static org.example.entity.enams.UserState.ACCOUNT_ADD_PUBLIC_API;
 
 @Component
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class NameAccount implements Command {
 			if (changeAccount == null) {
 				changeAccount = change.newAccount(nodeUser);
 				changeAccount.setNameAccount(text);
-				nodeUser.setState(PUBLIC_API);
+				nodeUser.setState(ACCOUNT_ADD_PUBLIC_API);
 				nodeUser.setAccount(changeAccount);
 				change.saveAccount(changeAccount, nodeUser);
 				nodeUserDAO.save(nodeUser);
@@ -41,6 +41,6 @@ public class NameAccount implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.ACCOUNT_NAME;
+		return UserState.ACCOUNT_ADD_NAME;
 	}
 }

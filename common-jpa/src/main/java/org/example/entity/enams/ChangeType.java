@@ -1,8 +1,5 @@
 package org.example.entity.enams;
 
-import lombok.ToString;
-
-@ToString
 public enum ChangeType {
     Binance("binance"),
     Baibit("baibit"),

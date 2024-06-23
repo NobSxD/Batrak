@@ -36,6 +36,6 @@ public class SelectionAccount implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.SELECT;
+		return UserState.ACCOUNT_SELECT;
 	}
 }

@@ -11,7 +11,7 @@ import org.example.entity.enams.UserState;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
 
-import static org.example.entity.enams.UserState.ACCOUNT_NAME;
+import static org.example.entity.enams.UserState.ACCOUNT_ADD_NAME;
 import static org.example.entity.enams.UserState.BASIC_STATE;
 
 @Component
@@ -33,7 +33,7 @@ public class SecretKeyAccount implements Command {
 
 			if (changeAccount.getNameAccount() == null || changeAccount.getPublicApiKey() == null || changeAccount.getSecretApiKey() == null){
 				change.deleteFindId(changeAccount.getId());
-				nodeUser.setState(ACCOUNT_NAME);
+				nodeUser.setState(ACCOUNT_ADD_NAME);
 				nodeUserDAO.save(nodeUser);
 				return "Имя акаунта или публичный ключ или секретный ключ не были введены, пожалуйста повторите попытку +\n" +
 						"Введит имя аккаунта";
@@ -55,6 +55,6 @@ public class SecretKeyAccount implements Command {
 
 	@Override
 	public UserState getType() {
-		return UserState.SECRET_API;
+		return UserState.ACCOUNT_ADD_SECRET_API;
 	}
 }

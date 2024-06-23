@@ -5,9 +5,11 @@ public enum SettingUpTrading {
 
 	NamePair("Выбор торговой пары"),
 
-	AmountOrder("Укажете цену ордера"),
+	AmountOrder("Укажите цену ордера"),
 
-	DepthGlass("Глубина размера стакана");
+	DepthGlass("Глубина размера стакана"),
+	SelectStrategy("Выбор стратегии"),
+	MainMenu("В главное мею");
 
 
 

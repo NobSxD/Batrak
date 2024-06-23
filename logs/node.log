@@ -164,3 +164,4 @@
 2024-06-16 16:37:30 INFO  ProfitCalculator:64 - Цена ордера: 66340.00000000
 2024-06-16 16:37:30 ERROR StrategyImpl:120 - Account has insufficient balance for requested action. (HTTP status code: 400)
 2024-06-16 16:37:30 ERROR StrategyImpl:79 - Entity must not be null.; nested exception is java.lang.IllegalArgumentException: Entity must not be null.
+2024-06-23 16:14:17 ERROR DepthGlass:51 - For input string: "Укажете цену ордера"

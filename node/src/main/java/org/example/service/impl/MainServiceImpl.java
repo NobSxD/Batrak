@@ -6,9 +6,6 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.example.command.CommandService;
 import org.example.entity.RawData;
-import org.example.entity.enams.ChangeType;
-import org.example.entity.enams.MainMenu;
-import org.example.entity.enams.SettingUpTrading;
 import org.example.entity.enams.UserState;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.MainService;
@@ -18,10 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.HashMap;
 import java.util.Map;
-
-import static org.example.entity.enams.UserState.*;
 
 
 @Service
@@ -31,31 +25,27 @@ public class MainServiceImpl implements MainService {
 
 	private final ProcessServiceCommand processServiceCommand;
 	private final CommandService commandService;
+	private final Map<String, UserState> buttonRegistration;
 
 	@Override
 	@Transactional
 	public void defines(Update update) {
+		String text = "";
+		long chatId = 0;
 
-		if (update.getMessage() != null) {
-			processTextMessage(update);
-		}
-		if (update.getCallbackQuery() != null) {
-			processTextButton(update);
-		}
-
-	}
-
-
-
-	public void processTextButton(Update update) {
-		String text = update.getCallbackQuery().getData();
 		saveRawData(update);
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
 
+		if (update.getMessage() != null) {         //при вводе пользователем сообщения
+			text = update.getMessage().getText();
+			chatId = update.getMessage().getChatId();
+		}
+		if (update.getCallbackQuery() != null) {  // при нажатие на кнопку пользователем
+			text = update.getCallbackQuery().getData();
+			chatId = update.getCallbackQuery().getMessage().getChatId();
+		}
 
-		long chatId = update.getCallbackQuery().getMessage().getChatId();
-		nodeUser.setChatId(chatId);
-		UserState userState = buttonCommand(text);
+		UserState userState = buttonRegistration.get(text);
 		if (userState != null){
 			nodeUser.setState(userState);
 		}
@@ -65,54 +55,6 @@ public class MainServiceImpl implements MainService {
 
 	}
 
-
-
-	public void processTextMessage(Update update) {
-		String text = update.getMessage().getText();
-		saveRawData(update);
-		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
-		long chatId = update.getMessage().getChatId();
-		nodeUser.setChatId(chatId);
-		UserState userState = textCommand(text);
-		if (userState != null){
-			nodeUser.setState(userState);
-		}
-
-		String send = commandService.send(nodeUser, text);
-		processServiceCommand.sendAnswer(send, chatId);
-
-	}
-
-	private UserState buttonCommand(String textButton){
-		ChangeType[] changeEnums = ChangeType.values(); //выбор биржи
-		MainMenu[] mainMenus = MainMenu.values(); // главное меню
-		SettingUpTrading[] settings = SettingUpTrading.values(); // настройка трейдинга
-
-		Map<String, UserState> userStateMap = new HashMap<>();
-		//-------Основное меню
-		userStateMap.put("выбор аккаунта", ACCOUNT_SELECTION);
-		userStateMap.put("регистрация", REGISTER_ACCOUNT);
-		userStateMap.put("Настрайки трейдинга", MANAGER_TRADE);
-		userStateMap.put("запуск трейдинга", TRADE_START);
-		userStateMap.put("остановить трейдинг", TRADE_STOP);
-		userStateMap.put("отмена", CANCEL);
-		//--------Настройки трейдинга
-		userStateMap.put("Выбор торговой пары", NAME_PAIR);
-		userStateMap.put("Укажите цену ордера", AMOUNT_ORDER);
-		userStateMap.put("Глубина размера стакана", DEPTH_GLASS);
-
-		return userStateMap.get(textButton);
-	}
-
-
-
-	private UserState textCommand(String textButton){
-		Map<String, UserState> userStateMap = new HashMap<>();
-		userStateMap.put("/cancel", CANCEL);
-		userStateMap.put("/start", START);
-		userStateMap.put("/help", HELP);
-		return userStateMap.get(textButton);
-	}
 
 
 	@SneakyThrows

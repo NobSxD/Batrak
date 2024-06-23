@@ -15,3 +15,40 @@
 2024-06-22 14:21:23 INFO  ProfitCalculator:53 - Наибольшее originalAmount: 2.04
 2024-06-22 14:21:23 INFO  ProfitCalculator:54 - Цена: 68000
 2024-06-22 14:21:23 INFO  ProfitCalculator:64 - Цена ордера: 68000
+2024-06-23 00:03:56 INFO  CurrencyConverter:27 - число 15,891895 менше 0.99 но больше 0.01
+2024-06-23 00:03:56 INFO  CurrencyConverter:27 - число 0,891236 менше 0.99 но больше 0.01
+2024-06-23 00:03:56 INFO  CurrencyConverter:36 - число 0,008875 менше 0.01 но больше 0.0001
+2024-06-23 00:03:56 INFO  CurrencyConverter:40 - число 0,000001 менше 0.0001 но больше 0.000001
+2024-06-23 00:03:56 INFO  CurrencyConverter:44 - число 0,000000 менше 0.000001 но больше 0.00000001
+2024-06-23 00:03:56 INFO  CurrencyConverter:48 - число 0,000000 менше 0.00000001 но больше 0.0000000001
+2024-06-23 00:03:56 INFO  CurrencyConverter:52 - число 0,000000 менше 0.0000000001 но больше 0.000000000001
+2024-06-23 00:03:56 INFO  CurrencyConverter:27 - число 1,897876 менше 0.99 но больше 0.01
+2024-06-23 00:03:56 INFO  CurrencyConverter:27 - число 150,898757 менше 0.99 но больше 0.01
+2024-06-23 00:03:56 INFO  CurrencyConverter:27 - число 15,890746 менше 0.99 но больше 0.01
+2024-06-23 00:04:32 INFO  CurrencyConverter:27 - число 15,891895 менше 0.99 но больше 0.01
+2024-06-23 00:04:32 INFO  CurrencyConverter:27 - число 0,891236 менше 0.99 но больше 0.01
+2024-06-23 00:04:32 INFO  CurrencyConverter:31 - число 0,008875 менше 0.01 но больше 0.0001
+2024-06-23 00:04:32 INFO  CurrencyConverter:35 - число 0,000001 менше 0.0001 но больше 0.000001
+2024-06-23 00:04:32 INFO  CurrencyConverter:39 - число 0,000000 менше 0.000001 но больше 0.00000001
+2024-06-23 00:04:32 INFO  CurrencyConverter:43 - число 0,000000 менше 0.00000001 но больше 0.0000000001
+2024-06-23 00:04:32 INFO  CurrencyConverter:47 - число 0,000000 менше 0.0000000001 но больше 0.000000000001
+2024-06-23 00:04:32 INFO  CurrencyConverter:27 - число 1,897876 менше 0.99 но больше 0.01
+2024-06-23 00:04:32 INFO  CurrencyConverter:27 - число 150,898757 менше 0.99 но больше 0.01
+2024-06-23 00:04:32 INFO  CurrencyConverter:27 - число 15,890746 менше 0.99 но больше 0.01
+2024-06-23 00:04:42 INFO  FinancialCalculator:70 - Наибольшее originalAmount: 1.05
+2024-06-23 00:04:42 INFO  FinancialCalculator:71 - Цена: 68800
+2024-06-23 00:04:42 INFO  FinancialCalculator:41 - Наибольшее originalAmount: 2.04
+2024-06-23 00:04:42 INFO  FinancialCalculator:42 - Цена: 68000
+2024-06-23 00:04:42 INFO  FinancialCalculator:52 - Цена ордера: 68000
+2024-06-23 00:04:42 INFO  FinancialCalculator:41 - Наибольшее originalAmount: 2.04
+2024-06-23 00:04:42 INFO  FinancialCalculator:42 - Цена: 68000
+2024-06-23 00:04:42 INFO  FinancialCalculator:52 - Цена ордера: 68000
+2024-06-23 00:04:42 INFO  FinancialCalculator:41 - Наибольшее originalAmount: 1.05
+2024-06-23 00:04:42 INFO  FinancialCalculator:42 - Цена: 67700
+2024-06-23 00:04:42 INFO  FinancialCalculator:52 - Цена ордера: 67800
+2024-06-23 00:04:42 INFO  FinancialCalculator:41 - Наибольшее originalAmount: 2.04
+2024-06-23 00:04:42 INFO  FinancialCalculator:42 - Цена: 68000
+2024-06-23 00:04:42 INFO  FinancialCalculator:52 - Цена ордера: 68000
+2024-06-23 00:04:42 INFO  FinancialCalculator:41 - Наибольшее originalAmount: 2.04
+2024-06-23 00:04:42 INFO  FinancialCalculator:42 - Цена: 68000
+2024-06-23 00:04:42 INFO  FinancialCalculator:52 - Цена ордера: 68000
