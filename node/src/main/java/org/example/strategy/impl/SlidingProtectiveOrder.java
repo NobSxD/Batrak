@@ -117,6 +117,7 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 					.orderType(OrderType.BIDS)
 					.pair(nodeUser.getSettingsTrade().getNamePair())
 					.createDate(new Date())
+					.strategyEnams(nodeUser.getSettingsTrade().getStrategy())
 					.nodeUser(nodeUser)
 					.build();
 			producerServiceExchange.sendAnswer("Ордер по курсу $" + wallBayOrder + " был исполнен", nodeUser.getChatId());
@@ -168,6 +169,7 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 					.pair(nodeUser.getSettingsTrade().getNamePair())
 					.createDate(new Date())
 					.nodeUser(nodeUser)
+					.strategyEnams(nodeUser.getSettingsTrade().getStrategy())
 					.build();
 			producerServiceExchange.sendAnswer("Ордер по курсу $" + wallSellOrder + " был исполнен", nodeUser.getChatId());
 			nodeUser.setStateTrade(TradeState.BAY);

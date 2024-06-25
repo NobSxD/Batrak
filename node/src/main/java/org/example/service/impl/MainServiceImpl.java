@@ -35,6 +35,11 @@ public class MainServiceImpl implements MainService {
 
 		saveRawData(update);
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
+		//TODO на будующие, для активации пользователя
+		if (nodeUser.getIsActive()){
+			processServiceCommand.sendAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
+			return;
+		}
 
 		if (update.getMessage() != null) {         //при вводе пользователем сообщения
 			text = update.getMessage().getText();
