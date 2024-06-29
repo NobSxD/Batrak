@@ -48,7 +48,7 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 
 		//1. Получить список ордеров в стакане
 		try {
-			OrderBook orderBook = basicChange.orderBooksLimitOrders(nodeUser.getSettingsTrade().getDepthGlass(), nodeUser);
+			OrderBook orderBook = basicChange.orderBooksLimitOrders(nodeUser.getConfigTrade().getDepthGlass(), nodeUser);
 			Statistics statistics = nodeUser.getStatistics();
 
 			if (nodeUser.getStateTrade().equals(TradeState.BAY)) {
@@ -62,8 +62,8 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 				ordersDAO.save(orderSel);
 				statistics.setCountDealSel(statistics.getCountDealSel() + 1);
 
-				BigDecimal profitPercentage = FinancialCalculator.calculateProfitPercentage(nodeUser.getSettingsTrade().getAmountOrder(), orderBay.getPrice(), orderSel.getPrice());
-				BigDecimal dollarAmount = FinancialCalculator.calculateDollarAmount(nodeUser.getSettingsTrade().getAmountOrder(), orderBay.getPrice(), orderSel.getPrice());
+				BigDecimal profitPercentage = FinancialCalculator.calculateProfitPercentage(nodeUser.getConfigTrade().getAmountOrder(), orderBay.getPrice(), orderSel.getPrice());
+				BigDecimal dollarAmount = FinancialCalculator.calculateDollarAmount(nodeUser.getConfigTrade().getAmountOrder(), orderBay.getPrice(), orderSel.getPrice());
 
 				statistics.setCountDeal(statistics.getCountDeal() + 1);
 				statistics.setProfit(statistics.getProfit().add(dollarAmount).setScale(2, RoundingMode.HALF_UP));
@@ -91,13 +91,13 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 
 	public NodeOrder bay(OrderBook orderBook, NodeUser nodeUser) {
 		try {
-			CurrencyPair currencyPair = new CurrencyPair(nodeUser.getSettingsTrade().getNamePair());
+			CurrencyPair currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
 			List<LimitOrder> bids = orderBook.getBids();
 
 			BigDecimal wallBayOrder = FinancialCalculator.maxAmount(bids);
 			wallBayOrder = CurrencyConverter.validUsd(wallBayOrder);
 
-			BigDecimal summa = nodeUser.getSettingsTrade().getAmountOrder();
+			BigDecimal summa = nodeUser.getConfigTrade().getAmountOrder();
 			summa = CurrencyConverter.convertCurrency(wallBayOrder, summa);
 
 
@@ -115,9 +115,9 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 					.summaCurrency(summa)
 					.summaUSD(usd)
 					.orderType(OrderType.BIDS)
-					.pair(nodeUser.getSettingsTrade().getNamePair())
+					.pair(nodeUser.getConfigTrade().getNamePair())
 					.createDate(new Date())
-					.strategyEnams(nodeUser.getSettingsTrade().getStrategy())
+					.strategyEnams(nodeUser.getConfigTrade().getStrategy())
 					.nodeUser(nodeUser)
 					.build();
 			producerServiceExchange.sendAnswer("Ордер по курсу $" + wallBayOrder + " был исполнен", nodeUser.getChatId());
@@ -141,7 +141,7 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 
 	public NodeOrder sel(OrderBook orderBook, NodeUser nodeUser, NodeOrder nodeOrder){
 		try {
-			CurrencyPair currencyPair = new CurrencyPair(nodeUser.getSettingsTrade().getNamePair());
+			CurrencyPair currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
 			List<LimitOrder> asks = orderBook.getAsks();
 
 			//TODO второй параметр изменить на деномический из настроек
@@ -166,10 +166,10 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 					.summaCurrency(nodeOrder.getSummaCurrency())
 					.summaUSD(usd)
 					.orderType(OrderType.ASKS)
-					.pair(nodeUser.getSettingsTrade().getNamePair())
+					.pair(nodeUser.getConfigTrade().getNamePair())
 					.createDate(new Date())
 					.nodeUser(nodeUser)
-					.strategyEnams(nodeUser.getSettingsTrade().getStrategy())
+					.strategyEnams(nodeUser.getConfigTrade().getStrategy())
 					.build();
 			producerServiceExchange.sendAnswer("Ордер по курсу $" + wallSellOrder + " был исполнен", nodeUser.getChatId());
 			nodeUser.setStateTrade(TradeState.BAY);

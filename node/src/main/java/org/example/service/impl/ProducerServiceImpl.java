@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
-import org.example.entity.account.Account;
+import org.example.entity.Account;
+import org.example.entity.NodeUser;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.MainMenu;
 import org.example.entity.enams.SettingUpTrading;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.example.model.RabbitQueue.ANSWER_MESSAGE;
+import static org.example.model.RabbitQueue.TRADE_MESSAGE;
 
 
 @Service
@@ -29,6 +31,11 @@ public class ProducerServiceImpl implements ProducerService {
 	@Override
 	public void producerAnswer(SendMessage sendMessage) {
 		rabbitTemplate.convertAndSend(ANSWER_MESSAGE, sendMessage);
+	}
+
+	@Override
+	public void startTread(NodeUser nodeUser) {
+		rabbitTemplate.convertAndSend(TRADE_MESSAGE, nodeUser);
 	}
 
 	public void producerChangeEnumsButton(SendMessage sendMessages) {

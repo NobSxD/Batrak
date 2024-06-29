@@ -1,7 +1,6 @@
 package org.example.entity;
 
 import lombok.*;
-import org.example.entity.account.Account;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.TradeState;
 import org.example.entity.enams.UserState;
@@ -39,17 +38,16 @@ public class NodeUser {
 	private String email;
 
 	private Boolean isActive;
-	private String nameStrategy;
 
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Account account;
 
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUser")
 	private List <NodeOrder> orders;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUsers")
+	@OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, mappedBy = "nodeUser")
 	private List <Account> accounts;
 
 
@@ -63,7 +61,7 @@ public class NodeUser {
 	private TradeState stateTrade;
 
 	@OneToOne
-	private SettingsTrade settingsTrade;
+	private ConfigTrade configTrade;
 
 	@OneToOne
 	private Statistics statistics;

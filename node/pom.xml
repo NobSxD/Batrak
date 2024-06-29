@@ -16,19 +16,13 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
+            <groupId>org.example</groupId>
+            <artifactId>common-jpa</artifactId>
+            <version>${version-SNAPSHOT}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,21 +45,13 @@
             <artifactId>common-rabbitmq</artifactId>
             <version>${version-SNAPSHOT}</version>
         </dependency>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>common-jpa</artifactId>
-            <version>${version-SNAPSHOT}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>XChange</artifactId>
             <version>${version-SNAPSHOT}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

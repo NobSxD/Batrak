@@ -5,9 +5,9 @@ import org.example.dao.NodeUserDAO;
 import org.example.dao.SettingsTradeDAO;
 import org.example.dao.StatisticsTradeDAO;
 import org.example.entity.NodeUser;
-import org.example.entity.SettingsTrade;
+import org.example.entity.ConfigTrade;
 import org.example.entity.Statistics;
-import org.example.entity.account.Account;
+import org.example.entity.Account;
 import org.example.processServiceCommand.ProcessServiceCommand;
 import org.example.service.ProducerService;
 import org.springframework.stereotype.Component;
@@ -111,7 +111,7 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 		var telegramUser = update.getMessage() == null ? update.getCallbackQuery().getFrom() : update.getMessage().getFrom();
 		var appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId());
 		if (appUserOpt.isEmpty()) {
-			var settingsTrade = new SettingsTrade();
+			var settingsTrade = new ConfigTrade();
 			var statistic = new Statistics();
 			NodeUser transientAppUser = NodeUser.builder()
 					.telegramUserId(telegramUser.getId())
@@ -125,7 +125,7 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 			statistic.setNodeUser(transientAppUser);
 
 			transientAppUser.setStatistics(statistic);
-			transientAppUser.setSettingsTrade(settingsTrade);
+			transientAppUser.setConfigTrade(settingsTrade);
 			statisticsTradeDAO.save(statistic);
 			settingsTradeDAO.save(settingsTrade);
 			return nodeUserDAO.save(transientAppUser);
@@ -133,8 +133,10 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 		return appUserOpt.get();
 	}
 
-
-
+	@Override
+	public void startTread(NodeUser nodeUser) {
+		producerService.startTread(nodeUser);
+	}
 
 
 }

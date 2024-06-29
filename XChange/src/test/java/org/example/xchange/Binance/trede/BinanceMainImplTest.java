@@ -2,8 +2,8 @@ package org.example.xchange.Binance.trede;
 
 import org.example.crypto.CryptoUtils;
 import org.example.entity.NodeUser;
-import org.example.entity.SettingsTrade;
-import org.example.entity.account.Account;
+import org.example.entity.ConfigTrade;
+import org.example.entity.Account;
 import org.example.xchange.Binance.BinanceMainImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,12 +26,12 @@ class BinanceMainImplTest {
 	void setAp(){
 		nodeUser = new NodeUser();
 		account = new Account();
-		SettingsTrade settingsTrade  = new SettingsTrade();
+		ConfigTrade configTrade = new ConfigTrade();
 		CryptoUtils cryptoUtils = new CryptoUtils();
 		account.setNameAccount("Bot");
 		account.setPublicApiKey(cryptoUtils.encryptMessage(System.getenv("pKey")));
 		account.setSecretApiKey(cryptoUtils.encryptMessage(System.getenv("sKey")));
-		nodeUser.setSettingsTrade(settingsTrade);
+		nodeUser.setConfigTrade(configTrade);
 		nodeUser.setAccount(account);
 
 	}

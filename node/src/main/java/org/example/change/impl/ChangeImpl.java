@@ -6,7 +6,7 @@ import org.example.change.ChangeFactory;
 import org.example.dao.AccountBaseDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
-import org.example.entity.account.Account;
+import org.example.entity.Account;
 import org.example.entity.enams.TradeState;
 import org.example.strategy.StrategyTrade;
 import org.example.xchange.BasicChangeInterface;

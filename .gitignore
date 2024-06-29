@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/node/src/main/resources/application-dev.properties
+/telegram/src/main/resources/application-dev.properties

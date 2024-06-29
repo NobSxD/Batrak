@@ -3,7 +3,6 @@ package org.example.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j2;
 import org.example.command.CommandService;
 import org.example.entity.RawData;
 import org.example.entity.enams.UserState;
@@ -19,7 +18,6 @@ import java.util.Map;
 
 
 @Service
-@Log4j2
 @RequiredArgsConstructor
 public class MainServiceImpl implements MainService {
 
@@ -54,7 +52,7 @@ public class MainServiceImpl implements MainService {
 		if (userState != null){
 			nodeUser.setState(userState);
 		}
-
+        nodeUser.setChatId(chatId);
 		String send = commandService.send(nodeUser, text);
 		processServiceCommand.sendAnswer(send, chatId);
 

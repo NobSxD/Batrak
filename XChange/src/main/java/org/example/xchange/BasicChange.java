@@ -61,7 +61,7 @@ public abstract class BasicChange implements BasicChangeInterface{
 			// Задание параметров запроса
 
 			// Получение стакана ордеров по торговой паре BTC/USD
-			Instrument currencyPair = new CurrencyPair(nodeUser.getSettingsTrade().getNamePair());
+			Instrument currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
 			orderBook = marketDataService.getOrderBook(currencyPair, countLimitOrders);
 
 

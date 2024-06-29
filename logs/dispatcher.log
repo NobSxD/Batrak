@@ -1,0 +1,14 @@
+2024-06-28 21:57:06 ERROR ListAccount:42 - chatId is marked non-null but is null
+2024-06-28 21:58:06 ERROR Start:22 - chatId is marked non-null but is null
+2024-06-28 22:00:06 ERROR Start:22 - chatId is marked non-null but is null
+2024-06-28 22:02:08 ERROR Start:22 - chatId is marked non-null but is null
+2024-06-28 22:30:10 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:30:18 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:32:31 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:32:41 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:32:46 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:33:19 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:33:19 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:33:19 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:33:35 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-28 22:49:12 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test

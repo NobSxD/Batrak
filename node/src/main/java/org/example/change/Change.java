@@ -2,7 +2,7 @@ package org.example.change;
 
 
 import org.example.entity.NodeUser;
-import org.example.entity.account.Account;
+import org.example.entity.Account;
 
 import java.util.List;
 

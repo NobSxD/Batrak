@@ -8,3 +8,4 @@ Cannot invoke "org.example.entity.enams.UserState.equals(Object)" because the re
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
+chatId is marked non-null but is null

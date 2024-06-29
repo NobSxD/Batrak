@@ -26,6 +26,7 @@ public class NodeOrder {
 	private OrderType orderType;
 	private String pair;
 	private Date createDate;
+	@Enumerated(EnumType.STRING)
 	private StrategyEnams strategyEnams;
 
 	@ManyToOne(fetch = FetchType.LAZY)

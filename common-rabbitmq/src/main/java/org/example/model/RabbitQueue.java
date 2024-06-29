@@ -5,4 +5,5 @@ public class RabbitQueue {
     public static final String TEXT_MESSAGE_UPDATE = "text_message_update";
     public static final String ANSWER_MESSAGE = "answer_message";
     public static final String TEXT_BUTTON = "text_button_update";
+    public static final String TRADE_MESSAGE = "tread_start_and_stop";
 }

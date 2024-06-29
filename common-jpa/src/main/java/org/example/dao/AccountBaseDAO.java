@@ -2,7 +2,7 @@ package org.example.dao;
 
 
 import org.example.entity.NodeUser;
-import org.example.entity.account.Account;
+import org.example.entity.Account;
 import org.example.entity.enams.ChangeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
