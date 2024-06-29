@@ -6,7 +6,7 @@ import lombok.SneakyThrows;
 import org.example.command.CommandService;
 import org.example.entity.RawData;
 import org.example.entity.enams.UserState;
-import org.example.processServiceCommand.ProcessServiceCommand;
+import org.example.service.ProcessServiceCommand;
 import org.example.service.MainService;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;

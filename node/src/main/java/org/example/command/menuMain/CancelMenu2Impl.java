@@ -1,11 +1,11 @@
 package org.example.command.menuMain;
 
 import lombok.Data;
+import org.apache.log4j.Logger;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
-import org.example.service.impl.LoggerInFile;
 import org.springframework.stereotype.Component;
 
 import static org.example.entity.enams.UserState.BASIC_STATE;
@@ -14,6 +14,7 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 @Component
 @Data
 public class CancelMenu2Impl implements Command {
+	private final Logger logger = Logger.getLogger(CancelMenu2Impl.class);
 	private final NodeUserDAO nodeUserDAO;
 	@Override
 	public String send(NodeUser nodeUser , String text) {
@@ -21,8 +22,7 @@ public class CancelMenu2Impl implements Command {
 			nodeUser.setState(BASIC_STATE);
 			nodeUserDAO.save(nodeUser);
 		}catch (Exception e){
-			System.out.println(e.getMessage());
-			LoggerInFile.saveLogInFile(e.getMessage(), "CancelMenu2Impl");
+			logger.error(e.getMessage() +  " имя пользователя: " +  nodeUser.getUsername() + ". Id пользователя " + nodeUser.getId());
 			return "во время отмены произошла ошибка, обратитесь к администратору системы.";
 		}
 		return "Команда отменена!";

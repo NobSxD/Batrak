@@ -2,38 +2,17 @@ package org.example.change.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.change.Change;
-import org.example.change.ChangeFactory;
 import org.example.dao.AccountBaseDAO;
-import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
 import org.example.entity.Account;
-import org.example.entity.enams.TradeState;
-import org.example.strategy.StrategyTrade;
-import org.example.xchange.BasicChangeInterface;
+import org.example.entity.NodeUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ChangeImpl implements Change {
-	private final StrategyTrade strategyTrade;
+
 	private final AccountBaseDAO accountBaseDAO;
-	private final NodeUserDAO nodeUserDAO;
-
-	@Override
-	public void tradeStart(NodeUser nodeUser) {
-		nodeUser.setTradeStartOrStop(true);
-		nodeUserDAO.save(nodeUser);
-		TradeThread trade = new TradeThread(nodeUser, strategyTrade);
-		Thread thread = new Thread(trade);
-		thread.start();
-	}
-
-	@Override
-	public void tradeStop(NodeUser nodeUser) {
-		nodeUser.setTradeStartOrStop(false);
-		nodeUserDAO.save(nodeUser);
-	}
 
 	@Override
 	public void saveAccount(Account account, NodeUser nodeUser) {
@@ -64,23 +43,4 @@ public class ChangeImpl implements Change {
 		accountBaseDAO.deleteById(id);
 	}
 
-	class TradeThread implements Runnable {
-		NodeUser nodeUser;
-		BasicChangeInterface change;
-		StrategyTrade strategyTrade;
-
-		public TradeThread(NodeUser nodeUser, StrategyTrade strategyTrade) {
-			this.nodeUser = nodeUser;
-			this.strategyTrade = strategyTrade;
-			change = ChangeFactory.createChange(nodeUser);
-		}
-
-		@Override
-		public void run() {
-			while (nodeUser.isTradeStartOrStop()) {
-				nodeUser.setStateTrade(TradeState.BAY);
-				strategyTrade.trade(nodeUser, change);
-			}
-		}
-	}
 }

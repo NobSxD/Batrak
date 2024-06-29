@@ -7,7 +7,7 @@ import org.example.dao.NodeUserDAO;
 import org.example.dao.SettingsTradeDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
-import org.example.processServiceCommand.ProcessServiceCommand;
+import org.example.service.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

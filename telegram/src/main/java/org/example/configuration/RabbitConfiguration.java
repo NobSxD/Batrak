@@ -25,5 +25,7 @@ public class RabbitConfiguration {
     }
     @Bean
     public Queue textButtonQueue(){return new Queue(TEXT_BUTTON);}
+    @Bean
+    public Queue tradeStart(){return new Queue(TRADE_MESSAGE);}
     
 }

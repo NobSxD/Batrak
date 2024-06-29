@@ -5,11 +5,10 @@ import org.apache.log4j.Logger;
 import org.example.change.Change;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
 import org.example.entity.Account;
+import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
-import org.example.processServiceCommand.ProcessServiceCommand;
-import org.example.service.impl.LoggerInFile;
+import org.example.service.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -39,8 +38,7 @@ public class ListAccount implements Command {
 			nodeUserDAO.save(nodeUser);
 			return "";
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			LoggerInFile.saveLogInFile(e.getMessage(), "AccountSelectionImpl.txt");
+			logger.error(e.getMessage() +  " имя пользователя: " +  nodeUser.getUsername() + ". Id пользователя " + nodeUser.getId());
 			return "во время выбора аккаунта произошла ошибка, обратитесь к администратору системы.";
 		}
 	}

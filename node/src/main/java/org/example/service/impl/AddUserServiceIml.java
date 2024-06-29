@@ -1,17 +1,15 @@
 package org.example.service.impl;
 
-import org.example.entity.MailParams;
-import org.example.service.AddUserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.example.dao.NodeUserDAO;
+import org.example.entity.MailParams;
 import org.example.entity.NodeUser;
+import org.example.service.AddUserService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
-@Log4j2
 @RequiredArgsConstructor
 @Service
 public class AddUserServiceIml implements AddUserService {

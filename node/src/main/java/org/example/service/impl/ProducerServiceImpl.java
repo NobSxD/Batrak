@@ -14,7 +14,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.example.model.RabbitQueue.ANSWER_MESSAGE;
 import static org.example.model.RabbitQueue.TRADE_MESSAGE;
@@ -35,7 +37,9 @@ public class ProducerServiceImpl implements ProducerService {
 
 	@Override
 	public void startTread(NodeUser nodeUser) {
-		rabbitTemplate.convertAndSend(TRADE_MESSAGE, nodeUser);
+		Map<String, Long> id = new HashMap<>();
+		id.put("id", nodeUser.getId());
+		rabbitTemplate.convertAndSend(TRADE_MESSAGE, id);
 	}
 
 	public void producerChangeEnumsButton(SendMessage sendMessages) {

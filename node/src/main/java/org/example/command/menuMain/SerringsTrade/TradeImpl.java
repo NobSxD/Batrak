@@ -1,19 +1,19 @@
 package org.example.command.menuMain.SerringsTrade;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.example.command.Command;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.SettingUpTrading;
 import org.example.entity.enams.UserState;
-import org.example.processServiceCommand.ProcessServiceCommand;
-import org.example.service.impl.LoggerInFile;
+import org.example.service.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class TradeImpl implements Command {
 	private final ProcessServiceCommand processServiceCommand;
-
+	private final Logger logger = Logger.getLogger(TradeImpl.class);
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
@@ -24,8 +24,7 @@ public class TradeImpl implements Command {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			LoggerInFile.saveLogInFile(e.getMessage(), "TradeImpl");
+			logger.error(e.getMessage() +  " имя пользователя: " +  nodeUser.getUsername() + ". Id пользователя " + nodeUser.getId());
 			return "во время настройки трейдинга произошла ошибка, обратитесь к администратору системы.";
 		}
 		return "";

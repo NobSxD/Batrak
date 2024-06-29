@@ -7,8 +7,6 @@ import org.example.entity.Account;
 import java.util.List;
 
 public interface Change {
-	void tradeStart(NodeUser nodeUser);
-	void tradeStop(NodeUser nodeUser);
 
 	void saveAccount(Account account, NodeUser nodeUser);
 

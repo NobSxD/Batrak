@@ -12,3 +12,21 @@
 2024-06-28 22:33:19 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
 2024-06-28 22:33:35 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
 2024-06-28 22:49:12 ERROR DeleteAccount:27 - Cannot invoke "org.example.entity.Account.getId()" because "account" is nullаккаунт пользователя под id 505077047 не найден. Аккаунт имя test
+2024-06-29 12:41:45 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 12:48:41 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 12:56:50 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 12:56:53 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 12:58:56 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 13:01:41 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 13:27:43 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 13:40:17 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 13:40:23 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 13:40:34 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 13:41:41 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 15:59:41 ERROR TradeStartImpl:26 - Failed to convert Message content
+2024-06-29 16:09:05 DEBUG ConsumerServiceImpl:30 - TRADE_BOT: Text бот получил юзера
+2024-06-29 16:09:27 DEBUG ConsumerServiceImpl:30 - TRADE_BOT: Text бот получил юзера
+2024-06-29 16:12:22 DEBUG ConsumerServiceImpl:30 - TRADE_BOT: Text бот получил юзера
+2024-06-29 16:23:32 DEBUG ConsumerServiceImpl:30 - TRADE_BOT: Text бот получил юзера
+2024-06-29 16:25:48 DEBUG ConsumerServiceImpl:30 - TRADE_BOT: Text бот получил юзера
+2024-06-29 16:25:51 ERROR ChangeImpl:36 - Failed to initialize: Invalid Api-Key ID. (HTTP status code: 400)имя пользователя: NobSxD id пользователя 1

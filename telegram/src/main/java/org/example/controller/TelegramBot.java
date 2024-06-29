@@ -58,13 +58,4 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    public void sendBottomMessage(SendMessage message){
-        if (message != null){
-            try {
-                execute(message);
-            } catch (TelegramApiException e){
-                log.error(e);
-            }
-        }
-    }
 }

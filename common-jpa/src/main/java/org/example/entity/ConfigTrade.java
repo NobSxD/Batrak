@@ -10,8 +10,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-
-public class ConfigTrade {
+public class ConfigTrade  {
 
 
 	@Id
@@ -30,4 +29,5 @@ public class ConfigTrade {
 
 	@OneToOne
 	private NodeUser nodeUser;
+
 }

@@ -41,6 +41,7 @@ public class NodeUser {
 
 
 	@OneToOne(cascade = CascadeType.MERGE)
+	@ToString.Exclude
 	private Account account;
 
 
@@ -67,6 +68,5 @@ public class NodeUser {
 	private Statistics statistics;
 
 	private boolean tradeStartOrStop;
-
 
 }

@@ -9,7 +9,7 @@
 //import org.example.entity.Account;
 //import org.example.entity.account.AccountBinance;
 //import org.example.entity.enams.UserState;
-//import org.example.processServiceCommand.ProcessServiceCommand;
+//import org.example.service.ProcessServiceCommand;
 //import org.example.service.ProducerService;
 //import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.BeforeEach;

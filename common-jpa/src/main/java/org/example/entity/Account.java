@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public  class Account {
+public  class Account{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	protected long id;
