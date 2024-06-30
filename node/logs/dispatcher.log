@@ -28,3 +28,30 @@
 2024-06-30 12:45:40 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.55
 2024-06-30 12:45:40 ERROR AmountOrder:70 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null пользовтель: Сергей Тест id: 1
 2024-06-30 12:45:40 ERROR AmountOrder:66 - For input string: "не число" пользовтель: Сергей Тест id: 1
+2024-06-30 12:50:01 ERROR AmountOrder:62 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:50:07 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.55
+2024-06-30 12:50:07 ERROR AmountOrder:70 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null пользовтель: Сергей Тест id: 1
+2024-06-30 12:51:06 ERROR AmountOrder:66 - For input string: "не число" пользовтель: Сергей Тест id: 1
+2024-06-30 12:54:44 ERROR AmountOrder:62 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:54:44 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.55
+2024-06-30 12:54:44 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 12:54:44 ERROR AmountOrder:66 - For input string: "не число" пользовтель: Сергей Тест id: 1
+2024-06-30 12:54:51 ERROR AmountOrder:62 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:55:13 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.55
+2024-06-30 12:55:13 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 12:55:27 ERROR AmountOrder:66 - For input string: "не число" пользовтель: Сергей Тест id: 1
+2024-06-30 12:56:57 ERROR AmountOrder:62 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:56:57 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.55
+2024-06-30 12:56:57 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 12:56:57 ERROR AmountOrder:66 - For input string: "не число" пользовтель: Сергей Тест id: 1
+2024-06-30 13:01:11 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 1154.55
+2024-06-30 13:01:11 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 13:01:11 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.55
+2024-06-30 13:01:11 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 13:01:11 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 169.14
+2024-06-30 13:01:11 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 13:01:11 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.00
+2024-06-30 13:01:11 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 13:01:11 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 5000.50
+2024-06-30 13:01:11 ERROR AmountOrder:70 - Cannot invoke "org.example.dao.SettingsTradeDAO.save(Object)" because "this.this$0.settingsTradeDAO" is null пользовтель: Сергей Тест id: 1
+2024-06-30 13:07:38 ERROR AmountOrder:31 - Cannot invoke "org.example.dao.NodeUserDAO.save(Object)" because "this.nodeUserDAO" is null

@@ -2,6 +2,7 @@ package org.example.command.menuMain.SerringsTrade;
 
 import org.example.dao.NodeUserDAO;
 import org.example.dao.SettingsTradeDAO;
+import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.UserState;
@@ -11,10 +12,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.math.BigDecimal;
+
 class AmountOrderTest {
 	AmountOrder amountOrder;
 	AmountOrder.SaveAmountOrder saveAmountOrder;
 	NodeUser nodeUser;
+	ConfigTrade configTrade;
 
 	@Mock
 	private NodeUserDAO nodeUserDAO;
@@ -26,6 +30,7 @@ class AmountOrderTest {
 	void newSaveAmountOrder(){
 		amountOrder = new AmountOrder(nodeUserDAO, settingsTradeDAO, processServiceCommand);
 		saveAmountOrder = amountOrder.new SaveAmountOrder();
+		configTrade = new ConfigTrade();
 		nodeUser = NodeUser.builder()
 				.id(1L)
 				.changeType(ChangeType.Binance)
@@ -33,9 +38,10 @@ class AmountOrderTest {
 				.username("Сергей Тест")
 				.firstName("Сергей")
 				.lastName("Тест")
-				.state(UserState.SETTINGS_SAVE_AMOUNT_ORDER)
+				.state(UserState.BASIC_STATE)
 				.telegramUserId(505077047L)
 				.tradeStartOrStop(false)
+				.configTrade(configTrade)
 				.build();
 	}
 
@@ -50,6 +56,29 @@ class AmountOrderTest {
 		send = saveAmountOrder.send(nodeUser, "не число");
 		Assertions.assertEquals("Ведите пожалуйсто число формат 100.22", send);
 
+	}
+	@Test
+	void sendNumberFormat(){
+		saveAmountOrder.send(nodeUser, "1154.5454854");
+		Assertions.assertEquals(nodeUser.getConfigTrade().getAmountOrder(), new BigDecimal("1154.55"));
+
+		saveAmountOrder.send(nodeUser, "11.5454854");
+		Assertions.assertEquals(nodeUser.getConfigTrade().getAmountOrder(), new BigDecimal("11.55"));
+
+		saveAmountOrder.send(nodeUser, "169.14");
+		Assertions.assertEquals(nodeUser.getConfigTrade().getAmountOrder(), new BigDecimal("169.14"));
+
+		saveAmountOrder.send(nodeUser, "11");
+		Assertions.assertEquals(nodeUser.getConfigTrade().getAmountOrder(), new BigDecimal("11.00"));
+
+		saveAmountOrder.send(nodeUser, "5000.5000000");
+		Assertions.assertEquals(nodeUser.getConfigTrade().getAmountOrder(), new BigDecimal("5000.50"));
+	}
+
+	@Test
+	void checkState(){
+		amountOrder.send(nodeUser, "");
+		Assertions.assertEquals(nodeUser.getState(), UserState.SETTINGS_SAVE_AMOUNT_ORDER);
 	}
 
 	@Test
