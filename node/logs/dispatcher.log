@@ -1,0 +1,30 @@
+2024-06-30 11:38:16 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: nullid: 1
+2024-06-30 11:40:18 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 11:52:51 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 11:53:06 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 11:54:06 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 11:56:12 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 11:56:43 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 11:56:55 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 11:57:31 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 11:58:07 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 12:00:41 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 12:01:01 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:01:47 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:07:22 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:15:11 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:16:52 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:16:52 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 12:18:44 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:18:44 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null
+2024-06-30 12:35:53 ERROR AmountOrder:58 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:35:53 ERROR AmountOrder:66 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null пользовтель: Сергей Тест id: 1
+2024-06-30 12:35:53 ERROR AmountOrder:62 - For input string: "не число"
+2024-06-30 12:44:39 ERROR AmountOrder:62 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:44:39 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.00
+2024-06-30 12:44:39 ERROR AmountOrder:70 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null пользовтель: Сергей Тест id: 1
+2024-06-30 12:44:39 ERROR AmountOrder:66 - For input string: "не число" пользовтель: Сергей Тест id: 1
+2024-06-30 12:45:40 ERROR AmountOrder:62 - Number is too small, it should be at least 11 пользовтель: Сергей Тест id: 1
+2024-06-30 12:45:40 INFO  AmountOrder:53 -  пользовтель: Сергей Тест id: 1 сумма ордера = 11.55
+2024-06-30 12:45:40 ERROR AmountOrder:70 - Cannot invoke "org.example.entity.ConfigTrade.setAmountOrder(java.math.BigDecimal)" because the return value of "org.example.entity.NodeUser.getConfigTrade()" is null пользовтель: Сергей Тест id: 1
+2024-06-30 12:45:40 ERROR AmountOrder:66 - For input string: "не число" пользовтель: Сергей Тест id: 1
