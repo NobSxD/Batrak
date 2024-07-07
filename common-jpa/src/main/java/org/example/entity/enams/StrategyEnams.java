@@ -1,7 +1,8 @@
 package org.example.entity.enams;
 
 public enum StrategyEnams {
-	SlidingProtectiveOrder("Скользящий защитный ордер");
+	SlidingProtectiveOrder("Скользящий защитный ордер"),
+	PredictionsOfEvents("Предскозания событий");
 
 	private final String value;
 	StrategyEnams(String value) {

@@ -1,10 +1,18 @@
 package org.example.xchange;
 
+import info.bitrich.xchangestream.core.StreamingExchange;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.log4j.Logger;
 import org.example.entity.NodeUser;
+import org.example.xchange.DTO.LimitOrderMain;
+import org.example.xchange.DTO.OrderMain;
+import org.example.xchange.finance.CurrencyConverter;
 import org.knowm.xchange.Exchange;
+import org.knowm.xchange.binance.service.BinanceMarketDataServiceRaw;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
+import org.knowm.xchange.dto.account.AccountInfo;
+import org.knowm.xchange.dto.account.Wallet;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.dto.trade.MarketOrder;
@@ -12,25 +20,35 @@ import org.knowm.xchange.dto.trade.OpenOrders;
 import org.knowm.xchange.instrument.Instrument;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchange.service.trade.TradeService;
+import org.knowm.xchange.service.trade.params.CancelOrderParams;
+import org.knowm.xchange.service.trade.params.DefaultCancelOrderByInstrumentAndIdParams;
+import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class BasicChange implements BasicChangeInterface{
 	private static final Logger logger = Logger.getLogger(BasicChange.class);
 
 	protected Exchange exchange;
+	protected StreamingExchange exchangeStreaming;
+
 
 
 
 	public String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, CurrencyPair currencyPair) {
+		BigDecimal usdt = CurrencyConverter.convertCurrency(price, summa);
 		String orderId = "";
 		TradeService tradeService = exchange.getTradeService();
-		LimitOrder limitOrder =  new LimitOrder(orderType, summa, currencyPair, "", new Date(), price);
+		LimitOrder limitOrder =  new LimitOrder(orderType, usdt, currencyPair, "", new Date(), price);
 
 		try {
 			orderId = tradeService.placeLimitOrder(limitOrder);
+			System.out.println(limitOrder.toString() + "*--");
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			return "Ордер на покупку не успешно";
@@ -38,9 +56,60 @@ public abstract class BasicChange implements BasicChangeInterface{
 		return orderId;
 	}
 
+	public LimitOrderMain placeLimitOrder(LimitOrder limitOrder){
+		try {
+			TradeService tradeService = exchange.getTradeService();
+			String orderId = tradeService.placeLimitOrder(limitOrder);
+			OrderMain order = OrderMain.builder()
+					.type(limitOrder.getType())
+					.originalAmount(limitOrder.getOriginalAmount())
+					.cumulativeAmount(limitOrder.getCumulativeAmount())
+					.averagePrice(limitOrder.getAveragePrice())
+					.fee(limitOrder.getFee())
+					.instrument(limitOrder.getInstrument())
+					.id(orderId)
+					.timestamp(limitOrder.getTimestamp())
+					.status(limitOrder.getStatus())
+					.userReference(limitOrder.getUserReference())
+					.build();
+
+			LimitOrderMain limitOrderMain = LimitOrderMain.builder()
+					.limitPrice(limitOrder.getLimitPrice())
+					.orderMain(order)
+					.build();
+			logger.info(limitOrderMain.toString());
+			return limitOrderMain;
+
+		} catch (IOException e) {
+			logger.error(e.getMessage() + " " + limitOrder.toString());
+			throw new RuntimeException(e);
+		}
+	}
+
+	public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType){
+		return new LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
+	}
+
+	public List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders){
+		List<LimitOrder> limitOrders = new ArrayList<>();
+		for (List<BigDecimal> ask : orders) {
+			checkArgument(
+					ask.size() == 2, "Expected a pair (price, amount) but got {0} elements.", ask.size());
+			limitOrders.add(createOrder(currencyPair, ask, orderType));
+		}
+		return limitOrders;
+	}
+
+	public void checkArgument(boolean argument, String msgPattern, Object... msgArgs) {
+		if (!argument) {
+			throw new IllegalArgumentException(MessageFormat.format(msgPattern, msgArgs));
+		}
+	}
+
 	public String marketOrder( Order.OrderType orderType, BigDecimal summa, CurrencyPair currencyPair) {
 		String orderId = "";
 		TradeService tradeService = exchange.getTradeService();
+
 		MarketOrder marketOrder = new MarketOrder(orderType, summa, currencyPair, null, new Date());
 		try {
 			orderId = tradeService.placeMarketOrder(marketOrder);
@@ -57,12 +126,12 @@ public abstract class BasicChange implements BasicChangeInterface{
 		try {
 			// Получение сервиса для работы с рыночными данными
 			MarketDataService marketDataService = exchange.getMarketDataService();
-
 			// Задание параметров запроса
 
 			// Получение стакана ордеров по торговой паре BTC/USD
 			Instrument currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
 			orderBook = marketDataService.getOrderBook(currencyPair, countLimitOrders);
+
 
 
 			// Вывод информации о стакане ордеров
@@ -74,6 +143,15 @@ public abstract class BasicChange implements BasicChangeInterface{
 	}
 
 	public boolean isOrderExecuted(String orderId){
+
+		exchangeStreaming.connect().blockingAwait();
+		Disposable subscription1 = exchangeStreaming.getStreamingMarketDataService()
+				.getTrades(CurrencyPair.BTC_USD)
+				.subscribe(
+						trade -> { trade.getMakerOrderId();
+						},
+						trade -> logger.info(String.format("Trade: {%s}", trade)));
+
 		TradeService orderService = exchange.getTradeService();
 		try {
 			OpenOrders openOrders = orderService.getOpenOrders();
@@ -89,6 +167,36 @@ public abstract class BasicChange implements BasicChangeInterface{
 		}
 		return true;
 	}
+	public void cancelOrder(String namePair, String idOrder){
+		try {
+			Instrument instrument = new CurrencyPair(namePair);
+			CancelOrderParams cancelOrderParams = new DefaultCancelOrderByInstrumentAndIdParams(instrument, idOrder);
+			exchange.getTradeService().cancelOrder(cancelOrderParams);
+		} catch (IOException e) {
+			logger.error(e.getMessage() + " ордер id: " + idOrder);
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	public String accountInfo(){
+		try {
+			AccountInfo accountInfo = exchange.getAccountService().getAccountInfo();
+			return accountInfo.toString();
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+			throw new RuntimeException(e);
+		}
+	}
+	public List<BigDecimal> historyData(NodeUser nodeUser){
+		MarketDataService marketDataService = exchange.getMarketDataService();
+		BinanceMarketDataServiceRaw binanceMarketDataServiceRaw = (BinanceMarketDataServiceRaw) exchange.getMarketDataService();
+
+		TradeHistoryParams params;
+		return null;
+
+	}
+	public abstract Wallet balances();
 
 
 }

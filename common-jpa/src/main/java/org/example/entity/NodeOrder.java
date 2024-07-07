@@ -1,8 +1,6 @@
 package org.example.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.example.entity.enams.OrderType;
 import org.example.entity.enams.StrategyEnams;
 
@@ -14,14 +12,18 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class NodeOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id", nullable = false)
 	private Long id;
 
+	private String orderId;
+	private BigDecimal originalAmount;
 	private BigDecimal price;
-	private BigDecimal summaCurrency;
+
 	private BigDecimal summaUSD;
 	private OrderType orderType;
 	private String pair;

@@ -1,6 +1,8 @@
 package org.example.xchange.Binance;
 
 
+import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
+import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.crypto.CryptoUtils;
@@ -9,6 +11,10 @@ import org.example.xchange.BasicChange;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.binance.BinanceExchange;
+import org.knowm.xchange.dto.account.AccountInfo;
+import org.knowm.xchange.dto.account.Wallet;
+
+import java.io.IOException;
 
 
 @Getter
@@ -22,16 +28,20 @@ public class BinanceMainImpl extends BasicChange{
 		exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getPublicApiKey()));
 		exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getSecretApiKey()));
 		this.exchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
+		exchangeStreaming = StreamingExchangeFactory.INSTANCE.createExchange(BinanceStreamingExchange.class);
 	}
 
 
+	@Override
+	//TODO сделать вывод информации о балансе
+	public Wallet balances() {
+		try {
+			AccountInfo accountInfo = exchange.getAccountService().getAccountInfo();
+		//	Wallet wallet = BinanceAdapters.adaptBinanceSpotWallet(accountInfo.getWallet());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 
-
-
-
-
-
-
-
-
+		return null;
+	}
 }

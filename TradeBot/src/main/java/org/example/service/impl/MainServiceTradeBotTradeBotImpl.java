@@ -14,4 +14,7 @@ public class MainServiceTradeBotTradeBotImpl implements MainServiceTradeBot {
 	public void startORStopTrade(NodeUser nodeUser) {
 		change.tradeStart(nodeUser);
 	}
+	public void infoAccount(NodeUser nodeUser){
+
+	}
 }

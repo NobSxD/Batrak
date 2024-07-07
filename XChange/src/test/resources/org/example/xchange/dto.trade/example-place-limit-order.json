@@ -1,0 +1,16 @@
+{
+  "limitPrice": 50000,
+  "Order": {
+    "type": "BID",
+    "originalAmount": 0.00022,
+    "cumulativeAmount": null,
+    "averagePrice": null,
+    "fee": null,
+    "instrument": "BTC/USDT",
+    "id": "",
+    "timestamp": 1381787133,
+    "status": null,
+    "flags": [],
+    "userReference": "108789836"
+  }
+}
