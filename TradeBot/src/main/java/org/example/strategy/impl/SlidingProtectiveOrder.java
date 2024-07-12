@@ -1,5 +1,8 @@
 package org.example.strategy.impl;
 
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.example.dao.NodeOrdersDAO;
@@ -11,10 +14,9 @@ import org.example.entity.Statistics;
 import org.example.entity.enams.OrderType;
 import org.example.entity.enams.StrategyEnams;
 import org.example.entity.enams.TradeState;
-import org.example.observer.CurrentConditionsDisplay;
-import org.example.observer.pair.DataBtcUsdtImpl;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.StrategyTrade;
+import org.example.websocet.WebSocketBinanceChange;
 import org.example.xchange.BasicChangeInterface;
 import org.example.xchange.DTO.LimitOrderMain;
 import org.example.xchange.finance.CurrencyConverter;
@@ -24,6 +26,7 @@ import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.exceptions.FundsExceededException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -34,14 +37,24 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SlidingProtectiveOrder implements StrategyTrade{
+public class SlidingProtectiveOrder implements StrategyTrade, Observer<BigDecimal>{
+	private static final Logger logger = Logger.getLogger(SlidingProtectiveOrder.class);
 	private BasicChangeInterface basicChange;
 	private final ProcessServiceCommand producerServiceExchange;
 	private final NodeUserDAO nodeUserDAO;
 	private final NodeOrdersDAO ordersDAO;
 	private final StatisticsTradeDAO statisticsTradeDAO;
-	private CurrentConditionsDisplay currentConditionsDisplay;
-	private static final Logger logger = Logger.getLogger(SlidingProtectiveOrder.class);
+
+	@Autowired
+	private WebSocketBinanceChange subject;
+
+	private Disposable disposable;
+
+	private LimitOrderMain limitOrderMain;
+	private String message;
+	List<BigDecimal> priceAndAmount;
+	private NodeUser nodeUser;
+
 
 	public  String trade(NodeUser nodeUser, BasicChangeInterface basicChange){ // необходимые параметры, сумма трейда, валютная пара, глудина стакана,
 		this.basicChange=basicChange;
@@ -57,13 +70,13 @@ public class SlidingProtectiveOrder implements StrategyTrade{
 
 			if (nodeUser.getStateTrade().equals(TradeState.BAY)) {
 				//TODO сделать сохранение ордера в бд
-				orderBay = bay(orderBook, nodeUser);
-				ordersDAO.save(orderBay);
+				bay(orderBook, nodeUser);
+
 				statistics.setCountDealBay(statistics.getCountDealBay() +1);
 			}
 			if (nodeUser.getStateTrade().equals(TradeState.SEL) && orderBay != null) {
-				orderSel = sel(orderBook, nodeUser, orderBay);
-				ordersDAO.save(orderSel);
+				//orderSel = sel(orderBook, nodeUser, orderBay);
+
 				statistics.setCountDealSel(statistics.getCountDealSel() + 1);
 
 				BigDecimal profitPercentage = FinancialCalculator.calculateProfitPercentage(nodeUser.getConfigTrade().getAmountOrder(), orderBay.getPrice(), orderSel.getPrice());
@@ -89,7 +102,7 @@ public class SlidingProtectiveOrder implements StrategyTrade{
 	}
 
 
-	public NodeOrder bay(OrderBook orderBook, NodeUser nodeUser) {
+	public void bay(OrderBook orderBook, NodeUser nodeUser) {
 		try {
 			CurrencyPair currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
 			List<LimitOrder> bids = orderBook.getBids();
@@ -105,37 +118,38 @@ public class SlidingProtectiveOrder implements StrategyTrade{
 			priceAndAmount.add(price);
 			priceAndAmount.add(amount);
 			LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.BID);
-			LimitOrderMain limitOrderMain = basicChange.placeLimitOrder(order);
+			limitOrderMain = basicChange.placeLimitOrder(order);
 
 			//<!-- Информируем о размещении ордера -->
 			BigDecimal usd = CurrencyConverter.convertUsdt(amount, price);
-			String message = "Ордер на покупку по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был размещен \n" +
+			message = "Ордер на покупку по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был размещен \n" +
 			"сумма ордера $" + usd;
-			NodeOrder resultOrder = resultTread(message, nodeUser, limitOrderMain, priceAndAmount);
 
-			nodeUser.setStateTrade(TradeState.SEL);
-			return resultOrder;
+			this.nodeUser = nodeUser;
+			this.priceAndAmount = priceAndAmount;
+			subject.addObserver(this);
+			resultTread(message, nodeUser, limitOrderMain, priceAndAmount);
+
+			//nodeUser.setStateTrade(TradeState.SEL);
 		}catch (FundsExceededException e){
 			producerServiceExchange.sendAnswer("Не достаточно денег на балансе", nodeUser.getChatId());
 			logger.error(e.getMessage());
 			nodeUser.setTradeStartOrStop(false);
-			return null;
 		}catch (Exception e){
 			producerServiceExchange.sendAnswer(e.getMessage(), nodeUser.getChatId());
 			logger.error(e.getMessage());
 			nodeUser.setTradeStartOrStop(false);
-			return null;
 		}
 	}
 
-	public NodeOrder sel(OrderBook orderBook, NodeUser nodeUser, NodeOrder nodeOrder){
+	public void sel(OrderBook orderBook, NodeUser nodeUser, NodeOrder nodeOrder){
 		try {
 			CurrencyPair currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
 			List<LimitOrder> asks = orderBook.getAsks();
 
 			//TODO второй параметр изменить на деномический из настроек
 			//<!-- назначаем минимальный спред, что бы не торговать в минус -->
-			BigDecimal minPrice = FinancialCalculator.calculateMinPrice(nodeOrder.getPrice(), new BigDecimal("0.5"));
+			BigDecimal minPrice = FinancialCalculator.calculateMinPrice(nodeOrder.getPrice(), new BigDecimal("0.3"));
 
 			BigDecimal price = FinancialCalculator.maxAmount(asks, minPrice);
 			price = CurrencyConverter.validUsd(price);
@@ -148,47 +162,44 @@ public class SlidingProtectiveOrder implements StrategyTrade{
 			priceAndAmount.add(price);
 			priceAndAmount.add(amount);
 			LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.ASK);
-			LimitOrderMain limitOrderMain = basicChange.placeLimitOrder(order);
+			limitOrderMain = basicChange.placeLimitOrder(order);
+
 
 			//<!-- Информируем о размещении ордера -->
 			BigDecimal usd = CurrencyConverter.convertUsdt(amount, price);
-			String message = "Ордер на продажу по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был размещен \n" +
+			message = "Ордер на продажу по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был размещен \n" +
 					"сумма ордера $" + usd;
 
-			NodeOrder resultOrder = resultTread(message, nodeUser, limitOrderMain, priceAndAmount);
+			this.nodeUser = nodeUser;
+			this.priceAndAmount = priceAndAmount;
+			subject.addObserver(this);
+			resultTread(message, nodeUser, limitOrderMain, priceAndAmount);
 
 			nodeUser.setStateTrade(TradeState.BAY);
-			return resultOrder;
 		}catch (FundsExceededException e){
 			producerServiceExchange.sendAnswer("Не достаточно денег на балансе", nodeUser.getChatId());
 			logger.error(e.getMessage());
 			nodeUser.setTradeStartOrStop(false);
-			return null;
 		}
 		catch (Exception e){
 			producerServiceExchange.sendAnswer(e.getMessage(), nodeUser.getChatId());
 			logger.error(e.getMessage());
 			nodeUser.setTradeStartOrStop(false);
-			return null;
 		}
 
 	}
 
-	public NodeOrder resultTread(String message, NodeUser nodeUser, LimitOrderMain limitOrderMain, List<BigDecimal> priceAndAmount){
+	public void resultTread(String message, NodeUser nodeUser, LimitOrderMain limitOrderMain, List<BigDecimal> priceAndAmount){
 		BigDecimal price = priceAndAmount.get(0);
 		BigDecimal amount = priceAndAmount.get(1);
 		logger.info(message + "user_id: " + nodeUser.getId() + "user_chat_id " + nodeUser.getChatId());
 		producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
 
-		currentConditionsDisplay = new CurrentConditionsDisplay(new DataBtcUsdtImpl());
-		BigDecimal display = currentConditionsDisplay.display();
-		if (display.compareTo(price) > 0){
-			message = "Ордер на покупку по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был выполнен \n" +
+		message = "Ордер  по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был выполнен \n" +
 					"сумма ордера $" + amount;
-			producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
-			logger.info(limitOrderMain.getOrderMain().getId() + " : ордер был исполнен по прайсу " + limitOrderMain.getLimitPrice());
-			currentConditionsDisplay.undSubscribe();
-		}
+		producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
+		logger.info(limitOrderMain.getOrderMain().getId() + " : ордер был исполнен по прайсу " + limitOrderMain.getLimitPrice());
+
 		final NodeOrder nodeOrderResult = NodeOrder.builder()
 				.price(price)
 				.orderId(limitOrderMain.getOrderMain().getId())
@@ -200,17 +211,39 @@ public class SlidingProtectiveOrder implements StrategyTrade{
 				.strategyEnams(nodeUser.getConfigTrade().getStrategy())
 				.nodeUser(nodeUser)
 				.build();
+		subject.removeObserver(disposable);
 		producerServiceExchange.sendAnswer("Ордер по курсу $" + price + " был исполнен", nodeUser.getChatId());
-		return nodeOrderResult;
+		ordersDAO.save(nodeOrderResult);
+		nodeUserDAO.save(nodeUser);
 	}
-
 
 
 	@Override
 	public StrategyEnams getType() {
-		return StrategyEnams.SlidingProtectiveOrder;
+		return StrategyEnams.PredictionsOfEvents;
 	}
 
 
+	@Override
+	public void onSubscribe(@NonNull Disposable d) {
+		this.disposable = d;
+	}
+
+	@Override
+	public void onNext(@NonNull BigDecimal bigDecimal) {
+		if (bigDecimal.compareTo(limitOrderMain.getLimitPrice()) == 0){
+				resultTread(message, nodeUser , limitOrderMain, priceAndAmount);
+			}
+	}
+
+	@Override
+	public void onError(@NonNull Throwable e) {
+
+	}
+
+	@Override
+	public void onComplete() {
+
+	}
 
 }

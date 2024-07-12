@@ -4,13 +4,12 @@ import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
 import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.subjects.PublishSubject;
 import org.apache.log4j.Logger;
-import org.example.observer.ObserverPrice;
-import org.example.observer.Subject;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.instrument.Instrument;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -19,17 +18,26 @@ import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_RE
 
 
 @Component
-public class WebSocketBinanceChange implements Subject{
-	private final Subject dataBtcUsdt;
+public class WebSocketBinanceChange {
 
 	private final Logger logger = Logger.getLogger(WebSocketBinanceChange.class);
 
-	public WebSocketBinanceChange(Subject dataBtcUsdt) throws InterruptedException {
-		this.dataBtcUsdt = dataBtcUsdt;
+	public WebSocketBinanceChange() throws InterruptedException {
 		streamBtcUSDT();
+	}
+	private PublishSubject<BigDecimal> subject = PublishSubject.create();
+	public void addObserver(Observer<BigDecimal> observer) {
+		subject.subscribe(observer);
+	}
+	public void removeObserver(Disposable disposable){
+		disposable.dispose();
+	}
+	public boolean hasObservers(){
+		return subject.hasObservers();
 	}
 
 	public void streamBtcUSDT() throws InterruptedException {
+		PublishSubject<BigDecimal> subject = PublishSubject.create();
 		final ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BinanceStreamingExchange.class);
 		exchangeSpecification.setShouldLoadRemoteMetaData(true);
 		exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
@@ -40,29 +48,11 @@ public class WebSocketBinanceChange implements Subject{
 		exchange.getStreamingMarketDataService()
 				.getTrades(CurrencyPair.BTC_USDT)
 				.subscribe(trade -> {
-					dataBtcUsdt.setPrice(trade.getPrice(), trade.getType(), trade.getInstrument());
-					logger.info(trade.toString());
+					subject.onNext(trade.getPrice());
+				//	logger.info(trade.toString());
 				});
-		Thread.sleep(2000);
+		Thread.sleep(20000);
 	}
 
-	@Override
-	public void registerObserver(ObserverPrice observerPrice) {
 
-	}
-
-	@Override
-	public void removeObserver(ObserverPrice observerPrice) {
-
-	}
-
-	@Override
-	public void notifyObservers() {
-
-	}
-
-	@Override
-	public void setPrice(BigDecimal price, Order.OrderType orderType, Instrument instrument) {
-
-	}
 }

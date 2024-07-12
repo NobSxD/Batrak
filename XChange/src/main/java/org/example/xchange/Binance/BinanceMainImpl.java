@@ -1,8 +1,6 @@
 package org.example.xchange.Binance;
 
 
-import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
-import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.crypto.CryptoUtils;
@@ -25,10 +23,10 @@ public class BinanceMainImpl extends BasicChange{
 		CryptoUtils cryptoUtils = new CryptoUtils();
 		ExchangeSpecification exSpec = new BinanceExchange().getDefaultExchangeSpecification();
 		exSpec.setUserName(nodeUser.getAccount().getNameAccount());
+		System.out.println(nodeUser.getAccount().getNameAccount());
 		exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getPublicApiKey()));
 		exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getSecretApiKey()));
 		this.exchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
-		exchangeStreaming = StreamingExchangeFactory.INSTANCE.createExchange(BinanceStreamingExchange.class);
 	}
 
 

@@ -32,6 +32,6 @@ public class PredictionsOfEvents implements StrategyTrade {
 
 	@Override
 	public StrategyEnams getType() {
-		return StrategyEnams.PredictionsOfEvents;
+		return null;
 	}
 }

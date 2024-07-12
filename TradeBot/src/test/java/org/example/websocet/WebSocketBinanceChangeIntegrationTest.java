@@ -4,29 +4,30 @@ import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
 import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
+import io.reactivex.rxjava3.observers.TestObserver;
 import org.example.crypto.CryptoUtils;
 import org.example.entity.Account;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
-import org.example.observer.CurrentConditionsDisplay;
-import org.example.observer.Subject;
+import org.example.observer.ObserverPrice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.knowm.xchange.dto.Order;
 
 import java.math.BigDecimal;
 
 import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
-import static org.assertj.core.api.Assertions.assertThat;
-@SpringBootTest
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+
+
 class WebSocketBinanceChangeIntegrationTest {
 	NodeUser nodeUser;
 	Account account;
-	@Autowired
-	private  Subject dataBtcUsdt;
+
 
 	@BeforeEach
 	void setAp(){
@@ -42,22 +43,57 @@ class WebSocketBinanceChangeIntegrationTest {
 		nodeUser.setAccount(account);
 
 	}
+
 	@Test
-	void streamBtcUSDT() throws InterruptedException {
-		CurrentConditionsDisplay currentConditionsDisplay = new CurrentConditionsDisplay((Subject) dataBtcUsdt);
-		BigDecimal display = currentConditionsDisplay.display();
-		BigDecimal price = new BigDecimal("56941");
+	public void testSetPriceAndNotifyObservers() throws InterruptedException {
+		// Создание мок объектов ObserverPrice
+		ObserverPrice observer1 = mock(ObserverPrice.class);
+		ObserverPrice observer2 = mock(ObserverPrice.class);
 
-		while (display == null || display.compareTo(price) != 0){
-			display = currentConditionsDisplay.display();
+		// Создание WebSocketBinanceChange
+		WebSocketBinanceChange webSocket = new WebSocketBinanceChange();
 
+		// Регистрация наблюдателей
 
-			System.out.println(display);
-			Thread.sleep(2000);
-		}
-		assertThat(price).isEqualTo(display).descriptionText();
-
+		// Проверка, что метод update был вызван для всех зарегистрированных наблюдателей
+		verify(observer1, times(1)).update(BigDecimal.valueOf(10000), Order.OrderType.BID, CurrencyPair.BTC_USDT);
+		verify(observer2, times(1)).update(BigDecimal.valueOf(10000), Order.OrderType.BID, CurrencyPair.BTC_USDT);
 	}
+
+	@Test
+	public void testAddObserver() throws InterruptedException {
+		WebSocketBinanceChange webSocket = new WebSocketBinanceChange();
+		TestObserver<BigDecimal> testObserver = new TestObserver<>();
+		webSocket.addObserver(testObserver);
+
+		// Проверяем, что наблюдатель успешно добавлен
+		assertTrue( webSocket.hasObservers());
+	}
+
+	@Test
+	public void testRemoveObserver() throws InterruptedException {
+		WebSocketBinanceChange webSocket = new WebSocketBinanceChange();
+		TestObserver<BigDecimal> testObserver = new TestObserver<>();
+		webSocket.addObserver(testObserver);
+
+		webSocket.removeObserver(testObserver);
+
+		// Проверяем, что наблюдатель успешно удален
+		assertFalse( webSocket.hasObservers());
+	}
+	@Test
+	public void testRemoveObservers() throws InterruptedException {
+		WebSocketBinanceChange webSocket = new WebSocketBinanceChange();
+		TestObserver<BigDecimal> testObserver = new TestObserver<>();
+		TestObserver<BigDecimal> testObserver1 = new TestObserver<>();
+		webSocket.addObserver(testObserver);
+		webSocket.addObserver(testObserver1);
+		webSocket.removeObserver(testObserver);
+
+		// Проверяем, что наблюдатель успешно удален, но только конкретный
+		assertTrue( webSocket.hasObservers());
+	}
+
 
 	@Test
 	void testWebSocketStreamData() throws InterruptedException {

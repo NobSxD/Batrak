@@ -31,7 +31,7 @@ public abstract class StockData implements Subject{
 	@Override
 	public void notifyObservers() {
 		for (int i = 0; i < observerPrices.size(); i++) {
-			ObserverPrice observerPrice = (ObserverPrice) observerPrices.get(i);
+			ObserverPrice observerPrice =  observerPrices.get(i);
 			observerPrice.update(currentPrice, orderType, instrument);
 		}
 	}
