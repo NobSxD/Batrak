@@ -23,10 +23,10 @@ public class PublicKeyAccount implements Command {
 	public String send(NodeUser nodeUser, String text) {
 		String pKey = cryptoUtils.encryptMessage(text);
 		try {
-			Account changeAccount = nodeUser.getAccount();
+			Account changeAccount = nodeUser.getNodeChange().getAccount();
 			nodeUser.setState(ACCOUNT_ADD_SECRET_API);
 			changeAccount.setPublicApiKey(pKey);
-			nodeUser.setAccount(changeAccount);
+			nodeUser.getNodeChange().setAccount(changeAccount);
 
 			if (changeAccount.getNameAccount() == null || changeAccount.getPublicApiKey() == null){
 				change.deleteFindId(changeAccount.getId());

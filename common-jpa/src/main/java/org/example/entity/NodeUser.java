@@ -40,9 +40,8 @@ public class NodeUser {
 	private Boolean isActive;
 
 
-	@OneToOne(cascade = CascadeType.MERGE)
-	@ToString.Exclude
-	private Account account;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	private NodeChange nodeChange;
 
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUser")

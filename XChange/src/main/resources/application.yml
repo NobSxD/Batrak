@@ -1,0 +1,7 @@
+currency-binance:
+  pairs:
+    - "USD/EUR"
+    - "USD/GBP"
+    - "USD/JPY"
+    - "USD/CHF"
+    - "EUR/JPY"

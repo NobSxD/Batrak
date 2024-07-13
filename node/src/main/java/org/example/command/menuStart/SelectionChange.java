@@ -1,6 +1,7 @@
 package org.example.command.menuStart;
 
 import lombok.RequiredArgsConstructor;
+import org.example.change.XChangeCommand;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
@@ -17,10 +18,13 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 public class SelectionChange implements Command {
 	private final ProcessServiceCommand processServiceCommand;
 	private final NodeUserDAO nodeUserDAO;
+	private final XChangeCommand xChangeCommand;
 
 	@Override
 	public String send(NodeUser nodeUser, String nameChange) {
-		nodeUser.setChangeType(ChangeType.fromValue(nameChange));
+		ChangeType type = ChangeType.fromValue(nameChange);
+		nodeUser.setNodeChange(xChangeCommand.getNodeChange(type));
+		nodeUser.setChangeType(type);
 		nodeUser.setState(BASIC_STATE);
 		nodeUserDAO.save(nodeUser);
 		processServiceCommand.menu2Selection(nameChange, nodeUser.getChatId());

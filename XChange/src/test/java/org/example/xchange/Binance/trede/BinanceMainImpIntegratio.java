@@ -4,7 +4,7 @@ import org.example.crypto.CryptoUtils;
 import org.example.entity.Account;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
-import org.example.xchange.Binance.BinanceMainImpl;
+import org.example.xchange.change.Binance.BinanceMainImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.knowm.xchange.Exchange;
@@ -39,7 +39,7 @@ class BinanceMainImpIntegratio {
 		account.setPublicApiKey(cryptoUtils.encryptMessage(System.getenv("pKey")));
 		account.setSecretApiKey(cryptoUtils.encryptMessage(System.getenv("sKey")));
 		nodeUser.setConfigTrade(configTrade);
-		nodeUser.setAccount(account);
+		nodeUser.getNodeChange().setAccount(account);
 
 	}
 	@Test

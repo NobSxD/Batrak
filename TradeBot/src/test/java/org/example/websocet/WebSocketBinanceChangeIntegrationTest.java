@@ -40,7 +40,7 @@ class WebSocketBinanceChangeIntegrationTest {
 		account.setPublicApiKey(cryptoUtils.encryptMessage(System.getenv("pKey")));
 		account.setSecretApiKey(cryptoUtils.encryptMessage(System.getenv("sKey")));
 		nodeUser.setConfigTrade(configTrade);
-		nodeUser.setAccount(account);
+		nodeUser.getNodeChange().setAccount(account);
 
 	}
 

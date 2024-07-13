@@ -26,10 +26,10 @@ public class SecretKeyAccount implements Command {
 	public String send(NodeUser nodeUser, String text) {
 		String pKey = cryptoUtils.encryptMessage(text);
 		try {
-			Account changeAccount = nodeUser.getAccount();
+			Account changeAccount = nodeUser.getNodeChange().getAccount();
 			changeAccount.setSecretApiKey(pKey);
 			changeAccount.setChangeType(nodeUser.getChangeType());
-			nodeUser.setAccount(changeAccount);
+			nodeUser.getNodeChange().setAccount(changeAccount);
 			nodeUser.setState(BASIC_STATE);
 
 			if (changeAccount.getNameAccount() == null || changeAccount.getPublicApiKey() == null || changeAccount.getSecretApiKey() == null){

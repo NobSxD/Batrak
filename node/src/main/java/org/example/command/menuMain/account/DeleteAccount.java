@@ -23,8 +23,8 @@ public class DeleteAccount implements Command {
 		try {
 			Account account = change.getAccount(text, nodeUser);
 			change.deleteFindId(account.getId());
-			if (nodeUser.getAccount().getNameAccount().equals(text)){
-				nodeUser.setAccount(null);
+			if (nodeUser.getNodeChange().getAccount().getNameAccount().equals(text)){
+				nodeUser.getNodeChange().setAccount(null);
 				nodeUserDAO.save(nodeUser);
 			}
 			processServiceCommand.menu2Selection(account.getNameAccount() + " данный аккаунт был удален ", nodeUser.getChatId());

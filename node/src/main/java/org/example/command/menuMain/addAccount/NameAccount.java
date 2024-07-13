@@ -25,7 +25,7 @@ public class NameAccount implements Command {
 				changeAccount = change.newAccount(nodeUser);
 				changeAccount.setNameAccount(text);
 				nodeUser.setState(ACCOUNT_ADD_PUBLIC_API);
-				nodeUser.setAccount(changeAccount);
+				nodeUser.getNodeChange().setAccount(changeAccount);
 				change.saveAccount(changeAccount, nodeUser);
 				nodeUserDAO.save(nodeUser);
 				return "Ведите публичный ключ";

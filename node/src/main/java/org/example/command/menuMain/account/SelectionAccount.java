@@ -23,7 +23,7 @@ public class SelectionAccount implements Command {
 		try {
 			Account changeAccount = change.getAccount(text, nodeUser);
 			change.saveAccount(changeAccount, nodeUser);
-			nodeUser.setAccount(changeAccount);
+			nodeUser.getNodeChange().setAccount(changeAccount);
 			nodeUserDAO.save(nodeUser);
 			processServiceCommand.menu2Selection("Вы выбрали аккаунт " + changeAccount.getNameAccount(), nodeUser.getChatId());
 		} catch (Exception e){
