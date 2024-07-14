@@ -23,7 +23,6 @@ public class SelectionChange implements Command {
 	@Override
 	public String send(NodeUser nodeUser, String nameChange) {
 		ChangeType type = ChangeType.fromValue(nameChange);
-		nodeUser.setNodeChange(xChangeCommand.getNodeChange(type));
 		nodeUser.setChangeType(type);
 		nodeUser.setState(BASIC_STATE);
 		nodeUserDAO.save(nodeUser);

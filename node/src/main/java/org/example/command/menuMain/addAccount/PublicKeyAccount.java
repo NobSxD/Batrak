@@ -1,7 +1,7 @@
 package org.example.command.menuMain.addAccount;
 
 import lombok.RequiredArgsConstructor;
-import org.example.change.Change;
+import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.crypto.CryptoUtils;
 import org.example.dao.NodeUserDAO;
@@ -18,25 +18,25 @@ import static org.example.entity.enams.UserState.ACCOUNT_ADD_SECRET_API;
 public class PublicKeyAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	private final CryptoUtils cryptoUtils;
-	private final Change change;
+	private final NodeAccount nodeAccount;
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		String pKey = cryptoUtils.encryptMessage(text);
 		try {
-			Account changeAccount = nodeUser.getNodeChange().getAccount();
+			Account changeAccount = nodeUser.getAccount();
 			nodeUser.setState(ACCOUNT_ADD_SECRET_API);
 			changeAccount.setPublicApiKey(pKey);
-			nodeUser.getNodeChange().setAccount(changeAccount);
+			nodeUser.setAccount(changeAccount);
 
 			if (changeAccount.getNameAccount() == null || changeAccount.getPublicApiKey() == null){
-				change.deleteFindId(changeAccount.getId());
+				nodeAccount.deleteFindId(changeAccount.getId());
 				nodeUser.setState(ACCOUNT_ADD_NAME);
 				nodeUserDAO.save(nodeUser);
 				return "Имя акаунта или публичный ключ не были введены, пожалуйста повторите попытку +\n" +
 						"Введит имя аккаунта";
 			}
 
-			change.saveAccount(changeAccount, nodeUser);
+			nodeAccount.saveAccount(changeAccount, nodeUser);
 			nodeUserDAO.save(nodeUser);
 			return "ведите секретный ключ";
 		} catch (Exception e) {

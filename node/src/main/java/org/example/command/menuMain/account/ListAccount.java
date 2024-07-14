@@ -2,7 +2,7 @@ package org.example.command.menuMain.account;
 
 import lombok.Data;
 import org.apache.log4j.Logger;
-import org.example.change.Change;
+import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.Account;
@@ -18,13 +18,13 @@ import java.util.List;
 public class ListAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	private final ProcessServiceCommand processServiceCommand;
-	private final Change change;
+	private final NodeAccount nodeAccount;
 	private static final Logger logger = Logger.getLogger(ListAccount.class);
 
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			List<Account> accounts = change.getAccounts(nodeUser);
+			List<Account> accounts = nodeAccount.getAccounts(nodeUser);
 			if (accounts.isEmpty()){
 				processServiceCommand.menu2Selection("У вас нет аккаунта для выбора, сначало добавте аккаунт:", nodeUser.getChatId());
 				return "";

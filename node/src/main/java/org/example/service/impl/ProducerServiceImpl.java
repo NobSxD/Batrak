@@ -1,5 +1,10 @@
 package org.example.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
+import org.example.change.XChangeCommand;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.ChangeType;
@@ -14,21 +19,19 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.example.model.RabbitQueue.ANSWER_MESSAGE;
 import static org.example.model.RabbitQueue.TRADE_MESSAGE;
 
 
 @Service
+@RequiredArgsConstructor
 public class ProducerServiceImpl implements ProducerService {
 	private final RabbitTemplate rabbitTemplate;
-
-	public ProducerServiceImpl(RabbitTemplate rabbitTemplate) {
-		this.rabbitTemplate = rabbitTemplate;
-	}
+	private final ObjectMapper objectMapper;
+	private final XChangeCommand xChangeCommand;
+	private final Logger logger = Logger.getLogger(ProducerServiceImpl.class);
 
 	@Override
 	public void producerAnswer(SendMessage sendMessage) {
@@ -37,9 +40,13 @@ public class ProducerServiceImpl implements ProducerService {
 
 	@Override
 	public void startTread(NodeUser nodeUser) {
-		Map<String, Long> id = new HashMap<>();
-		id.put("id", nodeUser.getId());
-		rabbitTemplate.convertAndSend(TRADE_MESSAGE, id);
+		try {
+			String s = objectMapper.writeValueAsString(nodeUser);
+			rabbitTemplate.convertAndSend(TRADE_MESSAGE, s);
+		} catch (JsonProcessingException e) {
+			logger.error(e.getMessage());
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void producerChangeEnumsButton(SendMessage sendMessages) {

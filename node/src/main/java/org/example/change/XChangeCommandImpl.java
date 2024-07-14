@@ -1,9 +1,10 @@
 package org.example.change;
 
+import org.example.change.xChange.XChangeMain;
 import org.example.entity.NodeChange;
+import org.example.entity.NodeUser;
 import org.example.entity.enams.ChangeType;
 import org.example.xchange.BasicChange;
-import org.example.xchange.change.XChangeMain;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,9 +25,9 @@ public class XChangeCommandImpl implements XChangeCommand{
 
 
 	@Override
-	public BasicChange init(ChangeType changeType) {
-		XChangeMain change = typeMap.get(changeType);
-		return change.init();
+	public BasicChange init(NodeUser nodeUser) {
+		XChangeMain change = typeMap.get(nodeUser.getChangeType());
+		return change.init(nodeUser);
 
 	}
 	@Override

@@ -1,7 +1,6 @@
 package org.example.xchange;
 
-import info.bitrich.xchangestream.core.StreamingExchange;
-import io.reactivex.rxjava3.disposables.Disposable;
+import lombok.ToString;
 import org.apache.log4j.Logger;
 import org.example.entity.NodeUser;
 import org.example.xchange.DTO.LimitOrderMain;
@@ -16,7 +15,6 @@ import org.knowm.xchange.dto.account.Wallet;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.dto.trade.MarketOrder;
-import org.knowm.xchange.dto.trade.OpenOrders;
 import org.knowm.xchange.instrument.Instrument;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchange.service.trade.TradeService;
@@ -25,17 +23,18 @@ import org.knowm.xchange.service.trade.params.DefaultCancelOrderByInstrumentAndI
 import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-public abstract class BasicChange implements BasicChangeInterface{
+@ToString
+public abstract class BasicChange implements BasicChangeInterface, Serializable {
 	private static final Logger logger = Logger.getLogger(BasicChange.class);
 
 	protected Exchange exchange;
-	protected StreamingExchange exchangeStreaming;
+
 
 
 
@@ -142,31 +141,7 @@ public abstract class BasicChange implements BasicChangeInterface{
 		return orderBook;
 	}
 
-	public boolean isOrderExecuted(String orderId){
 
-		exchangeStreaming.connect().blockingAwait();
-		Disposable subscription1 = exchangeStreaming.getStreamingMarketDataService()
-				.getTrades(CurrencyPair.BTC_USD)
-				.subscribe(
-						trade -> { trade.getMakerOrderId();
-						},
-						trade -> logger.info(String.format("Trade: {%s}", trade)));
-
-		TradeService orderService = exchange.getTradeService();
-		try {
-			OpenOrders openOrders = orderService.getOpenOrders();
-				for (LimitOrder order : openOrders.getOpenOrders()) {
-					if (order.getId().equals(orderId)) {
-						logger.info("Order не исполнен: " + orderId);
-						return false;
-					}
-				}
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
-	}
 	public void cancelOrder(String namePair, String idOrder){
 		try {
 			Instrument instrument = new CurrencyPair(namePair);

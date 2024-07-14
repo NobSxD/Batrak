@@ -23,10 +23,10 @@ public class BinanceMainImpl extends BasicChange {
 	public BinanceMainImpl(NodeUser nodeUser) {
 		CryptoUtils cryptoUtils = new CryptoUtils();
 		ExchangeSpecification exSpec = new BinanceExchange().getDefaultExchangeSpecification();
-		exSpec.setUserName(nodeUser.getNodeChange().getAccount().getNameAccount());
-		System.out.println(nodeUser.getNodeChange().getAccount().getNameAccount());
-		exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getNodeChange().getAccount().getPublicApiKey()));
-		exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getNodeChange().getAccount().getSecretApiKey()));
+		exSpec.setUserName(nodeUser.getAccount().getNameAccount());
+		System.out.println(nodeUser.getAccount().getNameAccount());
+		exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getPublicApiKey()));
+		exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getSecretApiKey()));
 		this.exchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
 	}
 

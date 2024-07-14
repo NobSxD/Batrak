@@ -1,7 +1,9 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.example.entity.collect.Pair;
+import org.example.entity.enams.ChangeType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,13 +20,21 @@ public class NodeChange {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	@OneToMany(mappedBy = "pair")
-	protected List<Pair> pairs;
+	@OneToMany(mappedBy = "nodeChange", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference
+	private List<Pair> pairs;
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference
+	private List<NodeUser> nodeUser;
 
-	@OneToOne
-	protected Account account;
+	@Enumerated(EnumType.STRING)
+	private ChangeType changeType;
 
-	@OneToMany
-	protected List<NodeUser> nodeUser;
+	// Getters and setters
+
+	public void addPair(Pair pair) {
+		pairs.add(pair);
+		pair.setNodeChange(this);
+	}
 }

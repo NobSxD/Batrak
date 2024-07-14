@@ -39,7 +39,7 @@ class BinanceMainImpIntegratio {
 		account.setPublicApiKey(cryptoUtils.encryptMessage(System.getenv("pKey")));
 		account.setSecretApiKey(cryptoUtils.encryptMessage(System.getenv("sKey")));
 		nodeUser.setConfigTrade(configTrade);
-		nodeUser.getNodeChange().setAccount(account);
+		nodeUser.setAccount(account);
 
 	}
 	@Test

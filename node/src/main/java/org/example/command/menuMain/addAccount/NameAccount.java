@@ -1,7 +1,7 @@
 package org.example.command.menuMain.addAccount;
 
 import lombok.RequiredArgsConstructor;
-import org.example.change.Change;
+import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
@@ -15,18 +15,18 @@ import static org.example.entity.enams.UserState.ACCOUNT_ADD_PUBLIC_API;
 @RequiredArgsConstructor
 public class NameAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
-	private final Change change;
+	private final NodeAccount nodeAccount;
 
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			Account changeAccount = change.getAccount(text, nodeUser);
+			Account changeAccount = nodeAccount.getAccount(text, nodeUser);
 			if (changeAccount == null) {
-				changeAccount = change.newAccount(nodeUser);
+				changeAccount = nodeAccount.newAccount(nodeUser);
 				changeAccount.setNameAccount(text);
 				nodeUser.setState(ACCOUNT_ADD_PUBLIC_API);
-				nodeUser.getNodeChange().setAccount(changeAccount);
-				change.saveAccount(changeAccount, nodeUser);
+				nodeUser.setAccount(changeAccount);
+				nodeAccount.saveAccount(changeAccount, nodeUser);
 				nodeUserDAO.save(nodeUser);
 				return "Ведите публичный ключ";
 			} else {

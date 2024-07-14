@@ -1,6 +1,7 @@
 package org.example.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.example.entity.enams.ChangeType;
 
@@ -29,9 +30,11 @@ public  class Account{
 
 
 	@OneToOne(cascade = CascadeType.MERGE)
+	@JsonBackReference
 	private NodeChange nodeChange;
 
 	@ManyToOne
+	@JsonBackReference
 	private NodeUser nodeUser;
 
 }

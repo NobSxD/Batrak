@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.entity.enams.StrategyEnams;
@@ -28,6 +29,7 @@ public class ConfigTrade  {
 	private StrategyEnams strategy = StrategyEnams.SlidingProtectiveOrder;
 
 	@OneToOne
+	@JsonBackReference
 	private NodeUser nodeUser;
 
 }

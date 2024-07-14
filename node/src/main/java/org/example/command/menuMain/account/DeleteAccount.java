@@ -2,7 +2,7 @@ package org.example.command.menuMain.account;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
-import org.example.change.Change;
+import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
@@ -14,17 +14,17 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class DeleteAccount implements Command {
-	private final Change change;
+	private final NodeAccount nodeAccount;
 	private final ProcessServiceCommand processServiceCommand;
 	private final NodeUserDAO nodeUserDAO;
 	private final Logger logger = Logger.getLogger(DeleteAccount.class);
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			Account account = change.getAccount(text, nodeUser);
-			change.deleteFindId(account.getId());
-			if (nodeUser.getNodeChange().getAccount().getNameAccount().equals(text)){
-				nodeUser.getNodeChange().setAccount(null);
+			Account account = nodeAccount.getAccount(text, nodeUser);
+			nodeAccount.deleteFindId(account.getId());
+			if (nodeUser.getAccount().getNameAccount().equals(text)){
+				nodeUser.setAccount(null);
 				nodeUserDAO.save(nodeUser);
 			}
 			processServiceCommand.menu2Selection(account.getNameAccount() + " данный аккаунт был удален ", nodeUser.getChatId());

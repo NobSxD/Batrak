@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.example.entity.enams.OrderType;
 import org.example.entity.enams.StrategyEnams;
@@ -32,6 +33,7 @@ public class NodeOrder {
 	private StrategyEnams strategyEnams;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private NodeUser nodeUser;
 
 }

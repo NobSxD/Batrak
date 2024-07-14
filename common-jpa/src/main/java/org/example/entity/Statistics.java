@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,6 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-
 public class Statistics {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -22,6 +22,7 @@ public class Statistics {
 	private int countDealSel = 0;
 
 	@OneToOne
+	@JsonBackReference
 	private NodeUser nodeUser;
 
 }

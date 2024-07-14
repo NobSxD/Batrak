@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface BasicChangeInterface {
-	boolean isOrderExecuted(String orderId);
+
 	OrderBook orderBooksLimitOrders(Integer countLimitOrders, NodeUser nodeUser);
 	String marketOrder(Order.OrderType orderType, BigDecimal summa, CurrencyPair currencyPair);
 	String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, CurrencyPair currencyPair);

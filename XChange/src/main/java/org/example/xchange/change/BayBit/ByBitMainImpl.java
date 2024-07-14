@@ -12,9 +12,9 @@ public class ByBitMainImpl extends BasicChange {
 	public ByBitMainImpl(NodeUser nodeUser) {
 		CryptoUtils cryptoUtils = new CryptoUtils();
 		ExchangeSpecification exSpec = new BybitExchange().getDefaultExchangeSpecification();
-		exSpec.setUserName(nodeUser.getNodeChange().getAccount().getNameAccount());
-		exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getNodeChange().getAccount().getPublicApiKey()));
-		exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getNodeChange().getAccount().getSecretApiKey()));
+		exSpec.setUserName(nodeUser.getAccount().getNameAccount());
+		exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getPublicApiKey()));
+		exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getSecretApiKey()));
 		this.exchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
 	}
 

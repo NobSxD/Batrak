@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.TradeState;
@@ -41,14 +42,29 @@ public class NodeUser {
 
 
 	@ManyToOne(cascade = CascadeType.MERGE)
+	@JsonManagedReference
 	private NodeChange nodeChange;
 
+	@OneToOne
+	@JsonManagedReference
+	protected Account account;
 
+
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUser")
 	private List <NodeOrder> orders;
 
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, mappedBy = "nodeUser")
 	private List <Account> accounts;
+
+	@OneToOne
+	@JsonManagedReference
+	private ConfigTrade configTrade;
+
+	@OneToOne
+	@JsonManagedReference
+	private Statistics statistics;
 
 
 	@Enumerated(EnumType.STRING)
@@ -60,11 +76,6 @@ public class NodeUser {
 	@Enumerated(EnumType.STRING)
 	private TradeState stateTrade;
 
-	@OneToOne
-	private ConfigTrade configTrade;
-
-	@OneToOne
-	private Statistics statistics;
 
 	private boolean tradeStartOrStop;
 
