@@ -29,12 +29,12 @@ public  class Account{
 	private ChangeType changeType;
 
 
-	@OneToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonBackReference
 	private NodeChange nodeChange;
 
 	@ManyToOne
-	@JsonBackReference
+	@JsonBackReference("nodeUser-account")
 	private NodeUser nodeUser;
 
 }

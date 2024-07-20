@@ -1,6 +1,7 @@
 package org.example.command.menuStart;
 
 import org.example.change.XChangeCommand;
+import org.example.dao.NodeChangeDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.service.ProcessServiceCommand;
@@ -15,6 +16,8 @@ class SelectionNodeAccountTest {
 
 	@Mock
 	ProcessServiceCommand processServiceCommand;
+	@Mock
+	NodeChangeDAO nodeChangeDAO;
 
 	@Mock
 	NodeUserDAO nodeUserDAO;
@@ -29,7 +32,7 @@ class SelectionNodeAccountTest {
 	@BeforeEach
 	void init(){
 		nodeUser = new NodeUser();
-		selectionChange = new SelectionChange(processServiceCommand, nodeUserDAO, command);
+		selectionChange = new SelectionChange(processServiceCommand, nodeUserDAO, command, nodeChangeDAO);
 	}
 
 	@Test

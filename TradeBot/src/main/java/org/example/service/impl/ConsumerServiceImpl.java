@@ -1,12 +1,11 @@
 package org.example.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
-import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
-import org.example.service.ConsumerService;
 import org.example.service.MainServiceTradeBot;
-import org.example.xchange.BasicChange;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -15,20 +14,23 @@ import static org.example.model.RabbitQueue.TRADE_MESSAGE;
 
 @Service
 @RequiredArgsConstructor
-public class ConsumerServiceImpl implements ConsumerService {
+public class ConsumerServiceImpl {
     private final Logger logger = Logger.getLogger(ConsumerServiceImpl.class);
     private final MainServiceTradeBot mainServiceTradeBot;
-    private final NodeUserDAO nodeUserDAO;
+    private final ObjectMapper objectMapper;
 
-
-
- //   @Override
     @RabbitListener(queues =  TRADE_MESSAGE)
-    public void consumeTexMessageUpdate(BasicChange basicChange) {
-        basicChange.balances();
-        var nodeUser = new NodeUser(); //nodeUserDAO.findById(id.get("id")).orElse(null);
-        logger.debug("TRADE_BOT: Text бот получил юзера");
-        mainServiceTradeBot.startORStopTrade(nodeUser);
+    public void consumeTexMessageUpdate(String message) {
+        try {
+            NodeUser nodeUser = objectMapper.readValue(message, NodeUser.class);
+            logger.debug("TRADE_BOT: Text бот получил юзера: " + nodeUser.getUsername());
+            mainServiceTradeBot.startORStopTrade(nodeUser);
+        } catch (JsonProcessingException e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
     }
 
 

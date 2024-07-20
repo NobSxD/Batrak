@@ -26,6 +26,7 @@ public class NodeOrder {
 	private BigDecimal price;
 
 	private BigDecimal summaUSD;
+	@Enumerated(EnumType.STRING)
 	private OrderType orderType;
 	private String pair;
 	private Date createDate;

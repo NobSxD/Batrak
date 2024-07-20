@@ -42,11 +42,9 @@ public class NodeUser {
 
 
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JsonManagedReference
 	private NodeChange nodeChange;
 
 	@OneToOne
-	@JsonManagedReference
 	protected Account account;
 
 
@@ -54,7 +52,7 @@ public class NodeUser {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUser")
 	private List <NodeOrder> orders;
 
-	@JsonManagedReference
+	@JsonManagedReference("nodeUser-account")
 	@OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, mappedBy = "nodeUser")
 	private List <Account> accounts;
 

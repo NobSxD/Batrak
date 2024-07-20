@@ -1,6 +1,6 @@
 package org.example.entity.collect;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.example.entity.NodeChange;
 
@@ -23,7 +23,7 @@ public class Pair {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "node_change_id")
-	@JsonManagedReference
+	@JsonBackReference
 	private NodeChange nodeChange;
 
 	// Getters and setters

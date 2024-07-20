@@ -21,6 +21,6 @@ public interface BasicChangeInterface {
 
 	LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType);
 	List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders);
-	LimitOrderMain placeLimitOrder(LimitOrder limitOrder);
+	LimitOrderMain placeLimitOrder(LimitOrder limitOrder, boolean trade);
 
 }

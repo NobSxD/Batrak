@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.crypto.CryptoUtils;
+import org.example.dao.NodeChangeDAO;
 import org.example.dao.NodeUserDAO;
+import org.example.entity.NodeChange;
 import org.example.entity.NodeUser;
 import org.example.entity.Account;
 import org.example.entity.enams.UserState;
@@ -18,9 +20,11 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 @RequiredArgsConstructor
 public class SecretKeyAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
+	private final NodeAccount nodeAccountDAO;
+	private final NodeChangeDAO nodeChangeDAO;
 	private final ProcessServiceCommand processServiceCommand;
 	private final CryptoUtils cryptoUtils;
-	private final NodeAccount nodeAccount;
+
 
 	@Override
 	public String send(NodeUser nodeUser, String text) {
@@ -33,14 +37,17 @@ public class SecretKeyAccount implements Command {
 			nodeUser.setState(BASIC_STATE);
 
 			if (changeAccount.getNameAccount() == null || changeAccount.getPublicApiKey() == null || changeAccount.getSecretApiKey() == null){
-				nodeAccount.deleteFindId(changeAccount.getId());
+				nodeAccountDAO.deleteFindId(changeAccount.getId());
 				nodeUser.setState(ACCOUNT_ADD_NAME);
 				nodeUserDAO.save(nodeUser);
 				return "Имя акаунта или публичный ключ или секретный ключ не были введены, пожалуйста повторите попытку +\n" +
 						"Введит имя аккаунта";
 			}
+			NodeChange nodeChange = nodeUser.getNodeChange();
+			nodeChange.getAccounts().add(changeAccount);
 
-			nodeAccount.saveAccount(changeAccount, nodeUser);
+			nodeChangeDAO.save(nodeChange);
+			nodeAccountDAO.saveAccount(changeAccount, nodeUser);
 			nodeUserDAO.save(nodeUser);
 
 			processServiceCommand.menu2Selection("Вы успешго добавили аккаунт - " + changeAccount.getNameAccount(), nodeUser.getChatId());

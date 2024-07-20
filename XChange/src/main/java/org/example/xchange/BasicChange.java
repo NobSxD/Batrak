@@ -55,10 +55,13 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		return orderId;
 	}
 
-	public LimitOrderMain placeLimitOrder(LimitOrder limitOrder){
+	public LimitOrderMain placeLimitOrder(LimitOrder limitOrder, boolean trade){ //если false то мы не отпровляем ордер на биржу
 		try {
 			TradeService tradeService = exchange.getTradeService();
-			String orderId = tradeService.placeLimitOrder(limitOrder);
+			String orderId =  "";
+			if (trade){
+				orderId = tradeService.placeLimitOrder(limitOrder);
+			}
 			OrderMain order = OrderMain.builder()
 					.type(limitOrder.getType())
 					.originalAmount(limitOrder.getOriginalAmount())
