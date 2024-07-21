@@ -42,4 +42,9 @@ public class NodeChangeServiceImpl implements NodeChangeService {
 		nodeChangeDAO.save(nodeChange);
 	}
 
+	@Override
+	public NodeChange getNodeChange(ChangeType changeType) {
+		return nodeChangeDAO.findByChangeType(changeType).orElse(null);
+	}
+
 }

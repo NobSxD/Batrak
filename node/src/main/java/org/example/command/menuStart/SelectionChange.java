@@ -12,6 +12,8 @@ import org.example.entity.enams.UserState;
 import org.example.service.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 import static org.example.entity.enams.UserState.BASIC_STATE;
 
 
@@ -27,7 +29,16 @@ public class SelectionChange implements Command {
 	public String send(NodeUser nodeUser, String nameChange) {
 		ChangeType type = ChangeType.fromValue(nameChange);
 		NodeChange nodeChange = xChangeCommand.getNodeChange(type);
-		nodeChange.getNodeUser().add(nodeUser);
+
+		Optional<NodeUser> existingUser = nodeChange.getNodeUser().stream()
+				.filter(user -> user.getId().equals(nodeUser.getId()))
+				.findFirst();
+		if (existingUser.isPresent()){
+
+		}else {
+			nodeChange.getNodeUser().add(nodeUser);
+		}
+
 
 		nodeUser.setChangeType(type);
 		nodeUser.setState(BASIC_STATE);

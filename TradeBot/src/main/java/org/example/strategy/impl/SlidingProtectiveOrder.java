@@ -1,6 +1,5 @@
 package org.example.strategy.impl;
 
-import io.reactivex.rxjava3.disposables.Disposable;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.example.dao.NodeOrdersDAO;
@@ -32,6 +31,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 @Component
 @RequiredArgsConstructor
@@ -62,6 +62,30 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 
 
 	}
+	public NodeOrder general(NodeUser nodeUser, List<LimitOrder> bidsOrAsk, Order.OrderType orderType,
+						BasicChangeInterface basicChange, String message) throws InterruptedException {
+		CurrencyPair currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
+		BigDecimal price = FinancialCalculator.maxAmount(bidsOrAsk);
+		price = CurrencyConverter.validUsd(price);
+
+		BigDecimal amount = nodeUser.getConfigTrade().getAmountOrder();
+		amount = CurrencyConverter.convertCurrency(price, amount);
+
+		List<BigDecimal> priceAndAmount = new ArrayList<>();
+		priceAndAmount.add(price);
+		priceAndAmount.add(amount);
+		LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, orderType);
+		//TODO вынести в настройки трейдинг на вертуальный счет
+		LimitOrderMain limitOrderMain = basicChange.placeLimitOrder(order, true);
+		BigDecimal usd = CurrencyConverter.convertUsdt(amount, price);
+		logger.info(message + "user_id: " + nodeUser.getId() + "user_chat_id " + nodeUser.getChatId());
+		producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
+		CountDownLatch latch = new CountDownLatch(1);
+		subscribeToCurrencyRate(limitOrderMain, latch);
+		latch.await();
+		logger.info("ордер исполнился");
+		return resultTread(nodeUser, limitOrderMain, priceAndAmount);
+	}
 
 	public NodeOrder bay(OrderBook orderBook, NodeUser nodeUser, BasicChangeInterface basicChange) {
 		try {
@@ -80,18 +104,22 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 			priceAndAmount.add(amount);
 			LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.BID);
 			//TODO вынести в настройки трейдинг на вертуальный счет
-			LimitOrderMain limitOrderMain = basicChange.placeLimitOrder(order, false);
+			LimitOrderMain limitOrderMain = basicChange.placeLimitOrder(order, true);
 
 			//<!-- Информируем о размещении ордера -->
 			BigDecimal usd = CurrencyConverter.convertUsdt(amount, price);
-			String message = "Ордер на покупку по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был размещен \n" +
-					"сумма ордера $" + usd;
+			String message = "**[Ордер на покупку]**\n" +
+					"Цена: $" + price.setScale(2, RoundingMode.HALF_UP) + "\n" +
+					"Сумма ордера: $" + usd + "\n" +
+					"_Статус: размещен_";
 			logger.info(message + "user_id: " + nodeUser.getId() + "user_chat_id " + nodeUser.getChatId());
 			producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
 
-			Disposable disposable = subscribeToCurrencyRate(limitOrderMain.getLimitPrice());
+			CountDownLatch latch = new CountDownLatch(1);
+			subscribeToCurrencyRate(limitOrderMain, latch);
+			latch.await();
 			logger.info("ордер исполнился");
-			subject.removeObserver(disposable);
+
 
 			NodeOrder nodeOrder = resultTread(nodeUser, limitOrderMain, priceAndAmount);
 			nodeUser.setStateTrade(TradeState.SEL);
@@ -131,18 +159,22 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 			priceAndAmount.add(amount);
 			LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.ASK);
 			//TODO вынести в настройки трейдинг на вертуальный счет
-			LimitOrderMain limitOrderMain = basicChange.placeLimitOrder(order, false);
+			LimitOrderMain limitOrderMain = basicChange.placeLimitOrder(order, true);
 
 			//<!-- Информируем о размещении ордера -->
 			BigDecimal usd = CurrencyConverter.convertUsdt(amount, price);
-			String message = "Ордер на продажу по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был размещен \n" +
-					"сумма ордера $" + usd;
+			String message = "**[Ордер на продажу]**\n" +
+					"Цена: $" + price.setScale(2, RoundingMode.HALF_UP) + "\n" +
+					"Сумма ордера: $" + usd + "\n" +
+					"_Статус: размещен_";
 			logger.info(message + "user_id: " + nodeUser.getId() + "user_chat_id " + nodeUser.getChatId());
 			producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
 
-			Disposable disposable = subscribeToCurrencyRate(limitOrderMain.getLimitPrice());
+			CountDownLatch latch = new CountDownLatch(1);
+			subscribeToCurrencyRate(limitOrderMain, latch);
+			latch.await();
 			logger.info("ордер исполнился");
-			subject.removeObserver(disposable);
+
 
 			NodeOrder resulOrder = resultTread(nodeUser, limitOrderMain, priceAndAmount);
 
@@ -166,10 +198,8 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 		BigDecimal amount = priceAndAmount.get(1);
 
 		BigDecimal usd = CurrencyConverter.convertUsdt(amount, price);
-		String message = "Ордер на покупку по прайсу $" + price.setScale(2, RoundingMode.HALF_UP) + " был выполнен \n" +
-				"сумма ордера $" + usd;
-		producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
-		logger.info(limitOrderMain.getOrderMain().getId() + " : ордер был исполнен по прайсу " + limitOrderMain.getLimitPrice());
+
+
 
 		OrderType orderType = null;
 		if (limitOrderMain.getOrderMain().getType().equals(Order.OrderType.BID)){
@@ -197,24 +227,63 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 				.nodeUser(nodeUser)
 				.build();
 
-		nodeUser.getOrders().add(nodeOrderResult);
-		producerServiceExchange.sendAnswer("Ордер по курсу $" + price + " был исполнен", nodeUser.getChatId());
+		logger.info(limitOrderMain.getOrderMain().getId() + " : ордер был исполнен по прайсу " + limitOrderMain.getLimitPrice());
+		String message = "**[Выполнение ордера]**\n" +
+				"Цена: $" + price + "\n" +
+				"_Статус: исполнен_";
+		producerServiceExchange.sendAnswer(message, nodeUser.getChatId());
 		ordersDAO.save(nodeOrderResult);
+		nodeUser.getOrders().add(nodeOrderResult);
 		nodeUserDAO.save(nodeUser);
 		return nodeOrderResult;
 	}
 
-	public Disposable subscribeToCurrencyRate(BigDecimal targetRate) {
-		return subject.getCurrencyRateStream()
-				.filter(rate -> rate.compareTo(targetRate) >= 0)
-				.subscribe(
-						rate -> {
-							// Уведомляем наблюдателя о достижении курса
-							System.out.println("Курс достиг значения: " + rate);
-						},error -> {
-							// Обработка ошибок
-							System.err.println("Произошла ошибка: " + error.getMessage());
-						});
+	public void subscribeToCurrencyRate(LimitOrderMain limitOrderMain, CountDownLatch latch) {
+		if (limitOrderMain.getOrderMain().getType().equals(Order.OrderType.BID)){
+			subject.getCurrencyRateStream()
+					.filter(rate -> rate.compareTo(limitOrderMain.getLimitPrice()) < 0)
+					.firstElement()
+					.subscribe(
+							rate -> {
+								// Уведомляем наблюдателя о достижении курса
+								System.out.println("Курс достиг значения: " + rate);
+								latch.countDown();
+							}, error -> {
+								// Обработка ошибок
+								System.err.println("Произошла ошибка: " + error.getMessage());
+								latch.countDown();
+							});
+			return;
+		}
+		if (limitOrderMain.getOrderMain().getType().equals(Order.OrderType.ASK)) {
+			subject.getCurrencyRateStream()
+					.filter(rate -> rate.compareTo(limitOrderMain.getLimitPrice()) > 0)
+					.firstElement()
+					.subscribe(
+							rate -> {
+								// Уведомляем наблюдателя о достижении курса
+								System.out.println("Курс достиг значения: " + rate);
+								latch.countDown();
+							}, error -> {
+								// Обработка ошибок
+								System.err.println("Произошла ошибка: " + error.getMessage());
+								latch.countDown();
+							});
+		}else {
+			subject.getCurrencyRateStream()
+					.filter(rate -> rate.compareTo(limitOrderMain.getLimitPrice()) == 0)
+					.firstElement()
+					.subscribe(
+							rate -> {
+								// Уведомляем наблюдателя о достижении курса
+								System.out.println("Курс достиг значения: " + rate);
+								latch.countDown();
+							}, error -> {
+								// Обработка ошибок
+								System.err.println("Произошла ошибка: " + error.getMessage());
+								latch.countDown();
+							});
+		}
 	}
 
 

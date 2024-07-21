@@ -24,6 +24,7 @@ public class XChangeCommandImpl implements XChangeCommand{
 
 	@Override
 	public NodeChange getNodeChange(ChangeType changeType){
-		return (NodeChange) typeMap.get(changeType);
+		XChangeMain xChangeMain = typeMap.get(changeType);
+		return xChangeMain.getChange();
 	}
 }

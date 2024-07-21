@@ -279,3 +279,1272 @@
 сумма ордера $11.35user_id: 1user_chat_id 505077047
 2024-07-20 17:15:45 INFO  SlidingProtectiveOrder:143 - ордер исполнился
 2024-07-20 17:15:45 INFO  SlidingProtectiveOrder:171 -  : ордер был исполнен по прайсу 66749.65
+2024-07-20 21:14:07 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:14:14 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:23:51 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:24:24 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:24:28 DEBUG ConsumerServiceImpl:26 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 21:24:31 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66619.99, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=165826618, additionalProperties={}))
+2024-07-20 21:24:31 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66619.99 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 21:24:31 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 21:24:31 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66619.99
+2024-07-20 21:24:31 ERROR SlidingProtectiveOrder:106 - A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser; nested exception is org.hibernate.HibernateException: A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser
+2024-07-20 21:24:31 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 21:26:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:26:38 DEBUG ConsumerServiceImpl:26 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 21:27:00 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66622.00, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=113503255, additionalProperties={}))
+2024-07-20 21:27:05 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66622.00 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 21:27:09 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 21:27:13 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66622.00
+2024-07-20 21:27:42 ERROR SlidingProtectiveOrder:106 - A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser; nested exception is org.hibernate.HibernateException: A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser
+2024-07-20 21:27:42 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 21:27:51 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:27:56 DEBUG ConsumerServiceImpl:26 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 21:28:09 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66618.67, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=101657841, additionalProperties={}))
+2024-07-20 21:28:09 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66618.67 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 21:28:09 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 21:28:20 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66618.67
+2024-07-20 21:32:16 ERROR SlidingProtectiveOrder:106 - A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser; nested exception is org.hibernate.HibernateException: A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser
+2024-07-20 21:32:16 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 21:32:16 DEBUG ConsumerServiceImpl:26 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 21:32:28 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66597.99, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=135835116, additionalProperties={}))
+2024-07-20 21:32:28 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66597.99 был размещен 
+сумма ордера $11.32user_id: 1user_chat_id 505077047
+2024-07-20 21:32:28 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 21:32:39 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66597.99
+2024-07-20 21:36:07 ERROR SlidingProtectiveOrder:106 - A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser; nested exception is org.hibernate.HibernateException: A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser
+2024-07-20 21:36:07 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 21:37:24 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:37:24 DEBUG ConsumerServiceImpl:26 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 21:37:30 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66590.00, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=104782539, additionalProperties={}))
+2024-07-20 21:37:30 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66590.00 был размещен 
+сумма ордера $11.32user_id: 1user_chat_id 505077047
+2024-07-20 21:37:30 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 21:37:31 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66590.00
+2024-07-20 21:38:06 ERROR SlidingProtectiveOrder:106 - A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser; nested exception is org.hibernate.HibernateException: A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser
+2024-07-20 21:38:06 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 21:40:22 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:40:22 DEBUG ConsumerServiceImpl:26 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 21:40:33 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66645.65, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=143394704, additionalProperties={}))
+2024-07-20 21:40:33 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66645.65 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 21:40:33 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 21:40:39 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66645.65
+2024-07-20 21:44:15 ERROR SlidingProtectiveOrder:106 - A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser; nested exception is org.hibernate.HibernateException: A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: org.example.entity.NodeChange.nodeUser
+2024-07-20 21:44:15 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 21:44:15 DEBUG ConsumerServiceImpl:26 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 21:44:25 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:26 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:27 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:28 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:29 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:30 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:32 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:34 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:35 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:36 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:37 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:38 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:39 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:40 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:42 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:44 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:45 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:46 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:47 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:48 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:49 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:44:50 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:53:56 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:54:15 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:54:31 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 21:54:41 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:01:06 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:01:15 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66612.72, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=165851951, additionalProperties={}))
+2024-07-20 22:01:15 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66612.72 был размещен 
+сумма ордера $11.32user_id: 1user_chat_id 505077047
+2024-07-20 22:01:15 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:01:16 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66612.72
+2024-07-20 22:01:18 ERROR SlidingProtectiveOrder:106 - failed to lazily initialize a collection of role: org.example.entity.NodeUser.orders, could not initialize proxy - no Session
+2024-07-20 22:01:18 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 22:01:18 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:01:26 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66624.99, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=124092386, additionalProperties={}))
+2024-07-20 22:01:26 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66624.99 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:01:26 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:01:28 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66624.99
+2024-07-20 22:01:40 ERROR SlidingProtectiveOrder:106 - failed to lazily initialize a collection of role: org.example.entity.NodeUser.orders, could not initialize proxy - no Session
+2024-07-20 22:01:40 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 22:02:05 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:02:08 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:02:15 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66615.99, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=119925893, additionalProperties={}))
+2024-07-20 22:02:15 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66615.99 был размещен 
+сумма ордера $11.32user_id: 1user_chat_id 505077047
+2024-07-20 22:02:15 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:02:16 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66615.99
+2024-07-20 22:04:05 ERROR SlidingProtectiveOrder:106 - failed to lazily initialize a collection of role: org.example.entity.NodeUser.orders, could not initialize proxy - no Session
+2024-07-20 22:04:05 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 22:06:58 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:07:03 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:07:49 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66626.14, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=183043659, additionalProperties={}))
+2024-07-20 22:07:49 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66626.14 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:07:50 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:07:53 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66626.14
+2024-07-20 22:08:09 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66826.02, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=121883857, additionalProperties={}))
+2024-07-20 22:08:10 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66826.02 был размещен 
+сумма ордера $11.36user_id: 1user_chat_id 505077047
+2024-07-20 22:08:10 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:08:11 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66826.02
+2024-07-20 22:08:12 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 22:12:00 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:12:03 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:12:20 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66651.63, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=157405261, additionalProperties={}))
+2024-07-20 22:12:20 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66651.63 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:12:20 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:12:25 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66651.63
+2024-07-20 22:12:37 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66851.58, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=182679991, additionalProperties={}))
+2024-07-20 22:12:37 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66851.58 был размещен 
+сумма ордера $11.36user_id: 1user_chat_id 505077047
+2024-07-20 22:12:37 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:12:37 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66851.58
+2024-07-20 22:12:37 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 22:13:00 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:13:05 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:13:23 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66651.63, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=144882902, additionalProperties={}))
+2024-07-20 22:13:23 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66651.63 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:13:23 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:13:23 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66651.63
+2024-07-20 22:13:25 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66851.58, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=102864536, additionalProperties={}))
+2024-07-20 22:13:25 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66851.58 был размещен 
+сумма ордера $11.36user_id: 1user_chat_id 505077047
+2024-07-20 22:13:25 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:13:25 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66851.58
+2024-07-20 22:13:58 ERROR ChangeImpl:41 - could not initialize proxy [org.example.entity.NodeUser#1] - no Session имя пользователя: EventObserver id пользователя 1
+2024-07-20 22:14:33 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:14:34 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:14:47 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66661.80, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=165024535, additionalProperties={}))
+2024-07-20 22:14:47 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66661.80 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:14:47 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:14:47 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66661.80
+2024-07-20 22:14:49 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66861.79, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=141433908, additionalProperties={}))
+2024-07-20 22:14:49 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66861.79 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:14:49 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:14:49 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66861.79
+2024-07-20 22:14:53 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66661.80, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=134088025, additionalProperties={}))
+2024-07-20 22:14:53 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66661.80 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:14:53 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:14:53 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66661.80
+2024-07-20 22:14:54 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66861.79, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=107753961, additionalProperties={}))
+2024-07-20 22:14:54 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66861.79 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:14:54 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:14:54 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66861.79
+2024-07-20 22:14:57 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66661.80, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=181860011, additionalProperties={}))
+2024-07-20 22:14:57 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66661.80 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:14:57 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:14:58 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66661.80
+2024-07-20 22:14:58 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66861.79, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=180816954, additionalProperties={}))
+2024-07-20 22:14:58 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66861.79 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:14:58 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:14:58 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66861.79
+2024-07-20 22:15:02 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66661.80, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=131506697, additionalProperties={}))
+2024-07-20 22:15:02 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66661.80 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:15:02 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:15:02 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66661.80
+2024-07-20 22:15:03 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66861.79, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=122875893, additionalProperties={}))
+2024-07-20 22:15:03 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66861.79 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:15:03 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:15:03 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66861.79
+2024-07-20 22:15:07 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66661.80, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=174648080, additionalProperties={}))
+2024-07-20 22:15:07 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66661.80 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:15:07 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:15:07 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66661.80
+2024-07-20 22:15:08 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66861.79, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=146884324, additionalProperties={}))
+2024-07-20 22:15:08 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66861.79 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:15:08 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:15:08 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66861.79
+2024-07-20 22:16:53 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:17:04 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66658.00, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=132444668, additionalProperties={}))
+2024-07-20 22:17:04 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66658.00 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:17:04 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:17:04 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66658.00
+2024-07-20 22:17:05 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66857.97, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=181809323, additionalProperties={}))
+2024-07-20 22:17:05 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66857.97 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:17:05 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:17:05 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66857.97
+2024-07-20 22:17:09 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66658.00, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=198254967, additionalProperties={}))
+2024-07-20 22:17:09 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66658.00 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:17:09 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:17:09 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66658.00
+2024-07-20 22:17:10 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66857.97, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=104569155, additionalProperties={}))
+2024-07-20 22:17:10 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66857.97 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:17:10 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:17:10 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66857.97
+2024-07-20 22:17:13 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66658.00, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=107032473, additionalProperties={}))
+2024-07-20 22:17:13 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66658.00 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:17:13 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:17:13 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66658.00
+2024-07-20 22:17:14 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66857.97, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=192506868, additionalProperties={}))
+2024-07-20 22:17:14 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66857.97 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:17:14 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:17:14 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66857.97
+2024-07-20 22:17:19 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66658.00, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=181296113, additionalProperties={}))
+2024-07-20 22:17:19 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66658.00 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:17:19 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:17:19 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66658.00
+2024-07-20 22:17:20 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66857.97, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=116279304, additionalProperties={}))
+2024-07-20 22:17:20 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66857.97 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:17:20 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:17:20 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66857.97
+2024-07-20 22:17:22 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66658.00, orderMain=OrderMain(type=BID, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=134864334, additionalProperties={}))
+2024-07-20 22:17:22 INFO  SlidingProtectiveOrder:89 - Ордер на покупку по прайсу $66658.00 был размещен 
+сумма ордера $11.33user_id: 1user_chat_id 505077047
+2024-07-20 22:17:22 INFO  SlidingProtectiveOrder:93 - ордер исполнился
+2024-07-20 22:17:22 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66658.00
+2024-07-20 22:17:23 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66857.97, orderMain=OrderMain(type=ASK, originalAmount=0.00017, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=126810484, additionalProperties={}))
+2024-07-20 22:17:23 INFO  SlidingProtectiveOrder:140 - Ордер на продажу по прайсу $66857.97 был размещен 
+сумма ордера $11.37user_id: 1user_chat_id 505077047
+2024-07-20 22:17:23 INFO  SlidingProtectiveOrder:144 - ордер исполнился
+2024-07-20 22:17:23 INFO  SlidingProtectiveOrder:172 -  : ордер был исполнен по прайсу 66857.97
+2024-07-20 22:31:26 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:31:32 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66804.37, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=134315376, additionalProperties={}))
+2024-07-20 22:31:32 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66804.37
+Сумма ордера: $10.69
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:31:32 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:31:32 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66804.37
+2024-07-20 22:31:32 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67004.78, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=185605671, additionalProperties={}))
+2024-07-20 22:31:32 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $67004.78
+Сумма ордера: $10.72
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:31:32 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:31:32 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 67004.78
+2024-07-20 22:32:12 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66792.83, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=136147031, additionalProperties={}))
+2024-07-20 22:32:12 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66792.83
+Сумма ордера: $10.69
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:32:12 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:32:12 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66792.83
+2024-07-20 22:32:12 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66993.21, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=134804315, additionalProperties={}))
+2024-07-20 22:32:12 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66993.21
+Сумма ордера: $10.72
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:32:12 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:32:12 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66993.21
+2024-07-20 22:32:24 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66792.83, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=181786939, additionalProperties={}))
+2024-07-20 22:32:24 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66792.83
+Сумма ордера: $10.69
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:32:24 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:32:24 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66792.83
+2024-07-20 22:32:24 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66993.21, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=150583862, additionalProperties={}))
+2024-07-20 22:32:24 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66993.21
+Сумма ордера: $10.72
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:32:24 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:32:24 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66993.21
+2024-07-20 22:33:49 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66722.60, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=195736519, additionalProperties={}))
+2024-07-20 22:33:49 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66722.60
+Сумма ордера: $10.68
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:33:49 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:33:49 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66722.60
+2024-07-20 22:33:49 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66922.77, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=165075158, additionalProperties={}))
+2024-07-20 22:33:49 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66922.77
+Сумма ордера: $10.71
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:33:49 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:33:49 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66922.77
+2024-07-20 22:41:57 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66668.03, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=183731807, additionalProperties={}))
+2024-07-20 22:41:57 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66668.03
+Сумма ордера: $10.67
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:41:57 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:41:57 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66668.03
+2024-07-20 22:41:57 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66868.03, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=148632727, additionalProperties={}))
+2024-07-20 22:41:57 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66868.03
+Сумма ордера: $10.70
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:41:57 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:41:57 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66868.03
+2024-07-20 22:42:21 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:43:45 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66667.99, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=28818983705, timestamp=null, status=null, flags=null, userReference=133102977, additionalProperties={}))
+2024-07-20 22:43:45 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66667.99
+Сумма ордера: $10.67
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:43:45 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:43:45 INFO  SlidingProtectiveOrder:202 - 28818983705 : ордер был исполнен по прайсу 66667.99
+2024-07-20 22:43:45 ERROR SlidingProtectiveOrder:157 - Account has insufficient balance for requested action. (HTTP status code: 400)
+2024-07-20 22:46:43 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 22:46:43 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:46:52 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66722.59, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=152992648, additionalProperties={}))
+2024-07-20 22:46:52 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66722.59
+Сумма ордера: $10.68
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:46:52 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:46:52 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66722.59
+2024-07-20 22:46:54 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66922.76, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=152286981, additionalProperties={}))
+2024-07-20 22:46:54 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66922.76
+Сумма ордера: $10.71
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:46:54 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:46:54 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66922.76
+2024-07-20 22:47:19 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66718.00, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=116858435, additionalProperties={}))
+2024-07-20 22:47:19 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66718.00
+Сумма ордера: $10.67
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:47:43 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:47:45 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66718.00
+2024-07-20 22:47:49 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66918.15, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=125529331, additionalProperties={}))
+2024-07-20 22:47:49 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66918.15
+Сумма ордера: $10.71
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:48:00 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:48:01 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66918.15
+2024-07-20 22:48:08 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66728.91, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=138418714, additionalProperties={}))
+2024-07-20 22:48:08 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66728.91
+Сумма ордера: $10.68
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:48:59 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:48:59 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66728.91
+2024-07-20 22:49:00 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66929.10, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=173735400, additionalProperties={}))
+2024-07-20 22:49:00 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66929.10
+Сумма ордера: $10.71
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:49:10 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:49:10 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66929.10
+2024-07-20 22:49:19 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66722.67, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=132054347, additionalProperties={}))
+2024-07-20 22:49:19 INFO  SlidingProtectiveOrder:91 - **[Ордер на покупку]**
+Цена: $66722.67
+Сумма ордера: $10.68
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:49:36 INFO  SlidingProtectiveOrder:95 - ордер исполнился
+2024-07-20 22:49:39 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66722.67
+2024-07-20 22:49:45 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66922.84, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=125136946, additionalProperties={}))
+2024-07-20 22:49:45 INFO  SlidingProtectiveOrder:144 - **[Ордер на продажу]**
+Цена: $66922.84
+Сумма ордера: $10.71
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 22:49:49 INFO  SlidingProtectiveOrder:148 - ордер исполнился
+2024-07-20 22:49:49 INFO  SlidingProtectiveOrder:202 -  : ордер был исполнен по прайсу 66922.84
+2024-07-20 22:59:36 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 22:59:45 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66809.99, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=176580736, additionalProperties={}))
+2024-07-20 22:59:45 INFO  SlidingProtectiveOrder:92 - **[Ордер на покупку]**
+Цена: $66809.99
+Сумма ордера: $10.69
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 23:00:10 INFO  SlidingProtectiveOrder:98 - ордер исполнился
+2024-07-20 23:00:10 INFO  SlidingProtectiveOrder:207 -  : ордер был исполнен по прайсу 66809.99
+2024-07-20 23:00:10 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67010.42, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=128981808, additionalProperties={}))
+2024-07-20 23:00:10 INFO  SlidingProtectiveOrder:147 - **[Ордер на продажу]**
+Цена: $67010.42
+Сумма ордера: $10.72
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 23:02:35 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 23:03:26 ERROR SlidingProtectiveOrder:106 - Account has insufficient balance for requested action. (HTTP status code: 400)
+2024-07-20 23:04:21 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-20 23:04:21 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-20 23:04:29 INFO  BasicChange:82 - LimitOrderMain(limitPrice=66832.98, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=28819214664, timestamp=null, status=null, flags=null, userReference=164633066, additionalProperties={}))
+2024-07-20 23:04:29 INFO  SlidingProtectiveOrder:92 - **[Ордер на покупку]**
+Цена: $66832.98
+Сумма ордера: $10.69
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-20 23:04:30 INFO  SlidingProtectiveOrder:98 - ордер исполнился
+2024-07-20 23:04:30 INFO  SlidingProtectiveOrder:207 - 28819214664 : ордер был исполнен по прайсу 66832.98
+2024-07-20 23:04:30 ERROR SlidingProtectiveOrder:162 - Account has insufficient balance for requested action. (HTTP status code: 400)
+2024-07-21 00:53:21 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-21 00:53:22 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-21 00:53:29 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67404.99, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=197563624, additionalProperties={}))
+2024-07-21 00:53:29 INFO  SlidingProtectiveOrder:92 - **[Ордер на покупку]**
+Цена: $67404.99
+Сумма ордера: $10.78
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-21 00:53:52 INFO  SlidingProtectiveOrder:98 - ордер исполнился
+2024-07-21 00:53:53 INFO  SlidingProtectiveOrder:207 -  : ордер был исполнен по прайсу 67404.99
+2024-07-21 00:59:03 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67607.20, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=, timestamp=null, status=null, flags=null, userReference=184136637, additionalProperties={}))
+2024-07-21 00:59:10 INFO  SlidingProtectiveOrder:147 - **[Ордер на продажу]**
+Цена: $67607.20
+Сумма ордера: $10.82
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-21 01:26:36 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-21 01:26:45 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67395.99, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=28821601943, timestamp=null, status=null, flags=null, userReference=171846303, additionalProperties={}))
+2024-07-21 01:26:45 INFO  SlidingProtectiveOrder:92 - **[Ордер на покупку]**
+Цена: $67395.99
+Сумма ордера: $10.78
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-21 01:26:48 INFO  SlidingProtectiveOrder:98 - ордер исполнился
+2024-07-21 01:26:48 INFO  SlidingProtectiveOrder:207 - 28821601943 : ордер был исполнен по прайсу 67395.99
+2024-07-21 01:26:48 ERROR SlidingProtectiveOrder:162 - Account has insufficient balance for requested action. (HTTP status code: 400)
+2024-07-21 01:30:25 DEBUG ConsumerServiceImpl:25 - NODE: Text message is received
+2024-07-21 01:30:25 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-21 01:30:28 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67349.44, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=28821643903, timestamp=null, status=null, flags=null, userReference=172685680, additionalProperties={}))
+2024-07-21 01:30:28 INFO  SlidingProtectiveOrder:92 - **[Ордер на покупку]**
+Цена: $67349.44
+Сумма ордера: $10.78
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-21 01:30:40 INFO  SlidingProtectiveOrder:98 - ордер исполнился
+2024-07-21 01:30:54 INFO  SlidingProtectiveOrder:207 - 28821643903 : ордер был исполнен по прайсу 67349.44
+2024-07-21 01:31:02 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67551.49, orderMain=OrderMain(type=ASK, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=28821649952, timestamp=null, status=null, flags=null, userReference=157731826, additionalProperties={}))
+2024-07-21 01:31:02 INFO  SlidingProtectiveOrder:147 - **[Ордер на продажу]**
+Цена: $67551.49
+Сумма ордера: $10.81
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-21 01:42:03 DEBUG ConsumerServiceImpl:29 - TRADE_BOT: Text бот получил юзера: EventObserver
+2024-07-21 01:42:07 INFO  BasicChange:82 - LimitOrderMain(limitPrice=67380.79, orderMain=OrderMain(type=BID, originalAmount=0.00016, cumulativeAmount=null, averagePrice=null, fee=null, instrument=BTC/USDT, id=28821771834, timestamp=null, status=null, flags=null, userReference=161443296, additionalProperties={}))
+2024-07-21 01:42:07 INFO  SlidingProtectiveOrder:92 - **[Ордер на покупку]**
+Цена: $67380.79
+Сумма ордера: $10.78
+_Статус: размещен_user_id: 1user_chat_id 505077047
+2024-07-21 01:42:07 INFO  SlidingProtectiveOrder:98 - ордер исполнился
+2024-07-21 01:42:07 INFO  SlidingProtectiveOrder:207 - 28821771834 : ордер был исполнен по прайсу 67380.79
+2024-07-21 01:42:07 ERROR SlidingProtectiveOrder:162 - Account has insufficient balance for requested action. (HTTP status code: 400)

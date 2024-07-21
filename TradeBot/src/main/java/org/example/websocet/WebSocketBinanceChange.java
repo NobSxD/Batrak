@@ -7,7 +7,7 @@ import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.subjects.PublishSubject;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_RE
 @Component
 public class WebSocketBinanceChange {
 
-	private final PublishSubject<BigDecimal> subject = PublishSubject.create();
+	private final BehaviorSubject<BigDecimal> subject = BehaviorSubject.create();
 	public void addObserver(Observer<BigDecimal> observer) {
 		subject.subscribe(observer);
 	}

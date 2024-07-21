@@ -1,6 +1,7 @@
 package org.example.change.xChange;
 
 import lombok.RequiredArgsConstructor;
+import org.example.entity.NodeChange;
 import org.example.entity.enams.ChangeType;
 import org.example.service.NodeChangeService;
 import org.example.xchange.change.Binance.config.CurrencyProperties;
@@ -22,6 +23,11 @@ public class Binance  implements XChangeMain {
 	private void init() {
 		List<String> propertiesPairs = currencyProperties.getPairs();
 		nodeChangeService.saveNodeChange(ChangeType.Binance, propertiesPairs);
+	}
+
+	@Override
+	public NodeChange getChange() {
+		return nodeChangeService.getNodeChange(ChangeType.Binance);
 	}
 
 	@Override
