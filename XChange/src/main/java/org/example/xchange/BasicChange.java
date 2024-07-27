@@ -2,12 +2,10 @@ package org.example.xchange;
 
 import lombok.ToString;
 import org.apache.log4j.Logger;
-import org.example.entity.NodeUser;
 import org.example.xchange.DTO.LimitOrderMain;
 import org.example.xchange.DTO.OrderMain;
 import org.example.xchange.finance.CurrencyConverter;
 import org.knowm.xchange.Exchange;
-import org.knowm.xchange.binance.service.BinanceMarketDataServiceRaw;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.account.AccountInfo;
@@ -20,7 +18,6 @@ import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchange.service.trade.TradeService;
 import org.knowm.xchange.service.trade.params.CancelOrderParams;
 import org.knowm.xchange.service.trade.params.DefaultCancelOrderByInstrumentAndIdParams;
-import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -34,9 +31,6 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 	private static final Logger logger = Logger.getLogger(BasicChange.class);
 
 	protected Exchange exchange;
-
-
-
 
 
 	public String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, CurrencyPair currencyPair) {
@@ -123,7 +117,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		return "Ваш ордес создан под id: " + orderId;
 	}
 
-	public OrderBook orderBooksLimitOrders(Integer countLimitOrders, NodeUser nodeUser) {
+	public OrderBook orderBooksLimitOrders(Integer countLimitOrders, String pairName) {
 		OrderBook orderBook = null;
 		try {
 			// Получение сервиса для работы с рыночными данными
@@ -131,10 +125,8 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 			// Задание параметров запроса
 
 			// Получение стакана ордеров по торговой паре BTC/USD
-			Instrument currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
+			Instrument currencyPair = new CurrencyPair(pairName);
 			orderBook = marketDataService.getOrderBook(currencyPair, countLimitOrders);
-
-
 
 			// Вывод информации о стакане ордеров
 			System.out.println(orderBook.toString());
@@ -166,14 +158,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 			throw new RuntimeException(e);
 		}
 	}
-	public List<BigDecimal> historyData(NodeUser nodeUser){
-		MarketDataService marketDataService = exchange.getMarketDataService();
-		BinanceMarketDataServiceRaw binanceMarketDataServiceRaw = (BinanceMarketDataServiceRaw) exchange.getMarketDataService();
 
-		TradeHistoryParams params;
-		return null;
-
-	}
 	public abstract Wallet balances();
 
 

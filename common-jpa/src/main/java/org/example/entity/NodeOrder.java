@@ -7,7 +7,7 @@ import org.example.entity.enams.StrategyEnams;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -29,12 +29,15 @@ public class NodeOrder {
 	@Enumerated(EnumType.STRING)
 	private OrderType orderType;
 	private String pair;
-	private Date createDate;
+	private LocalDateTime createDate;
+
 	@Enumerated(EnumType.STRING)
 	private StrategyEnams strategyEnams;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference
 	private NodeUser nodeUser;
+
+
 
 }

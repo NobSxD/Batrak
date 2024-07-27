@@ -28,11 +28,6 @@ public  class Account{
 	@Enumerated(EnumType.STRING)
 	private ChangeType changeType;
 
-
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JsonBackReference
-	private NodeChange nodeChange;
-
 	@ManyToOne
 	@JsonBackReference("nodeUser-account")
 	private NodeUser nodeUser;

@@ -27,7 +27,7 @@ class LimitOrderMainTestMain {
 		assertThat(limitOrderMainBinance.getOrderMain().getId()).isEqualTo("");
 		assertThat(limitOrderMainBinance.getOrderMain().getTimestamp()).isEqualTo(new Date(1381787133l));
 		assertThat(limitOrderMainBinance.getOrderMain().getStatus()).isNull();
-		assertThat(limitOrderMainBinance.getOrderMain().getUserReference()).isEqualTo(108789836);
+		assertThat(limitOrderMainBinance.getOrderMain().getUserReference()).isEqualTo("108789836");
 	}
 
 }

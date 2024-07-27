@@ -1,9 +1,11 @@
 package org.example.xchange.Binance.trede;
 
-import org.example.crypto.CryptoUtils;
+
+import org.exampel.crypto.CryptoUtils;
 import org.example.entity.Account;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
+import org.example.xchange.DTO.ChangeUser;
 import org.example.xchange.change.Binance.BinanceMainImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,9 +30,16 @@ class BinanceMainImpIntegratio {
 
 	NodeUser nodeUser;
 	Account account;
+	ChangeUser changeUser;
 
 	@BeforeEach
 	void setAp(){
+		 changeUser = ChangeUser.builder()
+				.userName(nodeUser.getUsername())
+				.apiKey(nodeUser.getAccount().getPublicApiKey())
+				.secretKey(nodeUser.getAccount().getSecretApiKey())
+				.botName(nodeUser.getAccount().getNameAccount())
+				.build();
 		nodeUser = new NodeUser();
 		account = new Account();
 		ConfigTrade configTrade = new ConfigTrade();
@@ -65,7 +74,7 @@ class BinanceMainImpIntegratio {
 
 	@Test
 	void marketOrder() {
-		BinanceMainImpl binanceMain = new BinanceMainImpl(nodeUser);
+		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
 		CurrencyPair currencyPair = new CurrencyPair(Currency.BTC, Currency.USDT);
 		String s = binanceMain.marketOrder(Order.OrderType.ASK, BigDecimal.valueOf(11), currencyPair);
 		System.out.println(s);
@@ -73,7 +82,7 @@ class BinanceMainImpIntegratio {
 
 	@Test
 	void limitOrder() {
-		BinanceMainImpl binanceMain = new BinanceMainImpl(nodeUser);
+		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
 		CurrencyPair currencyPair = new CurrencyPair(Currency.BTC, Currency.USDT);
 		String s = binanceMain.limitOrder(Order.OrderType.BID, BigDecimal.valueOf(11), new BigDecimal("50000"), currencyPair);
 		System.out.println(s);
@@ -95,8 +104,14 @@ class BinanceMainImpIntegratio {
 
 	@Test
 	void orderBokAsks(){
-		BinanceMainImpl binanceMain = new BinanceMainImpl(nodeUser);
-		OrderBook orderBook = binanceMain.orderBooksLimitOrders(25, nodeUser);
+		ChangeUser changeUser = ChangeUser.builder()
+				.userName(nodeUser.getUsername())
+				.apiKey(nodeUser.getAccount().getPublicApiKey())
+				.secretKey(nodeUser.getAccount().getSecretApiKey())
+				.botName(nodeUser.getAccount().getNameAccount())
+				.build();
+		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+		OrderBook orderBook = binanceMain.orderBooksLimitOrders(25, changeUser.getPairName());
 		orderBook.getAsks();
 	}
 

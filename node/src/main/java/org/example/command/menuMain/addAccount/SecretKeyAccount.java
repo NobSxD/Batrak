@@ -1,14 +1,12 @@
 package org.example.command.menuMain.addAccount;
 
 import lombok.RequiredArgsConstructor;
+import org.exampel.crypto.CryptoUtils;
 import org.example.change.account.NodeAccount;
 import org.example.command.Command;
-import org.example.crypto.CryptoUtils;
-import org.example.dao.NodeChangeDAO;
 import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeChange;
-import org.example.entity.NodeUser;
 import org.example.entity.Account;
+import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
 import org.example.service.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
@@ -21,13 +19,12 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 public class SecretKeyAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	private final NodeAccount nodeAccountDAO;
-	private final NodeChangeDAO nodeChangeDAO;
 	private final ProcessServiceCommand processServiceCommand;
-	private final CryptoUtils cryptoUtils;
 
 
 	@Override
 	public String send(NodeUser nodeUser, String text) {
+		CryptoUtils cryptoUtils = new CryptoUtils();
 		String pKey = cryptoUtils.encryptMessage(text);
 		try {
 			Account changeAccount = nodeUser.getAccount();
@@ -43,10 +40,7 @@ public class SecretKeyAccount implements Command {
 				return "Имя акаунта или публичный ключ или секретный ключ не были введены, пожалуйста повторите попытку +\n" +
 						"Введит имя аккаунта";
 			}
-			NodeChange nodeChange = nodeUser.getNodeChange();
-			nodeChange.getAccounts().add(changeAccount);
 
-			nodeChangeDAO.save(nodeChange);
 			nodeAccountDAO.saveAccount(changeAccount, nodeUser);
 			nodeUserDAO.save(nodeUser);
 

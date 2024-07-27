@@ -1,6 +1,5 @@
 package org.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.example.entity.collect.Pair;
@@ -25,17 +24,10 @@ public class NodeChange {
 	@JsonManagedReference
 	private List<Pair> pairs;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference
-	private List<NodeUser> nodeUser;
 
 	@Enumerated(EnumType.STRING)
 	private ChangeType changeType;
 
-	@OneToMany
-	@JsonManagedReference
-	private List<Account> accounts;
-	
 	public void addPair(Pair pair) {
 		pairs.add(pair);
 		pair.setNodeChange(this);

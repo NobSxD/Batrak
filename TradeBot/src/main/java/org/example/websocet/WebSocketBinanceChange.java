@@ -19,7 +19,7 @@ import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_RE
 
 
 @Component
-public class WebSocketBinanceChange {
+public class WebSocketBinanceChange implements WebSocketCommand{
 
 	private final BehaviorSubject<BigDecimal> subject = BehaviorSubject.create();
 	public void addObserver(Observer<BigDecimal> observer) {
@@ -52,6 +52,7 @@ public class WebSocketBinanceChange {
 					subject.onNext(trade.getPrice());
 				}, subject :: onError);
 	}
+	@Override
 	public Observable<BigDecimal> getCurrencyRateStream() {
 		return subject;
 	}

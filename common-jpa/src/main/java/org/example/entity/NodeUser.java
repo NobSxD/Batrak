@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.example.entity.enams.ChangeType;
@@ -28,6 +29,7 @@ public class NodeUser {
 	private Long chatId;
 
 	@CreationTimestamp
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
 	private LocalDateTime firstLoginDate;
 
 	private String firstName;
@@ -41,8 +43,6 @@ public class NodeUser {
 	private Boolean isActive;
 
 
-	@ManyToOne(cascade = CascadeType.MERGE)
-	private NodeChange nodeChange;
 
 	@OneToOne
 	protected Account account;

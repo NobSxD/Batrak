@@ -3,9 +3,9 @@ package org.example.xchange.change.Binance;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.crypto.CryptoUtils;
-import org.example.entity.NodeUser;
+import org.exampel.crypto.CryptoUtils;
 import org.example.xchange.BasicChange;
+import org.example.xchange.DTO.ChangeUser;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.binance.BinanceExchange;
@@ -20,13 +20,12 @@ import java.io.IOException;
 public class BinanceMainImpl extends BasicChange {
 
 
-	public BinanceMainImpl(NodeUser nodeUser) {
+	public BinanceMainImpl(ChangeUser user) {
 		CryptoUtils cryptoUtils = new CryptoUtils();
 		ExchangeSpecification exSpec = new BinanceExchange().getDefaultExchangeSpecification();
-		exSpec.setUserName(nodeUser.getAccount().getNameAccount());
-		System.out.println(nodeUser.getAccount().getNameAccount());
-		exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getPublicApiKey()));
-		exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getSecretApiKey()));
+		exSpec.setUserName(user.getBotName());
+		exSpec.setApiKey(cryptoUtils.decryptMessage(user.getApiKey()));
+		exSpec.setSecretKey(cryptoUtils.decryptMessage(user.getSecretKey()));
 		this.exchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
 	}
 

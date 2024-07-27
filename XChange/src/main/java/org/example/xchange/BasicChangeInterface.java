@@ -1,6 +1,5 @@
 package org.example.xchange;
 
-import org.example.entity.NodeUser;
 import org.example.xchange.DTO.LimitOrderMain;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public interface BasicChangeInterface {
 
-	OrderBook orderBooksLimitOrders(Integer countLimitOrders, NodeUser nodeUser);
+	OrderBook orderBooksLimitOrders(Integer countLimitOrders, String pairName);
 	String marketOrder(Order.OrderType orderType, BigDecimal summa, CurrencyPair currencyPair);
 	String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, CurrencyPair currencyPair);
 	void cancelOrder(String namePair, String idOrder);

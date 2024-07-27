@@ -1,7 +1,21 @@
 currency-binance:
   pairs:
-    - "USD/EUR"
-    - "USD/GBP"
-    - "USD/JPY"
-    - "USD/CHF"
-    - "EUR/JPY"
+    - "BTC-USDT"
+    - "BNB-USDT"
+    - "TRX-USDT"
+    - "ETH-USDT"
+    - "NOT-USDT"
+currency-baybit:
+  pairs:
+    - "BTC-USDT"
+    - "BNB-USDT"
+    - "TRX-USDT"
+    - "ETH-USDT"
+    - "NOT-USDT"
+currency-mexc:
+  pairs:
+    - "BTC-USDT"
+    - "BNB-USDT"
+    - "TRX-USDT"
+    - "ETH-USDT"
+    - "NOT-USDT"

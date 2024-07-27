@@ -8,6 +8,7 @@ import org.example.entity.Account;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
 import org.example.entity.Statistics;
+import org.example.entity.collect.Pair;
 import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerService;
 import org.springframework.stereotype.Component;
@@ -71,6 +72,14 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 
 	}
 
+	@Override
+	public void listPair(List<Pair> pairs, String output, Long chatId) {
+		var sendMessage = new SendMessage();
+		sendMessage.setChatId(chatId);
+		sendMessage.setText(output);
+		producerService.producerMenuListPair(pairs,sendMessage);
+
+	}
 
 	@Override
 	public String helpAccount() {

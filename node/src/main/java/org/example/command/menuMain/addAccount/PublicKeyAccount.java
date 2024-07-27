@@ -1,12 +1,12 @@
 package org.example.command.menuMain.addAccount;
 
 import lombok.RequiredArgsConstructor;
+import org.exampel.crypto.CryptoUtils;
 import org.example.change.account.NodeAccount;
 import org.example.command.Command;
-import org.example.crypto.CryptoUtils;
 import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
 import org.example.entity.Account;
+import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +17,11 @@ import static org.example.entity.enams.UserState.ACCOUNT_ADD_SECRET_API;
 @RequiredArgsConstructor
 public class PublicKeyAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
-	private final CryptoUtils cryptoUtils;
 	private final NodeAccount nodeAccount;
+
 	@Override
 	public String send(NodeUser nodeUser, String text) {
+		CryptoUtils cryptoUtils = new CryptoUtils();
 		String pKey = cryptoUtils.encryptMessage(text);
 		try {
 			Account changeAccount = nodeUser.getAccount();

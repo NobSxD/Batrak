@@ -4,9 +4,9 @@ package org.example.xchange.change.Mex;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.log4j.Logger;
-import org.example.crypto.CryptoUtils;
-import org.example.entity.NodeUser;
+import org.exampel.crypto.CryptoUtils;
 import org.example.xchange.BasicChange;
+import org.example.xchange.DTO.ChangeUser;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.dto.account.Wallet;
@@ -24,13 +24,13 @@ import java.util.Map;
 public class MexcMainImpl extends BasicChange {
 	private final Logger logger = Logger.getLogger(MexcMainImpl.class);
 
-	public MexcMainImpl(NodeUser nodeUser) {
+	public MexcMainImpl(ChangeUser user) {
 		try {
 			CryptoUtils cryptoUtils = new CryptoUtils();
 			ExchangeSpecification exSpec = new MEXCExchange().getDefaultExchangeSpecification();
-			exSpec.setUserName(nodeUser.getAccount().getNameAccount());
-			exSpec.setApiKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getPublicApiKey()));
-			exSpec.setSecretKey(cryptoUtils.decryptMessage(nodeUser.getAccount().getSecretApiKey()));
+			exSpec.setUserName(user.getBotName());
+			exSpec.setApiKey(cryptoUtils.decryptMessage(user.getApiKey()));
+			exSpec.setSecretKey(cryptoUtils.decryptMessage(user.getSecretKey()));
 			this.exchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
 		} catch (Exception e){
 			logger.error(e.getMessage());

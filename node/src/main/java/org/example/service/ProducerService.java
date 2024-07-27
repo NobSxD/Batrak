@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
+import org.example.entity.collect.Pair;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface ProducerService {
 
     void producerMenuListAccount(List<Account> accounts, SendMessage sendMessage);
     void startTread(NodeUser nodeUser);
+
+    void producerMenuListPair(List<Pair> pairs, SendMessage sendMessage);
 
 }

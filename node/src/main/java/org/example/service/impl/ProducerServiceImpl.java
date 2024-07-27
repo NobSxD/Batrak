@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
-import org.example.change.XChangeCommand;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
+import org.example.entity.collect.Pair;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.MainMenu;
 import org.example.entity.enams.SettingUpTrading;
@@ -30,7 +30,7 @@ import static org.example.model.RabbitQueue.TRADE_MESSAGE;
 public class ProducerServiceImpl implements ProducerService {
 	private final RabbitTemplate rabbitTemplate;
 	private final ObjectMapper objectMapper;
-	private final XChangeCommand xChangeCommand;
+
 	private final Logger logger = Logger.getLogger(ProducerServiceImpl.class);
 
 	@Override
@@ -140,6 +140,26 @@ public class ProducerServiceImpl implements ProducerService {
 		for (Account addChangeEnums : accounts  ) {
 			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
 			keyboardButtonsRow.add(button(addChangeEnums.getNameAccount()));
+			rowList.add(keyboardButtonsRow);
+		}
+
+
+		inlineKeyboardMarkup.setKeyboard(rowList);
+
+		sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+		rabbitTemplate.convertAndSend(ANSWER_MESSAGE, sendMessage);
+
+	}
+
+	@Override
+	public void producerMenuListPair(List<Pair> pairs, SendMessage sendMessage) {
+
+		InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+		List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+
+		for (Pair pair : pairs  ) {
+			List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
+			keyboardButtonsRow.add(button(pair.getPair()));
 			rowList.add(keyboardButtonsRow);
 		}
 
