@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.entity.enams.StrategyEnams;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity

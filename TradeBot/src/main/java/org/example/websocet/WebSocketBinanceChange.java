@@ -1,21 +1,13 @@
 package org.example.websocet;
 
-import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
-import info.bitrich.xchangestream.core.ProductSubscription;
-import info.bitrich.xchangestream.core.StreamingExchange;
-import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
-import org.knowm.xchange.ExchangeSpecification;
-import org.knowm.xchange.currency.CurrencyPair;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
-
-import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
 
 
 @Component
@@ -35,7 +27,7 @@ public class WebSocketBinanceChange implements WebSocketCommand{
 	@PostConstruct
 	public void streamBtcUSDT(){
 
-		final ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BinanceStreamingExchange.class);
+		/*final ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BinanceStreamingExchange.class);
 		exchangeSpecification.setShouldLoadRemoteMetaData(true);
 		exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
 
@@ -51,6 +43,8 @@ public class WebSocketBinanceChange implements WebSocketCommand{
 				.subscribe(trade -> {
 					subject.onNext(trade.getPrice());
 				}, subject :: onError);
+
+		 */
 	}
 	@Override
 	public Observable<BigDecimal> getCurrencyRateStream() {

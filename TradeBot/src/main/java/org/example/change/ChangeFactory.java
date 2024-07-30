@@ -17,8 +17,8 @@ public class ChangeFactory {
 				.build();
 		BasicChangeInterface change = null;
 		switch (nodeUser.getChangeType()){
-			case Mex -> change = new MexcMainImpl(changeUser);
-			case Baibit -> change = new ByBitMainImpl(changeUser);
+			case Mexc -> change = new MexcMainImpl(changeUser);
+			case Bybit -> change = new ByBitMainImpl(changeUser);
 			case Binance -> change = new BinanceMainImpl(changeUser);
 		}
 		return change;

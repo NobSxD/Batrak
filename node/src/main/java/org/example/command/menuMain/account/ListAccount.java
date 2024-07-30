@@ -1,7 +1,8 @@
 package org.example.command.menuMain.account;
 
 import lombok.Data;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
@@ -19,7 +20,7 @@ public class ListAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	private final ProcessServiceCommand processServiceCommand;
 	private final NodeAccount nodeAccount;
-	private static final Logger logger = Logger.getLogger(ListAccount.class);
+	private static final Logger logger = LoggerFactory.getLogger(ListAccount.class);
 
 	@Override
 	public String send(NodeUser nodeUser, String text) {

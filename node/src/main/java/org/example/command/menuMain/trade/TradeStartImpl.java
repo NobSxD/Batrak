@@ -1,7 +1,8 @@
 package org.example.command.menuMain.trade;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class TradeStartImpl implements Command {
-	private static final Logger logger = Logger.getLogger(TradeStartImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(TradeStartImpl.class);
 	private final ProcessServiceCommand processServiceCommand;
 	private final NodeUserDAO nodeUserDAO;
 	@Override

@@ -1,7 +1,8 @@
 package org.example.strategy.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.dao.NodeOrdersDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.dao.StatisticsTradeDAO;
@@ -22,7 +23,7 @@ public class PredictionsOfEvents implements StrategyTrade {
 	private final NodeOrdersDAO ordersDAO;
 	private final StatisticsTradeDAO statisticsTradeDAO;
 
-	private static final Logger logger = Logger.getLogger(PredictionsOfEvents.class);
+	private static final Logger logger = LoggerFactory.getLogger(PredictionsOfEvents.class);
 	@Override
 	public String trade(NodeUser nodeUser, BasicChangeInterface basicChange) {
 

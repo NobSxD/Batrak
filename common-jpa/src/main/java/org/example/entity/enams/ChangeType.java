@@ -2,8 +2,9 @@ package org.example.entity.enams;
 
 public enum ChangeType {
     Binance("binance"),
-    Baibit("baibit"),
-    Mex("mexc");
+    Bybit("bybit"),
+    Mexc("mexc"),
+    Test("test");
 
 
 

@@ -5,7 +5,7 @@ import lombok.*;
 import org.example.entity.collect.Pair;
 import org.example.entity.enams.ChangeType;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
@@ -26,6 +26,7 @@ public class NodeChange {
 
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "change_type", nullable = false)
 	private ChangeType changeType;
 
 	public void addPair(Pair pair) {

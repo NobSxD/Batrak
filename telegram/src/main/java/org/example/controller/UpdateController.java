@@ -2,7 +2,8 @@ package org.example.controller;
 
 import org.example.service.UpdateProducer;
 import org.example.utils.MessageUtils;
-import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -10,8 +11,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import static org.example.model.RabbitQueue.TEXT_MESSAGE_UPDATE;
 
 @Component
-@Log4j2
 public class UpdateController {
+    private final Logger logger = LoggerFactory.getLogger(UpdateController.class);
     private TelegramBot telegramBot;
     private final MessageUtils messageUtils;
     private final UpdateProducer updateProducer;
@@ -27,7 +28,7 @@ public class UpdateController {
 
     public void processUpdate(Update update){
         if (update == null){
-            log.error("Received update is null");
+            logger.error("Received update is null");
             return;
         }
         distributeMessagesByType(update);

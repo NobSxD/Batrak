@@ -1,7 +1,8 @@
 package org.example.command.menuMain.SerringsTrade;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.dao.SettingsTradeDAO;
@@ -17,7 +18,7 @@ public class NameStrategy implements Command {
 	private final ProcessServiceCommand processServiceCommand;
 	private final NodeUserDAO nodeUserDAO;
 	private final SettingsTradeDAO settingsTradeDAO;
-	private final static Logger logger = Logger.getLogger(NameStrategy.class);
+	private final static Logger logger = LoggerFactory.getLogger(NameStrategy.class);
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		nodeUser.setState(UserState.SETTINGS_SAVE_NAME_STRATEGY);

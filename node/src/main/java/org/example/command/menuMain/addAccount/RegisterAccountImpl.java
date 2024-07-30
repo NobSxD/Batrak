@@ -1,5 +1,6 @@
 package org.example.command.menuMain.addAccount;
 
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -8,8 +9,6 @@ import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
 
 import static org.example.entity.enams.UserState.ACCOUNT_ADD_NAME;
 

@@ -2,10 +2,10 @@ package org.example.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.entity.enams.ChangeType;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 

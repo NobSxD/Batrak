@@ -3,7 +3,8 @@ package org.example.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.entity.NodeUser;
 import org.example.service.MainServiceTradeBot;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -15,7 +16,7 @@ import static org.example.model.RabbitQueue.TRADE_MESSAGE;
 @Service
 @RequiredArgsConstructor
 public class ConsumerServiceImpl {
-    private final Logger logger = Logger.getLogger(ConsumerServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(ConsumerServiceImpl.class);
     private final MainServiceTradeBot mainServiceTradeBot;
     private final ObjectMapper objectMapper;
 

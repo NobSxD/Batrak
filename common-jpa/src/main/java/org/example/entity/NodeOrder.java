@@ -5,7 +5,7 @@ import lombok.*;
 import org.example.entity.enams.OrderType;
 import org.example.entity.enams.StrategyEnams;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

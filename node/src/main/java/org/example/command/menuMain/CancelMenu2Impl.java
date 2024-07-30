@@ -1,7 +1,8 @@
 package org.example.command.menuMain;
 
 import lombok.Data;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
@@ -14,7 +15,7 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 @Component
 @Data
 public class CancelMenu2Impl implements Command {
-	private final Logger logger = Logger.getLogger(CancelMenu2Impl.class);
+	private final Logger logger = LoggerFactory.getLogger(CancelMenu2Impl.class);
 	private final NodeUserDAO nodeUserDAO;
 	@Override
 	public String send(NodeUser nodeUser , String text) {

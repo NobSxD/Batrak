@@ -1,7 +1,6 @@
 package org.example.xchange;
 
 import lombok.ToString;
-import org.apache.log4j.Logger;
 import org.example.xchange.DTO.LimitOrderMain;
 import org.example.xchange.DTO.OrderMain;
 import org.example.xchange.finance.CurrencyConverter;
@@ -9,7 +8,6 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.account.AccountInfo;
-import org.knowm.xchange.dto.account.Wallet;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.dto.trade.MarketOrder;
@@ -18,17 +16,22 @@ import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchange.service.trade.TradeService;
 import org.knowm.xchange.service.trade.params.CancelOrderParams;
 import org.knowm.xchange.service.trade.params.DefaultCancelOrderByInstrumentAndIdParams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @ToString
 public abstract class BasicChange implements BasicChangeInterface, Serializable {
-	private static final Logger logger = Logger.getLogger(BasicChange.class);
+	private static final Logger logger = LoggerFactory.getLogger(BasicChange.class);
 
 	protected Exchange exchange;
 
@@ -37,7 +40,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		BigDecimal usdt = CurrencyConverter.convertCurrency(price, summa);
 		String orderId = "";
 		TradeService tradeService = exchange.getTradeService();
-		LimitOrder limitOrder =  new LimitOrder(orderType, usdt, currencyPair, "", new Date(), price);
+		LimitOrder limitOrder = new LimitOrder(orderType, usdt, currencyPair, "", new Date(), price);
 
 		try {
 			orderId = tradeService.placeLimitOrder(limitOrder);
@@ -49,11 +52,11 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		return orderId;
 	}
 
-	public LimitOrderMain placeLimitOrder(LimitOrder limitOrder, boolean trade){ //если false то мы не отпровляем ордер на биржу
+	public LimitOrderMain placeLimitOrder(LimitOrder limitOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
 		try {
 			TradeService tradeService = exchange.getTradeService();
-			String orderId =  "";
-			if (trade){
+			String orderId = "";
+			if (trade) {
 				orderId = tradeService.placeLimitOrder(limitOrder);
 			}
 			OrderMain order = OrderMain.builder()
@@ -64,7 +67,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 					.fee(limitOrder.getFee())
 					.instrument(limitOrder.getInstrument())
 					.id(orderId)
-					.timestamp(limitOrder.getTimestamp())
+					.timestamp(convertDateToLocalDateTime(limitOrder.getTimestamp()))
 					.status(limitOrder.getStatus())
 					.userReference(limitOrder.getUserReference())
 					.build();
@@ -82,11 +85,11 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		}
 	}
 
-	public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType){
+	public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType) {
 		return new LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
 	}
 
-	public List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders){
+	public List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders) {
 		List<LimitOrder> limitOrders = new ArrayList<>();
 		for (List<BigDecimal> ask : orders) {
 			checkArgument(
@@ -97,12 +100,12 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 	}
 
 	public void checkArgument(boolean argument, String msgPattern, Object... msgArgs) {
-		if (!argument) {
+		if (! argument) {
 			throw new IllegalArgumentException(MessageFormat.format(msgPattern, msgArgs));
 		}
 	}
 
-	public String marketOrder( Order.OrderType orderType, BigDecimal summa, CurrencyPair currencyPair) {
+	public String marketOrder(Order.OrderType orderType, BigDecimal summa, CurrencyPair currencyPair) {
 		String orderId = "";
 		TradeService tradeService = exchange.getTradeService();
 
@@ -130,14 +133,14 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 
 			// Вывод информации о стакане ордеров
 			System.out.println(orderBook.toString());
-		} catch (Exception e){
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return orderBook;
 	}
 
 
-	public void cancelOrder(String namePair, String idOrder){
+	public void cancelOrder(String namePair, String idOrder) {
 		try {
 			Instrument instrument = new CurrencyPair(namePair);
 			CancelOrderParams cancelOrderParams = new DefaultCancelOrderByInstrumentAndIdParams(instrument, idOrder);
@@ -149,7 +152,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 
 	}
 
-	public String accountInfo(){
+	public String accountInfo() {
 		try {
 			AccountInfo accountInfo = exchange.getAccountService().getAccountInfo();
 			return accountInfo.toString();
@@ -159,7 +162,9 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		}
 	}
 
-	public abstract Wallet balances();
-
-
+	public static LocalDateTime convertDateToLocalDateTime(Date date) {
+		return Instant.ofEpochMilli(date.getTime())
+				.atZone(ZoneId.systemDefault())
+				.toLocalDateTime();
+	}
 }

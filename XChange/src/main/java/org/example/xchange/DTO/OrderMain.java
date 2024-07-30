@@ -13,7 +13,7 @@ import org.knowm.xchange.instrument.Instrument;
 
 import javax.annotation.Generated;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +59,7 @@ public final class OrderMain {
 	private String id;
 
 	@JsonProperty("timestamp")
-	private Date timestamp;
+	private LocalDateTime timestamp;
 
 	@JsonProperty("status")
 	private Object status;
@@ -72,6 +72,7 @@ public final class OrderMain {
 
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+
 
 
 }

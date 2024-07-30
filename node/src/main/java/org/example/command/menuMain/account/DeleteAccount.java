@@ -1,7 +1,8 @@
 package org.example.command.menuMain.account;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
@@ -17,7 +18,7 @@ public class DeleteAccount implements Command {
 	private final NodeAccount nodeAccount;
 	private final ProcessServiceCommand processServiceCommand;
 	private final NodeUserDAO nodeUserDAO;
-	private final Logger logger = Logger.getLogger(DeleteAccount.class);
+	private final Logger logger = LoggerFactory.getLogger(DeleteAccount.class);
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {

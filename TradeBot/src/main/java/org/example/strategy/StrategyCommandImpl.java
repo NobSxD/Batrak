@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class StrategyCommandImpl implements StrategyCommand{
 
+
 	private final Map<StrategyEnams, StrategyTrade> stateMap;
 
 

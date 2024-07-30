@@ -30,16 +30,13 @@ public class BinanceMainImpl extends BasicChange {
 	}
 
 
-	@Override
 	//TODO сделать вывод информации о балансе
 	public Wallet balances() {
 		try {
 			AccountInfo accountInfo = exchange.getAccountService().getAccountInfo();
-		//	Wallet wallet = BinanceAdapters.adaptBinanceSpotWallet(accountInfo.getWallet());
+			return accountInfo.getWallet();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-
-		return null;
 	}
 }

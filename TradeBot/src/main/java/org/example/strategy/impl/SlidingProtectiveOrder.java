@@ -1,7 +1,6 @@
 package org.example.strategy.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
 import org.example.dao.NodeOrdersDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.dao.StatisticsTradeDAO;
@@ -24,22 +23,21 @@ import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.exceptions.FundsExceededException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 @Component
 @RequiredArgsConstructor
 public class SlidingProtectiveOrder implements StrategyTrade {
-	private static final Logger logger = Logger.getLogger(SlidingProtectiveOrder.class);
+	private static final Logger logger = LoggerFactory.getLogger(SlidingProtectiveOrder.class);
 	//private BasicChangeInterface basicChange;
 	private final ProcessServiceCommand producerServiceExchange;
 	private final NodeUserDAO nodeUserDAO;
@@ -158,12 +156,10 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 			orderType = OrderType.ASKS;
 		}
 
-		LocalDateTime date = null;
+		LocalDateTime date;
 		if (limitOrderMain.getOrderMain().getTimestamp() != null){
-			Date createDate = limitOrderMain.getOrderMain().getTimestamp();
-			Instant.ofEpochMilli(createDate.getTime())
-					.atZone(ZoneId.systemDefault())
-					.toLocalDateTime();
+			date = limitOrderMain.getOrderMain().getTimestamp();
+
 		}else {
 			date = LocalDateTime.now();
 		}

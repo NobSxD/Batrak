@@ -1,21 +1,31 @@
-currency-binance:
-  pairs:
-    - "BTC-USDT"
-    - "BNB-USDT"
-    - "TRX-USDT"
-    - "ETH-USDT"
-    - "NOT-USDT"
-currency-baybit:
-  pairs:
-    - "BTC-USDT"
-    - "BNB-USDT"
-    - "TRX-USDT"
-    - "ETH-USDT"
-    - "NOT-USDT"
-currency-mexc:
-  pairs:
-    - "BTC-USDT"
-    - "BNB-USDT"
-    - "TRX-USDT"
-    - "ETH-USDT"
-    - "NOT-USDT"
+currency:
+  exchanges:
+    binance:
+      type: "binance"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"
+        - "TRX-USDT"
+        - "ETH-USDT"
+        - "NOT-USDT"
+    bybit:
+      type: "bybit"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"
+        - "TRX-USDT"
+        - "ETH-USDT"
+        - "NOT-USDT"
+    mexc:
+      type: "mexc"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"
+        - "TRX-USDT"
+        - "ETH-USDT"
+        - "NOT-USDT"
+    test:
+      type: "test"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"

@@ -1,19 +1,15 @@
 package org.example.service.impl;
 
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.example.command.CommandService;
-import org.example.entity.RawData;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
 import org.example.service.MainService;
+import org.example.service.ProcessServiceCommand;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import javax.transaction.Transactional;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Map;
 
 
@@ -31,7 +27,6 @@ public class MainServiceImpl implements MainService {
 		String text = "";
 		long chatId = 0;
 
-		saveRawData(update);
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
 		//TODO на будующие, для активации пользователя
 		if (nodeUser.getIsActive()){
@@ -57,32 +52,6 @@ public class MainServiceImpl implements MainService {
 		processServiceCommand.sendAnswer(send, chatId);
 
 	}
-
-
-
-	@SneakyThrows
-	private void saveRawData(Update update) {
-		File file = new File("D:/project/new/treadeBot/node/src/main/resources/log/");
-		file.mkdirs();
-
-		File raw = new File(file, "rawData.txt");
-
-
-		if (! raw.exists()) {
-			raw.createNewFile();
-		}
-		FileOutputStream fileOutputStream = new FileOutputStream(raw, true);
-		RawData rawData = RawData.builder().event(update).build();
-		String rawDataString = rawData.toString() + "\n";
-		fileOutputStream.write(rawDataString.getBytes());
-		fileOutputStream.close();
-
-
-	}
-
-
-
-
 
 
 

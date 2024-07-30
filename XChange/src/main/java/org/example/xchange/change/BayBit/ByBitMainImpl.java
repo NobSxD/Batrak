@@ -19,7 +19,7 @@ public class ByBitMainImpl extends BasicChange {
 		this.exchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
 	}
 
-	@Override
+
 	public Wallet balances() {
 		return null;
 	}

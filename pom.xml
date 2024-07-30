@@ -15,7 +15,6 @@
         <module>common-rabbitmq</module>
         <module>XChange</module>
         <module>common-jpa</module>
-        <module>common-mapper</module>
         <module>common-crypt</module>
     </modules>
     <properties>
@@ -36,34 +35,21 @@
         <version.crypto>5.0.0</version.crypto>
         <version.java-jwt>4.4.0</version.java-jwt>
         <version.wiremock>3.2.0</version.wiremock>
-        <telegrambot.starter.version>6.7.0</telegrambot.starter.version>
+        <telegrambot.starter.version>6.9.7.1</telegrambot.starter.version>
         <version.mysql>8.0.29</version.mysql>
         <skipIntegrationTests>true</skipIntegrationTests>
         <version-SNAPSHOT>5.1.2-SNAPSHOT</version-SNAPSHOT>
         <version.knowm.xchart>3.8.7</version.knowm.xchart>
         <hashids.version>1.0.1</hashids.version>
+        <jakarta-bind.api.version>3.0.1</jakarta-bind.api.version>
+        <jaxb-api.version>2.3.0</jaxb-api.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.12</version>
+        <version>3.3.0</version>
     </parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${version.lombok}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-
-    </dependencies>
 
 
     <build>

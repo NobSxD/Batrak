@@ -6,20 +6,30 @@
         <artifactId>treadeBot</artifactId>
         <version>5.1.2-SNAPSHOT</version>
     </parent>
-    <groupId>org.example</groupId>
     <artifactId>telegram</artifactId>
     <name>telegram</name>
-    <url>http://maven.apache.org</url>
     <dependencies>
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
 
     <dependency>
         <groupId>org.telegram</groupId>
         <artifactId>telegrambots-spring-boot-starter</artifactId>
         <version>${telegrambot.starter.version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
 
     <dependency>

@@ -3,7 +3,8 @@ package org.example.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
 import org.example.entity.collect.Pair;
@@ -31,7 +32,7 @@ public class ProducerServiceImpl implements ProducerService {
 	private final RabbitTemplate rabbitTemplate;
 	private final ObjectMapper objectMapper;
 
-	private final Logger logger = Logger.getLogger(ProducerServiceImpl.class);
+	private final Logger logger = LoggerFactory.getLogger(ProducerServiceImpl.class);
 
 	@Override
 	public void producerAnswer(SendMessage sendMessage) {

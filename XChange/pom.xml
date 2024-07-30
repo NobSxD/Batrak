@@ -22,9 +22,15 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -38,10 +44,10 @@
             <version>5.1.2-SNAPSHOT</version>
         </dependency>
 
+
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.21.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -68,11 +74,6 @@
             <version>${change.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.knowm.xchart</groupId>
-            <artifactId>xchart</artifactId>
-            <version>${version.knowm.xchart}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.knowm.xchange</groupId>
@@ -84,8 +85,5 @@
             <artifactId>xchange-stream-core</artifactId>
             <version>${change.version}</version>
         </dependency>
-
     </dependencies>
-
-
 </project>
