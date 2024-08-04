@@ -1,11 +1,11 @@
 package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.entity.enams.OrderType;
 import org.example.entity.enams.StrategyEnams;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NodeOrder {
+public class NodeOrder{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id", nullable = false)
@@ -37,7 +37,6 @@ public class NodeOrder {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference
 	private NodeUser nodeUser;
-
 
 
 }

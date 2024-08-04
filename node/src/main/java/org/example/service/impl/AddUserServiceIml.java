@@ -22,7 +22,7 @@ public class AddUserServiceIml implements AddUserService {
     private String registrationMailQueue;
 
     @Override
-    public String registerUser(NodeUser nodeUser) {
+    public String  registerUser(NodeUser nodeUser) {
         if (nodeUser.getIsActive()) {
             return "Вы уже зарегистрированы!";
         } else if (nodeUser.getEmail() != null) {

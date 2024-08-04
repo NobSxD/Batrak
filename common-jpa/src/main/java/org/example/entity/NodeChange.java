@@ -2,6 +2,7 @@ package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.example.castom.Displayable;
 import org.example.entity.collect.Pair;
 import org.example.entity.enams.ChangeType;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NodeChange {
+public class NodeChange implements Displayable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id", nullable = false)
@@ -32,5 +33,10 @@ public class NodeChange {
 	public void addPair(Pair pair) {
 		pairs.add(pair);
 		pair.setNodeChange(this);
+	}
+
+	@Override
+	public String getDisplayName() {
+		return changeType.name();
 	}
 }

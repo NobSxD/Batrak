@@ -1,28 +1,28 @@
 package org.example.command.menuMain.SerringsTrade;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.dao.SettingsTradeDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.StrategyEnams;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class NameStrategy implements Command {
-	private final ProcessServiceCommand processServiceCommand;
+	private final ProducerTelegramService producerTelegramService;
 	private final NodeUserDAO nodeUserDAO;
 	private final SettingsTradeDAO settingsTradeDAO;
 	private final static Logger logger = LoggerFactory.getLogger(NameStrategy.class);
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		nodeUser.setState(UserState.SETTINGS_SAVE_NAME_STRATEGY);
-		processServiceCommand.listStrategy("Выберите тарговую стратегию", nodeUser.getChatId());
+		producerTelegramService.strategyMenu("Выберите тарговую стратегию", nodeUser.getChatId());
 		nodeUserDAO.save(nodeUser);
 		return "";
 	}
@@ -40,7 +40,7 @@ public class NameStrategy implements Command {
 
 				StrategyEnams strategyEnams = StrategyEnams.fromValue(text);
 				nodeUser.getConfigTrade().setStrategy(strategyEnams);
-				processServiceCommand.menu3TradeSettings("Выбирети далейшие настройки", nodeUser.getChatId());
+				producerTelegramService.settingUpTrading("Выбирети далейшие настройки", nodeUser.getChatId());
 				settingsTradeDAO.save(nodeUser.getConfigTrade());
 				nodeUserDAO.save(nodeUser);
 				return "";

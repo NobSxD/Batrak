@@ -24,8 +24,15 @@ public class RabbitConfiguration {
         return new Queue(ANSWER_MESSAGE);
     }
     @Bean
-    public Queue textButtonQueue(){return new Queue(TEXT_BUTTON);}
+    public Queue listCustomMessage(){return new Queue(LIST_CUSTOM_MESSAGE);}
+    @Bean
+    public Queue EnumCustomMessage(){return new Queue(ENUM_CUSTOM_MESSAGE);}
     @Bean
     public Queue tradeStart(){return new Queue(TRADE_MESSAGE);}
+
+    @Bean Queue rate(){return new Queue(RATE);}
+
+
+
     
 }

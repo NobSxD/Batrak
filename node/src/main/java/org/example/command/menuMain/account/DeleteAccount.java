@@ -1,22 +1,22 @@
 package org.example.command.menuMain.account;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
 import org.example.entity.Account;
+import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class DeleteAccount implements Command {
 	private final NodeAccount nodeAccount;
-	private final ProcessServiceCommand processServiceCommand;
+	private final ProducerTelegramService producerTelegramService;
 	private final NodeUserDAO nodeUserDAO;
 	private final Logger logger = LoggerFactory.getLogger(DeleteAccount.class);
 	@Override
@@ -28,7 +28,7 @@ public class DeleteAccount implements Command {
 				nodeUser.setAccount(null);
 				nodeUserDAO.save(nodeUser);
 			}
-			processServiceCommand.menu2Selection(account.getNameAccount() + " данный аккаунт был удален ", nodeUser.getChatId());
+			producerTelegramService.mainMenu(account.getNameAccount() + " данный аккаунт был удален ", nodeUser.getChatId());
 			return "";
 		} catch (NullPointerException e){
 			logger.error(e.getMessage() + "аккаунт пользователя под id " + nodeUser.getChatId() + " не найден. Аккаунт имя " + text);

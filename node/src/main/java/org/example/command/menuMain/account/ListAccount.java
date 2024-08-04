@@ -1,15 +1,15 @@
 package org.example.command.menuMain.account;
 
 import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.example.change.account.NodeAccount;
 import org.example.command.Command;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 public class ListAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
-	private final ProcessServiceCommand processServiceCommand;
+	private final ProducerTelegramService producerTelegramService;
 	private final NodeAccount nodeAccount;
 	private static final Logger logger = LoggerFactory.getLogger(ListAccount.class);
 
@@ -27,10 +27,10 @@ public class ListAccount implements Command {
 		try {
 			List<Account> accounts = nodeAccount.getAccounts(nodeUser);
 			if (accounts.isEmpty()){
-				processServiceCommand.menu2Selection("У вас нет аккаунта для выбора, сначало добавте аккаунт:", nodeUser.getChatId());
+				producerTelegramService.mainMenu("У вас нет аккаунта для выбора, сначало добавте аккаунт:", nodeUser.getChatId());
 				return "";
 			}
-			processServiceCommand.listAccount(accounts, "Выберите аккаунт", nodeUser.getChatId());
+			producerTelegramService.accountsMenu(accounts, "Выберите аккаунт", nodeUser.getChatId());
 			if (text.equals("Удаление аккаунта")){
 				nodeUser.setState(UserState.ACCOUNT_DELETE);
 			} else {

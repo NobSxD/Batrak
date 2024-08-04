@@ -7,6 +7,7 @@ import org.example.command.CommandService;
 import org.example.entity.enams.UserState;
 import org.example.service.MainService;
 import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 public class MainServiceImpl implements MainService {
 
 	private final ProcessServiceCommand processServiceCommand;
+	private final ProducerTelegramService producerTelegramService;
 	private final CommandService commandService;
 	private final Map<String, UserState> buttonRegistration;
 
@@ -30,7 +32,7 @@ public class MainServiceImpl implements MainService {
 		var nodeUser = processServiceCommand.findOrSaveAppUser(update);
 		//TODO на будующие, для активации пользователя
 		if (nodeUser.getIsActive()){
-			processServiceCommand.sendAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
+			producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
 			return;
 		}
 
@@ -49,8 +51,9 @@ public class MainServiceImpl implements MainService {
 		}
         nodeUser.setChatId(chatId);
 		String send = commandService.send(nodeUser, text);
-		processServiceCommand.sendAnswer(send, chatId);
-
+		if (!send.equals("")) {
+			producerTelegramService.producerAnswer(send, chatId);
+		}
 	}
 
 

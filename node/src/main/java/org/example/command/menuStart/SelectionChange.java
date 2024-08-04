@@ -6,7 +6,7 @@ import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
 import org.springframework.stereotype.Component;
 
 import static org.example.entity.enams.UserState.BASIC_STATE;
@@ -15,7 +15,7 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 @Component
 @RequiredArgsConstructor
 public class SelectionChange implements Command {
-	private final ProcessServiceCommand processServiceCommand;
+	private final ProducerTelegramService producerTelegramService;
 	private final NodeUserDAO nodeUserDAO;
 
 
@@ -26,7 +26,7 @@ public class SelectionChange implements Command {
 			nodeUser.setChangeType(type);
 			nodeUser.setState(BASIC_STATE);
 			nodeUserDAO.save(nodeUser);
-			processServiceCommand.menu2Selection(nameChange, nodeUser.getChatId());
+			producerTelegramService.mainMenu(nameChange, nodeUser.getChatId());
 			return "";
 		} catch (NullPointerException e){
 			return "Объект не найден";

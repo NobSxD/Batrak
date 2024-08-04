@@ -6,7 +6,7 @@ import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class AmountOrderTestMain {
 	@Mock
 	private SettingsTradeDAO settingsTradeDAO;
 	@Mock
-	private ProcessServiceCommand processServiceCommand;
+	private ProducerTelegramService processServiceCommand;
 	@BeforeEach
 	void newSaveAmountOrder(){
 		amountOrder = new AmountOrder(nodeUserDAO, settingsTradeDAO, processServiceCommand);

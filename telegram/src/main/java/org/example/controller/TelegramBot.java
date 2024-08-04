@@ -22,11 +22,12 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Value("${api.key}")
     private String key;
 
-    private UpdateController updateController;
+    private final UpdateController updateController;
 
-    public TelegramBot(UpdateController updateController){
+    public TelegramBot(UpdateController updateController) {
         this.updateController = updateController;
     }
+
 
     @PostConstruct
     public void init(){

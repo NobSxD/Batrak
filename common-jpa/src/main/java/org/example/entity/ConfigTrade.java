@@ -3,6 +3,7 @@ package org.example.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.castom.Displayable;
 import org.example.entity.enams.StrategyEnams;
 
 import jakarta.persistence.*;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-public class ConfigTrade  {
+public class ConfigTrade  implements Displayable {
 
 
 	@Id
@@ -32,4 +33,8 @@ public class ConfigTrade  {
 	@JsonBackReference
 	private NodeUser nodeUser;
 
+	@Override
+	public String getDisplayName() {
+		return namePair;
+	}
 }

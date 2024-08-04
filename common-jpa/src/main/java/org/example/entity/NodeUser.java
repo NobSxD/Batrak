@@ -2,13 +2,13 @@ package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.entity.enams.ChangeType;
 import org.example.entity.enams.TradeState;
 import org.example.entity.enams.UserState;
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 

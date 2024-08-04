@@ -35,6 +35,11 @@
         </dependency>
         <dependency>
             <groupId>org.example</groupId>
+            <artifactId>common-jpa</artifactId>
+            <version>${version-SNAPSHOT}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.example</groupId>
             <artifactId>common-rabbitmq</artifactId>
             <version>${version-SNAPSHOT}</version>
         </dependency>
@@ -68,6 +73,18 @@
             <artifactId>lombok</artifactId>
             <version>${version.lombok}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-spring-boot-starter</artifactId>
+            <version>${telegrambot.starter.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

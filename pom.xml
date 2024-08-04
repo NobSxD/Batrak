@@ -16,6 +16,7 @@
         <module>XChange</module>
         <module>common-jpa</module>
         <module>common-crypt</module>
+        <module>XChangeBinance</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -43,13 +44,15 @@
         <hashids.version>1.0.1</hashids.version>
         <jakarta-bind.api.version>3.0.1</jakarta-bind.api.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <telegrambots.version>7.2.0</telegrambots.version>
+        <mySql.version>9.0.0</mySql.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.0</version>
     </parent>
-
 
 
     <build>
@@ -68,11 +71,6 @@
                 </dependencies>
             </plugin>
 
-            <!-- Дополнительный Maven проектный инфо отчетный плагин -->
-            <plugin>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.8</version>
-            </plugin>
         </plugins>
     </build>
 

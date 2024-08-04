@@ -4,16 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.example.command.Command;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class MainMenu implements Command {
-	private final ProcessServiceCommand processServiceCommand;
+	private final ProducerTelegramService producerTelegramService;
 	@Override
 	public String send(NodeUser nodeUser, String text) {
-		processServiceCommand.menu2Selection( "Вы в главном меню",nodeUser.getChatId());
+		producerTelegramService.mainMenu( "Вы в главном меню",nodeUser.getChatId());
 		return "";
 	}
 

@@ -1,10 +1,10 @@
 package org.example.entity.collect;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
-import org.example.entity.NodeChange;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
+import org.example.castom.Displayable;
+import org.example.entity.NodeChange;
 
 @Entity
 @Getter
@@ -12,7 +12,7 @@ import jakarta.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pair {
+public class Pair implements Displayable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id", nullable = false)
@@ -22,10 +22,15 @@ public class Pair {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "node_change_id")
-	@JsonBackReference
+	@JsonIgnore
 	private NodeChange nodeChange;
 
 	public Pair(String pair) {
 		this.pair = pair;
+	}
+
+	@Override
+	public String getDisplayName() {
+		return pair;
 	}
 }

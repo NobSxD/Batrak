@@ -4,6 +4,7 @@ package org.example.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.castom.Displayable;
 import org.example.entity.enams.ChangeType;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public  class Account{
+public  class Account implements Displayable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	protected long id;
@@ -32,4 +33,8 @@ public  class Account{
 	@JsonBackReference("nodeUser-account")
 	private NodeUser nodeUser;
 
+	@Override
+	public String getDisplayName() {
+		return nameAccount;
+	}
 }

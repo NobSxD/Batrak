@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerService;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 
 @Component
@@ -13,10 +14,10 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 
 	@Override
 	public void sendAnswer(String output, Long chatId) {
-		//int sendMessage = null; //new SendMessage();
-		//sendMessage.setChatId(chatId);
-		//sendMessage.setText(output);
-		//producerService.producerAnswer(sendMessage);
+		SendMessage sendMessage = new SendMessage();
+		sendMessage.setChatId(chatId);
+		sendMessage.setText(output);
+		producerService.producerAnswer(sendMessage);
 	}
 
 

@@ -8,7 +8,7 @@ import org.example.dao.NodeUserDAO;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.UserState;
-import org.example.service.ProcessServiceCommand;
+import org.example.service.ProducerTelegramService;
 import org.springframework.stereotype.Component;
 
 import static org.example.entity.enams.UserState.ACCOUNT_ADD_NAME;
@@ -19,7 +19,7 @@ import static org.example.entity.enams.UserState.BASIC_STATE;
 public class SecretKeyAccount implements Command {
 	private final NodeUserDAO nodeUserDAO;
 	private final NodeAccount nodeAccountDAO;
-	private final ProcessServiceCommand processServiceCommand;
+	private final ProducerTelegramService producerTelegramService;
 
 
 	@Override
@@ -44,7 +44,7 @@ public class SecretKeyAccount implements Command {
 			nodeAccountDAO.saveAccount(changeAccount, nodeUser);
 			nodeUserDAO.save(nodeUser);
 
-			processServiceCommand.menu2Selection("Вы успешго добавили аккаунт - " + changeAccount.getNameAccount(), nodeUser.getChatId());
+			producerTelegramService.mainMenu("Вы успешго добавили аккаунт - " + changeAccount.getNameAccount(), nodeUser.getChatId());
 			return "";
 
 		} catch (Exception e) {
