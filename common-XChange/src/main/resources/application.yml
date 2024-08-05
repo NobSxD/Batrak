@@ -1,0 +1,30 @@
+currency:
+  exchanges:
+    binance:
+      type: "binance"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"
+        - "TRX-USDT"
+        - "ETH-USDT"
+    bybit:
+      type: "bybit"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"
+        - "TRX-USDT"
+        - "ETH-USDT"
+        - "NOT-USDT"
+    mexc:
+      type: "mexc"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"
+        - "TRX-USDT"
+        - "ETH-USDT"
+        - "NOT-USDT"
+    test:
+      type: "test"
+      pairs:
+        - "BTC-USDT"
+        - "BNB-USDT"

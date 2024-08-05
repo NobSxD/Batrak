@@ -10,13 +10,13 @@
     <name>treadeBot</name>
     <description>treadeBot</description>
     <modules>
-        <module>telegram</module>
-        <module>node</module>
+        <module>services-telegram</module>
+        <module>services-node</module>
+        <module>services-trade</module>
         <module>common-rabbitmq</module>
-        <module>XChange</module>
+        <module>common-XChange</module>
         <module>common-jpa</module>
         <module>common-crypt</module>
-        <module>XChangeBinance</module>
     </modules>
     <properties>
         <java.version>17</java.version>
