@@ -28,8 +28,9 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 	public String helpAccount() {
 		return """
 				Выбирите действие:
-				/infoBalance - информация о балансе;
-				/pair - выбор пары;
+				/start - выбор биржи 
+				/main - вызвать главное меню
+				/info_settings - посмотреть текущие настройки
 				/cancel - отмена выполнения текущей команды;
 				""";
 

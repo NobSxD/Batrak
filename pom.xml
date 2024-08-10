@@ -47,13 +47,13 @@
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <telegrambots.version>7.2.0</telegrambots.version>
         <mySql.version>9.0.0</mySql.version>
+        <version.fasterxml>2.14.3</version.fasterxml>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.0</version>
     </parent>
-
 
     <build>
         <plugins>

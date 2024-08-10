@@ -1,7 +1,7 @@
 package org.example.strategy.impl.helper;
 
+import org.example.entity.NodeOrder;
 import org.example.websocet.WebSocketCommand;
-import org.example.xchange.DTO.LimitOrderMain;
 import org.knowm.xchange.dto.Order;
 
 import java.math.BigDecimal;
@@ -27,11 +27,11 @@ public class CurrencyRateProcessor {
 				"_Статус: исполнен_";
 	}
 
-	public static void subscribeToCurrencyRate(LimitOrderMain limitOrderMain, CountDownLatch latch, WebSocketCommand subject) {
-		if (limitOrderMain.getOrderMain().getType().equals(Order.OrderType.BID)){
+	public static void subscribeToCurrencyRate(NodeOrder limitOrderMain, CountDownLatch latch, WebSocketCommand subject) {
+		if (limitOrderMain.getType().equals(Order.OrderType.BID.toString())){
 			subject.getCurrencyRateStream()
 					.filter(rate -> rate.getLimitPrice().compareTo(limitOrderMain.getLimitPrice()) < 0)
-					.filter(pair -> pair.getOrderMain().getInstrument().equals(limitOrderMain.getOrderMain().getInstrument()))
+					.filter(pair -> pair.getInstrument().equals(limitOrderMain.getInstrument()))
 					.firstElement()
 					.subscribe(
 							rate -> {
@@ -45,10 +45,10 @@ public class CurrencyRateProcessor {
 							});
 			return;
 		}
-		if (limitOrderMain.getOrderMain().getType().equals(Order.OrderType.ASK)) {
+		if (limitOrderMain.getType().equals(Order.OrderType.ASK.toString())) {
 			subject.getCurrencyRateStream()
 					.filter(rate -> rate.getLimitPrice().compareTo(limitOrderMain.getLimitPrice()) > 0)
-					.filter(pair -> pair.getOrderMain().getInstrument().equals(limitOrderMain.getOrderMain().getInstrument()))
+					.filter(pair -> pair.getInstrument().equals(limitOrderMain.getInstrument()))
 					.firstElement()
 					.subscribe(
 							rate -> {
@@ -63,6 +63,7 @@ public class CurrencyRateProcessor {
 		}else {
 			subject.getCurrencyRateStream()
 					.filter(rate -> rate.getLimitPrice().compareTo(limitOrderMain.getLimitPrice()) == 0)
+					.filter(pair -> pair.getInstrument().equals(limitOrderMain.getInstrument()))
 					.firstElement()
 					.subscribe(
 							rate -> {

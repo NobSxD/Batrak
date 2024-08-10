@@ -15,6 +15,7 @@ public enum UserState {
 	BOT_HELP,
 	BOT_BACK,
 	BOT_MAIN_MENU,
+	INFO_SETTINGS,
 
 	//--------------- акаунт
 	ACCOUNT_LIST,

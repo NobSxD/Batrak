@@ -2,9 +2,6 @@ package org.example.xchange.Binance.trede;
 
 
 import org.exampel.crypto.CryptoUtils;
-import org.example.entity.Account;
-import org.example.entity.ConfigTrade;
-import org.example.entity.NodeUser;
 import org.example.xchange.DTO.ChangeUser;
 import org.example.xchange.change.Binance.BinanceMainImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,27 +25,18 @@ import java.math.BigDecimal;
 
 class BinanceMainImpIntegratio {
 
-	NodeUser nodeUser;
-	Account account;
+
 	ChangeUser changeUser;
+
+
 
 	@BeforeEach
 	void setAp(){
-
-		nodeUser = new NodeUser();
-		account = new Account();
-		ConfigTrade configTrade = new ConfigTrade();
 		CryptoUtils cryptoUtils = new CryptoUtils();
-		account.setNameAccount("Bot");
-		account.setPublicApiKey(cryptoUtils.encryptMessage(System.getenv("pKey")));
-		account.setSecretApiKey(cryptoUtils.encryptMessage(System.getenv("sKey")));
-		nodeUser.setConfigTrade(configTrade);
-		nodeUser.setAccount(account);
 		changeUser = ChangeUser.builder()
-				.userName(nodeUser.getUsername())
-				.apiKey(nodeUser.getAccount().getPublicApiKey())
-				.secretKey(nodeUser.getAccount().getSecretApiKey())
-				.botName(nodeUser.getAccount().getNameAccount())
+				.botName("Bot")
+				.apiKey(cryptoUtils.encryptMessage(System.getenv("pKey")))
+				.secretKey(cryptoUtils.encryptMessage(System.getenv("sKey")))
 				.build();
 
 	}
@@ -106,12 +94,6 @@ class BinanceMainImpIntegratio {
 
 	@Test
 	void orderBokAsks(){
-		ChangeUser changeUser = ChangeUser.builder()
-				.userName(nodeUser.getUsername())
-				.apiKey(nodeUser.getAccount().getPublicApiKey())
-				.secretKey(nodeUser.getAccount().getSecretApiKey())
-				.botName(nodeUser.getAccount().getNameAccount())
-				.build();
 		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
 		OrderBook orderBook = binanceMain.orderBooksLimitOrders(25, changeUser.getPairName());
 		orderBook.getAsks();

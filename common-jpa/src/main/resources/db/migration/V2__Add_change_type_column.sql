@@ -1,1 +1,0 @@
-ALTER TABLE account  MODIFY COLUMN change_type ENUM('old_value1', 'old_value2', 'binance', 'bybit', 'mexc');

@@ -25,6 +25,7 @@ public class ConfigTrade  implements Displayable {
 	private BigDecimal amountOrder = new BigDecimal(11);
 
 	private int depthGlass = 100;
+	private boolean realTrade = true;
 
 	@Enumerated(EnumType.STRING)
 	private StrategyEnams strategy = StrategyEnams.SlidingProtectiveOrder;

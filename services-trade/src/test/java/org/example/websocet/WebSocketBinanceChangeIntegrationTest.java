@@ -8,8 +8,8 @@ import io.reactivex.rxjava3.observers.TestObserver;
 import org.exampel.crypto.CryptoUtils;
 import org.example.entity.Account;
 import org.example.entity.ConfigTrade;
+import org.example.entity.NodeOrder;
 import org.example.entity.NodeUser;
-import org.example.xchange.DTO.LimitOrderMain;
 import org.example.xchange.config.CurrencyProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ class WebSocketBinanceChangeIntegrationTest {
 	@Test
 	public void testAddObserver() throws InterruptedException {
 		WebSocketBinanceChange webSocket = new WebSocketBinanceChange(currencyProperties);
-		TestObserver<LimitOrderMain> testObserver = new TestObserver<>();
+		TestObserver<NodeOrder> testObserver = new TestObserver<>();
 		webSocket.addObserver(testObserver);
 
 		// Проверяем, что наблюдатель успешно добавлен
@@ -57,7 +57,7 @@ class WebSocketBinanceChangeIntegrationTest {
 	@Test
 	public void testRemoveObserver() throws InterruptedException {
 		WebSocketBinanceChange webSocket = new WebSocketBinanceChange(currencyProperties);
-		TestObserver<LimitOrderMain> testObserver = new TestObserver<>();
+		TestObserver<NodeOrder> testObserver = new TestObserver<>();
 		webSocket.addObserver(testObserver);
 
 		webSocket.removeObserver(testObserver);
@@ -68,8 +68,8 @@ class WebSocketBinanceChangeIntegrationTest {
 	@Test
 	public void testRemoveObservers() throws InterruptedException {
 		WebSocketBinanceChange webSocket = new WebSocketBinanceChange(currencyProperties);
-		TestObserver<LimitOrderMain> testObserver = new TestObserver<>();
-		TestObserver<LimitOrderMain> testObserver1 = new TestObserver<>();
+		TestObserver<NodeOrder> testObserver = new TestObserver<>();
+		TestObserver<NodeOrder> testObserver1 = new TestObserver<>();
 		webSocket.addObserver(testObserver);
 		webSocket.addObserver(testObserver1);
 		webSocket.removeObserver(testObserver);

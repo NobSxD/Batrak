@@ -1,8 +1,6 @@
 package org.example.xchange;
 
 import lombok.ToString;
-import org.example.xchange.DTO.LimitOrderMain;
-import org.example.xchange.DTO.OrderMain;
 import org.example.xchange.finance.CurrencyConverter;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -52,33 +50,15 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		return orderId;
 	}
 
-	public LimitOrderMain placeLimitOrder(LimitOrder limitOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
+	public String placeLimitOrder(LimitOrder limitOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
 		try {
 			TradeService tradeService = exchange.getTradeService();
 			String orderId = "";
 			if (trade) {
 				orderId = tradeService.placeLimitOrder(limitOrder);
 			}
-			OrderMain order = OrderMain.builder()
-					.type(limitOrder.getType())
-					.originalAmount(limitOrder.getOriginalAmount())
-					.cumulativeAmount(limitOrder.getCumulativeAmount())
-					.averagePrice(limitOrder.getAveragePrice())
-					.fee(limitOrder.getFee())
-					.instrument(limitOrder.getInstrument())
-					.id(orderId)
-					.timestamp(convertDateToLocalDateTime(limitOrder.getTimestamp()))
-					.status(limitOrder.getStatus())
-					.userReference(limitOrder.getUserReference())
-					.build();
-
-			LimitOrderMain limitOrderMain = LimitOrderMain.builder()
-					.limitPrice(limitOrder.getLimitPrice())
-					.orderMain(order)
-					.build();
-			logger.info(limitOrderMain.toString());
-			return limitOrderMain;
-
+			logger.info(limitOrder.toString());
+			return orderId;
 		} catch (IOException e) {
 			logger.error(e.getMessage() + " " + limitOrder.toString());
 			throw new RuntimeException(e);

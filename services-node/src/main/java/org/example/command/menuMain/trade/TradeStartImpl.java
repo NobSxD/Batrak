@@ -25,6 +25,7 @@ public class TradeStartImpl implements Command {
 			return "Трейд запущен, начинаю искать точку входа";
 		}catch (Exception e){
 			logger.error(e.getMessage());
+			e.printStackTrace();
 			return "во время старта трейдинга произошла ошибка, обратитесь к администратору системы.";
 		}
 	}

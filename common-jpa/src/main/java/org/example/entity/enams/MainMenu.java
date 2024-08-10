@@ -8,7 +8,8 @@ public enum MainMenu {
 
 	Trade("Настрайки трейдинга"),
 	TradeStart("запуск трейдинга"),
-	TradeStop("остановить трейдинг");
+	TradeStop("остановить трейдинг"),
+	Info_Settings("Информация о текущих настроек");
 
 
 

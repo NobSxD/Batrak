@@ -30,16 +30,19 @@ public class ButtonRegistration {
 		state.put("запуск трейдинга", TRADE_START);
 		state.put("остановить трейдинг", TRADE_STOP);
 		state.put("отмена", BOT_CANCEL);
+		state.put("Информация о текущих настроек", INFO_SETTINGS);
 		//--------Настройки трейдинга
 		state.put("Выбор торговой пары", SETTINGS_NAME_PAIR);
 		state.put("Укажите цену ордера", SETTINGS_AMOUNT_ORDER);
 		state.put("Глубина размера стакана", SETTINGS_DEPTH_GLASS);
 		state.put("В главное мею", BOT_MAIN_MENU);
+		state.put("/main", BOT_MAIN_MENU);
 		state.put("Выбор стратегии", SETTINGS_NAME_STRATEGY);
 		state.put("Удаление аккаунта", ACCOUNT_LIST);
 
 
 		state.put("/cancel", BOT_CANCEL);
+        state.put("/info_settings", INFO_SETTINGS);
 
 		state.put("/help", BOT_HELP);
 
