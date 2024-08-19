@@ -14,6 +14,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class NodeOrder {
 	
 	@Id
@@ -27,6 +28,7 @@ public class NodeOrder {
 	private String orderId;
 	
 	@JsonProperty("originalAmount")
+	@Column(precision = 10, scale = 10)
 	private BigDecimal originalAmount;
 	
 	@JsonProperty("limitPrice")
@@ -58,7 +60,7 @@ public class NodeOrder {
 	private NodeUser nodeUser;
 	
 	@JsonProperty("checkReal")
-	private boolean checkReal = true;
+	private boolean checkReal;
 	
 	@Builder
 	public NodeOrder(Long id, String type, String orderId, BigDecimal originalAmount, BigDecimal limitPrice, BigDecimal cumulativeAmount,

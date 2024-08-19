@@ -10,9 +10,7 @@ class ChangeTypeTest {
 	void typChange(){
 		ChangeType changeType = ChangeType.fromValue("binance");
 		assertEquals(changeType, ChangeType.Binance);
-
-		changeType = ChangeType.fromValue("mexc");
-		assertEquals(changeType, ChangeType.Mexc);
+		
 
 		changeType = ChangeType.fromValue("bybit");
 		assertEquals(changeType, ChangeType.Bybit);

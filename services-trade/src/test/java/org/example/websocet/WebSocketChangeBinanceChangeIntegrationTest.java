@@ -10,6 +10,7 @@ import org.example.entity.Account;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeOrder;
 import org.example.entity.NodeUser;
+import org.example.websocet.change_socket.WebSocketBinanceChange;
 import org.example.xchange.config.CurrencyProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-class WebSocketBinanceChangeIntegrationTest {
+class WebSocketChangeBinanceChangeIntegrationTest {
 	NodeUser nodeUser;
 	Account account;
 	@Mock

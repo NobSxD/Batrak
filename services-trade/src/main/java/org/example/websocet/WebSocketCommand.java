@@ -1,8 +1,8 @@
 package org.example.websocet;
 
-import io.reactivex.rxjava3.core.Observable;
-import org.example.entity.NodeOrder;
+import org.example.entity.NodeUser;
 
 public interface WebSocketCommand {
-	Observable<NodeOrder> getCurrencyRateStream();
+	WebSocketChange webSocketChange(NodeUser nodeUser);
+	
 }

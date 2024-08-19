@@ -2,12 +2,9 @@ package org.example.entity.enams;
 
 public enum ChangeType {
     Binance("binance"),
-    Bybit("bybit"),
-    Mexc("mexc"),
-    Test("test");
+    Bybit("bybit");
 
-
-
+    
     private final String value;
     ChangeType(String value) {
         this.value = value;

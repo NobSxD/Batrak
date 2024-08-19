@@ -1,16 +1,15 @@
-package org.example.websocet;
+package org.example.websocet.change_socket;
 
-import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
+import info.bitrich.xchangestream.bybit.BybitStreamingExchange;
 import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import lombok.RequiredArgsConstructor;
 import org.example.entity.NodeOrder;
 import org.example.entity.enams.ChangeType;
+import org.example.websocet.WebSocketChange;
 import org.example.xchange.config.CurrencyProperties;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -23,27 +22,17 @@ import java.util.Map;
 
 import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
 
-
 @Component
 @RequiredArgsConstructor
-public class WebSocketBinanceChange implements WebSocketCommand{
+public class WebSocketByBitChange implements WebSocketChange {
 	private final CurrencyProperties currencyProperties;
 	private final Map<CurrencyPair, StreamingExchange> exchangeMap = new HashMap<>();
 
 	private final BehaviorSubject<NodeOrder> subject = BehaviorSubject.create();
-	public void addObserver(Observer<NodeOrder> observer) {
-		subject.subscribe(observer);
-	}
-	public void removeObserver(Disposable disposable){
-		disposable.dispose();
-	}
-	public boolean hasObservers(){
-		return subject.hasObservers();
-	}
-
+	
 	@PostConstruct
 	public void streamBtcUSDT(){
-		List<String> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> ChangeType.Binance.toString().equals(exchange.getType()))
+		List<String> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> ChangeType.Bybit.toString().equals(exchange.getType()))
 				.flatMap(exchange -> exchange.getPairs().stream()).toList();
 
 		for (String currencyPair : currencyPairs) {
@@ -52,7 +41,7 @@ public class WebSocketBinanceChange implements WebSocketCommand{
 
 	}
 	private void createExchangeForCurrencyPair(CurrencyPair currencyPair) {
-		ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BinanceStreamingExchange.class);
+		ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BybitStreamingExchange.class);
 		exchangeSpecification.setShouldLoadRemoteMetaData(true);
 		exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
 
@@ -85,6 +74,10 @@ public class WebSocketBinanceChange implements WebSocketCommand{
 	public Observable<NodeOrder> getCurrencyRateStream() {
 		return subject;
 	}
-
-
+	
+	@Override
+	public ChangeType getType() {
+		return ChangeType.Binance;
+	}
+	
 }

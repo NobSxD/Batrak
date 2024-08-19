@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @RequiredArgsConstructor
 public class TradeStartImpl implements Command {
@@ -20,6 +22,7 @@ public class TradeStartImpl implements Command {
 	public String send(NodeUser nodeUser, String text) {
 		try {
 			nodeUser.setTradeStartOrStop(true);
+			nodeUser.setLastStartTread(LocalDateTime.now());
 			nodeUserDAO.save(nodeUser);
 			producerXChangeService.startTread(nodeUser);
 			return "Трейд запущен, начинаю искать точку входа";

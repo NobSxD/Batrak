@@ -76,11 +76,6 @@
             <artifactId>xchange-bybit</artifactId>
             <version>${change.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.knowm.xchange</groupId>
-            <artifactId>xchange-mexc</artifactId>
-            <version>${change.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.knowm.xchange</groupId>
@@ -92,6 +87,11 @@
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-stream-binance</artifactId>
+            <version>${change.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-stream-bybit</artifactId>
             <version>${change.version}</version>
         </dependency>
         <dependency>
