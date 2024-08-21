@@ -5,7 +5,6 @@ import org.example.xchange.BasicChangeInterface;
 import org.example.xchange.DTO.ChangeUser;
 import org.example.xchange.change.BayBit.ByBitMainImpl;
 import org.example.xchange.change.Binance.BinanceMainImpl;
-import org.example.xchange.change.Mex.MexcMainImpl;
 
 public class ChangeFactory {
 	public static BasicChangeInterface createChange(NodeUser nodeUser){
@@ -17,7 +16,6 @@ public class ChangeFactory {
 				.build();
 		BasicChangeInterface change = null;
 		switch (nodeUser.getChangeType()){
-			case Mexc -> change = new MexcMainImpl(changeUser);
 			case Bybit -> change = new ByBitMainImpl(changeUser);
 			case Binance -> change = new BinanceMainImpl(changeUser);
 		}

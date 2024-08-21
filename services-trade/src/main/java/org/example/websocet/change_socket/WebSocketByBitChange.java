@@ -1,75 +1,36 @@
 package org.example.websocet.change_socket;
 
 import info.bitrich.xchangestream.bybit.BybitStreamingExchange;
-import info.bitrich.xchangestream.core.ProductSubscription;
-import info.bitrich.xchangestream.core.StreamingExchange;
-import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import lombok.RequiredArgsConstructor;
 import org.example.entity.NodeOrder;
 import org.example.entity.enams.ChangeType;
 import org.example.websocet.WebSocketChange;
 import org.example.xchange.config.CurrencyProperties;
 import org.knowm.xchange.ExchangeSpecification;
-import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.bybit.dto.BybitCategory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
+import static org.knowm.xchange.Exchange.USE_SANDBOX;
 
 @Component
 @RequiredArgsConstructor
-public class WebSocketByBitChange implements WebSocketChange {
+public class WebSocketByBitChange extends WebSocketBasic implements WebSocketChange {
 	private final CurrencyProperties currencyProperties;
-	private final Map<CurrencyPair, StreamingExchange> exchangeMap = new HashMap<>();
-
-	private final BehaviorSubject<NodeOrder> subject = BehaviorSubject.create();
 	
+	@Override
 	@PostConstruct
-	public void streamBtcUSDT(){
-		List<String> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> ChangeType.Bybit.toString().equals(exchange.getType()))
-				.flatMap(exchange -> exchange.getPairs().stream()).toList();
-
-		for (String currencyPair : currencyPairs) {
-			createExchangeForCurrencyPair(new CurrencyPair(currencyPair));
-		}
-
+	public void streamValue() {
+		ExchangeSpecification exchangeSpecification = new
+				BybitStreamingExchange().getDefaultExchangeSpecification();
+		exchangeSpecification.setExchangeSpecificParametersItem(BybitStreamingExchange.EXCHANGE_TYPE,
+																BybitCategory.LINEAR);
+		exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, true);
+		init(ChangeType.Bybit, currencyProperties, exchangeSpecification);
 	}
-	private void createExchangeForCurrencyPair(CurrencyPair currencyPair) {
-		ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BybitStreamingExchange.class);
-		exchangeSpecification.setShouldLoadRemoteMetaData(true);
-		exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
-
-		StreamingExchange exchange = StreamingExchangeFactory.INSTANCE.createExchange(exchangeSpecification);
-
-		ProductSubscription subscription = ProductSubscription.create()
-				.addTrades(currencyPair)
-				.addOrderbook(currencyPair)
-				.build();
-
-		exchange.connect(subscription).blockingAwait();
-
-		exchange.getStreamingMarketDataService()
-				.getTrades(currencyPair)
-				.subscribe(trade -> {
-					NodeOrder nodeOrder = NodeOrder.builder()
-							.orderId(trade.getId())
-							.instrument(trade.getInstrument().toString())
-							.originalAmount(trade.getOriginalAmount())
-							.limitPrice(trade.getPrice())
-							.timestamp(trade.getTimestamp())
-							.type(trade.getType().toString())
-							.build();
-					subject.onNext(nodeOrder);
-				}, subject:: onError);
-
-		exchangeMap.put(currencyPair, exchange);
-	}
+	
 	@Override
 	public Observable<NodeOrder> getCurrencyRateStream() {
 		return subject;
@@ -77,7 +38,7 @@ public class WebSocketByBitChange implements WebSocketChange {
 	
 	@Override
 	public ChangeType getType() {
-		return ChangeType.Binance;
+		return ChangeType.Bybit;
 	}
 	
 }
