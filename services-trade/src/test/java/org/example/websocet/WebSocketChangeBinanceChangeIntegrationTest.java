@@ -1,17 +1,18 @@
 package org.example.websocet;
 
+import org.example.configuration.CurrencyProperties;
+import org.example.entity.Account;
+import org.example.entity.ConfigTrade;
+import org.example.entity.NodeOrder;
+import org.example.entity.NodeUser;
+import org.example.websocet.change_socket.WebSocketBinanceChange;
+
 import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
 import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.observers.TestObserver;
 import org.exampel.crypto.CryptoUtils;
-import org.example.entity.Account;
-import org.example.entity.ConfigTrade;
-import org.example.entity.NodeOrder;
-import org.example.entity.NodeUser;
-import org.example.websocet.change_socket.WebSocketBinanceChange;
-import org.example.xchange.config.CurrencyProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.knowm.xchange.ExchangeSpecification;

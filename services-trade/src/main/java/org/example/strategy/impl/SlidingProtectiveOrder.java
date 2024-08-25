@@ -1,8 +1,5 @@
 package org.example.strategy.impl;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.example.dao.NodeOrdersDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeOrder;
@@ -17,6 +14,10 @@ import org.example.websocet.WebSocketCommand;
 import org.example.xchange.BasicChangeInterface;
 import org.example.xchange.finance.CurrencyConverter;
 import org.example.xchange.finance.FinancialCalculator;
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -47,7 +48,6 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 		NodeOrder bay = null;
 		// Получение списка ордеров в стакане
 		OrderBook orderBook = basicChange.orderBooksLimitOrders(nodeUser.getConfigTrade().getDepthGlass(), nodeUser.getConfigTrade().getNamePair());
-		
 		if (nodeUser.getStateTrade().equals(TradeState.BAY)) {
 			bay = bay(orderBook, nodeUser, basicChange);
 		}
@@ -58,37 +58,40 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 	}
 	
 	public NodeOrder bay(OrderBook orderBook, NodeUser nodeUser, BasicChangeInterface basicChange) {
+		List<LimitOrder> bids;
+		List<BigDecimal> priceAndAmount;
+		CurrencyPair currencyPair;
+		BigDecimal price;
+		BigDecimal amount;
+		LimitOrder order;
+		String orderId;
+		NodeOrder nodeOrder;
+		String message;
+		WebSocketChange webSocketChange;
+		CountDownLatch latch;
 		try {
-			List<LimitOrder> bids = orderBook.getBids();
-			
-			CurrencyPair currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
-			BigDecimal price = FinancialCalculator.maxAmount(bids);
+			bids = orderBook.getBids();
+			currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
+			price = FinancialCalculator.maxAmount(bids);
 			price = CurrencyConverter.validUsd(price);
-			
 			//<!-- конвертирую  установленную сумму в валюту -->
-			BigDecimal amount = nodeUser.getConfigTrade().getAmountOrder();
+			amount = nodeUser.getConfigTrade().getAmountOrder();
 			amount = CurrencyConverter.convertCurrency(price, amount);
-			
 			//<!-- Подготавливаем лимитный ордер и отправляем его на биржу -->
-			List<BigDecimal> priceAndAmount = new ArrayList<>();
+			priceAndAmount = new ArrayList<>();
 			priceAndAmount.add(price);
 			priceAndAmount.add(amount);
-			LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.BID);
-			
-			String orderId = basicChange.placeLimitOrder(order, nodeUser.getConfigTrade().isRealTrade());
-			NodeOrder nodeOrder = createNodeOrder(order, orderId, priceAndAmount, nodeUser);
-			
+			order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.BID);
+			orderId = basicChange.placeLimitOrder(order, nodeUser.getConfigTrade().isRealTrade());
+			nodeOrder = createNodeOrder(order, orderId, priceAndAmount, nodeUser);
 			nodeUser.setStateTrade(TradeState.SEL);
-			
 			//<!-- Информируем о размещении ордера -->
-			String message = CurrencyRateProcessor.messageBay(nodeOrder.getUsd(), nodeOrder.getLimitPrice());
+			message = CurrencyRateProcessor.messageBay(nodeOrder.getUsd(), nodeOrder.getLimitPrice());
 			producerServiceExchange.sendAnswer(message, nodeOrder.getNodeUser().getChatId());
-			
-			WebSocketChange webSocketChange = webSocketCommand.webSocketChange(nodeUser);
-			CountDownLatch latch = new CountDownLatch(1);
+			webSocketChange = webSocketCommand.webSocketChange(nodeUser);
+			latch = new CountDownLatch(1);
 			CurrencyRateProcessor.subscribeToCurrencyRate(nodeOrder, latch, webSocketChange);
 			latch.await();
-			
 			result(nodeOrder);
 			return nodeOrder;
 			
@@ -97,43 +100,47 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 			log.error(e.getMessage());
 			e.printStackTrace();
 			nodeUser.setTradeStartOrStop(false);
-			return null;
+			throw new RuntimeException();
 		} catch (Exception e) {
 			producerServiceExchange.sendAnswer(e.getMessage(), nodeUser.getChatId());
 			log.error(e.getMessage());
 			e.printStackTrace();
 			nodeUser.setTradeStartOrStop(false);
-			return null;
+			throw new RuntimeException();
 		}
 	}
 	
 	public NodeOrder sel(OrderBook orderBook, NodeUser nodeUser, NodeOrder nodeOrder, BasicChangeInterface basicChange) {
+		List<LimitOrder> asks;
+		List<BigDecimal> priceAndAmount;
+		CurrencyPair currencyPair;
+		BigDecimal price;
+		BigDecimal amount;
+		LimitOrder order;
+		String orderId;
+		NodeOrder nodeOrderResult;
+		String message;
+		WebSocketChange webSocketChange;
+		CountDownLatch latch;
 		try {
-			List<LimitOrder> asks = orderBook.getAsks();
-			CurrencyPair currencyPair = new CurrencyPair(nodeOrder.getInstrument());
-			
-			BigDecimal price = CurrencyConverter.validUsd(FinancialCalculator.maxAmount(asks));
-			BigDecimal amount = nodeOrder.getOriginalAmount();
-			
-			List<BigDecimal> priceAndAmount = new ArrayList<>();
+			asks = orderBook.getAsks();
+			currencyPair = new CurrencyPair(nodeOrder.getInstrument());
+			price = CurrencyConverter.validUsd(FinancialCalculator.maxAmount(asks));
+			amount = nodeOrder.getOriginalAmount();
+			priceAndAmount = new ArrayList<>();
 			priceAndAmount.add(price);
 			priceAndAmount.add(amount);
-			
-			LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.ASK);
-			String orderId = basicChange.placeLimitOrder(order, nodeUser.getConfigTrade().isRealTrade());
-			NodeOrder nodeOrderResult = createNodeOrder(order, orderId, priceAndAmount, nodeUser);
-			
+			order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.ASK);
+			orderId = basicChange.placeLimitOrder(order, nodeUser.getConfigTrade().isRealTrade());
+			nodeOrderResult = createNodeOrder(order, orderId, priceAndAmount, nodeUser);
 			nodeUser.setStateTrade(TradeState.BAY);
-			
 			//<!-- Информируем о размещении ордера -->
-			String message = CurrencyRateProcessor.messageSel(nodeOrderResult.getUsd(), nodeOrderResult.getLimitPrice());
+			message = CurrencyRateProcessor.messageSel(nodeOrderResult.getUsd(), nodeOrderResult.getLimitPrice());
 			producerServiceExchange.sendAnswer(message, nodeOrderResult.getNodeUser().getChatId());
-			
-			WebSocketChange webSocketChange = webSocketCommand.webSocketChange(nodeUser);
-			CountDownLatch latch = new CountDownLatch(1);
+			webSocketChange = webSocketCommand.webSocketChange(nodeUser);
+			latch = new CountDownLatch(1);
 			CurrencyRateProcessor.subscribeToCurrencyRate(nodeOrderResult, latch, webSocketChange);
 			latch.await();
-			
 			result(nodeOrderResult);
 			nodeUser.getOrders().add(nodeOrderResult);
 			nodeUserDAO.save(nodeUser);
@@ -142,12 +149,12 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 			producerServiceExchange.sendAnswer("Не достаточно денег на балансе", nodeUser.getChatId());
 			log.error(e.getMessage());
 			nodeUser.setTradeStartOrStop(false);
-			return null;
+			throw new RuntimeException();
 		} catch (Exception e) {
 			producerServiceExchange.sendAnswer(e.getMessage(), nodeUser.getChatId());
 			log.error(e.getMessage());
 			nodeUser.setTradeStartOrStop(false);
-			return null;
+			throw new RuntimeException();
 		}
 	}
 	
@@ -165,7 +172,7 @@ public class SlidingProtectiveOrder implements StrategyTrade {
 		while (nodeUser.isTradeStartOrStop()) {
 			executeTrade(nodeUser, basicChange);
 			Optional<NodeUser> byId = nodeUserDAO.findById(nodeUser.getId()); //получаем обновлене состояние юзера, что бы узнать продолжать ли дальше трейдинг
-			nodeUser = byId.get();
+			nodeUser = byId.orElse(nodeUser);
 		}
 		List<NodeOrder> nodeOrders = ordersDAO.findAllOrdersFromTimestampAndNodeUser(nodeUser.getLastStartTread(), nodeUser);
 		producerServiceExchange.sendAnswer(messageResult(CurrencyRateProcessor.calculateProfit(nodeOrders), nodeOrders.size()), nodeUser.getChatId());

@@ -8,6 +8,7 @@
     </parent>
     <artifactId>common-crypt</artifactId>
     <name>common-crypt</name>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
@@ -21,4 +22,5 @@
         </dependency>
 
     </dependencies>
+
 </project>

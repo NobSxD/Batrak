@@ -1,12 +1,13 @@
 package org.example.websocet.change_socket;
 
-import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
-import io.reactivex.rxjava3.core.Observable;
-import lombok.RequiredArgsConstructor;
+import org.example.configuration.CurrencyProperties;
 import org.example.entity.NodeOrder;
 import org.example.entity.enams.ChangeType;
 import org.example.websocet.WebSocketChange;
-import org.example.xchange.config.CurrencyProperties;
+
+import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
+import io.reactivex.rxjava3.core.Observable;
+import lombok.RequiredArgsConstructor;
 import org.knowm.xchange.ExchangeSpecification;
 import org.springframework.stereotype.Component;
 

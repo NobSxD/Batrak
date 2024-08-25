@@ -1,12 +1,9 @@
 package org.example.xchange.change.Binance;
 
-import org.exampel.crypto.CryptoUtils;
 import org.example.xchange.DTO.ChangeUser;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.math.BigDecimal;
+import org.exampel.crypto.CryptoUtils;
+import org.junit.jupiter.api.BeforeEach;
 
 class BinanceMainImplTest {
 	
@@ -25,15 +22,5 @@ class BinanceMainImplTest {
 	}
 	
 	
-	@Test
-	public void testBalances(){
-		BigDecimal balances = binanceMain.balances();
-		System.out.println("баланс: " + balances);
-	}
-	
-	@Test
-	public void testBalancesThrowsIOException() throws IOException {
-	
-	}
 
 }

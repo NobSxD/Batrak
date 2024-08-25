@@ -8,6 +8,7 @@
     </parent>
     <artifactId>common-jpa</artifactId>
     <name>common-jpa</name>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,9 +44,7 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-mysql</artifactId>
         </dependency>
-
     </dependencies>
-
 
 
 </project>

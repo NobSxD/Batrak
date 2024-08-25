@@ -1,35 +1,116 @@
-  version: '3.1'
+version: '3.8'
 
 services:
   db:
-    build: DockerFIle/mySQL
+    image: mysql:8.0.28
     container_name: mysql
-    image: nobsxd/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: spring.datasource.password
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
     ports:
       - 3306:3306
     volumes:
       - D:/volume/db:/var/lib/mysql
+    networks:
+      - tradebot-network
 
 
   phpmyadmin:
-    build: DockerFIle/phpadmin
-    image: nobsxd/phpmyadmin
+    image: phpmyadmin
+    container_name: phpmyadmin
     restart: always
     ports:
       - 8081:80
     environment:
       - PMA_ARBITRARY=1
+    networks:
+      - tradebot-network
 
 
   rabbitmq:
-    build: DockerFIle/rabbitMQ
     image: rabbitmq:3.11.0-management
+    container_name: rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: userok
+      RABBITMQ_DEFAULT_PASS: p@ssw0rd
+      RABBITMQ_DEFAULT_VHOST: /
     volumes:
       - D:/volume/rabbitmq:/var/lib/rabbitmq
+    networks:
+      - tradebot-network
 
-    restart: unless-stopped
+
+  trade:
+    build:
+      context: /services-trade
+      dockerfile: Dockerfile
+    image: tradebot:latest
+    container_name: trade_bot
+    environment:
+      - SERVER_PORT=8089
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/trade_bot
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=userok
+      - SPRING_RABBITMQ_PASSWORD=p@ssw0rd
+    ports:
+      - "8089:8089"
+    networks:
+      - tradebot-network
+    depends_on:
+      - db
+
+
+  telegram:
+    build:
+      context: /services-telegram
+      dockerfile: Dockerfile
+    image: telegram:latest
+    container_name: telegram
+    environment:
+      - SERVER_PORT=8082
+      - USER_NAME=trade_ches_bot
+      - API.KEY=6882171453:AAEmJYqSF7Zy5ROq_EIvDiSCTvNMtf1c6vI
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=userok
+      - SPRING_RABBITMQ_PASSWORD=p@ssw0rd
+    ports:
+      - "8082:8082"
+    networks:
+      - tradebot-network
+    depends_on:
+      - rabbitmq
+
+
+  node:
+    build:
+      context: /services-node
+      dockerfile: Dockerfile
+    image: node:latest
+    container_name: node
+    environment:
+      - SERVER_PORT=8085
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/trade_bot
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=userok
+      - SPRING_RABBITMQ_PASSWORD=p@ssw0rd
+    ports:
+      - "8085:8085"
+    networks:
+      - tradebot-network
+    depends_on:
+      - db
+
+
+networks:
+  tradebot-network:
+    driver: bridge

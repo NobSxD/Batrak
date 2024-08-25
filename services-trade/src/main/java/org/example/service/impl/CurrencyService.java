@@ -1,14 +1,15 @@
 package org.example.service.impl;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import org.example.configuration.CurrencyProperties;
 import org.example.dao.NodeChangeDAO;
 import org.example.dao.PairDAO;
 import org.example.entity.NodeChange;
 import org.example.entity.collect.Pair;
 import org.example.entity.enams.ChangeType;
-import org.example.xchange.config.CurrencyProperties;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
