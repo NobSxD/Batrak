@@ -1,4 +1,4 @@
-package org.example.xchange.config;
+package org.example.configuration;
 
 import lombok.Getter;
 import lombok.Setter;

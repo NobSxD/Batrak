@@ -8,6 +8,7 @@
     <version>5.1.2-SNAPSHOT</version>
     <name>XChange</name>
     <description>XChange</description>
+    <packaging>jar</packaging>
     <parent>
         <groupId>org.example</groupId>
         <artifactId>treadeBot</artifactId>
@@ -118,4 +119,6 @@
             <url>https://repo.maven.apache.org/maven2/</url>
         </repository>
     </repositories>
+
+
 </project>

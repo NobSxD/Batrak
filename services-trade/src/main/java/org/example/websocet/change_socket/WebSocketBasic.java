@@ -1,13 +1,14 @@
 package org.example.websocet.change_socket;
 
+import org.example.configuration.CurrencyProperties;
+import org.example.entity.NodeOrder;
+import org.example.entity.enams.ChangeType;
+
 import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import lombok.extern.slf4j.Slf4j;
-import org.example.entity.NodeOrder;
-import org.example.entity.enams.ChangeType;
-import org.example.xchange.config.CurrencyProperties;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.instrument.Instrument;

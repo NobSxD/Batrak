@@ -1,14 +1,18 @@
 package org.example.xchange.finance;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class CurrencyConverter {
 
 	public static BigDecimal convertCurrency(BigDecimal originalAmount, BigDecimal usdt) {
-		int scale = 5;
+		int scale = 3;
 		RoundingMode roundingMode = RoundingMode.HALF_UP;
-		return usdt.divide(originalAmount, scale, roundingMode);
+		MathContext mc = new MathContext(originalAmount.precision());
+		BigDecimal divide = usdt.divide(originalAmount, roundingMode);
+		divide.round(mc);
+		return divide;
 
 	}
 

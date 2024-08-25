@@ -1,7 +1,8 @@
 package org.example.xchange;
 
-import lombok.ToString;
 import org.example.xchange.finance.CurrencyConverter;
+
+import lombok.ToString;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
@@ -42,9 +43,8 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 
 		try {
 			orderId = tradeService.placeLimitOrder(limitOrder);
-			System.out.println(limitOrder.toString() + "*--");
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			return "Ордер на покупку не успешно";
 		}
 		return orderId;
