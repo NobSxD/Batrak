@@ -5,22 +5,24 @@
  */
 
 plugins {
+    id 'org.springframework.boot' version libs.versions.org.springframework.boot.plagin
     id 'buildlogic.java-conventions'
 }
 
 dependencies {
-    api libs.javax.xml.bind.jaxb.api
-    api libs.jakarta.xml.bind.jakarta.xml.bind.api
     api project(':common-XChange')
     api project(':common-jpa')
     api project(':common-rabbitmq')
+    api libs.javax.xml.bind.jaxb.api
+    api libs.jakarta.xml.bind.jakarta.xml.bind.api
     api libs.org.springframework.boot.spring.boot.starter.amqp
     api libs.org.springframework.boot.spring.boot.starter.web
     api libs.io.reactivex.rxjava3.rxjava
     api libs.org.telegram.telegrambots.longpolling
     api libs.com.fasterxml.jackson.core.jackson.databind
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
 }
 
-description = 'TradeBot'
+description = 'services-trade'

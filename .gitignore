@@ -35,3 +35,5 @@ build/
 /node/src/main/resources/application-dev.properties
 /telegram/src/main/resources/application-dev.properties
 /TradeBot/src/main/resources/application-dev.properties
+
+.env

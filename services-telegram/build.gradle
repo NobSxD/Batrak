@@ -5,15 +5,16 @@
  */
 
 plugins {
+    id 'org.springframework.boot' version libs.versions.org.springframework.boot.plagin
     id 'buildlogic.java-conventions'
 }
 
 dependencies {
     api project(':common-jpa')
+    api project(':common-rabbitmq')
     api libs.org.springframework.boot.spring.boot.starter.web
     api libs.org.telegram.telegrambots.spring.boot.starter
     api libs.org.springframework.boot.spring.boot.starter.amqp
-    api project(':common-rabbitmq')
 }
 
-description = 'telegram'
+description = 'services-telegram'

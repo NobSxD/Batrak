@@ -15,6 +15,7 @@ dependencies {
     api libs.org.flywaydb.flyway.core
     api libs.org.flywaydb.flyway.mysql
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
 }
 

@@ -28,6 +28,7 @@ org-springframework-boot-spring-boot-starter-amqp = "3.3.0"
 org-springframework-boot-spring-boot-starter-data-jpa = "3.3.0"
 org-springframework-boot-spring-boot-starter-test = "3.3.0"
 org-springframework-boot-spring-boot-starter-web = "3.3.0"
+org-springframework-boot-plagin = "3.3.0"
 org-telegram-telegrambots-longpolling = "7.2.0"
 org-telegram-telegrambots-spring-boot-starter = "6.9.7.1"
 

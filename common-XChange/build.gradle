@@ -9,9 +9,9 @@ plugins {
 }
 
 dependencies {
-    api libs.org.springframework.boot.spring.boot.configuration.processor
-    api libs.org.springframework.boot.spring.boot.starter
     api project(':common-crypt')
+    api libs.org.springframework.boot.spring.boot.configuration.processor
+   // api libs.org.springframework.boot.spring.boot.starter
     api libs.com.fasterxml.jackson.core.jackson.databind
     api libs.com.fasterxml.jackson.core.jackson.annotations
     api libs.com.fasterxml.jackson.core.jackson.core
@@ -22,8 +22,8 @@ dependencies {
     api libs.org.knowm.xchange.xchange.stream.bybit
     api libs.org.knowm.xchange.xchange.stream.core
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
 }
 
-group = 'org.knowm.xchange'
-description = 'XChange'
+description = 'common-XChange'

@@ -5,7 +5,7 @@ services:
     image: mysql:8.0.28
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: spring.datasource.password
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     command: --default-authentication-plugin=mysql_native_password
     ports:
       - 3306:3306
@@ -34,9 +34,9 @@ services:
       - 5672:5672
       - 15672:15672
     environment:
-      RABBITMQ_DEFAULT_USER: userok
-      RABBITMQ_DEFAULT_PASS: p@ssw0rd
-      RABBITMQ_DEFAULT_VHOST: /
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
     volumes:
       - D:/volume/rabbitmq:/var/lib/rabbitmq
     networks:
@@ -50,14 +50,14 @@ services:
     image: tradebot:latest
     container_name: trade_bot
     environment:
-      - SERVER_PORT=8089
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/trade_bot
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_RABBITMQ_PORT=5672
-      - SPRING_RABBITMQ_USERNAME=userok
-      - SPRING_RABBITMQ_PASSWORD=p@ssw0rd
+       SERVER_PORT: 8089
+       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${MYSQL_DATA_BASE}
+       SPRING_DATASOURCE_USERNAME: ${MYSQL_ROOT_USER}
+       SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+       SPRING_RABBITMQ_HOST: rabbitmq
+       SPRING_RABBITMQ_PORT: 5672
+       SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
+       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
     ports:
       - "8089:8089"
     networks:
@@ -73,13 +73,13 @@ services:
     image: telegram:latest
     container_name: telegram
     environment:
-      - SERVER_PORT=8082
-      - USER_NAME=trade_ches_bot
-      - API.KEY=6882171453:AAEmJYqSF7Zy5ROq_EIvDiSCTvNMtf1c6vI
-      - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_RABBITMQ_PORT=5672
-      - SPRING_RABBITMQ_USERNAME=userok
-      - SPRING_RABBITMQ_PASSWORD=p@ssw0rd
+      SERVER_PORT: 8082
+      USER_NAME: ${TELEGRAM_USER_NAME}
+      API_KEY: ${TELEGRAM_API_KEY}
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
     ports:
       - "8082:8082"
     networks:
@@ -95,14 +95,14 @@ services:
     image: node:latest
     container_name: node
     environment:
-      - SERVER_PORT=8085
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/trade_bot
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_RABBITMQ_HOST=rabbitmq
-      - SPRING_RABBITMQ_PORT=5672
-      - SPRING_RABBITMQ_USERNAME=userok
-      - SPRING_RABBITMQ_PASSWORD=p@ssw0rd
+      SERVER_PORT: 8085
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${MYSQL_DATA_BASE}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_ROOT_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
     ports:
       - "8085:8085"
     networks:
