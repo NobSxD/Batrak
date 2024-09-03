@@ -24,5 +24,7 @@ dependencies {
     annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
 }
-
+test{
+    useJUnitPlatform()
+}
 description = 'node'

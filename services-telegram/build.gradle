@@ -10,11 +10,15 @@ plugins {
 }
 
 dependencies {
-    api project(':common-jpa')
+    api (project(':common-jpa')){
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-data-jpa'
+    }
     api project(':common-rabbitmq')
     api libs.org.springframework.boot.spring.boot.starter.web
     api libs.org.telegram.telegrambots.spring.boot.starter
     api libs.org.springframework.boot.spring.boot.starter.amqp
 }
-
+test{
+    useJUnitPlatform()
+}
 description = 'services-telegram'

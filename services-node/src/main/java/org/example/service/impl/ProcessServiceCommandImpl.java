@@ -1,16 +1,17 @@
 package org.example.service.impl;
 
-import lombok.Data;
 import org.example.dao.NodeUserDAO;
 import org.example.dao.SettingsTradeDAO;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
 import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerTelegramService;
+
+import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import static org.example.entity.enams.UserState.BASIC_STATE;
+import static org.example.entity.enams.state.UserState.BASIC_STATE;
 
 @Component
 @Data

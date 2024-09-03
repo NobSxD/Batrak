@@ -12,5 +12,7 @@ dependencies {
     api libs.com.github.ulisesbocchio.jasypt.spring.boot.starter
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
 }
-
+test{
+    useJUnitPlatform()
+}
 description = 'common-crypt'

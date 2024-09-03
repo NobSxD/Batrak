@@ -1,9 +1,10 @@
 package org.example.change.account;
 
-import lombok.RequiredArgsConstructor;
 import org.example.dao.AccountBaseDAO;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,18 +24,18 @@ public class NodeAccountImpl implements NodeAccount {
 	public Account newAccount(NodeUser nodeUser) {
 		Account account = new Account();
 		account.setNodeUser(nodeUser);
-		account.setChangeType(nodeUser.getChangeType());
+		account.setMenuChange(nodeUser.getMenuChange());
 		return account;
 	}
 
 	@Override
 	public List<Account> getAccounts(NodeUser nodeUser) {
-		return accountBaseDAO.findAllByChangeTypeAndNodeUser(nodeUser.getChangeType(), nodeUser);
+		return accountBaseDAO.findAllByMenuChangeAndNodeUser(nodeUser.getMenuChange(), nodeUser);
 	}
 
 	@Override
 	public Account getAccount(String nameAccount, NodeUser nodeUser) {
-		return accountBaseDAO.findByNameAccountAndChangeTypeAndNodeUser(nameAccount, nodeUser.getChangeType(), nodeUser);
+		return accountBaseDAO.findByNameAccountAndMenuChangeAndNodeUser(nameAccount, nodeUser.getMenuChange(), nodeUser).orElse(null);
 	}
 
 	@Override

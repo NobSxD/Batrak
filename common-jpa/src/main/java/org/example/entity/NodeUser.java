@@ -1,12 +1,26 @@
 package org.example.entity;
 
+import org.example.entity.enams.menu.MenuChange;
+import org.example.entity.enams.state.TradeState;
+import org.example.entity.enams.state.UserState;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import lombok.*;
-import org.example.entity.enams.ChangeType;
-import org.example.entity.enams.TradeState;
-import org.example.entity.enams.UserState;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -64,7 +78,7 @@ public class NodeUser {
 	private ConfigTrade configTrade;
 	
 	@Enumerated(EnumType.STRING)
-	private ChangeType changeType;
+	private MenuChange menuChange;
 	
 	@Enumerated(EnumType.STRING)
 	private UserState state;
@@ -78,7 +92,7 @@ public class NodeUser {
 	public NodeUser(Long id, Long telegramUserId, Long chatId, Date firstLoginDate, String firstName,
 			String lastName, String username, String email, Boolean isActive, Date lastStartTread,
 			Account account, List<NodeOrder> orders, List<Account> accounts, ConfigTrade configTrade,
-			ChangeType changeType, UserState state, TradeState stateTrade, boolean tradeStartOrStop) {
+			MenuChange menuChange, UserState state, TradeState stateTrade, boolean tradeStartOrStop) {
 		this.id = id;
 		this.telegramUserId = telegramUserId;
 		this.chatId = chatId;
@@ -93,7 +107,7 @@ public class NodeUser {
 		this.orders = orders;
 		this.accounts = accounts;
 		this.configTrade = configTrade;
-		this.changeType = changeType;
+		this.menuChange = menuChange;
 		this.state = state;
 		this.stateTrade = stateTrade;
 		this.tradeStartOrStop = tradeStartOrStop;

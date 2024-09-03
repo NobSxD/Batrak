@@ -3,8 +3,8 @@ Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
-Cannot invoke "org.example.entity.enams.UserState.equals(Object)" because the return value of "org.example.entity.NodeUser.getMenuState()" is null
-Cannot invoke "org.example.entity.enams.UserState.equals(Object)" because the return value of "org.example.entity.NodeUser.getMenuState()" is null
+Cannot invoke "org.example.entity.enams.state.UserState.equals(Object)" because the return value of "org.example.entity.NodeUser.getMenuState()" is null
+Cannot invoke "org.example.entity.enams.state.UserState.equals(Object)" because the return value of "org.example.entity.NodeUser.getMenuState()" is null
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null
 Cannot invoke "org.example.entity.account.AccountBinance.setNodeUser(org.example.entity.NodeUser)" because "accountBinance" is null

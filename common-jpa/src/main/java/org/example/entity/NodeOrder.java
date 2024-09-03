@@ -1,10 +1,24 @@
 package org.example.entity;
 
+import org.example.entity.enams.menu.MenuStrategy;
+import org.example.entity.enams.state.OrderState;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import lombok.*;
-import org.example.entity.enams.StrategyEnams;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,6 +29,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class NodeOrder {
 	
 	@Id
@@ -25,6 +40,7 @@ public class NodeOrder {
 	@JsonProperty("type")
 	private String type;
 	
+	@JsonProperty("orderId")
 	private String orderId;
 	
 	@JsonProperty("originalAmount")
@@ -53,7 +69,8 @@ public class NodeOrder {
 	private String userReference;
 	
 	@Enumerated(EnumType.STRING)
-	private StrategyEnams strategyEnams;
+	@JsonProperty("menuStrategy")
+	private MenuStrategy menuStrategy;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference
@@ -62,10 +79,13 @@ public class NodeOrder {
 	@JsonProperty("checkReal")
 	private boolean checkReal;
 	
+	@JsonProperty("orderState")
+	private OrderState orderState;
+	
 	@Builder
 	public NodeOrder(Long id, String type, String orderId, BigDecimal originalAmount, BigDecimal limitPrice, BigDecimal cumulativeAmount,
 			BigDecimal averagePrice, BigDecimal usd, String instrument, Date timestamp,
-			String userReference, StrategyEnams strategyEnams, NodeUser nodeUser, boolean checkReal) {
+			String userReference, MenuStrategy menuStrategy, NodeUser nodeUser, boolean checkReal, OrderState orderState) {
 		this.id = id;
 		this.type = type;
 		this.orderId = orderId;
@@ -77,9 +97,10 @@ public class NodeOrder {
 		this.instrument = instrument;
 		this.timestamp = timestamp != null ? convertToLocalDateTime(timestamp) : null;
 		this.userReference = userReference;
-		this.strategyEnams = strategyEnams;
+		this.menuStrategy = menuStrategy;
 		this.nodeUser = nodeUser;
 		this.checkReal = checkReal;
+		this.orderState = orderState;
 	}
 	
 	private LocalDateTime convertToLocalDateTime(Date date) {

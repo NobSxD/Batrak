@@ -1,7 +1,7 @@
 package org.example.websocet;
 
 import org.example.entity.NodeUser;
-import org.example.entity.enams.ChangeType;
+import org.example.entity.enams.menu.MenuChange;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class WebSocketCommandImpl implements WebSocketCommand {
 
 
-	private final Map<ChangeType, WebSocketChange> stateMap;
+	private final Map<MenuChange, WebSocketChange> stateMap;
 
 
 	public WebSocketCommandImpl(List<WebSocketChange> commands) {
@@ -23,6 +23,6 @@ public class WebSocketCommandImpl implements WebSocketCommand {
 	
 	@Override
 	public WebSocketChange webSocketChange(NodeUser nodeUser) {
-		return stateMap.get(nodeUser.getChangeType());
+		return stateMap.get(nodeUser.getMenuChange());
 	}
 }

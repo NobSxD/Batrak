@@ -1,11 +1,22 @@
 package org.example.entity;
 
+import org.example.castom.Displayable;
+import org.example.entity.enams.menu.MenuChange;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import lombok.*;
-import org.example.castom.Displayable;
-import org.example.entity.enams.ChangeType;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -16,7 +27,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public  class Account implements Displayable {
+public class Account implements Displayable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	protected long id;
@@ -27,7 +38,8 @@ public  class Account implements Displayable {
 	private BigDecimal balance;
 
 	@Enumerated(EnumType.STRING)
-	private ChangeType changeType;
+	@JsonProperty("menuChange")
+	private MenuChange menuChange;
 
 	@ManyToOne
 	@JsonBackReference("nodeUser-account")

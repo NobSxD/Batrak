@@ -1,14 +1,15 @@
 package org.example.strategy.impl;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.example.dao.NodeOrdersDAO;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
-import org.example.entity.enams.StrategyEnams;
+import org.example.entity.enams.menu.MenuStrategy;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.StrategyTrade;
 import org.example.xchange.BasicChangeInterface;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,7 +29,7 @@ public class PredictionsOfEvents implements StrategyTrade {
 	}
 	
 	@Override
-	public StrategyEnams getType() {
+	public MenuStrategy getType() {
 		return null;
 	}
 }

@@ -1,7 +1,7 @@
 package org.example.strategy;
 
 import org.example.entity.NodeUser;
-import org.example.entity.enams.StrategyEnams;
+import org.example.entity.enams.menu.MenuStrategy;
 import org.example.xchange.BasicChangeInterface;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class StrategyCommandImpl implements StrategyCommand{
 
 
-	private final Map<StrategyEnams, StrategyTrade> stateMap;
+	private final Map<MenuStrategy, StrategyTrade> stateMap;
 
 
 	public StrategyCommandImpl(List<StrategyTrade> commands) {

@@ -11,12 +11,14 @@ plugins {
 dependencies {
     api libs.org.springframework.boot.spring.boot.starter.data.jpa
     api libs.com.mysql.mysql.connector.j
-    api libs.com.fasterxml.jackson.core.jackson.databind.x1
+    api libs.com.fasterxml.jackson.core.jackson.databind
     api libs.org.flywaydb.flyway.core
     api libs.org.flywaydb.flyway.mysql
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
     annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
 }
-
+test{
+    useJUnitPlatform()
+}
 description = 'common-jpa'

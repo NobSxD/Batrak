@@ -7,5 +7,7 @@
 plugins {
     id 'buildlogic.java-conventions'
 }
-
+test{
+    useJUnitPlatform()
+}
 description = 'common-rabbitmq'

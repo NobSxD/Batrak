@@ -1,17 +1,30 @@
 package org.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
 import org.example.castom.Displayable;
-import org.example.entity.enams.StrategyEnams;
+import org.example.entity.enams.menu.MenuStrategy;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ConfigTrade  implements Displayable {
 
 
@@ -28,7 +41,8 @@ public class ConfigTrade  implements Displayable {
 	private boolean realTrade = true;
 
 	@Enumerated(EnumType.STRING)
-	private StrategyEnams strategy = StrategyEnams.SlidingProtectiveOrder;
+	@JsonProperty("strategy")
+	private MenuStrategy strategy = MenuStrategy.SlidingProtectiveOrder;
 
 	@OneToOne
 	@JsonBackReference

@@ -2,7 +2,7 @@ package org.example.websocet.change_socket;
 
 import org.example.configuration.CurrencyProperties;
 import org.example.entity.NodeOrder;
-import org.example.entity.enams.ChangeType;
+import org.example.entity.enams.menu.MenuChange;
 import org.example.websocet.WebSocketChange;
 
 import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
@@ -22,7 +22,7 @@ public class WebSocketBinanceChange extends WebSocketBasic implements WebSocketC
 	@PostConstruct
 	public void streamValue() {
 		ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BinanceStreamingExchange.class);
-		init(ChangeType.Binance, currencyProperties, exchangeSpecification);
+		init(MenuChange.Binance, currencyProperties, exchangeSpecification);
 	}
 	
 	@Override
@@ -31,8 +31,8 @@ public class WebSocketBinanceChange extends WebSocketBasic implements WebSocketC
 	}
 	
 	@Override
-	public ChangeType getType() {
-		return ChangeType.Binance;
+	public MenuChange getType() {
+		return MenuChange.Binance;
 	}
 	
 }

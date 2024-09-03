@@ -1,51 +1,81 @@
 package org.example.configuration;
 
-import org.example.entity.enams.ChangeType;
-import org.example.entity.enams.UserState;
+import org.example.button.ButtonBasic;
+import org.example.button.ButtonChange;
+import org.example.button.ButtonCommand;
+import org.example.button.ButtonMainMenu;
+import org.example.button.ButtonOperation;
+import org.example.button.ButtonSetting;
+import org.example.button.ButtonStrategy;
+import org.example.entity.enams.state.UserState;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.example.entity.enams.UserState.*;
+import static org.example.entity.enams.state.UserState.ACCOUNT_ADD_REGISTER;
+import static org.example.entity.enams.state.UserState.ACCOUNT_LIST;
+import static org.example.entity.enams.state.UserState.BOT_CANCEL;
+import static org.example.entity.enams.state.UserState.BOT_CHANGE;
+import static org.example.entity.enams.state.UserState.BOT_HELP;
+import static org.example.entity.enams.state.UserState.BOT_MAIN_MENU;
+import static org.example.entity.enams.state.UserState.BOT_START;
+import static org.example.entity.enams.state.UserState.INFO_SETTINGS;
+import static org.example.entity.enams.state.UserState.SETTINGS_AMOUNT_ORDER;
+import static org.example.entity.enams.state.UserState.SETTINGS_DEPTH_GLASS;
+import static org.example.entity.enams.state.UserState.SETTINGS_NAME_PAIR;
+import static org.example.entity.enams.state.UserState.SETTINGS_NAME_STRATEGY;
+import static org.example.entity.enams.state.UserState.SETTINGS_SAVE_NAME_STRATEGY;
+import static org.example.entity.enams.state.UserState.TRADE_CANCEL;
+import static org.example.entity.enams.state.UserState.TRADE_OPERATION;
+import static org.example.entity.enams.state.UserState.TRADE_SETTINGS;
+import static org.example.entity.enams.state.UserState.TRADE_START;
+import static org.example.entity.enams.state.UserState.TRADE_STOP;
 
 @Configuration
 public class ButtonRegistration {
 	@Bean
 	Map<String, UserState> buttonMap(){
 		Map<String, UserState> state = new HashMap<>();
-		ChangeType[] changeEnums = ChangeType.values(); //выбор биржи
-
-
-		state.put("/start", BOT_START);
-
-		for (ChangeType type: changeEnums) {
-			state.put(type.toString(), BOT_CHANGE);
-		}
-
-		state.put("выбор аккаунта", ACCOUNT_LIST);
-		state.put("регистрация", ACCOUNT_ADD_REGISTER);
-		state.put("Настрайки трейдинга", TRADE_MANAGER);
-		state.put("запуск трейдинга", TRADE_START);
-		state.put("остановить трейдинг", TRADE_STOP);
-		state.put("отмена", BOT_CANCEL);
-		state.put("Информация о текущих настроек", INFO_SETTINGS);
-		//--------Настройки трейдинга
-		state.put("Выбор торговой пары", SETTINGS_NAME_PAIR);
-		state.put("Укажите цену ордера", SETTINGS_AMOUNT_ORDER);
-		state.put("Глубина размера стакана", SETTINGS_DEPTH_GLASS);
-		state.put("В главное мею", BOT_MAIN_MENU);
-		state.put("/main", BOT_MAIN_MENU);
-		state.put("Выбор стратегии", SETTINGS_NAME_STRATEGY);
-		state.put("Удаление аккаунта", ACCOUNT_LIST);
-
-
-		state.put("/cancel", BOT_CANCEL);
-        state.put("/info_settings", INFO_SETTINGS);
-
-		state.put("/help", BOT_HELP);
-
+		
+		//команды текстом
+		state.put(ButtonCommand.start,BOT_START);
+		state.put(ButtonCommand.help,BOT_HELP);
+		state.put(ButtonCommand.cancel, BOT_CANCEL);
+		state.put(ButtonCommand.info,INFO_SETTINGS);
+		state.put(ButtonCommand.main,BOT_MAIN_MENU);
+		
+		//выбор биржи
+		state.put(ButtonChange.bybit, BOT_CHANGE);
+		state.put(ButtonChange.binance, BOT_CHANGE);
+		
+		//основное меню
+		state.put(ButtonBasic.infoSettings, INFO_SETTINGS);
+		state.put(ButtonBasic.deleteAccount, ACCOUNT_LIST);
+		state.put(ButtonBasic.choiceAccount, ACCOUNT_LIST);
+		state.put(ButtonBasic.tradeSettings, TRADE_SETTINGS);
+		state.put(ButtonBasic.tradeOperation, TRADE_OPERATION);
+		state.put(ButtonBasic.registerAccount, ACCOUNT_ADD_REGISTER);
+		
+		//меню настройки трейдинга
+		state.put(ButtonSetting.namePair, SETTINGS_NAME_PAIR);
+		state.put(ButtonSetting.amountOrder, SETTINGS_AMOUNT_ORDER);
+		state.put(ButtonSetting.depthGlass, SETTINGS_DEPTH_GLASS);
+		state.put(ButtonSetting.selectStrategy, SETTINGS_NAME_STRATEGY);
+		state.put(ButtonMainMenu.mainMenu, BOT_MAIN_MENU);
+		
+		//меню управление трейдинга
+		state.put(ButtonOperation.tradeStart, TRADE_START);
+		state.put(ButtonOperation.tradeStop,TRADE_STOP);
+		state.put(ButtonOperation.tradeCancel,TRADE_CANCEL);
+		state.put(ButtonCommand.main,BOT_MAIN_MENU);
+		
+		//выбор стратегии
+		state.put(ButtonStrategy.slidingProtectiveOrder, SETTINGS_SAVE_NAME_STRATEGY);
+		state.put(ButtonStrategy.predictionsOfEvents, SETTINGS_SAVE_NAME_STRATEGY);
+		
 		return state;
 	}
 }
