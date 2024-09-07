@@ -15,20 +15,22 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfiguration {
     @Bean
-    public MessageConverter jsonMessageConverter(){
+    public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 
     @Bean
-    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){
+    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
         return new RabbitAdmin(new RabbitTemplate(connectionFactory));
     }
+
     @Bean
-    public ObjectMapper objectMapper(){
+    public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
+
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
         return builder ->

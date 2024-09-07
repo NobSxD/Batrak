@@ -1,28 +1,31 @@
 package org.example.xchange.finance;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 
+@Slf4j
 public class CurrencyConverter {
 
-	public static BigDecimal convertCurrency(BigDecimal originalAmount, BigDecimal usdt) {
-		int scale = 3;
+	public static BigDecimal convertCurrency(BigDecimal price, BigDecimal usdt, int scale) {
 		RoundingMode roundingMode = RoundingMode.HALF_UP;
-		MathContext mc = new MathContext(originalAmount.precision());
-		BigDecimal divide = usdt.divide(originalAmount, roundingMode);
-		divide.round(mc);
-		return divide;
+		BigDecimal result = usdt.divide(price, scale, roundingMode);
+		log.info("usdt={} / price={} равно={}", usdt, price,result);
+		return result;
 
 	}
 
-	public static BigDecimal convertUsdt(BigDecimal originalAmount, BigDecimal priceCurrency) {
+	public static BigDecimal convertUsdt(BigDecimal price, BigDecimal priceCurrency) {
 		int scale = 2;
 		RoundingMode roundingMode = RoundingMode.HALF_UP;
-		return priceCurrency.multiply(originalAmount).setScale(scale, roundingMode);
+		BigDecimal result = priceCurrency.multiply(price).setScale(scale, roundingMode);
+		log.info("Криптавалюта={} * price={} равно={}", priceCurrency, price, result);
+		return result;
 
 	}
 
+	
 	public static BigDecimal validUsd(BigDecimal usd) {
 		 if (usd.compareTo(new BigDecimal("0.01")) > 0) {
 			return usd.setScale(2, RoundingMode.HALF_UP);

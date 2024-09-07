@@ -1,5 +1,7 @@
 package org.example.configuration;
 
+import org.example.entity.collect.Pair;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,12 +15,13 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties(prefix = "currency")
 public class CurrencyProperties {
-	private Map<String, ExchangeProperties> exchanges;
+    private Map<String, ExchangeProperties> exchanges;
 
-	@Setter
-	@Getter
-	public static class ExchangeProperties {
-		private String type;
-		private List<String> pairs;
-	}
+    @Setter
+    @Getter
+    public static class ExchangeProperties {
+        private String type;
+        private List<Pair> pairs;
+        private int scale;
+    }
 }

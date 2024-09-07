@@ -17,4 +17,5 @@ public interface NodeAccount {
 	Account getAccount(String nameAccount, NodeUser nodeUser);
 
 	void deleteFindId(long id);
+	boolean existsByNodeUser(NodeUser nodeUser);
 }

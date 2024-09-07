@@ -19,6 +19,9 @@ repositories {
     maven {
         url = uri('https://oss.sonatype.org/content/groups/public/')
     }
+    maven {
+        url = uri('https://repo.spring.io/milestone')
+    }
 }
 
 group = 'org.example'

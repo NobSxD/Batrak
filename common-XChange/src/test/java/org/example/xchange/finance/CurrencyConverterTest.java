@@ -3,6 +3,7 @@ package org.example.xchange.finance;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +15,7 @@ class CurrencyConverterTest {
 		BigDecimal priceBTC = new BigDecimal("67773.2");
 		BigDecimal cash = new BigDecimal("67.74");
 		BigDecimal expectedBTC = new BigDecimal("0.00100");
-		BigDecimal usdt = CurrencyConverter.convertCurrency(priceBTC, cash);
+		BigDecimal usdt = CurrencyConverter.convertCurrency(priceBTC, cash, 5);
 		assertEquals(expectedBTC, usdt);
 	}
 	@Test
@@ -46,6 +47,15 @@ class CurrencyConverterTest {
 		assertEquals(new BigDecimal("150.90") , bigDecimal9);
 		BigDecimal bigDecimal10 = CurrencyConverter.validUsd(new BigDecimal("15.89074575"));
 		assertEquals(new BigDecimal("15.89") , bigDecimal10);
+	}
+	@Test
+	void scale(){
+		RoundingMode roundingMode = RoundingMode.HALF_UP;
+		BigDecimal test;
+		BigDecimal test2 = new BigDecimal("14.6789345").setScale(3,roundingMode);
+		test = test2;
+		assertEquals(test.scale(),3);
+		
 	}
 
 

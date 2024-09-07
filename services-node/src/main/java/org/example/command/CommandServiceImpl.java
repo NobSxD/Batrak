@@ -27,6 +27,10 @@ public class CommandServiceImpl implements CommandService{
 	public String send(NodeUser nodeUser, String text){
 		try {
 			Command command = stateMap.get(nodeUser.getState());
+			if (command == null){
+				log.error("Пользователь id: {} name: {}, ввел неизвестную команду:{}", nodeUser.getId(), nodeUser.getFirstName(), nodeUser.getState());
+				return "команда " + nodeUser.getState() + "не найденна.";
+			}
 			String send = command.send(nodeUser, text);
 			nodeUserDAO.save(nodeUser);
 			return send;

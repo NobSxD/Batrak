@@ -34,6 +34,7 @@ public class ConfigTrade  implements Displayable {
 	private Long id;
 
 	private String namePair = "BTC-USDT";
+	int scale = 5;
 
 	private BigDecimal amountOrder = new BigDecimal(11);
 

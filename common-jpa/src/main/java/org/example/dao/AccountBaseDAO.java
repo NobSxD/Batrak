@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface AccountBaseDAO extends JpaRepository<Account,Long> {
 	Optional<Account> findByNameAccountAndMenuChangeAndNodeUser(String nameAccount, MenuChange type, NodeUser nodeUser);
 	List<Account> findAllByMenuChangeAndNodeUser(MenuChange type, NodeUser nodeUser);
+	boolean existsByMenuChangeAndNodeUser(MenuChange type, NodeUser nodeUser);
 
 }

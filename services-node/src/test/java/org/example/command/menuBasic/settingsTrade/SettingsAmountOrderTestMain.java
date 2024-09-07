@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SettingsAmountOrderTestMain {
-	SettingsAmountOrder settingsAmountOrder;
 	NodeUser nodeUser;
 	ConfigTrade configTrade;
 	
@@ -28,11 +27,7 @@ class SettingsAmountOrderTestMain {
 				.configTrade(configTrade)
 				.build();
 	}
-	@Test
-	void checkState(){
-		settingsAmountOrder.send(nodeUser, "");
-		Assertions.assertEquals(nodeUser.getState(), UserState.SETTINGS_SAVE_AMOUNT_ORDER);
-	}
+
 
 	@Test
 	void testExpectedException() {

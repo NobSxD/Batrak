@@ -1,0 +1,25 @@
+<code_scheme name="Default" version="173">
+    <JavaCodeStyleSettings>
+        <option name="CLASS_NAMES_IN_JAVADOC" value="3" />
+        <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="9999" />
+        <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="9999" />
+        <option name="PACKAGES_TO_USE_IMPORT_ON_DEMAND">
+            <value />
+        </option>
+        <option name="IMPORT_LAYOUT_TABLE">
+            <value>
+                <package name="org.eltex" withSubpackages="true" static="false" />
+                <emptyLine />
+                <package name="" withSubpackages="true" static="false" />
+                <emptyLine />
+                <package name="javax" withSubpackages="true" static="false" />
+                <emptyLine />
+                <package name="javax.swing" withSubpackages="true" static="false" />
+                <emptyLine />
+                <package name="java" withSubpackages="true" static="false" />
+                <emptyLine />
+                <package name="" withSubpackages="true" static="true" />
+            </value>
+        </option>
+    </JavaCodeStyleSettings>
+</code_scheme>

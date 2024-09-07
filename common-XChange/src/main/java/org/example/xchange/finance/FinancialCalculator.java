@@ -20,21 +20,24 @@ public class FinancialCalculator {
 		BigDecimal finalValue = initialBTC.multiply(selBTC);
 		return finalValue.subtract(cash).setScale(2, RoundingMode.HALF_UP);
 	}
-
-
-
+	
+	
+	
 	public static BigDecimal maxAmount(List<LimitOrder> limitOrders) {
 		int index = 0;
+		BigDecimal max;
 		BigDecimal maxOriginalAmount = BigDecimal.ZERO;
 		LimitOrder orderWithMaxOriginalAmount = null;
+		
 		for (int i = 0; i < limitOrders.size(); i++) {
-			if (limitOrders.get(i).getOriginalAmount().compareTo(maxOriginalAmount) > 0) {
-				maxOriginalAmount = limitOrders.get(i).getOriginalAmount();
-				orderWithMaxOriginalAmount = limitOrders.get(i);
+			LimitOrder currentOrder = limitOrders.get(i);
+			if (currentOrder.getOriginalAmount().compareTo(maxOriginalAmount) > 0) {
+				maxOriginalAmount = currentOrder.getOriginalAmount();
+				orderWithMaxOriginalAmount = currentOrder;
 				index = i;
 			}
 		}
-		BigDecimal max = null;
+		
 		if (orderWithMaxOriginalAmount != null) {
 			if (index > 0) {
 				max = limitOrders.get(index - 1).getLimitPrice();

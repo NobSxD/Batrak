@@ -19,7 +19,7 @@ dependencies {
     api libs.org.springframework.boot.spring.boot.starter.web
     api libs.io.reactivex.rxjava3.rxjava
     api libs.org.telegram.telegrambots.longpolling
-    api libs.com.fasterxml.jackson.core.jackson.databind
+    api libs.com.fasterxml.jackson.core.jackson.databind.x1
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
     annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok

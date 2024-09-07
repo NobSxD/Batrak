@@ -23,6 +23,7 @@ dependencies {
     testImplementation libs.com.h2database.h2
     annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.0.4'
 }
 test{
     useJUnitPlatform()

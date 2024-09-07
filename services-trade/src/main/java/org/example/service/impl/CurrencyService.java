@@ -12,7 +12,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 @Component
 @RequiredArgsConstructor
@@ -28,20 +28,21 @@ public class CurrencyService {
 		currencyProperties.getExchanges().forEach((name, exchange) -> {
 			MenuChange menuChange = MenuChange.fromValue(exchange.getType());
 			NodeChange nodeChange = nodeChangeDAO.findByMenuChange(menuChange)
-					.orElseGet(() -> NodeChange.builder()
-							.menuChange(menuChange)
-							.build());
-
+												 .orElseGet(() -> NodeChange.builder()
+																			.menuChange(menuChange)
+																			.build());
+			
 			// Удаление старых пар
-			nodeChange.setPairs(new ArrayList<>());
+			nodeChange.setPairs(new HashMap<>());
 			nodeChangeDAO.save(nodeChange); // Очищаем старые пары
-
 			// Добавление новых пар
-			for (String currencyPair : exchange.getPairs()) {
-				Pair pair = new Pair(currencyPair);
+			exchange.getPairs().forEach(pairConfig -> {
+				String currencyPair = pairConfig.getNamePair();
+				int scale = pairConfig.getScale();
+				Pair pair = new Pair(currencyPair, scale);
 				pairDAO.save(pair);
 				nodeChange.addPair(pair);
-			}
+			});
 			nodeChangeDAO.save(nodeChange);
 		});
 	}

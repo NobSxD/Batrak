@@ -36,7 +36,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 
 
 	public String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, Instrument currencyPair) {
-		BigDecimal usdt = CurrencyConverter.convertCurrency(price, summa);
+		BigDecimal usdt = CurrencyConverter.convertCurrency(price, summa, 5);
 		String orderId = "";
 		TradeService tradeService = exchange.getTradeService();
 		LimitOrder limitOrder = new LimitOrder(orderType, usdt, currencyPair, "", new Date(), price);
@@ -66,7 +66,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 	}
 
 	public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType) {
-		return new LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
+		return new  LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
 	}
 
 	public List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders) {

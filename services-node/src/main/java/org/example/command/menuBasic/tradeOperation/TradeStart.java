@@ -2,6 +2,7 @@ package org.example.command.menuBasic.tradeOperation;
 
 import org.example.command.Command;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.state.TradeState;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerXChangeService;
 
@@ -21,10 +22,15 @@ public class TradeStart implements Command {
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			nodeUser.setTradeStartOrStop(true);
-			nodeUser.setLastStartTread(LocalDateTime.now());
-			producerXChangeService.startTread(nodeUser);
-			return "Трейд запущен, начинаю искать точку входа";
+			if (nodeUser.isTradeStartOrStop()) {
+				nodeUser.setTradeStartOrStop(true);
+				//TODO добавить 3 фазное завершение торговли
+				nodeUser.setStateTrade(TradeState.BAY);
+				nodeUser.setLastStartTread(LocalDateTime.now());
+				producerXChangeService.startTread(nodeUser);
+				return "";
+			}
+			return "Трейдинг уже запущен, отмените ордер или дождитесь завершение торговли.";
 		}catch (Exception e){
 			log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(),  e.getMessage());
 			return "во время старта трейдинга произошла ошибка, обратитесь к администратору системы.";

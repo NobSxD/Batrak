@@ -25,18 +25,22 @@ public class AccountList implements Command {
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			List<Account> accounts = nodeAccount.getAccounts(nodeUser);
-			if (accounts.isEmpty()) {
-				producerTelegramService.mainMenu("У вас нет аккаунта для выбора, сначало добавте аккаунт:", nodeUser.getChatId());
-				return "";
+			if (!nodeAccount.existsByNodeUser(nodeUser)) {
+				return "У вас нет аккаунта.";
 			}
-			producerTelegramService.accountsMenu(accounts, "Выберите аккаунт", nodeUser.getChatId());
+			List<Account> accounts = nodeAccount.getAccounts(nodeUser);
 			if (text.equals(ButtonBasic.deleteAccount)) {
 				nodeUser.setState(UserState.ACCOUNT_DELETE);
-			} else {
-				nodeUser.setState(UserState.ACCOUNT_SELECT);
+				producerTelegramService.accountsMenu(accounts, "Выберите аккаунт для удаления", nodeUser.getChatId());
+				return "";
 			}
-			return "";
+			if (text.equals(ButtonBasic.choiceAccount)){
+				nodeUser.setState(UserState.ACCOUNT_SELECT);
+				producerTelegramService.accountsMenu(accounts, "Выберите аккаунт для торговли", nodeUser.getChatId());
+				return "";
+			}
+			log.error("Пользаватель {}, пытался выбрать или удалить аккаунт. text= {}", nodeUser.getId(), text);
+			return "Аккаунт не выбран и аккаунт не удален, пожалуйста повторите попытку или введите команду /start";
 		} catch (Exception e) {
 			log.error("Имя пользователя: {}. Пользователь id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
 			return "во время выбора аккаунта произошла ошибка, обратитесь к администратору системы.";

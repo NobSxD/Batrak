@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -37,7 +37,7 @@ public class NodeChange implements Displayable {
 
 	@OneToMany(mappedBy = "nodeChange", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
-	private List<Pair> pairs;
+	private Map<String,Pair> pairs;
 
 
 	@Enumerated(EnumType.STRING)
@@ -46,7 +46,7 @@ public class NodeChange implements Displayable {
 	private MenuChange menuChange;
 
 	public void addPair(Pair pair) {
-		pairs.add(pair);
+		pairs.put(pair.getNamePair(), pair);
 		pair.setNodeChange(this);
 	}
 

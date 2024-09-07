@@ -34,6 +34,11 @@ public class NodeAccountImpl implements NodeAccount {
 	}
 
 	@Override
+	public boolean existsByNodeUser(NodeUser nodeUser){
+		return accountBaseDAO.existsByMenuChangeAndNodeUser(nodeUser.getMenuChange(),nodeUser);
+	}
+
+	@Override
 	public Account getAccount(String nameAccount, NodeUser nodeUser) {
 		return accountBaseDAO.findByNameAccountAndMenuChangeAndNodeUser(nameAccount, nodeUser.getMenuChange(), nodeUser).orElse(null);
 	}

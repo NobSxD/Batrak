@@ -41,11 +41,12 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
 			strategyCommand.trade(nodeUser, change);
 			
 		} catch (ExchangeException e) {
-			processServiceCommand.sendAnswer("Проверте правелность введных данных, api public key, api secret key", nodeUser.getChatId());
-			log.error(e.getMessage() + " имя пользователя: " +  nodeUser.getUsername() + ". Id пользователя " + nodeUser.getId());
+			processServiceCommand.sendAnswer("Проверте правелность введных данных, api public key, api secret key, или добавте разрешенный ip server", nodeUser.getChatId());
+			log.error("Имя пользователя: {}. id: {}. Ошибка: {}.", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
 		} catch (Exception e) {
 			nodeUser.setTradeStartOrStop(false);
 			log.error(e.getMessage() + " имя пользователя: " +  nodeUser.getUsername() + " id пользователя " + nodeUser.getId());
+			log.error("Имя пользователя: {}. id: {}. Ошибка: {}.", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
 		}
 	}
 	

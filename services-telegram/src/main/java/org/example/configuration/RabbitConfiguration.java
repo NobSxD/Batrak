@@ -29,6 +29,9 @@ public class RabbitConfiguration {
     public Queue EnumCustomMessage(){return new Queue(ENUM_CUSTOM_MESSAGE);}
     @Bean
     public Queue tradeStart(){return new Queue(TRADE_MESSAGE);}
+    
+    @Bean
+    public Queue tradeCancelOrder(){return new Queue(TRADE_CANCEL_ORDER);}
 
     @Bean Queue rate(){return new Queue(RATE);}
 

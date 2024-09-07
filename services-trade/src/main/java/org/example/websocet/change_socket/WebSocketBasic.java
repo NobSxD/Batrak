@@ -2,6 +2,7 @@ package org.example.websocet.change_socket;
 
 import org.example.configuration.CurrencyProperties;
 import org.example.entity.NodeOrder;
+import org.example.entity.collect.Pair;
 import org.example.entity.enams.menu.MenuChange;
 
 import info.bitrich.xchangestream.core.ProductSubscription;
@@ -28,10 +29,10 @@ public abstract class WebSocketBasic {
 	public abstract void streamValue();
 	
 	protected void init(MenuChange menuChange, CurrencyProperties currencyProperties, ExchangeSpecification exchangeSpecification) {
-		List<String> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> menuChange.toString().equals(exchange.getType()))
-													   .flatMap(exchange -> exchange.getPairs().stream()).toList();
-		for (String currencyPair : currencyPairs) {
-			createExchangeForCurrencyPair(new CurrencyPair(currencyPair), exchangeSpecification);
+		List<Pair> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> menuChange.toString().equals(exchange.getType()))
+													 .flatMap(exchange -> exchange.getPairs().stream()).toList();
+		for (Pair currencyPair : currencyPairs) {
+			createExchangeForCurrencyPair(new CurrencyPair(currencyPair.getNamePair()), exchangeSpecification);
 		}
 		
 	}

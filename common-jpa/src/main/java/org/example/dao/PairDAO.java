@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface PairDAO extends JpaRepository<Pair, Long> {
-	Optional<Pair> findByPair(String pair);
+	Optional<Pair> findByNamePair(String pair);
 }

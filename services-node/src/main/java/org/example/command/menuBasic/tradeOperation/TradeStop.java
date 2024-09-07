@@ -16,7 +16,7 @@ public class TradeStop implements Command {
 	public String send(NodeUser nodeUser, String text) {
 		try {
 			nodeUser.setTradeStartOrStop(false);
-			return "Для избежание финансовых потерь дождитесь цыкл завершения торговли";
+			return "Для избежание финансовых потерь дождитесь цикла завершения торговли";
 		}catch (Exception e){
 			log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(),  e.getMessage());
 			return "во время остановки трейдинга произошла ошибка, обратитесь к администратору системы.";

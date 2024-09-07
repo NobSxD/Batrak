@@ -3,11 +3,9 @@ currency:
     binance:
       type: "binance"
       pairs:
-        - namePair: "BTC-USDT"
+        - pair: "BTC-USDT"
           scale: 5
-
-        - namePair: "BNB-USDT"
-          scale: 3
+#        - "BNB-USDT"
 #        - "TRX-USDT"
 #        - "ETH-USDT"
 #    bybit:
