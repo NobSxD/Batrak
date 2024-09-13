@@ -1,5 +1,7 @@
 package org.example.service.impl;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.change.ChangeFactory;
 import org.example.entity.NodeOrder;
 import org.example.entity.NodeUser;
@@ -9,10 +11,8 @@ import org.example.service.MainServiceTradeBot;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.StrategyCommand;
 import org.example.xchange.BasicChangeInterface;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.knowm.xchange.exceptions.ExchangeException;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,10 +34,11 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
 	private final StrategyCommand strategyCommand;
 	private final ProcessServiceCommand processServiceCommand;
 	@Override
-	public void startORStopTrade(NodeUser nodeUser) {
+	public void startORStopTrade(@Payload NodeUser nodeUser) {
 		try {
 			nodeUser.setStateTrade(TradeState.BAY);
 			BasicChangeInterface change = ChangeFactory.createChange(nodeUser);
+			processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
 			strategyCommand.trade(nodeUser, change);
 			
 		} catch (ExchangeException e) {

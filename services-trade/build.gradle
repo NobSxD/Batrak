@@ -14,17 +14,23 @@ dependencies {
     api project(':common-jpa')
     api project(':common-rabbitmq')
     api libs.javax.xml.bind.jaxb.api
-    api libs.jakarta.xml.bind.jakarta.xml.bind.api
     api libs.org.springframework.boot.spring.boot.starter.amqp
     api libs.org.springframework.boot.spring.boot.starter.web
-    api libs.io.reactivex.rxjava3.rxjava
     api libs.org.telegram.telegrambots.longpolling
-    api libs.com.fasterxml.jackson.core.jackson.databind.x1
+    api libs.com.fasterxml.jackson.datatype.jackson.datatype.jsr310
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
     annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
 }
 test{
     useJUnitPlatform()
+}
+configurations.configureEach {
+    resolutionStrategy {
+        force 'com.fasterxml.jackson.core:jackson-databind:2.14.3'
+        force 'com.fasterxml.jackson.core:jackson-annotations:2.14.3'
+        force 'com.fasterxml.jackson.core:jackson-core:2.14.3'
+        force 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.3'
+    }
 }
 description = 'services-trade'

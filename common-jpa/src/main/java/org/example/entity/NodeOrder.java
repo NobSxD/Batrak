@@ -1,8 +1,5 @@
 package org.example.entity;
 
-import org.example.entity.enams.menu.MenuStrategy;
-import org.example.entity.enams.state.OrderState;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
@@ -19,6 +16,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.entity.enams.menu.MenuStrategy;
+import org.example.entity.enams.state.OrderState;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

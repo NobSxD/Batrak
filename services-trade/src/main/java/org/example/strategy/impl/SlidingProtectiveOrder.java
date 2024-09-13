@@ -102,6 +102,7 @@ public class SlidingProtectiveOrder implements StrategyTrade {
         } catch (FundsExceededException e) {
             return handleFundsExceededException(nodeUser, e);
         } catch (Exception e) {
+            e.printStackTrace();
             return handleGeneralException(nodeUser, e);
         }
     }
@@ -125,10 +126,7 @@ public class SlidingProtectiveOrder implements StrategyTrade {
     private NodeOrder processOrder(NodeUser nodeUser, BasicChangeInterface basicChange,
                                    Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType,
                                    boolean isBid) throws InterruptedException {
-        CurrencyPair instrument = new CurrencyPair("BTC-USDT");
-        BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
-        List<BigDecimal> priceAndAmount2 = List.of(new BigDecimal("50000.39000000"),price);
-        LimitOrder order = basicChange.createOrder(instrument, priceAndAmount2, Order.OrderType.BID);
+        LimitOrder order = basicChange.createOrder(currencyPair, priceAndAmount, Order.OrderType.BID);
         String orderId = basicChange.placeLimitOrder(order, nodeUser.getConfigTrade().isRealTrade());
         NodeOrder nodeOrder = createNodeOrder(order, orderId, priceAndAmount, nodeUser, OrderState.PLACED);
         nodeUser.getOrders().add(nodeOrder);

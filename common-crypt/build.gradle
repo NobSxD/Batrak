@@ -10,7 +10,7 @@ plugins {
 
 dependencies {
     api libs.com.github.ulisesbocchio.jasypt.spring.boot.starter
-    testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 test{
     useJUnitPlatform()

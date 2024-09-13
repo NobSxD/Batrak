@@ -1,8 +1,5 @@
 package org.example.entity;
 
-import org.example.castom.Displayable;
-import org.example.entity.enams.menu.MenuChange;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
@@ -17,6 +14,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.example.castom.Displayable;
+import org.example.entity.enams.menu.MenuChange;
 
 import java.math.BigDecimal;
 
@@ -42,7 +41,7 @@ public class Account implements Displayable {
 	private MenuChange menuChange;
 
 	@ManyToOne
-	@JsonBackReference("nodeUser-account")
+	@JsonBackReference
 	private NodeUser nodeUser;
 
 	@Override

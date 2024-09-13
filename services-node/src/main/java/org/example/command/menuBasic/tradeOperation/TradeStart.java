@@ -32,6 +32,7 @@ public class TradeStart implements Command {
 			}
 			return "Трейдинг уже запущен, отмените ордер или дождитесь завершение торговли.";
 		}catch (Exception e){
+			e.printStackTrace();
 			log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(),  e.getMessage());
 			return "во время старта трейдинга произошла ошибка, обратитесь к администратору системы.";
 		}

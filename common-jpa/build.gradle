@@ -12,9 +12,7 @@ dependencies {
     api libs.org.springframework.boot.spring.boot.starter.data.jpa
     api libs.com.mysql.mysql.connector.j
     api libs.com.fasterxml.jackson.core.jackson.databind
-    api libs.org.flywaydb.flyway.core
-    api libs.org.flywaydb.flyway.mysql
-    testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
     annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
 }

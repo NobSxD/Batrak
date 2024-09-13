@@ -25,109 +25,106 @@ import java.util.List;
 
 
 class BinanceMainImpIntegratio {
+    ChangeUser changeUser;
+    @BeforeEach
+    void setAp() {
+        CryptoUtils cryptoUtils = new CryptoUtils();
+        changeUser = ChangeUser.builder()
+                .botName("Bot")
+                .apiKey(cryptoUtils.encryptMessage(System.getenv("pKey")))
+                .secretKey(cryptoUtils.encryptMessage(System.getenv("sKey")))
+                .build();
+
+    }
+
+    @Test
+    public void generatorDTO() throws IOException {
+        //BinanceMainImpl binanceMain = new BinanceMainImpl(nodeUser);
+        Exchange bitstamp = ExchangeFactory.INSTANCE.createExchange(BinanceExchange.class);
+
+        // Interested in the public market data feed (no authentication)
+        MarketDataService marketDataService = bitstamp.getMarketDataService();
 
 
-	ChangeUser changeUser;
+        Ticker ticker = marketDataService.getTicker((Instrument) CurrencyPair.BTC_USDT);
+
+        System.out.println(ticker.toString());
+
+        BinanceMarketDataServiceRaw raw = (BinanceMarketDataServiceRaw) marketDataService;
+        BinanceTicker24h bitstampTicker = raw.ticker24hAllProducts((Instrument) CurrencyPair.BTC_USDT);
+
+        System.out.println(bitstampTicker.toString());
+
+    }
 
 
+    @Test
+    void limitOrder() {
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        Instrument instrument = new CurrencyPair("BTC-USDT");
+        String s = binanceMain.limitOrder(Order.OrderType.BID, BigDecimal.valueOf(11), new BigDecimal("50000"), instrument);
+        System.out.println(s);
+    }
 
-	@BeforeEach
-	void setAp(){
-		CryptoUtils cryptoUtils = new CryptoUtils();
-		changeUser = ChangeUser.builder()
-				.botName("Bot")
-				.apiKey(cryptoUtils.encryptMessage(System.getenv("pKey")))
-				.secretKey(cryptoUtils.encryptMessage(System.getenv("sKey")))
-				.build();
+    @Test
+    void createOrder() {
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        Instrument instrument = new CurrencyPair("BTC-USDT");
+        List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), new BigDecimal("10.5"));
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
 
-	}
-	@Test
-	public void generatorDTO() throws IOException {
-		//BinanceMainImpl binanceMain = new BinanceMainImpl(nodeUser);
-		Exchange bitstamp = ExchangeFactory.INSTANCE.createExchange(BinanceExchange.class);
+    }
 
-		// Interested in the public market data feed (no authentication)
-		MarketDataService marketDataService = bitstamp.getMarketDataService();
+    @Test
+    void placeLimitOrder() {
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        Instrument instrument = new CurrencyPair("BTC-USDT");
+        List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), new BigDecimal("0.00020"));
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        binanceMain.placeLimitOrder(order, true);
+    }
 
+    @Test
+    void placeLimitOrderAndConvert() {
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        Instrument instrument = new CurrencyPair("BTC-USDT");
+        BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231"), new BigDecimal("11.2"), 5);
+        List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), price);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        binanceMain.placeLimitOrder(order, true);
+    }
 
+    @Test
+    void placeLimitOrderAndConvertFalse() {
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        CurrencyPair instrument = new CurrencyPair("BTC-USDT");
+        BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
+        List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"), price);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        String s = binanceMain.placeLimitOrder(order, true);
+        System.out.println(s);
+    }
 
-		Ticker ticker = marketDataService.getTicker((Instrument) CurrencyPair.BTC_USDT);
+    @Test
+    void pair() {
+        CurrencyPair currencyPair = new CurrencyPair("ER-TTT");
+        System.out.println(currencyPair);
 
-		System.out.println(ticker.toString());
+    }
 
-		BinanceMarketDataServiceRaw raw = (BinanceMarketDataServiceRaw) marketDataService;
-		BinanceTicker24h bitstampTicker = raw.ticker24hAllProducts((Instrument) CurrencyPair.BTC_USDT);
+    @Test
+    void bigDecimal() {
+        String a = "123";
+        Double d = Double.valueOf(a);
+        BigDecimal bigDecimal = BigDecimal.valueOf(d);
+        System.out.println(bigDecimal);
+    }
 
-		System.out.println(bitstampTicker.toString());
-
-	}
-
-
-	@Test
-	void limitOrder() {
-		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
-		Instrument instrument = new CurrencyPair("BTC-USDT");
-		String s = binanceMain.limitOrder(Order.OrderType.BID, BigDecimal.valueOf(11), new BigDecimal("50000"), instrument);
-		System.out.println(s);
-	}
-
-	@Test
-	void createOrder(){
-		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
-		Instrument instrument = new CurrencyPair("BTC-USDT");
-		List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"),new BigDecimal("10.5"));
-		LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-
-	}
-	@Test
-	void placeLimitOrder(){
-		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
-		Instrument instrument = new CurrencyPair("BTC-USDT");
-		List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"),new BigDecimal("0.00020"));
-		LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-		binanceMain.placeLimitOrder(order, true);
-	}
-
-	@Test
-	void placeLimitOrderAndConvert(){
-		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
-		Instrument instrument = new CurrencyPair("BTC-USDT");
-		BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231"), new BigDecimal("11.2"), 5);
-		List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"),price);
-		LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-		binanceMain.placeLimitOrder(order, true);
-	}
-
-	@Test
-	void placeLimitOrderAndConvertFalse(){
-		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
-		CurrencyPair instrument = new CurrencyPair("BTC-USDT");
-		BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
-		List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"),price);
-		LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-		String s = binanceMain.placeLimitOrder(order, true);
-		System.out.println(s);
-	}
-
-	@Test
-	void pair(){
-		CurrencyPair currencyPair = new CurrencyPair("ER-TTT");
-		System.out.println(currencyPair);
-
-	}
-	@Test
-	void bigDecimal(){
-		String a = "123";
-		Double d = Double.valueOf(a);
-		BigDecimal bigDecimal = BigDecimal.valueOf(d);
-		System.out.println(bigDecimal);
-	}
-
-	@Test
-	void orderBokAsks(){
-		BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
-		OrderBook orderBook = binanceMain.orderBooksLimitOrders(25, "BTC-USDT");
-		orderBook.getAsks();
-	}
+    @Test
+    void orderBokAsks() {
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        OrderBook orderBook = binanceMain.orderBooksLimitOrders(25, "BTC-USDT");
+        orderBook.getAsks();
+    }
 
 }

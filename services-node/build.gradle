@@ -14,18 +14,26 @@ dependencies {
     api project(':common-rabbitmq')
     api project(':common-jpa')
     api libs.org.springframework.boot.spring.boot.starter.web
-    api libs.org.springframework.boot.spring.boot.starter.actuator
     api libs.org.telegram.telegrambots.longpolling
     api libs.javax.xml.bind.jaxb.api
-    api libs.jakarta.xml.bind.jakarta.xml.bind.api
     api libs.org.springframework.boot.spring.boot.starter.amqp
+    api libs.com.fasterxml.jackson.datatype.jackson.datatype.jsr310
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
     testImplementation libs.com.h2database.h2
     annotationProcessor libs.org.projectlombok.lombok
     compileOnly libs.org.projectlombok.lombok
     implementation 'com.github.ben-manes.caffeine:caffeine:3.0.4'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.3'
 }
 test{
     useJUnitPlatform()
+}
+configurations.configureEach {
+    resolutionStrategy {
+        force 'com.fasterxml.jackson.core:jackson-databind:2.14.3'
+        force 'com.fasterxml.jackson.core:jackson-annotations:2.14.3'
+        force 'com.fasterxml.jackson.core:jackson-core:2.14.3'
+        force 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.3'
+    }
 }
 description = 'node'

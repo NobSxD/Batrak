@@ -5,8 +5,8 @@
 com-fasterxml-jackson-core-jackson-annotations = "2.14.3"
 com-fasterxml-jackson-core-jackson-core = "2.14.3"
 com-fasterxml-jackson-core-jackson-databind = "2.14.3"
-com-fasterxml-jackson-core-jackson-databind-x1 = "2.13.4.1"
-com-github-ulisesbocchio-jasypt-spring-boot-starter = "3.0.3"
+com-fasterxml-jackson-core-jackson-databind-x1 = "2.14.3"
+com-github-ulisesbocchio-jasypt-spring-boot-starter = "3.0.1"
 com-h2database-h2 = "2.2.224"
 com-mysql-mysql-connector-j = "9.0.0"
 io-reactivex-rxjava3-rxjava = "3.1.1"
@@ -21,18 +21,19 @@ org-knowm-xchange-xchange-stream-binance = "5.2.1-SNAPSHOT"
 org-knowm-xchange-xchange-stream-bybit = "5.2.1-SNAPSHOT"
 org-knowm-xchange-xchange-stream-core = "5.2.1-SNAPSHOT"
 org-projectlombok-lombok = "1.18.26"
-org-springframework-boot-spring-boot-configuration-processor = "3.3.0"
-org-springframework-boot-spring-boot-starter = "3.3.0"
-org-springframework-boot-spring-boot-starter-actuator = "3.3.0"
-org-springframework-boot-spring-boot-starter-amqp = "3.3.0"
-org-springframework-boot-spring-boot-starter-data-jpa = "3.3.0"
-org-springframework-boot-spring-boot-starter-test = "3.3.0"
-org-springframework-boot-spring-boot-starter-web = "3.3.0"
-org-springframework-boot-plagin = "3.3.0"
+org-springframework-boot-spring-boot-configuration-processor = "3.0.1"
+org-springframework-boot-spring-boot-starter = "3.0.1"
+org-springframework-boot-spring-boot-starter-amqp = "3.0.1"
+org-springframework-boot-spring-boot-starter-data-jpa = "3.0.1"
+org-springframework-boot-spring-boot-starter-test = "3.0.1"
+org-springframework-boot-spring-boot-starter-web = "3.0.1"
+org-springframework-boot-plagin = "3.0.1"
 org-telegram-telegrambots-longpolling = "7.2.0"
 org-telegram-telegrambots-spring-boot-starter = "6.9.7.1"
+com-fasterxml-jackson-datatype-jsr310 = "2.14.3"
 
 [libraries]
+com-fasterxml-jackson-datatype-jackson-datatype-jsr310 = {module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "com-fasterxml-jackson-datatype-jsr310"}
 com-fasterxml-jackson-core-jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "com-fasterxml-jackson-core-jackson-annotations" }
 com-fasterxml-jackson-core-jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "com-fasterxml-jackson-core-jackson-core" }
 com-fasterxml-jackson-core-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "com-fasterxml-jackson-core-jackson-databind" }
@@ -54,7 +55,6 @@ org-knowm-xchange-xchange-stream-core = { module = "org.knowm.xchange:xchange-st
 org-projectlombok-lombok = { module = "org.projectlombok:lombok", version.ref = "org-projectlombok-lombok" }
 org-springframework-boot-spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor", version.ref = "org-springframework-boot-spring-boot-configuration-processor" }
 org-springframework-boot-spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "org-springframework-boot-spring-boot-starter" }
-org-springframework-boot-spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator", version.ref = "org-springframework-boot-spring-boot-starter-actuator" }
 org-springframework-boot-spring-boot-starter-amqp = { module = "org.springframework.boot:spring-boot-starter-amqp", version.ref = "org-springframework-boot-spring-boot-starter-amqp" }
 org-springframework-boot-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "org-springframework-boot-spring-boot-starter-data-jpa" }
 org-springframework-boot-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "org-springframework-boot-spring-boot-starter-test" }
