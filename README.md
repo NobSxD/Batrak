@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/NobSxD/treadeBot/b6d01b48c5ca525eda359f83175d535d1c84bf6a/probot.svg" width="15%"> 
+<img src="https://github.com/NobSxD/treadeBot/blob/master/probot.svg" width="15%"> 
 
 # treadeBot 
 
