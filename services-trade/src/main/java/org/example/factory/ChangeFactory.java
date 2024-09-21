@@ -1,0 +1,25 @@
+package org.example.factory;
+
+import org.example.entity.NodeUser;
+import org.example.xchange.BasicChangeInterface;
+import org.example.xchange.DTO.ChangeUser;
+import org.example.xchange.change.BayBit.ByBitMainImpl;
+import org.example.xchange.change.Binance.BinanceMainImpl;
+
+public class ChangeFactory {
+    public static BasicChangeInterface createChange(NodeUser nodeUser) {
+        ChangeUser changeUser = ChangeUser.builder()
+                .userName(nodeUser.getUsername())
+                .apiKey(nodeUser.getAccount().getPublicApiKey())
+                .secretKey(nodeUser.getAccount().getSecretApiKey())
+                .botName(nodeUser.getAccount().getNameAccount())
+                .build();
+        BasicChangeInterface change = null;
+        switch (nodeUser.getMenuChange()) {
+            case Bybit -> change = new ByBitMainImpl(changeUser);
+            case Binance -> change = new BinanceMainImpl(changeUser);
+        }
+        return change;
+    }
+
+}

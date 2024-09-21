@@ -3,11 +3,12 @@ package org.example.entity.enams.menu;
 import org.example.button.ButtonMainMenu;
 import org.example.button.ButtonSetting;
 
-public enum MenuSetting {
+public enum MenuSetting{
 	NamePair(ButtonSetting.namePair),
 	AmountOrder(ButtonSetting.amountOrder),
 	DepthGlass(ButtonSetting.depthGlass),
 	SelectStrategy(ButtonSetting.selectStrategy),
+	DemoTrade(ButtonSetting.enableDemoTrading),
 	MainMenu(ButtonMainMenu.mainMenu);
 	
 	private final String value;

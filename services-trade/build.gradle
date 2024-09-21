@@ -13,6 +13,7 @@ dependencies {
     api project(':common-XChange')
     api project(':common-jpa')
     api project(':common-rabbitmq')
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.0.4'
     api libs.javax.xml.bind.jaxb.api
     api libs.org.springframework.boot.spring.boot.starter.amqp
     api libs.org.springframework.boot.spring.boot.starter.web

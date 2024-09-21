@@ -19,8 +19,7 @@ public class ConsumerServiceImpl {
     @RabbitListener(queues =  TRADE_MESSAGE)
     public void consumeTexMessageUpdate(NodeUser nodeUser) {
         try {
-            log.debug("TRADE_BOT: Text бот получил юзера: " + nodeUser.getUsername());
-            mainServiceTradeBot.startORStopTrade(nodeUser);
+            mainServiceTradeBot.startTrade(nodeUser);
         } catch (Exception e) {
             log.error(e.getMessage());
             e.printStackTrace();

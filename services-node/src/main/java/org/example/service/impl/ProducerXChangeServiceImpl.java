@@ -18,7 +18,7 @@ public class ProducerXChangeServiceImpl implements ProducerXChangeService {
 	private final RabbitTemplate rabbitTemplate;
 
 	@Override
-	public void startTread(NodeUser nodeUser) {
+	public void startTrade(NodeUser nodeUser) {
 		rabbitTemplate.convertAndSend(TRADE_MESSAGE, nodeUser);
 	}
 	

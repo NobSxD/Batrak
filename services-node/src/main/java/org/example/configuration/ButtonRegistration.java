@@ -22,6 +22,7 @@ import static org.example.entity.enams.state.UserState.BOT_CHANGE;
 import static org.example.entity.enams.state.UserState.BOT_HELP;
 import static org.example.entity.enams.state.UserState.BOT_MAIN_MENU;
 import static org.example.entity.enams.state.UserState.BOT_START;
+import static org.example.entity.enams.state.UserState.SETTINGS_ENABLE_DEMO_TRADING;
 import static org.example.entity.enams.state.UserState.INFO_SETTINGS;
 import static org.example.entity.enams.state.UserState.SETTINGS_AMOUNT_ORDER;
 import static org.example.entity.enams.state.UserState.SETTINGS_DEPTH_GLASS;
@@ -64,6 +65,7 @@ public class ButtonRegistration {
 		state.put(ButtonSetting.amountOrder, SETTINGS_AMOUNT_ORDER);
 		state.put(ButtonSetting.depthGlass, SETTINGS_DEPTH_GLASS);
 		state.put(ButtonSetting.selectStrategy, SETTINGS_NAME_STRATEGY);
+		state.put(ButtonSetting.enableDemoTrading, SETTINGS_ENABLE_DEMO_TRADING);
 		state.put(ButtonMainMenu.mainMenu, BOT_MAIN_MENU);
 		
 		//меню управление трейдинга

@@ -27,7 +27,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     @RabbitListener(queues = TEXT_MESSAGE_UPDATE)
     public void consumeTexMessageUpdate(Update update) {
         logger.debug("NODE: Text message is received");
-        mainService.defines(update);
+        mainService.processUpdate(update);
     }
 
 

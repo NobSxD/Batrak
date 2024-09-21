@@ -81,13 +81,12 @@ public class NodeUser {
     @Enumerated(EnumType.STRING)
     private TradeState stateTrade;
 
-    private boolean tradeStartOrStop;
 
     @Builder
     public NodeUser(Long id, Long telegramUserId, Long chatId, Date firstLoginDate, String firstName,
                     String lastName, String username, String email, Boolean isActive, Date lastStartTread,
                     Account account, List<NodeOrder> orders, List<Account> accounts, ConfigTrade configTrade,
-                    MenuChange menuChange, UserState state, TradeState stateTrade, boolean tradeStartOrStop) {
+                    MenuChange menuChange, UserState state, TradeState stateTrade) {
         this.id = id;
         this.telegramUserId = telegramUserId;
         this.chatId = chatId;
@@ -105,7 +104,6 @@ public class NodeUser {
         this.menuChange = menuChange;
         this.state = state;
         this.stateTrade = stateTrade;
-        this.tradeStartOrStop = tradeStartOrStop;
     }
 
     private LocalDateTime convertToLocalDateTime(Date date) {

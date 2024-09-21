@@ -77,7 +77,8 @@ public class NodeOrder {
 	
 	@JsonProperty("checkReal")
 	private boolean checkReal;
-	
+
+	@Enumerated(EnumType.STRING)
 	@JsonProperty("orderState")
 	private OrderState orderState;
 	

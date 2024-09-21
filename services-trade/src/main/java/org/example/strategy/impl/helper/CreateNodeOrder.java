@@ -26,7 +26,7 @@ public class CreateNodeOrder {
 						.instrument(limitOrder.getInstrument().toString())
 						.timestamp(new Date())
 						.userReference(limitOrder.getUserReference())
-						.checkReal(nodeUser.getConfigTrade().isRealTrade())
+						.checkReal(nodeUser.getConfigTrade().isEnableDemoTrading())
 						.nodeUser(nodeUser)
 						.orderState(orderState)
 						.build();

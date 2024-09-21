@@ -19,27 +19,27 @@ import static org.knowm.xchange.Exchange.USE_SANDBOX;
 @Component
 @RequiredArgsConstructor
 public class WebSocketByBitChange extends WebSocketBasic implements WebSocketChange {
-	private final CurrencyProperties currencyProperties;
-	
-	@Override
-	@PostConstruct
-	public void streamValue() {
-		ExchangeSpecification exchangeSpecification = new
-				BybitStreamingExchange().getDefaultExchangeSpecification();
-		exchangeSpecification.setExchangeSpecificParametersItem(BybitStreamingExchange.EXCHANGE_TYPE,
-																BybitCategory.LINEAR);
-		exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, true);
-		init(MenuChange.Bybit, currencyProperties, exchangeSpecification);
-	}
-	
-	@Override
-	public Observable<NodeOrder> getCurrencyRateStream() {
-		return subject;
-	}
-	
-	@Override
-	public MenuChange getType() {
-		return MenuChange.Bybit;
-	}
-	
+    private final CurrencyProperties currencyProperties;
+
+    @Override
+    @PostConstruct
+    public void streamValue() {
+        ExchangeSpecification exchangeSpecification = new
+                BybitStreamingExchange().getDefaultExchangeSpecification();
+        exchangeSpecification.setExchangeSpecificParametersItem(BybitStreamingExchange.EXCHANGE_TYPE,
+                BybitCategory.LINEAR);
+        exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, true);
+        init(MenuChange.Bybit, currencyProperties, exchangeSpecification);
+    }
+
+    @Override
+    public Observable<NodeOrder> getCurrencyRateStream() {
+        return subject;
+    }
+
+    @Override
+    public MenuChange getType() {
+        return MenuChange.Bybit;
+    }
+
 }

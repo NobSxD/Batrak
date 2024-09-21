@@ -1,6 +1,6 @@
 package org.example.command.menuBasic.account;
 
-import org.example.change.account.NodeAccount;
+import org.example.factory.account.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;

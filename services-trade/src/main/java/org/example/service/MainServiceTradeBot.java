@@ -10,9 +10,10 @@ import static org.example.model.RabbitQueue.TRADE_MESSAGE;
 public interface MainServiceTradeBot {
 	
 	@RabbitListener(queues =  TRADE_MESSAGE)
-	void startORStopTrade(NodeUser nodeUser);
+	void startTrade(NodeUser nodeUser);
 	
 	@RabbitListener(queues = TRADE_CANCEL_ORDER)
 	void cancelOrder(NodeUser nodeUser);
 	void infoAccount(NodeUser nodeUser);
+	void stopTrade(NodeUser nodeUser);
 }

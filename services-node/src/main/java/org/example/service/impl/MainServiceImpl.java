@@ -1,6 +1,8 @@
 package org.example.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.command.CommandService;
+import org.example.entity.NodeUser;
 import org.example.entity.enams.state.UserState;
 import org.example.service.MainService;
 import org.example.service.ProcessServiceCommand;
@@ -13,9 +15,12 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Map;
 
+import static org.example.service.impl.ProcessServiceCommandImpl.extractChatIdFromUpdate;
+
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MainServiceImpl implements MainService {
 
     private final ProcessServiceCommand processServiceCommand;
@@ -25,39 +30,58 @@ public class MainServiceImpl implements MainService {
 
     @Override
     @Transactional
-    public void defines(Update update) {
+    public void processUpdate(Update update) {
         try {
-
-            String text = "";
-            long chatId = 0;
-
-            var nodeUser = processServiceCommand.findOrSaveAppUser(update);
-            //TODO на будующие, для активации пользователя
-            if (nodeUser.getIsActive()) {
-                producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
+            if (update == null) {
+                throw new IllegalArgumentException("Update cannot be null");
+            }
+            NodeUser nodeUser = processServiceCommand.findOrSaveAppUser(update);
+            String text = extractTextFromUpdate(update);
+            if (nodeUser == null) {
+                throw new IllegalStateException("NodeUser cannot be null");
+            }
+            if (isUserInactive(nodeUser)) {
+                if (nodeUser.getChatId() == null){
+                    long id = extractChatIdFromUpdate(update);
+                    nodeUser.setChatId(id);
+                }
+                denyAccess(nodeUser.getChatId());
                 return;
             }
 
-            if (update.getMessage() != null) {         //при вводе пользователем сообщения
-                text = update.getMessage().getText();
-                chatId = update.getMessage().getChatId();
-            }
-            if (update.getCallbackQuery() != null) {  // при нажатие на кнопку пользователем
-                text = update.getCallbackQuery().getData();
-                chatId = update.getCallbackQuery().getMessage().getChatId();
-            }
 
-            UserState userState = buttonRegistration.get(text);
-            if (userState != null) {
-                nodeUser.setState(userState);
-            }
-            nodeUser.setChatId(chatId);
-            String send = commandService.send(nodeUser, text); //Сдесь происходит основная логика при нажатие на кнопки
-            if (!send.equals("")) {
-                producerTelegramService.producerAnswer(send, chatId);
+            updateUserState(nodeUser, text);
+            String response = commandService.send(nodeUser, text);
+
+            if (response != null && !response.isEmpty()) {
+                producerTelegramService.producerAnswer(response, nodeUser.getChatId());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error processing update {}", e.getMessage());
+        }
+    }
+
+    private boolean isUserInactive(NodeUser user) {
+        return user.getIsActive();
+    }
+
+    private void denyAccess(long chatId) {
+        producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
+    }
+
+    private String extractTextFromUpdate(Update update) {
+        if (update.getMessage() != null) {
+            return update.getMessage().getText();
+        } else if (update.getCallbackQuery() != null) {
+            return update.getCallbackQuery().getData();
+        }
+        return "";
+    }
+
+    private void updateUserState(NodeUser user, String text) {
+        UserState userState = buttonRegistration.get(text);
+        if (userState != null) {
+            user.setState(userState);
         }
     }
 

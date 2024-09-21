@@ -36,6 +36,18 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 
 
 	public String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, Instrument currencyPair) {
+		if (orderType == null){
+			throw new IllegalArgumentException("OrderType cannot be null");
+		}
+		if (summa == null){
+			throw new IllegalArgumentException("Summa cannot be null");
+		}
+		if (price == null){
+			throw new IllegalArgumentException("Price cannot be null");
+		}
+		if (currencyPair == null){
+			throw new IllegalArgumentException("CurrencyPair cannot be null");
+		}
 		BigDecimal usdt = CurrencyConverter.convertCurrency(price, summa, 5);
 		String orderId = "";
 		TradeService tradeService = exchange.getTradeService();
@@ -51,6 +63,9 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 	}
 
 	public String placeLimitOrder(LimitOrder limitOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
+		if (limitOrder == null){
+			throw new IllegalArgumentException("LimitOrder cannot be null");
+		}
 		try {
 			TradeService tradeService = exchange.getTradeService();
 			String orderId = "";
@@ -66,6 +81,15 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 	}
 
 	public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType) {
+		if (currencyPair == null){
+			throw new IllegalArgumentException("CurrencyPair cannot be null");
+		}
+		if (priceAndAmount == null){
+			throw new IllegalArgumentException("PriceAndAmount cannot be null");
+		}
+		if (orderType == null){
+			throw new IllegalArgumentException("OrderType cannot be null");
+		}
 		return new  LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
 	}
 

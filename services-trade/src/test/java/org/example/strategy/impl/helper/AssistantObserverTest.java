@@ -83,7 +83,7 @@ class AssistantObserverTest {
 																	.build());
 		when(mockSubject.getCurrencyRateStream()).thenReturn(rateStream);
 		CountDownLatch latch = new CountDownLatch(1);
-		AssistantObserver.subscribeToCurrencyRate(mockOrder, latch, mockSubject, Observable.never());
+		AssistantObserver.subscribeToCurrencyRate(mockOrder, latch, mockSubject,Order.OrderType.BID);
 		assertTrue(latch.await(1, TimeUnit.SECONDS), "Latch was not counted down when rate was reached.");
 	}
 	
@@ -102,7 +102,8 @@ class AssistantObserverTest {
 																		   .originalAmount(new BigDecimal("0.9"))
 																		   .orderState(OrderState.PENDING_CANCEL)
 																		   .build());
-		AssistantObserver.subscribeToCurrencyRate(mockOrder, latch, mockSubject, cancelEventStream);
+		when(mockSubject.getCurrencyRateStream()).thenReturn(cancelEventStream);
+		AssistantObserver.subscribeToCurrencyRate(mockOrder, latch, mockSubject,Order.OrderType.BID);
 		assertTrue(latch.await(1, TimeUnit.SECONDS), "Latch was not counted down when trade was cancelled.");
 	}
 }
