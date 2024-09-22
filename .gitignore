@@ -37,7 +37,8 @@ build/
 /TradeBot/src/main/resources/application-dev.properties
 ###учетные данные###
 .env
-volume
+volume/db
+volume/rabbitmq
 /services-node/src/main/resources/application-dev.properties
 /services-telegram/src/main/resources/application-dev.properties
 /services-trade/src/main/resources/application-dev.properties

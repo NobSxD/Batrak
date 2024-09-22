@@ -69,13 +69,13 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		try {
 			TradeService tradeService = exchange.getTradeService();
 			String orderId = "";
-			if (trade) {
+			if (!trade) {
 				orderId = tradeService.placeLimitOrder(limitOrder);
 			}
 			logger.info(limitOrder.toString());
 			return orderId;
 		} catch (IOException e) {
-			logger.error(e.getMessage() + " " + limitOrder.toString());
+			logger.error("Ошибка: {}, лимит ордер: {}", e.getMessage(), limitOrder);
 			throw new RuntimeException(e);
 		}
 	}

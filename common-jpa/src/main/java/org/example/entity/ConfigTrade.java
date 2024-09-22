@@ -39,7 +39,7 @@ public class ConfigTrade  implements Displayable {
 	private BigDecimal amountOrder = new BigDecimal(11);
 
 	private int depthGlass = 100;
-	private boolean enableDemoTrading = true;
+	private boolean enableDemoTrading = false;
 
 	@Enumerated(EnumType.STRING)
 	@JsonProperty("strategy")
