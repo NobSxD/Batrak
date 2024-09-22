@@ -35,13 +35,13 @@ public abstract class StrategyBasic implements Strategy {
                                            boolean isBid) throws InterruptedException;
 
     public void cancelOrder(NodeOrder nodeOrder) {
-        latch.countDown();
-        if (this.basicChange == null){
+        if (basicChange == null){
             //TODO придумать логику отмены
             return;
         }
-        this.basicChange.cancelOrder(nodeOrder.getInstrument(), nodeOrder.getOrderId());
+        basicChange.cancelOrder(nodeOrder.getInstrument(), nodeOrder.getOrderId());
         nodeOrder.setOrderState(OrderState.PENDING_CANCEL);
+        latch.countDown();
     }
 
 }

@@ -90,6 +90,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             }
             strategyMap.put(nodeUser.getId(), strategy);
             strategy.trade(nodeUser, processServiceCommand, webSocketCommand, nodeUserDAO, nodeOrdersDAO, nodeUserCache, change);
+            strategyMap.remove(nodeUser.getId());
 
         } catch (ExchangeException e) {
             processServiceCommand.sendAnswer("Проверте правелность введных данных, api public key, api secret key, или добавте разрешенный ip server", nodeUser.getChatId());
@@ -166,8 +167,6 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         NodeOrder nodeOrder = orders.get(orders.size() - 1);
         nodeOrder.setOrderState(OrderState.PENDING_CANCEL);
         strategy.cancelOrder(nodeOrder);
-        nodeUser.setStateTrade(TradeState.TRADE_BASIC);
-        nodeUserDAO.save(nodeUser);
         log.info("Order with id={} is set to pending cancel state for userId={}", nodeOrder.getId(), nodeUser.getId());
 
     }

@@ -237,12 +237,6 @@ public class SlidingProtectiveOrder extends StrategyBasic {
         nodeUser.getOrders().add(nodeOrder);
         nodeUserCache.put(nodeUser.getId(), nodeUser);
 
-        if (isBid){
-            tradeStatusManager.sell();
-        }
-        if (!isBid){
-            tradeStatusManager.buy();
-        }
         // Информируем о размещении ордера
         String message = isBid ? AssistantMessage.messageBuy(nodeOrder.getUsd(), nodeOrder.getLimitPrice())
                 : AssistantMessage.messageSell(nodeOrder.getUsd(), nodeOrder.getLimitPrice());
@@ -254,6 +248,13 @@ public class SlidingProtectiveOrder extends StrategyBasic {
             return nodeOrder;
         }
         finalizeOrder(nodeOrder);
+        if (isBid){
+            tradeStatusManager.sell();
+        }
+        if (!isBid){
+            tradeStatusManager.buy();
+        }
+
         return nodeOrder;
     }
 
@@ -268,7 +269,6 @@ public class SlidingProtectiveOrder extends StrategyBasic {
             latch.await();
         } finally {
             if (nodeOrder.getOrderState().equals(OrderState.PENDING_CANCEL)) {
-                basicChange.cancelOrder(nodeOrder.getInstrument(), nodeOrder.getOrderId());
                 producerServiceExchange.sendAnswer(AssistantMessage.messageCancel(nodeOrder.getOrderId()), nodeUser.getChatId());
                 tradeStatusManager.cancelTrading();
                 nodeOrder.setOrderState(OrderState.CANCELLED);

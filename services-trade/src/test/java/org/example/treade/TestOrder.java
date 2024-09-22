@@ -35,5 +35,17 @@ public class TestOrder {
         String s = binanceMain.placeLimitOrder(order, true);
         System.out.println(s);
     }
+    @Test
+    void cancelOrder() throws InterruptedException {
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        CurrencyPair instrument = new CurrencyPair("BTC-USDT");
+        BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
+        List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"),price);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        String s = binanceMain.placeLimitOrder(order, false);
+        Thread.sleep(2000);
+        binanceMain.cancelOrder("BTC/USDT",s);
+        System.out.println(s);
+    }
 
 }
