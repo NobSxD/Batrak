@@ -5,16 +5,17 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.NodeOrdersDAO;
-import org.example.factory.ChangeFactory;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeOrder;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.state.OrderState;
 import org.example.entity.enams.state.TradeState;
+import org.example.factory.ChangeFactory;
 import org.example.factory.CreateStrategy;
 import org.example.service.MainServiceTradeBot;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.Strategy;
+import org.example.strategy.impl.helper.TradeStatusManager;
 import org.example.websocet.WebSocketCommand;
 import org.example.xchange.BasicChangeInterface;
 import org.knowm.xchange.exceptions.ExchangeException;
@@ -45,7 +46,7 @@ import java.util.Map;
 @Slf4j
 public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     private final ProcessServiceCommand processServiceCommand;
-    private final Cache<Long, NodeUser> nodeUserCache;
+    private final Cache<Long, NodeUser> nodeUserCache; //TODO продумать как сбрасывать кешь
     private final NodeUserDAO nodeUserDAO;
     private final NodeOrdersDAO nodeOrdersDAO;
     private final WebSocketCommand webSocketCommand;
@@ -93,11 +94,12 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             strategyMap.remove(nodeUser.getId());
 
         } catch (ExchangeException e) {
+            strategyMap.remove(nodeUser.getId());
             processServiceCommand.sendAnswer("Проверте правелность введных данных, api public key, api secret key, или добавте разрешенный ip server", nodeUser.getChatId());
             log.error("Имя пользователя: {}. id: {}. Ошибка: {}.", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
         } catch (Exception e) {
+            strategyMap.remove(nodeUser.getId());
             nodeUser.setStateTrade(TradeState.TRADE_BASIC);
-            log.error(e.getMessage() + " имя пользователя: " + nodeUser.getUsername() + " id пользователя " + nodeUser.getId());
             log.error("Имя пользователя: {}. id: {}. Ошибка: {}.", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
         }
     }
@@ -146,29 +148,64 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     public void cancelOrder(NodeUser nodeUser) {
         NodeUser nodeUserCache = this.nodeUserCache.getIfPresent(nodeUser.getId());
 
+        // Обработка случая, когда пользователь не найден в кеше
         if (nodeUserCache == null) {
             log.warn("User not found in cache, cannot cancel order for userId={}", nodeUser.getId());
             processServiceCommand.sendAnswer("Ордер для отмены не найден", nodeUser.getChatId());
             return;
         }
 
+        // Обработка случая, когда ордера отсутствуют
         List<NodeOrder> orders = nodeUserCache.getOrders();
         if (orders == null || orders.isEmpty()) {
             log.warn("No orders found for userId={}", nodeUser.getId());
             processServiceCommand.sendAnswer("Ордер для отмены не найден", nodeUser.getChatId());
             return;
         }
+
+        // Обработка отсутствия стратегии
         Strategy strategy = strategyMap.get(nodeUser.getId());
         if (strategy == null) {
             processServiceCommand.sendAnswer("Стратегия не была запущенна", nodeUser.getChatId());
             return;
         }
-        // Cancel the last order
-        NodeOrder nodeOrder = orders.get(orders.size() - 1);
-        nodeOrder.setOrderState(OrderState.PENDING_CANCEL);
-        strategy.cancelOrder(nodeOrder);
-        log.info("Order with id={} is set to pending cancel state for userId={}", nodeOrder.getId(), nodeUser.getId());
 
+        // Попытка отменить последний ордер
+        try {
+            NodeOrder nodeOrder = orders.get(orders.size() - 1);
+            if (nodeOrder == null) {
+                log.warn("No last orders found for userId={}", nodeUser.getId());
+                processServiceCommand.sendAnswer("Последний ордер для отмены не был найден", nodeUser.getChatId());
+                return;
+            }
+
+            try {
+                nodeOrder.setOrderState(OrderState.PENDING_CANCEL);
+                strategy.cancelOrder(nodeOrder);
+
+                log.info("Order with id={} is set to pending cancel state for userId={}", nodeOrder.getId(), nodeUser.getId());
+            } catch (ExchangeException e) {
+                handleOrderCancellationException(nodeUser,nodeOrder, "Ордер не найден", e);
+            } catch (Exception e) {
+                handleOrderCancellationException(nodeUser,nodeOrder, "Неожиданная ошибка при отмене ордера", e);
+            }
+
+        } catch (IndexOutOfBoundsException e) {
+            log.warn("Attempt to access non-existent order for userId={}", nodeUser.getId());
+            processServiceCommand.sendAnswer("Ошибка доступа к ордеру", nodeUser.getChatId());
+        }
+    }
+
+    private void handleOrderCancellationException(NodeUser nodeUser, NodeOrder nodeOrder, String userMessage, Exception e) {
+        if (nodeOrder != null) {
+            nodeOrder.setOrderState(OrderState.REJECTED);
+        }
+        if (e instanceof ExchangeException) {
+            log.error("Exchange error while cancelling order: {}", e.getMessage());
+        } else {
+            log.error("Unexpected error: {}", e.getMessage(), e);
+        }
+        processServiceCommand.sendAnswer(userMessage, nodeUser != null ? nodeUser.getChatId() : null);
     }
 
     @Override
@@ -178,6 +215,13 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             processServiceCommand.sendAnswer("Стратегия не была запущенна", nodeUser.getChatId());
             return;
         }
-        strategy.getTradeStatusManager().stopTrading();
+
+        TradeStatusManager tradeStatusManager = strategy.getTradeStatusManager();
+        if (tradeStatusManager.getCurrentTradeState().equals(TradeState.BUY)){
+            cancelOrder(nodeUser); //если ордер выстовлен на покупку, то мы можем его отменить и остановить трейдинг без потерь
+        } else{
+            tradeStatusManager.stopTrading();
+        }
+
     }
 }

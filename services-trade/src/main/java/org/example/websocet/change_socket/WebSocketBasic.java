@@ -4,6 +4,7 @@ import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import lombok.extern.slf4j.Slf4j;
 import org.example.configuration.CurrencyProperties;
@@ -48,12 +49,10 @@ public abstract class WebSocketBasic {
     }
 
     private void createExchangeForCurrencyPair(CurrencyPair currencyPair, ExchangeSpecification exchangeSpecification) {
-        if (currencyPair == null) {
-            throw new IllegalArgumentException("CurrencyPair cannot be null");
+        if (currencyPair == null || exchangeSpecification == null) {
+            throw new IllegalArgumentException("CurrencyPair and ExchangeSpecification cannot be null");
         }
-        if (exchangeSpecification == null) {
-            throw new IllegalArgumentException("ExchangeSpecification cannot be null");
-        }
+
         exchangeSpecification.setShouldLoadRemoteMetaData(true);
         exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
         StreamingExchange exchange = StreamingExchangeFactory.INSTANCE.createExchange(exchangeSpecification);
@@ -66,24 +65,14 @@ public abstract class WebSocketBasic {
         Observable<NodeOrder> tradeObservable = exchange.getStreamingMarketDataService()
                 .getTrades((Instrument) currencyPair)
                 .map(trade -> NodeOrder.builder()
-                        .orderId(trade.getId())
                         .instrument(trade.getInstrument().toString())
-                        .originalAmount(trade.getOriginalAmount())
                         .limitPrice(trade.getPrice())
-                        .timestamp(trade.getTimestamp())
-                        .type(trade.getType().toString())
                         .build())
                 .doOnError(error -> {
                     log.error("Ошибка при получении данных: ", error);
-                });
+                })
+                .retryWhen(exponentialBackoff());
         tradeObservable
-                .retryWhen(errors -> errors
-                        .doOnNext(error -> log.warn("Переподключение из-за ошибки: ", error))
-                        .flatMap(error -> {
-                            log.info("Попытка переподключения через 5 секунд...");
-                            return Observable.timer(5, TimeUnit.SECONDS);
-                        })
-                )
                 .subscribe(
                         subject::onNext,
                         subject::onError
@@ -91,4 +80,12 @@ public abstract class WebSocketBasic {
         exchangeMap.put(currencyPair, exchange);
     }
 
+    private Function<Observable<Throwable>, Observable<?>> exponentialBackoff() {
+        return errors -> errors.zipWith(Observable.range(1, 5), (error, attempt) -> attempt)
+                .flatMap(attempt -> {
+                    long delay = Math.min((long) Math.pow(2, attempt), 30);
+                    log.warn("Переподключение через {} секунд из-за ошибки: ", delay);
+                    return Observable.timer(delay, TimeUnit.SECONDS);
+                });
+    }
 }

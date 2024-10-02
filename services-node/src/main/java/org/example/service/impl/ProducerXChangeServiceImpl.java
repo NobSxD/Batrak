@@ -8,8 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import static org.example.model.RabbitQueue.INFO_ACCOUNT;
 import static org.example.model.RabbitQueue.TRADE_CANCEL_ORDER;
 import static org.example.model.RabbitQueue.TRADE_MESSAGE;
+import static org.example.model.RabbitQueue.TRADE_STOP;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +23,16 @@ public class ProducerXChangeServiceImpl implements ProducerXChangeService {
 	public void startTrade(NodeUser nodeUser) {
 		rabbitTemplate.convertAndSend(TRADE_MESSAGE, nodeUser);
 	}
-	
+
+	@Override
+	public void stopTrade(NodeUser nodeUser) {
+		rabbitTemplate.convertAndSend(TRADE_STOP, nodeUser);
+	}
+	@Override
+	public void infoAccount(NodeUser nodeUser){
+		rabbitTemplate.convertAndSend(INFO_ACCOUNT, nodeUser);
+	}
+
 	@Override
 	public void cancelTread(NodeUser nodeUser) {
 		rabbitTemplate.convertAndSend(TRADE_CANCEL_ORDER, nodeUser);

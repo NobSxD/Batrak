@@ -3,21 +3,21 @@ package org.example.xchange;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
+import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.instrument.Instrument;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface BasicChangeInterface {
-
 	OrderBook orderBooksLimitOrders(Integer countLimitOrders, String pairName);
-	String marketOrder(Order.OrderType orderType, BigDecimal summa, Instrument currencyPair);
-	String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, Instrument currencyPair);
 	void cancelOrder(String namePair, String idOrder);
 	String accountInfo();
 
 	LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType);
+	MarketOrder createMarketOrder(Order.OrderType orderType, BigDecimal summa, Instrument currencyPair);
 	List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders);
 	String placeLimitOrder(LimitOrder limitOrder, boolean trade);
+	String placeMarketOrder(MarketOrder marketOrder, boolean trade);
 
 }

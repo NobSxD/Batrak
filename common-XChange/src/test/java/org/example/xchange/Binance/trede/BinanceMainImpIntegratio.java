@@ -16,6 +16,7 @@ import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.trade.LimitOrder;
+import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.instrument.Instrument;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 
@@ -57,15 +58,6 @@ class BinanceMainImpIntegratio {
 
     }
 
-
-    @Test
-    void limitOrder() {
-        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
-        Instrument instrument = new CurrencyPair("BTC-USDT");
-        String s = binanceMain.limitOrder(Order.OrderType.BID, BigDecimal.valueOf(11), new BigDecimal("50000"), instrument);
-        System.out.println(s);
-    }
-
     @Test
     void createOrder() {
         BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
@@ -73,6 +65,14 @@ class BinanceMainImpIntegratio {
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), new BigDecimal("10.5"));
         LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
 
+    }
+    @Test
+    void marketOrder(){
+        BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
+        Instrument instrument = new CurrencyPair("BTC-USDT");
+        MarketOrder marketOrder = binanceMain.createMarketOrder(Order.OrderType.BID, new BigDecimal("0.00017"), instrument);
+        String order = binanceMain.placeMarketOrder(marketOrder,false);
+        System.out.println(order);
     }
 
     @Test

@@ -22,13 +22,6 @@ class FinancialCalculatorTest {
 	List<LimitOrder> limitOrdersSel;
 	Instrument btcUsdt;
 
-	@Test
-	void calculateProfitPercentage(){
-		BigDecimal expectedDollarAmount = new BigDecimal("0.50");
-		BigDecimal profitAmount = FinancialCalculator.calculateProfitPercentage(cash, bayBTC, selBTC);
-		assertEquals(expectedDollarAmount, profitAmount);
-
-	}
 	@BeforeEach
 	void newArray(){
 		limitOrdersBay = new ArrayList<>();
@@ -56,17 +49,8 @@ class FinancialCalculatorTest {
 		limitOrdersSel.add(new LimitOrder(Order.OrderType.ASK, new BigDecimal("1.05"), btcUsdt, "", null, new BigDecimal("68800")));
 		limitOrdersSel.add(new LimitOrder(Order.OrderType.ASK, new BigDecimal("0.09"), btcUsdt, "", null, new BigDecimal("68900")));
 
-
-
 	}
 
-	@Test
-	void calculateDollarAmount(){
-		BigDecimal expectedDollarAmount = new BigDecimal("5.00");
-		BigDecimal profitAmount = FinancialCalculator.calculateDollarAmount(cash, bayBTC, selBTC);
-		assertEquals(expectedDollarAmount, profitAmount);
-
-	}
 
 	@Test
 	void maxBayAmount(){
@@ -102,11 +86,44 @@ class FinancialCalculatorTest {
 		assertEquals(expectedPrice3, priceTwoIndex);
 
 	}
+	@Test
+	void gridList(){
+		BigDecimal initialRate = new BigDecimal("1000");        // Начальная цена
+		BigDecimal percentageStep = new BigDecimal("5");        // Шаг в процентах
+		int size = 5;                                           // Размер списка
+
+		List<BigDecimal> bigDecimals = FinancialCalculator.gridLevels(initialRate, percentageStep, size, 5);
+		System.out.println("Сетка уровней ордеров: " + bigDecimals);
+	}
 
 	@Test
-	void calculateNewPrice(){
-		BigDecimal bigDecimal = FinancialCalculator.calculateMinPrice(new BigDecimal("68000"), new BigDecimal("10"));
-		assertEquals(bigDecimal, new BigDecimal("74800.00000"));
+	void sizeGridLevels(){
+		int i = FinancialCalculator.sizeGridLevels(new BigDecimal("1000"), new BigDecimal("100"));
+		assertEquals(i, 10);
+		int i2 = FinancialCalculator.sizeGridLevels(new BigDecimal("1000"), new BigDecimal("11"));
+		assertEquals(i2, 90);
+		int i3 = FinancialCalculator.sizeGridLevels(new BigDecimal("87945"), new BigDecimal("123"));
+		assertEquals(i3, 715);
+		int i4 = FinancialCalculator.sizeGridLevels(new BigDecimal("3213"), new BigDecimal("147"));
+		assertEquals(i4, 21);
+		int i5 = FinancialCalculator.sizeGridLevels(new BigDecimal("10"), new BigDecimal("100"));
+		assertEquals(i5, 0);
+	}
+
+	@Test
+	void stepPrice(){
+		BigDecimal bigDecimal = FinancialCalculator.stepPrice(new BigDecimal("60000"), new BigDecimal("10"));
+		assertEquals(bigDecimal, new BigDecimal("66000.00"));
+
+		BigDecimal bigDecimal2 = FinancialCalculator.stepPrice(new BigDecimal("58963"), new BigDecimal("6.5"));
+		assertEquals(bigDecimal2, new BigDecimal("62795.60"));
+
+		BigDecimal bigDecimal3 = FinancialCalculator.stepPrice(new BigDecimal("0.00569"), new BigDecimal("6.5"));
+		assertEquals(bigDecimal3, new BigDecimal("0.0061"));
+
+		BigDecimal bigDecimal4 = FinancialCalculator.stepPrice(new BigDecimal("0.0170"), new BigDecimal("10"));
+		assertEquals(bigDecimal4, new BigDecimal("0.02"));
+
 	}
 
 

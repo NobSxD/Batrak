@@ -14,7 +14,6 @@ public class RabbitConfiguration {
     public MessageConverter jsonMessageConverter(){
         return new Jackson2JsonMessageConverter();
     }
-
     @Bean
     public Queue textMessageQueue(){
         return new Queue(TEXT_MESSAGE_UPDATE);
@@ -29,13 +28,10 @@ public class RabbitConfiguration {
     public Queue EnumCustomMessage(){return new Queue(ENUM_CUSTOM_MESSAGE);}
     @Bean
     public Queue tradeStart(){return new Queue(TRADE_MESSAGE);}
-    
     @Bean
     public Queue tradeCancelOrder(){return new Queue(TRADE_CANCEL_ORDER);}
-
     @Bean Queue rate(){return new Queue(RATE);}
+    @Bean Queue infoAccount(){return new Queue(INFO_ACCOUNT);}
+    @Bean Queue trade_stop(){return new Queue(TRADE_STOP);}
 
-
-
-    
 }

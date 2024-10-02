@@ -1,7 +1,5 @@
 package org.example.xchange;
 
-import org.example.xchange.finance.CurrencyConverter;
-
 import lombok.ToString;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -22,9 +20,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,32 +30,6 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 	protected Exchange exchange;
 
 
-	public String limitOrder(Order.OrderType orderType, BigDecimal summa, BigDecimal price, Instrument currencyPair) {
-		if (orderType == null){
-			throw new IllegalArgumentException("OrderType cannot be null");
-		}
-		if (summa == null){
-			throw new IllegalArgumentException("Summa cannot be null");
-		}
-		if (price == null){
-			throw new IllegalArgumentException("Price cannot be null");
-		}
-		if (currencyPair == null){
-			throw new IllegalArgumentException("CurrencyPair cannot be null");
-		}
-		BigDecimal usdt = CurrencyConverter.convertCurrency(price, summa, 5);
-		String orderId = "";
-		TradeService tradeService = exchange.getTradeService();
-		LimitOrder limitOrder = new LimitOrder(orderType, usdt, currencyPair, "", new Date(), price);
-
-		try {
-			orderId = tradeService.placeLimitOrder(limitOrder);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			return "Ордер на покупку не успешно";
-		}
-		return orderId;
-	}
 
 	public String placeLimitOrder(LimitOrder limitOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
 		if (limitOrder == null){
@@ -80,6 +49,25 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		}
 	}
 
+	public String placeMarketOrder(MarketOrder marketOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
+		if (marketOrder == null){
+			throw new IllegalArgumentException("MarketOrder cannot be null");
+		}
+		try {
+			TradeService tradeService = exchange.getTradeService();
+			String orderId = "";
+			if (!trade) {
+				orderId = tradeService.placeMarketOrder(marketOrder);
+			}
+			logger.info(marketOrder.toString());
+			return orderId;
+		} catch (IOException e) {
+			logger.error("Ошибка: {}, маркет ордер: {}", e.getMessage(), marketOrder);
+			throw new RuntimeException(e);
+		}
+	}
+
+
 	public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType) {
 		if (currencyPair == null){
 			throw new IllegalArgumentException("CurrencyPair cannot be null");
@@ -91,6 +79,18 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 			throw new IllegalArgumentException("OrderType cannot be null");
 		}
 		return new  LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
+	}
+	public MarketOrder createMarketOrder(Order.OrderType orderType, BigDecimal summa, Instrument currencyPair){
+		if (orderType == null){
+			throw new IllegalArgumentException("OrderType cannot be null");
+		}
+		if (summa == null){
+			throw new IllegalArgumentException("Summa cannot be null");
+		}
+		if (currencyPair == null){
+			throw new IllegalArgumentException("Instrument cannot be null");
+		}
+		return new MarketOrder(orderType, summa, currencyPair, null, new Date());
 	}
 
 	public List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders) {
@@ -109,21 +109,6 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		}
 	}
 
-	public String marketOrder(Order.OrderType orderType, BigDecimal summa, Instrument currencyPair) {
-		String orderId = "";
-		TradeService tradeService = exchange.getTradeService();
-
-		MarketOrder marketOrder = new MarketOrder(orderType, summa, currencyPair, null, new Date());
-		try {
-			orderId = tradeService.placeMarketOrder(marketOrder);
-			System.out.println(orderId);
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			return "Ордер на покупку не успешно";
-		}
-		return "Ваш ордес создан под id: " + orderId;
-	}
-
 	public OrderBook orderBooksLimitOrders(Integer countLimitOrders, String pairName) {
 		OrderBook orderBook = null;
 		try {
@@ -135,8 +120,6 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 			Instrument currencyPair = new CurrencyPair(pairName);
 			orderBook = marketDataService.getOrderBook(currencyPair, countLimitOrders);
 
-			// Вывод информации о стакане ордеров
-			System.out.println(orderBook.toString());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -150,7 +133,10 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 			CancelOrderParams cancelOrderParams = new DefaultCancelOrderByInstrumentAndIdParams(instrument, idOrder);
 			exchange.getTradeService().cancelOrder(cancelOrderParams);
 		} catch (IOException e) {
-			logger.error(e.getMessage() + " ордер id: " + idOrder);
+			logger.error("ордер id: {}, IOException ошибка: {}", idOrder, e.getMessage());
+			throw new RuntimeException(e);
+		} catch (Exception e){
+			logger.error("ордер id: {}, Exception ошибка: {}", idOrder, e.getMessage());
 			throw new RuntimeException(e);
 		}
 
@@ -166,9 +152,4 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		}
 	}
 
-	public static LocalDateTime convertDateToLocalDateTime(Date date) {
-		return Instant.ofEpochMilli(date.getTime())
-				.atZone(ZoneId.systemDefault())
-				.toLocalDateTime();
-	}
 }

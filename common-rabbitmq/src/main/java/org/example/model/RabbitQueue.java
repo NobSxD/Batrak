@@ -10,8 +10,9 @@ public class RabbitQueue {
 
     public static final String LIST_CUSTOM_MESSAGE = "list_custom_message";
     public static final String ENUM_CUSTOM_MESSAGE = "enum_custom_message";
-    public static final String RATE="rate";
-
+    public static final String RATE = "rate";
+    public static final String INFO_ACCOUNT = "info_account";
+    public static final String TRADE_STOP = "trade_stop";
 
 
 }
