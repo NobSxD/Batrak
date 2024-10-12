@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Батрак</title>
+    <link rel="shortcut icon" href="images/robot.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to right, #eff0f3, #d4d7dd);
+            animation: backgroundAnimation 5s infinite alternate;
+        }
+        header {
+            background-color: #0f1a41;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav li {
+            display: inline;
+            margin: 0 10px;
+        }
+        nav a {
+            color: #cfdfd3;
+            text-decoration: none;
+        }
+        nav a:hover {
+            color: #ff6347; /* Изменение цвета на оранжевый при наведении */
+        }
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            padding: 1rem;
+            background-color: #0f1a41;
+            min-height: 600px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .main-magrin{
+            margin-right: 5%;
+            margin-left: 5%;
+            margin-top: 1%;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+        }
+
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out both;
+        }
+
+        .highlight {
+            background-color: #d8eaff;
+            padding: 2px 5px;
+        }
+
+        .join-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .join-button:hover {
+            background-color: #ff5031;
+        
+        }
+        .join-hover{
+            color: #3451f3;
+            text-decoration: none;
+        }
+        .join-hover:hover{
+            color: #ff5031;
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out both;
+        }
+        ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        li {
+            margin-top: 5px;
+        }
+        .highlight{
+            border-radius: 4px;
+        }
+        
+
+        .fade-in {
+            margin-bottom: 20px; /* Отступ между секциями */
+            padding: 15px; /* Отступы внутри каждой секции */
+            background-color: #fff; /* Белый фон для каждой секции */
+            border-left: 5px solid #3498db; /* Синий вертикальный линейный акцент слева */
+            transition: transform 0.3s ease; /* Плавный переход для анимации */
+        }
+
+        .fade-in:hover {
+            transform: scale(1.01); /* Эффект увеличения при наведении */
+        }
+
+        /* Заголовки */
+        h2, h3 {
+            color: #2c3e50; /* Цвет заголовков */
+        }
+
+        /* Текст */
+        p {
+            line-height: 1.6; /* Интервал между строками для улучшения читаемости */
+        }
+
+        .responsive-img {
+            max-width: 100%;   /* Изображение не будет превышать ширину своего родителя */
+            height: auto;      /* Автоматическая высота для пропорционального масштабирования */
+            display: block;    /* Убирает дополнительные отступы вокруг изображения */
+            margin: 0 auto;    /* Центровка изображения */
+        }
+
+        .activeLink {
+            color: #ff6347;
+        }
+    
+        @media (max-width: 600px) {
+            nav ul {
+                display: block;
+                text-align: center;
+            }
+            nav li {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Бот Батрак</h1>
+        <div class="main-magrin">
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('home', this)"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="#" onclick="showSection('functional', this)"><i class="fas fa-robot"></i> Функционал бота</a></li>
+                    <li><a href="#" onclick="showSection('recommendations', this)"><i class="fas fa-chart-line"></i> Рекомендации по торговле</a></li>
+                    <li><a href="#" onclick="showSection('pricing', this)"><i class="fas fa-dollar-sign"></i> Тарифы</a></li>
+                    <li><a href="#" onclick="showSection('faq', this)"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="#" onclick="showSection('contacts', this)"><i class="fas fa-address-book"></i> Контакты</a></li>
+                    <li><a href="#" onclick="showSection('strategies', this)"><i class="fas fa-project-diagram"></i> Стратегии</a></li>
+                    <li><a href="#" onclick="showSection('links', this)"><i class="fas fa-link"></i> Полезные ссылки</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-magrin">
+        <section id="home" class="content-section active">
+            <div class="fade-in">
+                <h2>Добро пожаловать</h2>
+                <h3>О проекте Торговый Бот</h3>
+                <p>Добро пожаловать на главную страницу нашего  проекта <span class="highlight"> Батрак</span>, созданного для автоматизации и оптимизации вашего процесса торговли на финансовых рынках. Наш бот способен интегрироваться с различными биржами, предоставляя вам возможность торговать на самых выгодных площадках. Кроме того, по мере развития нашего проекта, в наш бот будут добавляться новые биржи.</p>
+            </div>
+
+            <div class="fade-in">
+                <h2>История создания</h2>
+                <p>История создания нашего торгового бота начинается с идеи исключить человеческий фактор из процесса торговли, чтобы обеспечить стабильность и эффективность операций. Однажды, группа энтузиастов и экспертов в области технологий и финансов решила объединить свои знания и опыт для разработки инновационного решения для всех трейдеров. Так и родился наш торговый бот.</p>
+
+                <p>Основной целью было создание инструмента, который не только упрощает торговлю, но и делает её более выгодной и безопасной. Так, благодаря усердной работе и стремлению к совершенству, нам удалось создать бота, который управляется с помощью удобного интерфейса в мессенджере Telegram. Это позволяет вам контролировать все торговые операции прямо с вашего смартфона в удобное для вас время.</p>
+
+                <p>Наш торговый бот — это ваше секретное оружие в мире торговли. <br><a href="https://t.me/trade_ches_bot" class="join-button">Присоединяйтесь к проекту! <i class="fab fa-telegram-plane"></i></a></p>
+            </div>
+        </section>
+        
+        <section id="functional" class="content-section">
+            <h2>Функционал бота</h2>
+            <div class="gallery">
+                <figure>
+                    <img src="photo1.png" alt="Описание функции 1">
+                    <figcaption>Описание функции 1</figcaption>
+                </figure>
+            </div>
+        </section>
+        
+        <section id="recommendations" class="content-section">
+            <div class="fade-in">
+                <h2>Советы перед настройкой грид-бота</h2>
+                <p>Перед тем как приступить к настройке грид-бота, важно понять, что универсальной инструкции на все случаи жизни не существует. Выбор стратегии зависит от текущей рыночной ситуации и от суммы, которую вы готовы вложить. Многое зависит также от вашего умения анализировать рынок и оценивать свои финансовые возможности.</p>
+            </div>
+    
+            <div class="fade-in">
+                <h3>Определение минимально оптимального баланса</h3>
+                <p>Оптимальный минимальный баланс для грид-бота, по моему мнению, составляет 300$. При меньшей сумме настроить бота для эффективной работы будет сложно, а потенциальная прибыль будет минимальной. Начать с такой суммы можно лишь в учебных целях.</p>
+            </div>
+    
+            <div class="fade-in">
+                <h3>Создание резервного фонда</h3>
+                <p>Рекомендуется выделять на грид-ботов не менее 1000$. Это позволит вам эффективно усреднять позиции.</p>
+            </div>
+    
+            <div class="fade-in">
+                <h3>Выбор надежных активов</h3>
+                <p>Запускать ботов следует на фундаментальные криптовалюты, избегая мем-токенов и монет, о которых вы мало знаете. Для Bitcoin или Ethereum рекомендуется минимальный баланс в $500. С меньшей суммой эффективная настройка затруднена, поэтому можно рассмотреть альткоины.</p>
+            </div>
+    
+            <div class="fade-in">
+                <h3>Понять риски и настроить бот</h3>
+                <p>Понимание рисков и грамотная настройка бота — ключ к успеху. Внимательно изучите рыночные условия и адаптируйте стратегию под свои возможности. Это поможет минимизировать риски и увеличить шансы на получение прибыли.</p>
+            </div>
+            <div class="fade-in">
+                <h3>Выбор диапазона шага</h3>
+                <p>Выбор диапазона шага — это всегда вопрос нахождения золотой середины. Для меня оптимальным считается диапазон от 0,9% до 2%. Необязательно придерживаться идеальных значений в этом диапазоне; сетка в 1-1,5% также может отлично работать. Главное — оставаться в пределах указанного диапазона.</p>
+                <p>При настройке параметра "количество сеток" особое внимание уделяйте показателю "прибыль/сетка", который является ключевым, а не просто количеству сеток.</p>
+                <p>Что касается стоимости, бот обычно должен укладываться в диапазон около 100$. Однако, как уже говорилось, с такой суммой лучше рассматривать тест-драйв. Для полноценной работы рекомендую начинать с 300$ и выше.</p>
+                <p>Также стоит учитывать: рекомендуется устанавливать сетку на покупку в два раза больше, чем на продажу. То есть, если вы задаете параметр покупки на уровне 1%, то параметр продажи должен быть около 0,5% или близким к этому значению. </p>
+
+            </div>
+        </section>
+        
+        <section id="pricing" class="content-section">
+            <div class="fade-in">
+                <h2>Тарифы</h2>
+                <p>В данный момент услуги бот предостовляеться бесплатно.</p>
+                <p>Но вы можете пожертвовать на развитие проекта </p>
+                <p>Кашелек USDT(TRC20):
+                    <pre>TXchLXyKPXLysVAUEEqCHnNqvpfv91XD6x</pre>
+                </p>
+            </div>
+            <div>
+                <img src="images/usdt.jpg" alt="USDT" class="responsive-img">
+            </div>
+
+        </section>
+        
+        <section id="faq" class="content-section">
+            <h2>FAQ</h2>
+            <p>Ответы на часто задаваемые вопросы.</p>
+        </section>
+        
+        <section id="contacts" class="content-section">
+            <h2>Контакты</h2>
+            <p>Способы связи с вами, такие как адрес электронной почты или телефон.</p>
+        </section>
+        
+        <section id="strategies" class="content-section">
+            <div class="fade-in">
+                <h2>Описание стратегии Грид-трейдинг</h2>
+                <p>Грид-трейдинг — это известная среди трейдеров стратегия, использующая установку ряда ордеров на покупку и продажу на фиксированном расстоянии друг от друга, образуя так называемую <span class="highlight">"сеть" (grid)</span>. Эта стратегия позволяет получать прибыль на колебаниях рынка, независимо от направления движения цен.</p>
+            </div>
+        
+            <div class="fade-in">
+                <h3>Основные элементы стратегии</h3>
+                <p><strong>Уровни:</strong> устанавливаются на равном расстоянии для открытия длинных и коротких позиций автоматически.</p>
+                <p><strong>Ордеры на покупку и продажу:</strong> размещаются в одном положении и активируются при достижении цены соответствующего уровня.</p>
+                <p><strong>Профит и убыток:</strong> стратегия нацелена на извлечение прибыли из каждой позиции независимо от того, в каком направлении движется рынок.</p>
+            </div>
+        
+            <div class="fade-in">
+                <h3>Преимущества Грид-трейдинга</h3>
+                <p>Подходит для рынков с высокой волатильностью, так как позволяет извлекать прибыль из каждой колебательной волны.</p>
+                <p>Минимизирует влияние человеческого фактора, благодаря автоматизации исполнения ордеров.</p>
+                <p>Адаптируется под различные рыночные условия без необходимости сложного анализа или прогнозирования.</p>
+            </div>
+        
+            <div class="fade-in">
+                <h3>Grid-боты</h3>
+                <p><strong>Grid-бот</strong> — это торговый робот или автоматизированная стратегия, которая используется для выполнения торговых операций на основе заранее установленных правил. Он работает по принципу "сеточной" стратегии, где ордера размещаются на различных уровнях цены, как вверх, так и вниз, с заданным расстоянием между ними.</p>
+                <p>Grid-боты могут автоматически открывать позиции покупки и продажи в пределах заранее определенного диапазона цен, что позволяет трейдерам получать пассивный доход при минимальном участии. Когда рынок движется, бот автоматически выставляет новые заявки на продажу или покупку, чтобы зафиксировать прибыль.</p>
+                <p>Эта стратегия эффективна в любых рыночных условиях, независимо от направления движения цены. Однако, несмотря на привлекательные описания выше, следует помнить, что всегда существует вероятность потери своих сбережений, хотя такие риски обычно минимальны.</p>
+            </div>
+            
+            <div class="fade-in">
+                <h3>Первая потенциальная проблема</h3>
+                <p>Первое, что может произойти — это выход бота за пределы установленного торгового диапазона. В этом случае паниковать не стоит: бот просто прекращает торговлю и ожидает возвращения цены в заданный диапазон.</p>
+                <p>Полностью исключить такую ситуацию вряд ли возможно, но при регулярном мониторинге рынка и базовом понимании технического анализа вероятность ее наступления значительно снижается.</p>
+            </div>
+
+            <div class="fade-in">
+                <h3>Вторая потенциальная ошибка</h3>
+                <p>Наиболее критичная ошибка — это неправильный выбор актива. Если бот запускается на так называемой скам-монете, она может никогда не восстановиться после падения, оставив грид-бота за пределами торгового диапазона с бесполезными активами.</p>
+                <p>Эта ошибка является единственным настоящим риском работы с grid-ботами. Чтобы ее избежать, рекомендуется инвестировать в фундаментальные активы, а не в краткосрочные монеты, демонстрирующие резкий рост.</p>
+            </div>
+
+            <div class="fade-in">
+                <h3>Третья ошибка: ожидания прибыли</h3>
+                <p>На самом деле, большую часть времени ваш грид-бот может показывать убытки, оставаясь в пределах торгового диапазона. Это нормально, и не стоит поддаваться желанию досрочно закрыть его в убыток.</p>
+                <p>После корректной настройки, бота достаточно лишь периодически проверять, не переживая из-за временных убытков в промежуточных отчетах.</p>
+            </div>
+        </section>
+        
+        <section id="links" class="content-section">
+            <div class="fade-in">
+                <h3><i class="fas fa-university">  Биржи:</i></h3>
+                <p><i class="fas fa-university"><a href="https://www.binance.com/activity/referral-entry/CPA/together-v4?hl=ru&ref=CPA_00OLO8DVXH" class="join-hover">   Binance</a></i> - Топ 1 Биржа в Мире. Binance предоставляет широкий спектр криптовалютных пар для торговли. Имеет удобный интерфейс, а также приложения для мобильных устройств. Обеспечивает высокую степень безопасности и предлагает функции как для новичков, так и для опытных трейдеров. Биржа также предлагает образовательные ресурсы для обучения криптотрейдингу.</p>
+                <p><i class="fas fa-university"><a href="https://www.bybit.com/invite?ref=BDMNZ8B" class="join-hover">  Babit</a></i> - Топ 1 Биржа в СНГ,  Babit обеспечивает доступ к популярным криптовалютам и поддерживает инновационные инструменты для торговли деривативами. P2P-платформа позволяет пользователям безопасно обменивать фиатные средства на криптовалюту. Известна низкими комиссиями и поддержкой пользователей на русском языке, что делает её популярной среди трейдеров из СНГ.</p>
+            </div>
+            <div class="fade-in">
+                <h3>Подержали проект:</h3>
+                <p><i class="fab fa-twitch"> Envy</i> Мой друг и стример -> <a href="https://www.twitch.tv/envy_chilling" class="join-hover">Подписывайся</a></p>
+                <p><i class="fab fa-telegram-plane"> Envy </i> Телеграм Envy -> <a href="https://t.me/envy_chill" class="join-hover">Подписывайся</a></p>
+            </div>
+            <div class="fade-in">
+                <h3> Проект:</h3>
+                <p><i class="fas fa-robot"></i> <a href="https://t.me/trade_ches_bot" class="join-hover"> Ботрак</a></p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId, clickedElement = null) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.style.display = 'none');
+            
+            // Show the selected section
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.style.display = 'block';
+            }
+    
+            // Remove 'active' class from all links
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => link.classList.remove('activeLink'));
+    
+            // If a button was clicked, add 'active' class to it
+            if (clickedElement) {
+                clickedElement.classList.add('activeLink');
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show the home section and set the home link as active
+            const homeLink = document.querySelector('nav ul li a[href="#"]:first-of-type'); // Get the first link
+            showSection('home', homeLink);
+        });
+    </script>
+</body>
+</html>
