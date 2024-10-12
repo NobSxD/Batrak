@@ -18,5 +18,5 @@ Failed to initialize: Timestamp for this request is outside of the recvWindow. (
 Failed to initialize: Timestamp for this request is outside of the recvWindow. (HTTP status code: 400)
 Failed to initialize: Timestamp for this request is outside of the recvWindow. (HTTP status code: 400)
 Cannot invoke "org.knowm.xchange.dto.Order.getAveragePrice()" because "orderBids" is null
-Cannot invoke "org.example.factory.account.NodeAccount.tradeStart(org.example.entity.NodeUser)" because "changeType" is null
+Cannot invoke "org.example.factory.account.NodeAccount.tradeStart(org.example.entity.NodeUser)" because "change" is null
 Failed to initialize: Invalid Api-Key ID. (HTTP status code: 400)
