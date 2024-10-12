@@ -6,6 +6,9 @@ target/
 
 /.env
 /volume
+/services-node/src/main/resources/application-dev.properties
+/services-trade/src/main/resources/application-dev.properties
+/services-telegram/src/main/resources/application-dev.properties
 
 ### STS ###
 .apt_generated
