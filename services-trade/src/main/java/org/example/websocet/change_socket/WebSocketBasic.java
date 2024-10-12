@@ -9,8 +9,8 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import lombok.extern.slf4j.Slf4j;
 import org.example.configuration.CurrencyProperties;
 import org.example.entity.NodeOrder;
+import org.example.entity.collect.ChangeType;
 import org.example.entity.collect.Pair;
-import org.example.entity.enams.menu.MenuChange;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.instrument.Instrument;
@@ -30,9 +30,9 @@ public abstract class WebSocketBasic {
 
     public abstract void streamValue();
 
-    protected void init(MenuChange menuChange, CurrencyProperties currencyProperties, ExchangeSpecification exchangeSpecification) {
-        if (menuChange == null) {
-            throw new IllegalArgumentException("MenuChange cannot be null");
+    protected void init(ChangeType changeType, CurrencyProperties currencyProperties, ExchangeSpecification exchangeSpecification) {
+        if (changeType == null) {
+            throw new IllegalArgumentException("Change cannot be null");
         }
         if (currencyProperties == null) {
             throw new IllegalArgumentException("CurrencyProperties cannot be null");
@@ -40,7 +40,7 @@ public abstract class WebSocketBasic {
         if (exchangeSpecification == null) {
             throw new IllegalArgumentException("ExchangeSpecification cannot be null");
         }
-        List<Pair> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> menuChange.toString().equals(exchange.getType()))
+        List<Pair> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> changeType.toString().equals(exchange.getType()))
                 .flatMap(exchange -> exchange.getPairs().stream()).toList();
         for (Pair currencyPair : currencyPairs) {
             createExchangeForCurrencyPair(new CurrencyPair(currencyPair.getNamePair()), exchangeSpecification);

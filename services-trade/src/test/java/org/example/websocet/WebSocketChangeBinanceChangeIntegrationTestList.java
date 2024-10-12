@@ -22,7 +22,7 @@ import org.mockito.Mock;
 import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
 
 
-class WebSocketChangeBinanceChangeIntegrationTest {
+class WebSocketChangeBinanceChangeIntegrationTestList {
 	NodeUser nodeUser;
 	Account account;
 	@Mock

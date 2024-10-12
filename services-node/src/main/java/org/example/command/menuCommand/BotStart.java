@@ -1,6 +1,7 @@
 package org.example.command.menuCommand;
 
 import org.example.command.Command;
+import org.example.dao.NodeChangeDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
@@ -14,10 +15,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class BotStart implements Command {
 	private final ProducerTelegramService producerTelegramService;
+	private final NodeChangeDAO nodeChangeDAO;
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			producerTelegramService.changeMenu( "Выбирите биржу", nodeUser.getChatId());
+			nodeUser.setState(UserState.BOT_CHANGE);
+			producerTelegramService.changeMenu( nodeChangeDAO.findAll(),"Выбирите биржу", nodeUser.getChatId());
 		}catch (Exception e){
 			log.error("ошибка: {}",e.getMessage());
 		}

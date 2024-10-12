@@ -1,37 +1,35 @@
 package org.example.command.menuBasic.tradeSettings;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.button.MessageInfo;
 import org.example.command.Command;
-import org.example.dao.SettingsTradeDAO;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class SettingsDepthGlass implements Command {
-	private final SettingsTradeDAO settingsTradeDAO;
+public class SettingsStepSell implements Command {
 	private final ProducerTelegramService producerTelegramService;
 
 
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			nodeUser.setState(UserState.SETTINGS_SAVE_DEPTH_GLASS);
-			return "Укажите количество ордеров в стакане";
+			nodeUser.setState(UserState.SETTINGS_SAVE_STEP_SELL);
+			return MessageInfo.ENTER_PRICE_STEP;
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			return "При переходе в меню изменение глубины рынка произошла ошибка, обратитесь к администратору";
+			return MessageInfo.PRICE_STEP_MENU_ERROR;
 		}
 	}
 
 	@Override
 	public UserState getType() {
-		return UserState.SETTINGS_DEPTH_GLASS;
+		return UserState.SETTINGS_STEP_SELL;
 	}
 
 	@Component
@@ -40,11 +38,11 @@ public class SettingsDepthGlass implements Command {
 		@Override
 		public String send(NodeUser nodeUser, String text) {
 			try {
-				int count = Integer.parseInt(text);
+				double count = Double.parseDouble(text);
 				nodeUser.setState(UserState.TRADE_MANAGER);
-				nodeUser.getConfigTrade().setDepthGlass(count);
-				settingsTradeDAO.save(nodeUser.getConfigTrade());
-				producerTelegramService.menuTrade("Уровень глубины рынка  успешно изменен. Новая глубины рынка: " + text, nodeUser.getChatId());
+				nodeUser.getConfigTrade().setStepSell(count);
+				producerTelegramService.menuTrade(MessageInfo.SELL_PRICE_STEP_CHANGED_SELL
+						.formatted(text, "%"), nodeUser.getChatId());
 				return "";
 			} catch (NumberFormatException e) {
 				log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(),  e.getMessage());
@@ -57,7 +55,7 @@ public class SettingsDepthGlass implements Command {
 
 		@Override
 		public UserState getType() {
-			return UserState.SETTINGS_SAVE_DEPTH_GLASS;
+			return UserState.SETTINGS_SAVE_STEP_SELL;
 		}
 	}
 }

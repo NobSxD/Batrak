@@ -2,7 +2,7 @@ package org.example.websocet.change_socket;
 
 import org.example.configuration.CurrencyProperties;
 import org.example.entity.NodeOrder;
-import org.example.entity.enams.menu.MenuChange;
+import org.example.entity.collect.ChangeType;
 import org.example.websocet.WebSocketChange;
 
 import info.bitrich.xchangestream.bybit.BybitStreamingExchange;
@@ -29,7 +29,7 @@ public class WebSocketByBitChange extends WebSocketBasic implements WebSocketCha
         exchangeSpecification.setExchangeSpecificParametersItem(BybitStreamingExchange.EXCHANGE_TYPE,
                 BybitCategory.LINEAR);
         exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, true);
-        init(MenuChange.Bybit, currencyProperties, exchangeSpecification);
+        init(ChangeType.Bybit, currencyProperties, exchangeSpecification);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class WebSocketByBitChange extends WebSocketBasic implements WebSocketCha
     }
 
     @Override
-    public MenuChange getType() {
-        return MenuChange.Bybit;
+    public ChangeType getType() {
+        return ChangeType.Bybit;
     }
 
 }

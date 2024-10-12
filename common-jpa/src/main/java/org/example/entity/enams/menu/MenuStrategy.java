@@ -1,10 +1,10 @@
 package org.example.entity.enams.menu;
 
-import org.example.button.ButtonStrategy;
+import org.example.button.ButtonLabelManager;
 
 public enum MenuStrategy {
-	SlidingProtectiveOrder(ButtonStrategy.slidingProtectiveOrder),
-	PredictionsOfEvents(ButtonStrategy.predictionsOfEvents);
+
+	GridTrading(ButtonLabelManager.gridTrading);
 
 	private final String value;
 	MenuStrategy(String value) {

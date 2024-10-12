@@ -1,5 +1,6 @@
 package org.example.command.menuCommand;
 
+import org.example.button.MessageInfo;
 import org.example.command.Command;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
@@ -20,54 +21,50 @@ public class BotInfo implements Command {
 
     @Override
     public String send(NodeUser nodeUser, String text) {
-        String enableDemoTrading = "";
-        int depthGlass;
-        String nameChange;
-        BigDecimal amountOrder;
-        String pair;
-        String accountName;
-        InetAddress inetAddress;
-        String ipAddress;
-        StringBuilder settings;
-
         try {
             if (nodeUser == null) {
-                return "Пользователь не найден, введите команду /start";
+                return MessageInfo.USER_NOT_FOUND;
             }
-            if (nodeUser.getMenuChange() == null) {
-                return "Биржа не найдена, введите команду /start";
+            if (nodeUser.getChangeType() == null) {
+                return MessageInfo.EXCHANGE_NOT_FOUND;
             }
-            nameChange = nodeUser.getMenuChange().name();
-            amountOrder = nodeUser.getConfigTrade().getAmountOrder();
-            pair = nodeUser.getConfigTrade().getNamePair();
-            accountName = Optional.of(nodeUser)
+            if (nodeUser.getConfigTrade() == null){
+                return MessageInfo.SETTINGS_ACCOUNT_NOT_FOUND;
+            }
+            String nameChange = nodeUser.getChangeType().name();
+            BigDecimal amountOrder = nodeUser.getConfigTrade().getAmountOrder();
+            BigDecimal deposit = nodeUser.getConfigTrade().getDeposit();
+            String pair = nodeUser.getConfigTrade().getNamePair();
+            String accountName = Optional.of(nodeUser)
                     .map(NodeUser::getAccount)
                     .map(Account::getNameAccount)
-                    .orElse("Аккаунт не выбран");
+                    .orElse(MessageInfo.ACCOUNT_NOT_SELECTED);
 
-            depthGlass = nodeUser.getConfigTrade().getDepthGlass();
+            double stepBay = nodeUser.getConfigTrade().getStepBay();
+            double stepSell = nodeUser.getConfigTrade().getStepSell();
 
-            inetAddress = InetAddress.getLocalHost();
-            ipAddress = inetAddress.getHostAddress();
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            String ipAddress = inetAddress.getHostAddress();
 
+            String enableDemoTrading = "";
             if (nodeUser.getConfigTrade().isEnableDemoTrading()){
-                enableDemoTrading = "Внимание! В настоящий момент активирован виртуальный режим трейдинга. " +
-                        "Все операции будут производиться без использования реального счета.";
+                enableDemoTrading = MessageInfo.DEMO_MODE_ACTIVE;
             }
             if (!nodeUser.getConfigTrade().isEnableDemoTrading()){
-                enableDemoTrading = "Внимание! В настоящее время активирован реальный режим трейдинга. " +
-                        "Все операции будут производиться с использованием реального счета.";
+                enableDemoTrading = MessageInfo.REAL_MODE_ACTIVE;
             }
-            settings = new StringBuilder()
-                    .append("<--[Текущие настройки]--> \n")
-                    .append("Текущий аккаунт: ").append(accountName).append(".\n")
-                    .append("Биржа: ").append(nameChange).append(".\n")
-                    .append("Сумма ордера: $").append(amountOrder).append(".\n")
-                    .append("Валютная пара: ").append(pair).append(".\n")
-                    .append("Глубина ордеров в стакане: ").append(depthGlass).append(".\n")
-                    .append("\n------------------------------------\n")
+            StringBuilder settings = new StringBuilder()
+                    .append(MessageInfo.CURRENT_SETTINGS_HEADER)
+                    .append(MessageInfo.CURRENT_ACCOUNT).append(accountName).append(".\n")
+                    .append(MessageInfo.EXCHANGE).append(nameChange).append(".\n")
+                    .append(MessageInfo.ORDER_AMOUNT).append(amountOrder).append(".\n")
+                    .append(MessageInfo.CURRENCY_PAIR).append(pair).append(".\n")
+                    .append(MessageInfo.STEP_BAY).append(stepBay).append("%.\n")
+                    .append(MessageInfo.STEP_SELL).append(stepSell).append("%.\n")
+                    .append(MessageInfo.DEPOSIT).append(deposit).append("$.\n")
+                    .append(MessageInfo.SETTINGS_SEPARATOR)
                     .append(enableDemoTrading).append(".\n")
-                    .append("\nip адресс сервера: ").append(ipAddress);
+                    .append(MessageInfo.SERVER_IP_ADDRESS).append(ipAddress);
             return settings.toString();
         } catch (NullPointerException e) {
             log.error("Пользовтель: {}. id: {}. Ошибка: NPE {}", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());

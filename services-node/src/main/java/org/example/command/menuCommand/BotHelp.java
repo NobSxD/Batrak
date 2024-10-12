@@ -20,6 +20,7 @@ public class BotHelp implements Command {
                 /info_settings - посмотреть текущие настройки
                 /cancel - отмена выполнения текущей команды;
                 """;
+        //TODO добавить сайт
     }
 
     @Override

@@ -19,7 +19,6 @@ public class SettingsDemoTrading implements Command {
         String message = "Хотите включить демо-режим? Введите 'да' для включения, 'нет' для торговли на реальные деньги.";
         producerTelegramService.producerAnswer(message, nodeUser.getChatId());
         nodeUser.setState(UserState.SETTINGS_SAVE_ENABLE_DEMO_TRADING);
-
         return "";
     }
 

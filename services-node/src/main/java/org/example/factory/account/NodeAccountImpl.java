@@ -24,23 +24,23 @@ public class NodeAccountImpl implements NodeAccount {
 	public Account newAccount(NodeUser nodeUser) {
 		Account account = new Account();
 		account.setNodeUser(nodeUser);
-		account.setMenuChange(nodeUser.getMenuChange());
+		account.setChangeType(nodeUser.getChangeType());
 		return account;
 	}
 
 	@Override
 	public List<Account> getAccounts(NodeUser nodeUser) {
-		return accountBaseDAO.findAllByMenuChangeAndNodeUser(nodeUser.getMenuChange(), nodeUser);
+		return accountBaseDAO.findAllByChangeTypeAndNodeUser(nodeUser.getChangeType(), nodeUser);
 	}
 
 	@Override
 	public boolean existsByNodeUser(NodeUser nodeUser){
-		return accountBaseDAO.existsByMenuChangeAndNodeUser(nodeUser.getMenuChange(),nodeUser);
+		return accountBaseDAO.existsByChangeTypeAndNodeUser(nodeUser.getChangeType(),nodeUser);
 	}
 
 	@Override
 	public Account getAccount(String nameAccount, NodeUser nodeUser) {
-		return accountBaseDAO.findByNameAccountAndMenuChangeAndNodeUser(nameAccount, nodeUser.getMenuChange(), nodeUser).orElse(null);
+		return accountBaseDAO.findByNameAccountAndChangeTypeAndNodeUser(nameAccount, nodeUser.getChangeType(), nodeUser).orElse(null);
 	}
 
 	@Override

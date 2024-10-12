@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.RequiredArgsConstructor;
 import org.example.configuration.CurrencyProperties;
 import org.example.entity.NodeOrder;
-import org.example.entity.enams.menu.MenuChange;
+import org.example.entity.collect.ChangeType;
 import org.example.websocet.WebSocketChange;
 import org.knowm.xchange.ExchangeSpecification;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class WebSocketBinanceChange extends WebSocketBasic implements WebSocketC
 	@PostConstruct
 	public void streamValue() {
 		ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BinanceStreamingExchange.class);
-		init(MenuChange.Binance, currencyProperties, exchangeSpecification);
+		init(ChangeType.Binance, currencyProperties, exchangeSpecification);
 	}
 	
 	@Override
@@ -30,8 +30,8 @@ public class WebSocketBinanceChange extends WebSocketBasic implements WebSocketC
 	}
 	
 	@Override
-	public MenuChange getType() {
-		return MenuChange.Binance;
+	public ChangeType getType() {
+		return ChangeType.Binance;
 	}
 	
 }

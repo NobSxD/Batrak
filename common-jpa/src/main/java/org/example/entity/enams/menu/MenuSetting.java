@@ -1,15 +1,14 @@
 package org.example.entity.enams.menu;
 
-import org.example.button.ButtonMainMenu;
-import org.example.button.ButtonSetting;
+import org.example.button.ButtonLabelManager;
 
 public enum MenuSetting{
-	NamePair(ButtonSetting.namePair),
-	AmountOrder(ButtonSetting.amountOrder),
-	DepthGlass(ButtonSetting.depthGlass),
-	SelectStrategy(ButtonSetting.selectStrategy),
-	DemoTrade(ButtonSetting.enableDemoTrading),
-	MainMenu(ButtonMainMenu.mainMenu);
+	NamePair(ButtonLabelManager.namePair),
+	AmountOrder(ButtonLabelManager.amountOrder),
+	Step(ButtonLabelManager.step),
+	SelectStrategy(ButtonLabelManager.selectStrategy),
+	DemoTrade(ButtonLabelManager.enableDemoTrading),
+	MainMenu(ButtonLabelManager.mainMenu);
 	
 	private final String value;
 	

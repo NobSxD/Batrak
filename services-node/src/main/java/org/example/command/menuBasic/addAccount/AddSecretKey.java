@@ -30,7 +30,7 @@ public class AddSecretKey implements Command {
 		try {
 			Account changeAccount = nodeUser.getAccount();
 			changeAccount.setSecretApiKey(pKey);
-			changeAccount.setMenuChange(nodeUser.getMenuChange());
+			changeAccount.setChangeType(nodeUser.getChangeType());
 			nodeUser.setAccount(changeAccount);
 			nodeUser.setState(BASIC_STATE);
 

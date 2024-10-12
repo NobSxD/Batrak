@@ -1,14 +1,14 @@
 package org.example.entity.enams.menu;
 
-import org.example.button.ButtonBasic;
+import org.example.button.ButtonLabelManager;
 
 public enum MenuBasic {
-	ChoiceAccount(ButtonBasic.choiceAccount),
-	DeleteAccount(ButtonBasic.deleteAccount),
-	RegisterAccount(ButtonBasic.registerAccount),
-	TradeMenu(ButtonBasic.tradeOperation),
-	TradeSettings(ButtonBasic.tradeSettings),
-	Info_Settings(ButtonBasic.infoSettings);
+	ChoiceAccount(ButtonLabelManager.choiceAccount),
+	DeleteAccount(ButtonLabelManager.deleteAccount),
+	RegisterAccount(ButtonLabelManager.registerAccount),
+	TradeMenu(ButtonLabelManager.tradeOperation),
+	TradeSettings(ButtonLabelManager.tradeSettings),
+	Info_Settings(ButtonLabelManager.infoSettings);
 	
 	private final String value;
 	

@@ -37,13 +37,15 @@ public class ConfigTrade  implements Displayable {
 	int scale = 5;
 
 	private BigDecimal amountOrder = new BigDecimal(11);
+	private BigDecimal deposit = new BigDecimal(300);
 
-	private int depthGlass = 100;
+	private double stepBay = 0.01;
+	private double stepSell = 0.005;
 	private boolean enableDemoTrading = false;
 
 	@Enumerated(EnumType.STRING)
 	@JsonProperty("strategy")
-	private MenuStrategy strategy = MenuStrategy.SlidingProtectiveOrder;
+	private MenuStrategy strategy = MenuStrategy.GridTrading;
 
 	@OneToOne
 	@JsonBackReference
@@ -52,5 +54,20 @@ public class ConfigTrade  implements Displayable {
 	@Override
 	public String getDisplayName() {
 		return namePair;
+	}
+
+	public void setStepBay(double stepBay) {
+		this.stepBay = stepBay / 100;
+	}
+	public double getStepBay() {
+		return stepBay * 100;
+	}
+
+	public double getStepSell() {
+		return stepSell * 100;
+	}
+
+	public void setStepSell(double stepSell) {
+		this.stepSell = stepSell / 100;
 	}
 }
