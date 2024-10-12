@@ -10,6 +10,10 @@ target/
 /services-trade/src/main/resources/application-dev.properties
 /services-telegram/src/main/resources/application-dev.properties
 
+/.gradle
+/build-logic/.gradle
+
+
 ### STS ###
 .apt_generated
 .classpath
