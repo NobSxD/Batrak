@@ -1,13 +1,12 @@
 package org.example.entity.enams.menu;
 
-import org.example.button.ButtonMainMenu;
-import org.example.button.ButtonOperation;
+import org.example.button.ButtonLabelManager;
 
 public enum MenuOperation {
-	TradeStart(ButtonOperation.tradeStart),
-	TradeStop(ButtonOperation.tradeStop),
-	TradeCancel(ButtonOperation.tradeCancel),
-	MainMenu(ButtonMainMenu.mainMenu);
+	TradeStart(ButtonLabelManager.tradeStart),
+	TradeStop(ButtonLabelManager.tradeStop),
+	TradeCancel(ButtonLabelManager.tradeCancel),
+	MainMenu(ButtonLabelManager.mainMenu);
 	
 	private final String value;
 	MenuOperation(String value) {

@@ -1,16 +1,14 @@
 package org.example.command.menuBasic.tradeSettings;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.command.Command;
 import org.example.dao.NodeChangeDAO;
-import org.example.dao.SettingsTradeDAO;
 import org.example.entity.NodeChange;
 import org.example.entity.NodeUser;
 import org.example.entity.collect.Pair;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,14 +17,14 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 @Slf4j
 public class SettingsNamePair implements Command {
-	private final SettingsTradeDAO settingsTradeDAO;
+
 	private final ProducerTelegramService producerTelegramService;
 	private final NodeChangeDAO nodeChangeDAO;
 	
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			NodeChange nodeChange = nodeChangeDAO.findByMenuChange(nodeUser.getMenuChange()).orElse(null);
+			NodeChange nodeChange = nodeChangeDAO.findByChangeType(nodeUser.getChangeType()).orElse(null);
 			if (nodeChange == null){
 				return "Биржа не найденна, введите команду /start и выбирети биржу.";
 			}
@@ -55,7 +53,7 @@ public class SettingsNamePair implements Command {
 		@Override
 		public String send(NodeUser nodeUser, String text) {
 			try {
-				NodeChange nodeChange = nodeChangeDAO.findByMenuChange(nodeUser.getMenuChange()).orElse(null);
+				NodeChange nodeChange = nodeChangeDAO.findByChangeType(nodeUser.getChangeType()).orElse(null);
 				if (nodeChange == null){
 					return "Биржа не найденна, введите команду /start и выбирети биржу.";
 				}
@@ -66,7 +64,6 @@ public class SettingsNamePair implements Command {
 				nodeUser.getConfigTrade().setNamePair(pair.getNamePair());
 				nodeUser.getConfigTrade().setScale(pair.getScale());
 				nodeUser.setState(UserState.TRADE_MANAGER);
-				settingsTradeDAO.save(nodeUser.getConfigTrade());
 				producerTelegramService.menuTrade("Валютная пара успешно изменена. Новая пара: " + text, nodeUser.getChatId());
 				return "";
 			} catch (IllegalArgumentException e) {

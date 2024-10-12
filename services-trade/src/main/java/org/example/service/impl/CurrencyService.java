@@ -5,7 +5,7 @@ import org.example.dao.NodeChangeDAO;
 import org.example.dao.PairDAO;
 import org.example.entity.NodeChange;
 import org.example.entity.collect.Pair;
-import org.example.entity.enams.menu.MenuChange;
+import org.example.entity.collect.ChangeType;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
@@ -26,10 +26,10 @@ public class CurrencyService {
     @Transactional
     public void saveNodeChanges() {
         currencyProperties.getExchanges().forEach((name, exchange) -> {
-            MenuChange menuChange = MenuChange.fromValue(exchange.getType());
-            NodeChange nodeChange = nodeChangeDAO.findByMenuChange(menuChange)
+            ChangeType changeType = ChangeType.fromValue(exchange.getType());
+            NodeChange nodeChange = nodeChangeDAO.findByChangeType(changeType)
                     .orElseGet(() -> NodeChange.builder()
-                            .menuChange(menuChange)
+                            .changeType(changeType)
                             .build());
 
             // Удаление старых пар

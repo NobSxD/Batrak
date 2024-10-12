@@ -80,17 +80,17 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		}
 		return new  LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
 	}
-	public MarketOrder createMarketOrder(Order.OrderType orderType, BigDecimal summa, Instrument currencyPair){
+	public MarketOrder createMarketOrder(Order.OrderType orderType, BigDecimal coinAmunt, Instrument currencyPair){
 		if (orderType == null){
 			throw new IllegalArgumentException("OrderType cannot be null");
 		}
-		if (summa == null){
+		if (coinAmunt == null){
 			throw new IllegalArgumentException("Summa cannot be null");
 		}
 		if (currencyPair == null){
 			throw new IllegalArgumentException("Instrument cannot be null");
 		}
-		return new MarketOrder(orderType, summa, currencyPair, null, new Date());
+		return new MarketOrder(orderType, coinAmunt, currencyPair, null, new Date());
 	}
 
 	public List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders) {

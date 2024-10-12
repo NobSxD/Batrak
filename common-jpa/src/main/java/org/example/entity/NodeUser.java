@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.entity.enams.menu.MenuChange;
+import org.example.entity.collect.ChangeType;
 import org.example.entity.enams.state.TradeState;
 import org.example.entity.enams.state.UserState;
 import org.hibernate.annotations.CreationTimestamp;
@@ -73,7 +73,7 @@ public class NodeUser {
     private ConfigTrade configTrade;
 
     @Enumerated(EnumType.STRING)
-    private MenuChange menuChange;
+    private ChangeType changeType;
 
     @Enumerated(EnumType.STRING)
     private UserState state;
@@ -86,7 +86,7 @@ public class NodeUser {
     public NodeUser(Long id, Long telegramUserId, Long chatId, Date firstLoginDate, String firstName,
                     String lastName, String username, String email, Boolean isActive, Date lastStartTread,
                     Account account, List<NodeOrder> orders, List<Account> accounts, ConfigTrade configTrade,
-                    MenuChange menuChange, UserState state, TradeState stateTrade) {
+                    ChangeType changeType, UserState state, TradeState stateTrade) {
         this.id = id;
         this.telegramUserId = telegramUserId;
         this.chatId = chatId;
@@ -101,7 +101,7 @@ public class NodeUser {
         this.orders = orders;
         this.accounts = accounts;
         this.configTrade = configTrade;
-        this.menuChange = menuChange;
+        this.changeType = changeType;
         this.state = state;
         this.stateTrade = stateTrade;
     }

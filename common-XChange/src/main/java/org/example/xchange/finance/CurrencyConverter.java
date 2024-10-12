@@ -16,11 +16,11 @@ public class CurrencyConverter {
 
     }
 
-    public static BigDecimal convertUsdt(BigDecimal price, BigDecimal priceCurrency) {
+    public static BigDecimal convertUsdt(BigDecimal price, BigDecimal coinAmount) {
         int scale = 2;
         RoundingMode roundingMode = RoundingMode.HALF_UP;
-        BigDecimal result = priceCurrency.multiply(price).setScale(scale, roundingMode);
-        log.info("Криптавалюта={} * price={} равно={}", priceCurrency, price, result);
+        BigDecimal result = coinAmount.multiply(price).setScale(scale, roundingMode);
+        log.info("Криптавалюта={} * price={} равно={}", coinAmount, price, result);
         return result;
 
     }

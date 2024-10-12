@@ -3,7 +3,7 @@ package org.example.command.menuChange;
 import lombok.extern.slf4j.Slf4j;
 import org.example.command.Command;
 import org.example.entity.NodeUser;
-import org.example.entity.enams.menu.MenuChange;
+import org.example.entity.collect.ChangeType;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
 
@@ -22,12 +22,12 @@ public class SelectionChange implements Command {
 	@Override
 	public String send(NodeUser nodeUser, String nameChange) {
 		try {
-			MenuChange type = MenuChange.fromValue(nameChange);
+			ChangeType type = ChangeType.fromValue(nameChange);
 			if (type == null){
 				log.error("Пользователь id: {} name: {}, меню не найденно:{}", nodeUser.getId(), nodeUser.getFirstName(), nameChange);
-				return "меню %s не найденна.".formatted(nameChange);
+				return "Биржа %s не найденна.".formatted(nameChange);
 			}
-			nodeUser.setMenuChange(type);
+			nodeUser.setChangeType(type);
 			nodeUser.setState(BASIC_STATE);
 			producerTelegramService.mainMenu(nameChange, nodeUser.getChatId());
 			return "";

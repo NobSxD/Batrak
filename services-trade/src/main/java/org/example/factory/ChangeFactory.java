@@ -15,7 +15,7 @@ public class ChangeFactory {
                 .botName(nodeUser.getAccount().getNameAccount())
                 .build();
         BasicChangeInterface change = null;
-        switch (nodeUser.getMenuChange()) {
+        switch (nodeUser.getChangeType()) {
             case Bybit -> change = new ByBitMainImpl(changeUser);
             case Binance -> change = new BinanceMainImpl(changeUser);
         }

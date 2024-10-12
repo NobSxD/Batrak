@@ -1,6 +1,6 @@
 package org.example.command.menuBasic.account;
 
-import org.example.button.ButtonBasic;
+import org.example.button.ButtonLabelManager;
 import org.example.factory.account.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
@@ -29,12 +29,12 @@ public class AccountList implements Command {
 				return "У вас нет аккаунта.";
 			}
 			List<Account> accounts = nodeAccount.getAccounts(nodeUser);
-			if (text.equals(ButtonBasic.deleteAccount)) {
+			if (text.equals(ButtonLabelManager.deleteAccount)) {
 				nodeUser.setState(UserState.ACCOUNT_DELETE);
 				producerTelegramService.accountsMenu(accounts, "Выберите аккаунт для удаления", nodeUser.getChatId());
 				return "";
 			}
-			if (text.equals(ButtonBasic.choiceAccount)){
+			if (text.equals(ButtonLabelManager.choiceAccount)){
 				nodeUser.setState(UserState.ACCOUNT_SELECT);
 				producerTelegramService.accountsMenu(accounts, "Выберите аккаунт для торговли", nodeUser.getChatId());
 				return "";

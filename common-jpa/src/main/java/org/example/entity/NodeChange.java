@@ -1,8 +1,8 @@
 package org.example.entity;
 
 import org.example.castom.Displayable;
+import org.example.entity.collect.ChangeType;
 import org.example.entity.collect.Pair;
-import org.example.entity.enams.menu.MenuChange;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -42,8 +42,8 @@ public class NodeChange implements Displayable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "change_type", nullable = false)
-	@JsonProperty("menuChange")
-	private MenuChange menuChange;
+	@JsonProperty("changeType")
+	private ChangeType changeType;
 
 	public void addPair(Pair pair) {
 		pairs.put(pair.getNamePair(), pair);
@@ -52,6 +52,6 @@ public class NodeChange implements Displayable {
 
 	@Override
 	public String getDisplayName() {
-		return menuChange.name();
+		return changeType.name();
 	}
 }

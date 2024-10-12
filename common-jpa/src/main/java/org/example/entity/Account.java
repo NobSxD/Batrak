@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.example.castom.Displayable;
-import org.example.entity.enams.menu.MenuChange;
+import org.example.entity.collect.ChangeType;
 
 import java.math.BigDecimal;
 
@@ -37,8 +37,8 @@ public class Account implements Displayable {
 	private BigDecimal balance;
 
 	@Enumerated(EnumType.STRING)
-	@JsonProperty("menuChange")
-	private MenuChange menuChange;
+	@JsonProperty("changeType")
+	private ChangeType changeType;
 
 	@ManyToOne
 	@JsonBackReference
