@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+/.env
+/volume
+
 ### STS ###
 .apt_generated
 .classpath
@@ -36,9 +39,6 @@ build/
 /telegram/src/main/resources/application-dev.properties
 /TradeBot/src/main/resources/application-dev.properties
 ###учетные данные###
-.env
-volume/db
-volume/rabbitmq
 /services-node/src/main/resources/application-dev.properties
 /services-telegram/src/main/resources/application-dev.properties
 /services-trade/src/main/resources/application-dev.properties
