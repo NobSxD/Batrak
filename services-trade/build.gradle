@@ -8,6 +8,9 @@ plugins {
     id 'org.springframework.boot' version libs.versions.org.springframework.boot.plagin
     id 'buildlogic.java-conventions'
 }
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
 
 dependencies {
     api project(':common-XChange')

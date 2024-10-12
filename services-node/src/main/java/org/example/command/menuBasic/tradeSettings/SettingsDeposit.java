@@ -19,7 +19,7 @@ public class SettingsDeposit implements Command {
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			nodeUser.setState(UserState.SETTINGS_SAVE_AMOUNT_ORDER);
+			nodeUser.setState(UserState.SETTINGS_SAVE_DEPOSIT);
 			return MessageInfo.ENTER_DEPOSIT_AMOUNT;
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -38,7 +38,7 @@ public class SettingsDeposit implements Command {
 		@Override
 		public String send(NodeUser nodeUser, String amount) {
 			try {
-				nodeUser.getConfigTrade().setAmountOrder(new BigDecimal(amount));
+				nodeUser.getConfigTrade().setDeposit(new BigDecimal(amount));
 				nodeUser.setState(UserState.TRADE_MANAGER);
 				producerTelegramService.menuTrade(String.format(MessageInfo.DEPOSIT_AMOUNT_CHANGED, amount), nodeUser.getChatId());
 				return "";

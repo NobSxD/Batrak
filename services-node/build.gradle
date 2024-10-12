@@ -36,4 +36,7 @@ configurations.configureEach {
         force 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.3'
     }
 }
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
 description = 'node'

@@ -68,7 +68,7 @@ public class NodeUser {
     @JsonIgnore
     private List<Account> accounts;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private ConfigTrade configTrade;
 

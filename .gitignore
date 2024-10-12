@@ -6,6 +6,10 @@ target/
 
 /.env
 /volume
+/.gradle
+/build
+/build-logic/build
+/build-logic/.gradle
 
 ### STS ###
 .apt_generated

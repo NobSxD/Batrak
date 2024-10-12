@@ -1,22 +1,14 @@
 package org.example.entity;
 
-import org.example.castom.Displayable;
-import org.example.entity.enams.menu.MenuStrategy;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.castom.Displayable;
+import org.example.entity.enams.menu.MenuStrategy;
 
 import java.math.BigDecimal;
 
@@ -26,7 +18,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConfigTrade  implements Displayable {
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -47,7 +38,7 @@ public class ConfigTrade  implements Displayable {
 	@JsonProperty("strategy")
 	private MenuStrategy strategy = MenuStrategy.GridTrading;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JsonBackReference
 	private NodeUser nodeUser;
 

@@ -3,7 +3,6 @@ package org.example.service.impl;
 import com.github.benmanes.caffeine.cache.Cache;
 import lombok.Data;
 import org.example.dao.NodeUserDAO;
-import org.example.dao.SettingsTradeDAO;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
 import org.example.service.ProcessServiceCommand;
@@ -17,7 +16,6 @@ import static org.example.entity.enams.state.UserState.BASIC_STATE;
 public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 
     private final NodeUserDAO nodeUserDAO;
-    private final SettingsTradeDAO settingsTradeDAO;
     private final Cache<Long, NodeUser> nodeUserCache;
 
 
@@ -29,21 +27,19 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
         if (nodeUser == null) {
             var appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId());
             if (appUserOpt.isEmpty()) {
-                var settingsTrade = new ConfigTrade();
-                NodeUser transientAppUser = NodeUser.builder()
+                ConfigTrade settingsTrade = new ConfigTrade();
+                nodeUser = NodeUser.builder()
                         .chatId(extractChatIdFromUpdate(update))
                         .telegramUserId(telegramUser.getId())
                         .username(telegramUser.getUserName())
                         .firstName(telegramUser.getFirstName())
                         .lastName(telegramUser.getLastName())
+                        .configTrade(settingsTrade)
                         .isActive(false)
                         .state(BASIC_STATE)
                         .build();
-
-                settingsTrade.setNodeUser(transientAppUser);
-                transientAppUser.setConfigTrade(settingsTrade);
-                settingsTradeDAO.save(settingsTrade);
-                nodeUserDAO.save(transientAppUser);
+                settingsTrade.setNodeUser(nodeUser);
+                nodeUserDAO.save(nodeUser);
             } else {
                 nodeUser = appUserOpt.get();
                 nodeUserCache.put(telegramUser.getId(), nodeUser);

@@ -31,8 +31,10 @@ public class ButtonLabelManager {
     //ButtonSetting
     public static final String namePair = "Выбор торговой пары";
     public static final String amountOrder = "Укажите цену ордера";
-    public static final String step = "Шаг цены в % для покупки и продажи";
+    public static final String stepBay = "Шаг цены в % для покупки";
+    public static final String stepSell = "Шаг цены в % для продажи";
     public static final String selectStrategy = "Выбор стратегии";
+    public static final String deposit = "Выбор размера депозита";
     public static final String enableDemoTrading = "Вкл./Выкл виртуальной торговли";
 
     //ButtonStrategy

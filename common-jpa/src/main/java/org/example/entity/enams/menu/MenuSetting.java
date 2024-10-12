@@ -5,8 +5,9 @@ import org.example.button.ButtonLabelManager;
 public enum MenuSetting{
 	NamePair(ButtonLabelManager.namePair),
 	AmountOrder(ButtonLabelManager.amountOrder),
-	Step(ButtonLabelManager.step),
-	SelectStrategy(ButtonLabelManager.selectStrategy),
+	StepBay(ButtonLabelManager.stepBay),
+	StepSell(ButtonLabelManager.stepSell),
+	Deposit(ButtonLabelManager.deposit),
 	DemoTrade(ButtonLabelManager.enableDemoTrading),
 	MainMenu(ButtonLabelManager.mainMenu);
 	
