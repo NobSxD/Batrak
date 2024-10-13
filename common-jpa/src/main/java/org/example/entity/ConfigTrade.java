@@ -53,9 +53,15 @@ public class ConfigTrade  implements Displayable {
 	public double getStepBay() {
 		return stepBay * 100;
 	}
+	public double getStepBayD() {
+		return stepBay;
+	}
 
 	public double getStepSell() {
 		return stepSell * 100;
+	}
+	public double getStepSellD() {
+		return stepSell;
 	}
 
 	public void setStepSell(double stepSell) {

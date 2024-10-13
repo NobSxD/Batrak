@@ -14,6 +14,7 @@ import org.example.websocet.WebSocketChange;
 import org.example.websocet.WebSocketCommand;
 import org.example.xchange.BasicChangeInterface;
 import org.example.xchange.finance.CurrencyConverter;
+import org.example.xchange.finance.FinancialCalculator;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.trade.MarketOrder;
@@ -47,7 +48,7 @@ public class GridTrading extends StrategyBasic {
     public final Set<BigDecimal> buyLevels = new HashSet<>();
     BigDecimal endPrice = new BigDecimal("999999999999");
     BigDecimal buyPercent;
-    BigDecimal sellPercent = new BigDecimal("0.005");
+    BigDecimal sellPercent;
     BigDecimal currentPrice;
     BigDecimal lastPrice;
 
@@ -73,7 +74,8 @@ public class GridTrading extends StrategyBasic {
         this.coinAmount = nodeUser.getConfigTrade().getAmountOrder();
         this.demoTrade = nodeUser.getConfigTrade().isEnableDemoTrading();
         this.scale = nodeUser.getConfigTrade().getScale();
-        this.buyPercent = BigDecimal.valueOf(nodeUser.getConfigTrade().getStepBay());
+        this.buyPercent = BigDecimal.valueOf(nodeUser.getConfigTrade().getStepBayD());
+        this.sellPercent = BigDecimal.valueOf(nodeUser.getConfigTrade().getStepSellD());
     }
 
 
@@ -164,8 +166,11 @@ public class GridTrading extends StrategyBasic {
 
     public void process(Order.OrderType orderType, NodeUser nodeUser) {
         try {
-
-            BigDecimal cryptoQty = CurrencyConverter.convertCurrency(currentPrice, coinAmount, scale);
+            BigDecimal amount = coinAmount;
+            if (orderType.equals(Order.OrderType.ASK)){
+                amount = FinancialCalculator.increaseByPercentage(coinAmount, sellPercent);
+            }
+            BigDecimal cryptoQty = CurrencyConverter.convertCurrency(currentPrice, amount, scale);
             if (cryptoQty == null) {
                 throw new IllegalArgumentException("Converted cryptocurrency amount is null");
             }
@@ -177,11 +182,10 @@ public class GridTrading extends StrategyBasic {
 
             String idOrder = basicChange.placeMarketOrder(marketOrder, demoTrade);
 
-            BigDecimal usdAmount = CurrencyConverter.convertUsdt(currentPrice, coinAmount);
+            BigDecimal usdAmount = CurrencyConverter.convertUsdt(currentPrice, amount);
             if (usdAmount == null) {
                 throw new IllegalArgumentException("Converted USD amount is null");
             }
-
 
             NodeOrder nodeOrder = NodeOrder.builder()
                     .limitPrice(currentPrice)

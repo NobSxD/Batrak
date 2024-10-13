@@ -105,4 +105,13 @@ public class FinancialCalculator {
         int scale = CurrencyConverter.validUsd(price).scale();
         return price.add(price.multiply(step).divide(new BigDecimal("100"))).setScale(scale, RoundingMode.HALF_UP);
     }
+
+    public static BigDecimal increaseByPercentage(BigDecimal amount, BigDecimal percentage) {
+        if (amount == null || percentage == null) {
+            throw new IllegalArgumentException("Amount and percentage must not be null");
+        }
+        // Увеличиваем сумму на процент
+        BigDecimal increase = amount.multiply(percentage);
+        return amount.add(increase).setScale(2, RoundingMode.HALF_UP);
+    }
 }
