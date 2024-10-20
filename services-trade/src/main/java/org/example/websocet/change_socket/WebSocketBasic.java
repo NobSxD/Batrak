@@ -26,7 +26,7 @@ import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_RE
 public abstract class WebSocketBasic {
 
     protected final BehaviorSubject<NodeOrder> subject = BehaviorSubject.create();
-    protected final Map<CurrencyPair, StreamingExchange> exchangeMap = new HashMap<>();
+    protected final Map<CurrencyPair, Observable<NodeOrder>> exchangeMap = new HashMap<>();
 
     public abstract void streamValue();
 
@@ -77,7 +77,7 @@ public abstract class WebSocketBasic {
                         subject::onNext,
                         subject::onError
                 );
-        exchangeMap.put(currencyPair, exchange);
+        exchangeMap.put(currencyPair, tradeObservable);
     }
 
     private Function<Observable<Throwable>, Observable<?>> exponentialBackoff() {

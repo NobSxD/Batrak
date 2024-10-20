@@ -23,9 +23,8 @@ public class CreateStrategyImpl implements CreateStrategy {
     public Strategy createStrategy(NodeUser nodeUser, BasicChangeInterface basicChange) {
         Strategy strategy = null;
         switch (nodeUser.getConfigTrade().getStrategy()) {
-            case GridTrading ->
-                    new GridTrading(nodeUser, basicChange, nodeUserDAO, webSocketCommand, processServiceCommand,
-                            nodeOrdersDAO);
+            case GridTrading -> strategy = new GridTrading(nodeUser, basicChange, nodeUserDAO, webSocketCommand,
+                    processServiceCommand, nodeOrdersDAO);
         }
         return strategy;
     }

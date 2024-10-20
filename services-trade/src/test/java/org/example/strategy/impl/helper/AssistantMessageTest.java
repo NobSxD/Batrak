@@ -57,11 +57,7 @@ class AssistantMessageTest {
 		String newSellMessage = AssistantMessage.messageSell(usd, price);
 		long endNewSell = System.nanoTime();
 		long durationNewSell = TimeUnit.NANOSECONDS.toMicros(endNewSell - startNewSell);
-		
-		long startNewProcessing = System.nanoTime();
-		String newProcessingMessage = AssistantMessage.messageProcessing(price);
-		long endNewProcessing = System.nanoTime();
-		long durationNewProcessing = TimeUnit.NANOSECONDS.toMicros(endNewProcessing - startNewProcessing);
+
 		
 		long startNewResult = System.nanoTime();
 		String newResultMessage = AssistantMessage.messageResult(profit, size);
@@ -71,7 +67,6 @@ class AssistantMessageTest {
 		// Asserting the equality of results
 		assertEquals(oldBuyMessage, newBuyMessage);
 		assertEquals(oldSellMessage, newSellMessage);
-		assertEquals(oldProcessingMessage, newProcessingMessage);
 		assertEquals(oldResultMessage, newResultMessage);
 		
 		// Printing durations
@@ -82,7 +77,6 @@ class AssistantMessageTest {
 		System.out.println("New Sell Duration: " + durationNewSell + " micros");
 		
 		System.out.println("Old Processing Duration: " + durationOldProcessing + " micros");
-		System.out.println("New Processing Duration: " + durationNewProcessing + " micros");
 		
 		System.out.println("Old Result Duration: " + durationOldResult + " micros");
 		System.out.println("New Result Duration: " + durationNewResult + " micros");

@@ -1,23 +1,9 @@
 package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import org.example.entity.collect.ChangeType;
 import org.example.entity.enams.state.TradeState;
 import org.example.entity.enams.state.UserState;
@@ -61,11 +47,11 @@ public class NodeUser {
     protected Account account;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUser")
-    @JsonIgnore
+    @JsonManagedReference
     private List<NodeOrder> orders;
 
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, mappedBy = "nodeUser")
-    @JsonIgnore
+    @JsonManagedReference
     private List<Account> accounts;
 
     @OneToOne(cascade = CascadeType.ALL)

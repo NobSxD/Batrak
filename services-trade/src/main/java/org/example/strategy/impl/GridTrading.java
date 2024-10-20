@@ -1,6 +1,7 @@
 package org.example.strategy.impl;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.NodeOrdersDAO;
 import org.example.dao.NodeUserDAO;
@@ -22,12 +23,8 @@ import org.knowm.xchange.exceptions.FundsExceededException;
 import org.knowm.xchange.instrument.Instrument;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -43,40 +40,34 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class GridTrading extends StrategyBasic {
-
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     public final Set<BigDecimal> buyLevels = new HashSet<>();
-    BigDecimal endPrice = new BigDecimal("999999999999");
-    BigDecimal buyPercent;
-    BigDecimal sellPercent;
-    BigDecimal currentPrice;
-    BigDecimal lastPrice;
-
     private final Instrument instrument;
     private final BigDecimal coinAmount;
     private final boolean demoTrade;
+    private final double stepSell;
+    private final double stepBay;
     private final int scale;
-    private final NodeUserDAO nodeUserDAO;
-    private final NodeOrdersDAO nodeOrdersDAO;
-    private NodeUser nodeUser;
+    BigDecimal endPrice;
+    BigDecimal currentPrice;
+    BigDecimal lastPrice;
 
     public GridTrading(NodeUser nodeUser, BasicChangeInterface basicChange, NodeUserDAO nodeUserDAO,
                        WebSocketCommand webSocketCommand, ProcessServiceCommand producerServiceExchange,
                        NodeOrdersDAO nodeOrdersDAO) {
-        super(new TradeStatusManager());
-        this.nodeUser = nodeUser;
+        super(new TradeStatusManager(), nodeOrdersDAO, nodeUserDAO);
         this.basicChange = basicChange;
-        this.nodeUserDAO = nodeUserDAO;
         this.webSocketCommand = webSocketCommand;
         this.producerServiceExchange = producerServiceExchange;
-        this.nodeOrdersDAO = nodeOrdersDAO;
         this.instrument = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
         this.coinAmount = nodeUser.getConfigTrade().getAmountOrder();
         this.demoTrade = nodeUser.getConfigTrade().isEnableDemoTrading();
         this.scale = nodeUser.getConfigTrade().getScale();
-        this.buyPercent = BigDecimal.valueOf(nodeUser.getConfigTrade().getStepBayD());
-        this.sellPercent = BigDecimal.valueOf(nodeUser.getConfigTrade().getStepSellD());
+        this.stepBay = nodeUser.getConfigTrade().getStepBayD();
+        this.stepSell = nodeUser.getConfigTrade().getStepSellD();
+        tradeStatusManager.startTrading();
+        tradeStatusManager.newCountDownLatch(1);
     }
+
 
 
     @Override
@@ -85,95 +76,142 @@ public class GridTrading extends StrategyBasic {
     }
 
     @Override
-    public void tradeStart() {
-        Runnable task = () -> {
-            try {
+    @Transactional
+    public void tradeStart(NodeUser nodeUser) {
+        try {
+            while (true) {
                 TradeState state = tradeStatusManager.getCurrentTradeState();
-                switch (state) {
-                    case TRADE_STOP, TRADE_CANCEL -> {
-                        scheduler.shutdown();
-                        resultTrade(nodeOrdersDAO, nodeUser);
-                        return;
-                    }
+                if (state == TradeState.TRADE_STOP) {
+                    break;
+                }
+                if (state == TradeState.TRADE_CANCEL) {
+                    resultTrade(nodeUser);
+                    break;
                 }
                 startTradingCycle(nodeUser);
-            }catch (Exception e) {
-                log.error("Ошибка в торговом цикле: ", e);
+                awaitLatch(tradeStatusManager.getCountDownLatch());
+                // Подождите 40 секунд перед следующим циклом
+                try {
+                    log.info("Достигнута конечная цена, завершаем торговый цикл. : {}", currentPrice);
+                    tradeStatusManager.sellLast();
+                    lastPrice = null;
+                    endPrice = null;
+                    Thread.sleep(40000);
+                } catch (InterruptedException e) {
+                    log.error("Поток был прерван: ", e);
+                    Thread.currentThread().interrupt(); // Восстановление прерывания
+                    break;
+                }
             }
-        };
-
-        scheduler.scheduleAtFixedRate(task, 0, 40, TimeUnit.SECONDS);
-
+        } catch (Exception e) {
+            log.error("Ошибка в торговом цикле: ", e);
+        }
     }
 
 
+    @Transactional
     public void startTradingCycle(NodeUser nodeUser) {
         WebSocketChange webSocketChange = webSocketCommand.webSocketChange(nodeUser);
 
-        disposable = webSocketChange.getCurrencyRateStream()
+        // Подписываемся на изменения
+        disposable = webSocketChange.exchangePair(instrument)
                 .observeOn(Schedulers.io())
-                .takeUntil(rate -> rate.getLimitPrice().compareTo(endPrice) >= 0)
-                .subscribe(rate -> {
-                    BigDecimal currentPrice = rate.getLimitPrice();
+                .buffer(10, TimeUnit.SECONDS)  // Оптимизация: собираем данные за промежуток времени, чтобы не сохранять каждое изменение
+                .subscribe(rateList -> {
+                    List<NodeOrder> newOrders = new ArrayList<>();
+                    for (NodeOrder rate : rateList) {
+                        BigDecimal currentPrice = rate.getLimitPrice();
+                        NodeOrder nodeOrder = processPrice(currentPrice, nodeUser);
+                        if (nodeOrder != null) {
+                            newOrders.add(nodeOrder);
+                        }
+                    }
 
-                    if (shouldBuy(currentPrice)) {
-                        tradeStatusManager.buy();
-                        executeBuyOrder(currentPrice, nodeUser);
-                    } else if (shouldSell(currentPrice)) {
-                        tradeStatusManager.sell();
-                        executeSellOrder(currentPrice, nodeUser);
+                    // Добавляем заказы только если есть новые
+                    if (!newOrders.isEmpty()) {
+                        if (nodeUser.getOrders() == null) {
+                            nodeUser.setOrders(new ArrayList<>());
+                        }
+                        nodeUser.getOrders().addAll(newOrders);
+                        nodeUserDAO.save(nodeUser);  // Сохраняем изменения только один раз
                     }
                 }, error -> {
                     log.error("Error occurred: {}", error.getMessage());
-                }, () -> {
-                    log.info("Reached endPrice, stopping the trading cycle");
                 });
+    }
 
+
+    public NodeOrder processPrice(BigDecimal currentPrice, NodeUser nodeUser) {
+        NodeOrder nodeOrder = null;
+        TradeState state = tradeStatusManager.getCurrentTradeState();
+        if (state.equals(TradeState.TRADE_START)) {
+            log.info("Прайс на первую покупку : {}", currentPrice);
+            tradeStatusManager.runTrading();
+            endPrice = FinancialCalculator.increaseByPercentage(currentPrice, BigDecimal.valueOf(stepSell));
+            nodeOrder = executeBuyOrder(currentPrice, nodeUser);
+        }
+         if (shouldBuy(currentPrice)) {
+            log.info("Прайс на покупку : {}", currentPrice);
+            nodeOrder = executeBuyOrder(currentPrice, nodeUser);
+        } else if (shouldSell(currentPrice)) {
+            log.info("Прайс на продажу : {}", currentPrice);
+            nodeOrder = executeSellOrder(currentPrice, nodeUser);
+        }
+        return nodeOrder;
+    }
+
+    public void awaitLatch(CountDownLatch latch) {
+        try {
+            latch.await(); // Блокируем текущий поток до завершения задачи
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Восстановление статуса прерывания
+            log.error("Торговый поток был прерван:", e);
+        }
     }
 
     public boolean shouldBuy(BigDecimal currentPrice) {
-        if (lastPrice == null) {
-            endPrice = currentPrice;
-            // Первая сделка, покупаем независимо от уровня
-            return true;
-        }
-        BigDecimal targetBuyPrice = lastPrice.subtract(lastPrice.multiply(buyPercent));
+        BigDecimal targetBuyPrice = lastPrice.subtract(lastPrice.multiply(BigDecimal.valueOf(stepBay)));
         // Проверяем, можно ли купить на этом уровне
-        return currentPrice.compareTo(targetBuyPrice) <= 0 && !buyLevels.contains(currentPrice);
+        boolean canBuy = currentPrice.compareTo(targetBuyPrice) <= 0;
+        boolean contains = !buyLevels.contains(currentPrice);
+        if (canBuy && contains){
+            log.debug("BAY: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ",currentPrice,targetBuyPrice, buyLevels );
+        }
+        return canBuy && contains;
     }
 
     public boolean shouldSell(BigDecimal currentPrice) {
-        BigDecimal targetSellPrice = lastPrice.add(lastPrice.multiply(sellPercent));
+        BigDecimal targetSellPrice = lastPrice.add(lastPrice.multiply(BigDecimal.valueOf(stepSell)));
         // Проверяем, можно ли продать на этом уровне
         boolean canSell = currentPrice.compareTo(targetSellPrice) >= 0;
         boolean contains = buyLevels.contains(lastPrice);
+        if (canSell && contains){
+            log.debug("SELL: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ",currentPrice,targetSellPrice, buyLevels );
+        }
         return canSell && contains;
     }
 
-    public void executeBuyOrder(BigDecimal price, NodeUser nodeUser) {
+    public NodeOrder executeBuyOrder(BigDecimal price, NodeUser nodeUser) {
         this.currentPrice = price;
         lastPrice = price;
         buyLevels.add(price);
-        process(Order.OrderType.BID, nodeUser);
+        return process(Order.OrderType.BID, nodeUser);
     }
 
-    protected void executeSellOrder(BigDecimal price, NodeUser nodeUser) {
+    public NodeOrder executeSellOrder(BigDecimal price, NodeUser nodeUser) {
         this.currentPrice = price;
         buyLevels.remove(lastPrice);
         lastPrice = price;
-        process(Order.OrderType.ASK, nodeUser);
+        return process(Order.OrderType.ASK, nodeUser);
     }
 
-    public void process(Order.OrderType orderType, NodeUser nodeUser) {
+    public NodeOrder process(Order.OrderType orderType, NodeUser nodeUser) {
         try {
             BigDecimal amount = coinAmount;
-            if (orderType.equals(Order.OrderType.ASK)){
-                amount = FinancialCalculator.increaseByPercentage(coinAmount, sellPercent);
+            if (orderType.equals(Order.OrderType.ASK)) {
+                amount = FinancialCalculator.increaseByPercentage(coinAmount, BigDecimal.valueOf(stepSell));
             }
             BigDecimal cryptoQty = CurrencyConverter.convertCurrency(currentPrice, amount, scale);
-            if (cryptoQty == null) {
-                throw new IllegalArgumentException("Converted cryptocurrency amount is null");
-            }
 
             MarketOrder marketOrder = basicChange.createMarketOrder(orderType, cryptoQty, instrument);
             if (marketOrder == null) {
@@ -182,18 +220,13 @@ public class GridTrading extends StrategyBasic {
 
             String idOrder = basicChange.placeMarketOrder(marketOrder, demoTrade);
 
-            BigDecimal usdAmount = CurrencyConverter.convertUsdt(currentPrice, amount);
-            if (usdAmount == null) {
-                throw new IllegalArgumentException("Converted USD amount is null");
-            }
-
             NodeOrder nodeOrder = NodeOrder.builder()
                     .limitPrice(currentPrice)
                     .type(orderType.name())
                     .orderId(idOrder)
                     .orderState(OrderState.COMPLETED)
                     .originalAmount(cryptoQty)
-                    .usd(usdAmount)
+                    .usd(amount)
                     .timestamp(new Date())
                     .instrument(nodeUser.getConfigTrade().getNamePair())
                     .checkReal(nodeUser.getConfigTrade().isEnableDemoTrading())
@@ -201,12 +234,7 @@ public class GridTrading extends StrategyBasic {
                     .menuStrategy(nodeUser.getConfigTrade().getStrategy())
                     .build();
             finalizeOrder(nodeOrder);
-
-            if (nodeUser.getOrders() == null) {
-                nodeUser.setOrders(new ArrayList<>());
-            }
-            nodeUser.getOrders().add(nodeOrder);
-            nodeUserDAO.save(nodeUser);
+            return nodeOrder;
         } catch (FundsExceededException e) {
             handleFundsExceededException(nodeUser, e);
         } catch (IllegalArgumentException e) {
@@ -216,5 +244,6 @@ public class GridTrading extends StrategyBasic {
         } catch (Exception e) {
             handleGeneralException(nodeUser, e);
         }
+        return null;
     }
 }

@@ -8,6 +8,7 @@ import org.example.entity.NodeOrder;
 import org.example.entity.collect.ChangeType;
 import org.example.websocet.WebSocketChange;
 import org.knowm.xchange.ExchangeSpecification;
+import org.knowm.xchange.instrument.Instrument;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +28,11 @@ public class WebSocketBinanceChange extends WebSocketBasic implements WebSocketC
 	@Override
 	public Observable<NodeOrder> getCurrencyRateStream() {
 		return subject;
+	}
+
+	@Override
+	public Observable<NodeOrder> exchangePair(Instrument instrument){
+		return exchangeMap.get(instrument);
 	}
 	
 	@Override

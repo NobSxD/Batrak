@@ -71,22 +71,21 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
 
             processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
 
-            Strategy strategy = (nodeUser.getStateTrade().equals(TradeState.SELL))
-                    ? strategyMap.get(nodeUser.getId())
-                    : createStrategy.createStrategy(nodeUser, change);
+            Strategy strategy = createStrategy.createStrategy(nodeUser, change);
 
             if (strategy == null) {
                 processServiceCommand.sendAnswer("Не удалось найти стратегию", nodeUser.getChatId());
                 return;
             }
             strategyMap.put(nodeUser.getId(), strategy);
-            strategy.tradeStart();
+            strategy.tradeStart(nodeUser);
+            strategyMap.remove(nodeUser.getId());
 
         } catch (ExchangeException e) {
             handleTradeException(nodeUser, e, "Проверьте правильность введенных данных, " +
                     "API public key, API secret key, или добавьте разрешенный IP сервера");
         } catch (Exception e) {
-            handleTradeException(nodeUser, e, "Произошла ошибка в связке трейдинга");
+            handleTradeException(nodeUser, e, "К сожалению, произошла ошибка в процессе торговли. а");
         }
     }
 

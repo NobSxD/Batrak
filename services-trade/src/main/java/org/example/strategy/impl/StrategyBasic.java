@@ -4,10 +4,10 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.NodeOrdersDAO;
+import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeOrder;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.state.OrderState;
-import org.example.entity.enams.state.TradeState;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.Strategy;
 import org.example.strategy.impl.helper.AssistantMessage;
@@ -40,33 +40,16 @@ public abstract class StrategyBasic implements Strategy {
      * Статус трейдинга
      */
     protected final TradeStatusManager tradeStatusManager;
+
+    protected final NodeOrdersDAO nodeOrdersDAO;
+    protected final NodeUserDAO nodeUserDAO;
     protected Disposable disposable;
 
-    protected StrategyBasic(TradeStatusManager tradeStatusManager) {
+    protected StrategyBasic(TradeStatusManager tradeStatusManager, NodeOrdersDAO nodeOrdersDAO, NodeUserDAO nodeUserDAO) {
         this.tradeStatusManager = tradeStatusManager;
+        this.nodeOrdersDAO = nodeOrdersDAO;
+        this.nodeUserDAO = nodeUserDAO;
     }
-
-    /**
-     * Выполняет процесс торговли для данного пользователя. Этот метод настраивает торговую среду и
-     * постоянно обновляет состояние торговли пользователя, взаимодействуя с различными компонентами,
-     * такими как базы данных и команды веб-сокетов.
-     *
-     * <p>Этот метод требует, чтобы несколько зависимостей не были null. Если любая из этих зависимостей
-     * равна null, будет выброшено {@link IllegalArgumentException}. Метод использует кэш для данных
-     * пользователей для повышения эффективности и взаимодействует с различными DAO для управления
-     * данными пользователей и заказами. Состояния торговли управляются и обновляются в рамках цикла,
-     * чтобы обеспечить непрерывную торговлю до выполнения определенных условий.</p>
-     *
-     * <p>Обрабатываемые состояния торговли включают {@link TradeState#TRADE_START}, {@link TradeState#BUY}
-     * и {@link TradeState#SELL}. Корректировки ордеров выполняются в зависимости от текущего состояния
-     * и состояния книги ордеров. После завершения торговли или достижения состояния ошибки, сводка
-     * результатов торговли отправляется пользователю через предоставленный обменный сервис.</p>
-     *
-     * @throws IllegalArgumentException если любая из зависимостей сервиса или DAO равна null
-     */
-    @Transactional
-    @Override
-    public abstract void tradeStart();
 
     @Override
     public void tradeStop() {
@@ -82,10 +65,10 @@ public abstract class StrategyBasic implements Strategy {
     }
 
     @Transactional
-    public abstract void process(Order.OrderType orderType, NodeUser nodeUser);
+    public abstract NodeOrder process(Order.OrderType orderType, NodeUser nodeUser);
 
-    public void resultTrade(NodeOrdersDAO ordersDAO,NodeUser nodeUser ){
-        List<NodeOrder> nodeOrders = ordersDAO.findAllOrdersFromTimestampAndNodeUser( //TODO выбрать только исполненые ордера, учитовать минуты при старте
+    public void resultTrade(NodeUser nodeUser ){
+        List<NodeOrder> nodeOrders = nodeOrdersDAO.findAllOrdersFromTimestampAndNodeUser( //TODO выбрать только исполненые ордера, учитовать минуты при старте
                 nodeUser.getLastStartTread(), nodeUser);
         producerServiceExchange.sendAnswer(
                 AssistantMessage.messageResult(
@@ -96,7 +79,7 @@ public abstract class StrategyBasic implements Strategy {
 
     protected void finalizeOrder(NodeOrder nodeOrder) {
         log.info("{} : ордер был исполнен по прайсу {}. ", nodeOrder.getOrderId(), nodeOrder.getLimitPrice());
-        String message = AssistantMessage.messageProcessing(nodeOrder.getLimitPrice());
+        String message = AssistantMessage.messageProcessing(nodeOrder);
         producerServiceExchange.sendAnswer(message, nodeOrder.getNodeUser().getChatId());
         nodeOrder.setOrderState(OrderState.COMPLETED);
     }

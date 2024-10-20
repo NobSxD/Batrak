@@ -22,6 +22,7 @@ import java.util.List;
 
 import static org.example.entity.enams.state.UserState.BASIC_STATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class GridTradingTest {
     @Mock
@@ -122,5 +123,13 @@ class GridTradingTest {
 
         // Проверка, что настоящие и ожидаемые списки продавцов одинаковы
         assertEquals(expectedSellPrices, sellPrices);
+    }
+
+    @Test
+    void lastPrice(){
+        BigDecimal endPrice = new BigDecimal("68000");
+        BigDecimal currentPrice = new BigDecimal("67000");
+        boolean b = endPrice.compareTo(currentPrice) <= 0;
+        assertFalse(b);
     }
 }
