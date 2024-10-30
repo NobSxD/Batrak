@@ -49,3 +49,6 @@ build/
 /services-node/src/main/resources/application-dev.properties
 /services-telegram/src/main/resources/application-dev.properties
 /services-trade/src/main/resources/application-dev.properties
+
+/deploy
+/deploy.bat

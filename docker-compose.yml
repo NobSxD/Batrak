@@ -49,7 +49,7 @@ services:
     build:
       context: /services-trade
       dockerfile: Dockerfile
-    image: tradebot:latest
+    image: nobsxd/batrak:tradebot
     container_name: trade_bot
     environment:
        SERVER_PORT: 8089
@@ -60,7 +60,9 @@ services:
        SPRING_RABBITMQ_PORT: ${RABBITMQ_DEFAULT_PORT}
        SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
        SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
+       JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 #для тестовой среды
     ports:
+      - "5005:5005" #для тестовой среды
       - "8089:8089"
     networks:
       - tradebot-network
@@ -72,7 +74,7 @@ services:
     build:
       context: /services-telegram
       dockerfile: Dockerfile
-    image: telegram:latest
+    image: nobsxd/batrak:telegram
     container_name: telegram
     environment:
       SERVER_PORT: 8082
@@ -82,7 +84,9 @@ services:
       SPRING_RABBITMQ_PORT: ${RABBITMQ_DEFAULT_PORT}
       SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006 #для тестовой среды
     ports:
+      - "5006:5006" #для тестовой среды
       - "8082:8082"
     networks:
       - tradebot-network
@@ -94,7 +98,7 @@ services:
     build:
       context: /services-node
       dockerfile: Dockerfile
-    image: node:latest
+    image: nobsxd/batrak:node
     container_name: node
     environment:
       SERVER_PORT: 8085
@@ -105,7 +109,9 @@ services:
       SPRING_RABBITMQ_PORT: ${RABBITMQ_DEFAULT_PORT}
       SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5007 #для тестовой среды
     ports:
+      - "5007:5007" #для тестовой среды
       - "8085:8085"
     networks:
       - tradebot-network

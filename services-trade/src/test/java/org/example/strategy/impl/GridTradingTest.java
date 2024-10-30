@@ -12,6 +12,7 @@ import org.example.xchange.BasicChangeInterface;
 import org.example.xchange.DTO.ChangeUser;
 import org.example.xchange.change.Binance.BinanceMainImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -24,6 +25,7 @@ import static org.example.entity.enams.state.UserState.BASIC_STATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@Tag("integration")
 class GridTradingTest {
     @Mock
     private TradeStatusManager tradeStatusManager;

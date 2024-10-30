@@ -29,6 +29,7 @@ public class WebSocketByBitChange extends WebSocketBasic implements WebSocketCha
         exchangeSpecification.setExchangeSpecificParametersItem(BybitStreamingExchange.EXCHANGE_TYPE,
                 BybitCategory.LINEAR);
         exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, true);
+        exchangeSpecification.setShouldLoadRemoteMetaData(false);
         init(ChangeType.Bybit, currencyProperties, exchangeSpecification);
     }
 

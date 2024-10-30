@@ -1,6 +1,7 @@
 package org.example.entity.collect;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.castom.Displayable;
@@ -12,6 +13,7 @@ import org.example.entity.NodeChange;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Pair implements Displayable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

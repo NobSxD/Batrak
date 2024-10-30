@@ -1,41 +1,54 @@
 package org.example.configuration;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@TestPropertySource(locations = "classpath:application.yml")
+
+@SpringBootTest // Используется для настройки тестового контекста
+@Import(CurrencyProperties.class) // Импортируем класс конфигурации для теста
+@EnableConfigurationProperties
 class CurrencyPropertiesTest {
-	
-	private final CurrencyProperties currencyProperties;
-	
-	CurrencyPropertiesTest(CurrencyProperties currencyProperties) {
-		this.currencyProperties = currencyProperties;
-	}
-	
+
+
+	@Autowired
+	private CurrencyProperties currencyProperties;
+
+
 	@Test
-	void testCurrencyExchangesLoaded() {
+	void testCurrencyExchangesBinance() {
 		assertThat(currencyProperties.getExchanges()).isNotNull();
 		assertThat(currencyProperties.getExchanges()).containsKey("binance");
-		
+
 		CurrencyProperties.ExchangeProperties binance = currencyProperties.getExchanges().get("binance");
-		
+
 		assertThat(binance).isNotNull();
 		assertThat(binance.getType()).isEqualTo("binance");
-		assertThat(binance.getScale()).isEqualTo(8);
-		
+		assertThat(binance.getPairs().get(0).getScale()).isEqualTo(5);
+		assertThat(binance.getPairs().get(1).getScale()).isEqualTo(3);
+
 		assertThat(binance.getPairs()).hasSize(2);
-		assertThat(binance.getPairs()).extracting("currencyPair")
-									  .containsExactlyInAnyOrder("BTC-USDT", "ETH-USDT");
+
+		assertThat(binance.getPairs().get(0).getNamePair()).isEqualTo("BTC-USDT").info.description("BTC-USDT");
+		assertThat(binance.getPairs().get(1).getNamePair()).isEqualTo("BNB-USDT").info.description("BNB-USDT");
 	}
-	
+
 	@Test
-	void testExchangeHasCorrectScale() {
-		CurrencyProperties.ExchangeProperties binance = currencyProperties.getExchanges().get("binance");
-		int expectedScale = 8;
-		assertThat(binance.getScale()).isEqualTo(expectedScale);
+	void testCurrencyExchangesByBit() {
+		assertThat(currencyProperties.getExchanges()).isNotNull();
+		assertThat(currencyProperties.getExchanges()).containsKey("bybit");
+
+		CurrencyProperties.ExchangeProperties bybit = currencyProperties.getExchanges().get("bybit");
+
+		assertThat(bybit).isNotNull();
+		assertThat(bybit.getType()).isEqualTo("bybit");
+		assertThat(bybit.getPairs().get(0).getScale()).isEqualTo(5);
+
+		assertThat(bybit.getPairs()).hasSize(1);
+		assertThat(bybit.getPairs().get(0).getNamePair()).isEqualTo("BTC-USDT").info.description("BTC-USDT");
 	}
 }

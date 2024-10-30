@@ -5,6 +5,7 @@ import org.example.xchange.DTO.ChangeUser;
 import org.example.xchange.change.Binance.BinanceMainImpl;
 import org.example.xchange.finance.CurrencyConverter;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
@@ -25,6 +26,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 
+@Tag("integration")
 class BinanceMainImpIntegratio {
     ChangeUser changeUser;
     @BeforeEach

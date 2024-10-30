@@ -27,7 +27,9 @@ dependencies {
     compileOnly libs.org.projectlombok.lombok
 }
 test{
-    useJUnitPlatform()
+    useJUnitPlatform{
+        excludeTags 'integration'
+    }
 }
 configurations.configureEach {
     resolutionStrategy {

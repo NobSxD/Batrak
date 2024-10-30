@@ -8,13 +8,8 @@ currency:
 
         - namePair: "BNB-USDT"
           scale: 3
-#        - "TRX-USDT"
-#        - "ETH-USDT"
-#    bybit:
-#      type: "bybit"
-#      pairs:
-#        - "BTC-USDT"
-#        - "BNB-USDT"
-#        - "TRX-USDT"
-#        - "ETH-USDT"
-#        - "NOT-USDT"
+    bybit:
+      type: "bybit"
+      pairs:
+        - namePair: "BTC-USDT"
+          scale: 5

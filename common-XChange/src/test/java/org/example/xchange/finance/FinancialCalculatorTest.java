@@ -14,9 +14,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FinancialCalculatorTest {
-	BigDecimal cash = new BigDecimal("1000");
-	BigDecimal bayBTC = new BigDecimal("70000.00");
-	BigDecimal selBTC = new BigDecimal("70350.00");
 	List<LimitOrder> limitOrdersBay;
 
 	List<LimitOrder> limitOrdersSel;

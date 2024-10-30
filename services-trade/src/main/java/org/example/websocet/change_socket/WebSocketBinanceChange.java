@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
+
 @Component
 @RequiredArgsConstructor
 public class WebSocketBinanceChange extends WebSocketBasic implements WebSocketChange {
@@ -22,6 +24,8 @@ public class WebSocketBinanceChange extends WebSocketBasic implements WebSocketC
 	@PostConstruct
 	public void streamValue() {
 		ExchangeSpecification exchangeSpecification = new ExchangeSpecification(BinanceStreamingExchange.class);
+		exchangeSpecification.setShouldLoadRemoteMetaData(true);
+		exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
 		init(ChangeType.Binance, currencyProperties, exchangeSpecification);
 	}
 	

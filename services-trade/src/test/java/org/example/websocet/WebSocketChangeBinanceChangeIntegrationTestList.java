@@ -1,19 +1,16 @@
 package org.example.websocet;
 
-import org.example.configuration.CurrencyProperties;
-import org.example.entity.Account;
-import org.example.entity.ConfigTrade;
-import org.example.entity.NodeOrder;
-import org.example.entity.NodeUser;
-import org.example.websocet.change_socket.WebSocketBinanceChange;
-
 import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
 import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
-import io.reactivex.rxjava3.observers.TestObserver;
 import org.exampel.crypto.CryptoUtils;
+import org.example.configuration.CurrencyProperties;
+import org.example.entity.Account;
+import org.example.entity.ConfigTrade;
+import org.example.entity.NodeUser;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -21,7 +18,7 @@ import org.mockito.Mock;
 
 import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
 
-
+@Tag("integration")
 class WebSocketChangeBinanceChangeIntegrationTestList {
 	NodeUser nodeUser;
 	Account account;
@@ -43,36 +40,6 @@ class WebSocketChangeBinanceChangeIntegrationTestList {
 
 	}
 
-
-	@Test
-	public void testAddObserver() throws InterruptedException {
-		WebSocketBinanceChange webSocket = new WebSocketBinanceChange(currencyProperties);
-		TestObserver<NodeOrder> testObserver = new TestObserver<>();
-		
-
-		// Проверяем, что наблюдатель успешно добавлен
-		
-	}
-
-	@Test
-	public void testRemoveObserver() throws InterruptedException {
-		WebSocketBinanceChange webSocket = new WebSocketBinanceChange(currencyProperties);
-		TestObserver<NodeOrder> testObserver = new TestObserver<>();
-		
-
-		// Проверяем, что наблюдатель успешно удален
-		
-	}
-	@Test
-	public void testRemoveObservers() throws InterruptedException {
-		WebSocketBinanceChange webSocket = new WebSocketBinanceChange(currencyProperties);
-		TestObserver<NodeOrder> testObserver = new TestObserver<>();
-		TestObserver<NodeOrder> testObserver1 = new TestObserver<>();
-		
-
-		// Проверяем, что наблюдатель успешно удален, но только конкретный
-		
-	}
 
 
 	@Test

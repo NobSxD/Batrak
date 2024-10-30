@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
-
 @Slf4j
 public abstract class WebSocketBasic {
 
@@ -40,7 +38,8 @@ public abstract class WebSocketBasic {
         if (exchangeSpecification == null) {
             throw new IllegalArgumentException("ExchangeSpecification cannot be null");
         }
-        List<Pair> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange -> changeType.toString().equals(exchange.getType()))
+        List<Pair> currencyPairs = currencyProperties.getExchanges().values().stream().filter(exchange ->
+                        changeType.toString().equals(exchange.getType()))
                 .flatMap(exchange -> exchange.getPairs().stream()).toList();
         for (Pair currencyPair : currencyPairs) {
             createExchangeForCurrencyPair(new CurrencyPair(currencyPair.getNamePair()), exchangeSpecification);
@@ -53,8 +52,6 @@ public abstract class WebSocketBasic {
             throw new IllegalArgumentException("CurrencyPair and ExchangeSpecification cannot be null");
         }
 
-        exchangeSpecification.setShouldLoadRemoteMetaData(true);
-        exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
         StreamingExchange exchange = StreamingExchangeFactory.INSTANCE.createExchange(exchangeSpecification);
         ProductSubscription subscription = ProductSubscription.create()
                 .addTrades(currencyPair)
@@ -64,7 +61,7 @@ public abstract class WebSocketBasic {
         exchange.connect(subscription).blockingAwait();
         Observable<NodeOrder> tradeObservable = exchange.getStreamingMarketDataService()
                 .getTrades((Instrument) currencyPair)
-                .map(trade -> NodeOrder.builder()
+                .map(trade -> NodeOrder.builder()//TODO заменить на DTO
                         .instrument(trade.getInstrument().toString())
                         .limitPrice(trade.getPrice())
                         .build())

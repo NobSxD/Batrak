@@ -80,16 +80,17 @@ public class GridTrading extends StrategyBasic {
     public void tradeStart(NodeUser nodeUser) {
         try {
             while (true) {
-                TradeState state = tradeStatusManager.getCurrentTradeState();
-                if (state == TradeState.TRADE_STOP) {
+                if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_STOP) {
                     break;
                 }
-                if (state == TradeState.TRADE_CANCEL) {
+
+                startTradingCycle(nodeUser);
+                awaitLatch(tradeStatusManager.getCountDownLatch());
+
+                if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_CANCEL) {
                     resultTrade(nodeUser);
                     break;
                 }
-                startTradingCycle(nodeUser);
-                awaitLatch(tradeStatusManager.getCountDownLatch());
                 // Подождите 40 секунд перед следующим циклом
                 try {
                     log.info("Достигнута конечная цена, завершаем торговый цикл. : {}", currentPrice);
@@ -146,9 +147,9 @@ public class GridTrading extends StrategyBasic {
         TradeState state = tradeStatusManager.getCurrentTradeState();
         if (state.equals(TradeState.TRADE_START)) {
             log.info("Прайс на первую покупку : {}", currentPrice);
-            tradeStatusManager.runTrading();
             endPrice = FinancialCalculator.increaseByPercentage(currentPrice, BigDecimal.valueOf(stepSell));
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
+            tradeStatusManager.runTrading();
         }
          if (shouldBuy(currentPrice)) {
             log.info("Прайс на покупку : {}", currentPrice);
@@ -156,7 +157,10 @@ public class GridTrading extends StrategyBasic {
         } else if (shouldSell(currentPrice)) {
             log.info("Прайс на продажу : {}", currentPrice);
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
-        }
+        }else if (shouldLastSell(currentPrice)) {
+             log.info("Прайс на последнию продажу : {}", currentPrice);
+             nodeOrder = executeSellOrder(currentPrice, nodeUser);
+         }
         return nodeOrder;
     }
 
@@ -168,6 +172,7 @@ public class GridTrading extends StrategyBasic {
             log.error("Торговый поток был прерван:", e);
         }
     }
+
 
     public boolean shouldBuy(BigDecimal currentPrice) {
         BigDecimal targetBuyPrice = lastPrice.subtract(lastPrice.multiply(BigDecimal.valueOf(stepBay)));
@@ -187,6 +192,15 @@ public class GridTrading extends StrategyBasic {
         boolean contains = buyLevels.contains(lastPrice);
         if (canSell && contains){
             log.debug("SELL: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ",currentPrice,targetSellPrice, buyLevels );
+        }
+        return canSell && contains;
+    }
+    public boolean shouldLastSell(BigDecimal currentPrice) {
+
+        boolean canSell = endPrice.compareTo(currentPrice) <= 0;
+        boolean contains = buyLevels.contains(lastPrice);
+        if (canSell && contains){
+            log.debug("SELL LAST: currentPrice = {}, endPrice = {}, buyLevels = {} ",currentPrice,endPrice, buyLevels );
         }
         return canSell && contains;
     }

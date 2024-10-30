@@ -42,8 +42,8 @@ class MessageWrapperDTOTest {
 	@Test
 	public void testDeserialization() throws JsonProcessingException {
 		String jsonString = "{\"customMessage\":{\"text\":\"Test Message\"}," +
-				"\"object\":[{\"type\":\"configTrade\",\"namePair\":\"BTC-USDT\",\"amountOrder\":11,\"depthGlass\":100,\"realTrade\":true,\"strategy\":\"SlidingProtectiveOrder\"}]," +
-				"\"enumClass\":\"org.example.MenuStrategy\"}";
+				"\"object\":[{\"type\":\"configTrade\",\"namePair\":\"BTC-USDT\",\"amountOrder\":11,\"depthGlass\":100,\"realTrade\":true,\"strategy\":\"GridTrading\"}]," +
+				"\"enumClass\":\"org.example.entity.enams.menu.MenuStrategy\"}";
 		
 		MessageWrapperDTO messageWrapper = objectMapper.readValue(jsonString, MessageWrapperDTO.class);
 		

@@ -22,6 +22,5 @@ public class CurrencyProperties {
     public static class ExchangeProperties {
         private String type;
         private List<Pair> pairs;
-        private int scale;
     }
 }
