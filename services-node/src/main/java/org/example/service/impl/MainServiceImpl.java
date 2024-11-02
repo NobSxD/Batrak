@@ -31,33 +31,22 @@ public class MainServiceImpl implements MainService {
     @Override
     @Transactional
     public void processUpdate(Update update) {
+        if (update == null) {
+            log.error("Update object is null");
+            return;
+        }
+
         try {
-            if (update == null) {
-                throw new IllegalArgumentException("Update cannot be null");
-            }
             NodeUser nodeUser = processServiceCommand.findOrSaveAppUser(update);
-            String text = extractTextFromUpdate(update);
             if (nodeUser == null) {
                 throw new IllegalStateException("NodeUser cannot be null");
             }
-            if (isUserInactive(nodeUser)) {
-                if (nodeUser.getChatId() == null){
-                    long id = extractChatIdFromUpdate(update);
-                    nodeUser.setChatId(id);
-                }
-                denyAccess(nodeUser.getChatId());
-                return;
-            }
 
-
-            updateUserState(nodeUser, text);
-            String response = commandService.send(nodeUser, text);
-
-            if (response != null && !response.isEmpty()) {
-                producerTelegramService.producerAnswer(response, nodeUser.getChatId());
-            }
+            String text = extractTextFromUpdate(update);
+            handleUserActivity(nodeUser, update);
+            processUserCommand(nodeUser, text);
         } catch (Exception e) {
-            log.error("Error processing update {}", e.getMessage());
+            log.error("Error processing update: {}", e.getMessage(), e);
         }
     }
 
@@ -82,6 +71,33 @@ public class MainServiceImpl implements MainService {
         UserState userState = buttonRegistration.get(text);
         if (userState != null) {
             user.setState(userState);
+        }
+    }
+
+    private void handleUserActivity(NodeUser nodeUser, Update update) {
+        if (!isUserInactive(nodeUser)) {
+            return;
+        }
+
+        Long chatId = nodeUser.getChatId();
+        if (chatId == null) {
+            chatId = extractChatIdFromUpdate(update);
+            nodeUser.setChatId(chatId);
+        }
+
+        denyAccess(chatId);
+    }
+
+    private void processUserCommand(NodeUser nodeUser, String text) {
+        if (text == null || text.isEmpty()) {
+            log.warn("Text extracted from update is null or empty");
+            return;
+        }
+
+        updateUserState(nodeUser, text);
+        String response = commandService.send(nodeUser, text);
+        if (response != null && !response.isEmpty()) {
+            producerTelegramService.producerAnswer(response, nodeUser.getChatId());
         }
     }
 

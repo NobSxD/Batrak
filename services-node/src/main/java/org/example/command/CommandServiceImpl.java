@@ -61,12 +61,16 @@ public class CommandServiceImpl implements CommandService{
 			send = command.send(nodeUser, text);
 			nodeUserDAO.save(nodeUser);
 			return send;
-		}catch (SqlScriptException e){
+		}catch (IllegalArgumentException e){
+			log.error("На сервере не добавленно сикретное слово id: {}, ошибка: {}", nodeUser.getId(), e.getMessage());
+			return "Ошибка при шифровании пароля";
+		}
+		catch (SqlScriptException e){
 			log.error("Ошибка при сохронении пользователя id: {}, ошибка: {}", nodeUser.getId(), e.getMessage());
-			return "";
+			return "Ошибка при сохранении в базу данных";
 		}catch (Exception e){
 			log.error("Неизвестная ошибка id: {}, ошибка: {}", nodeUser.getId(), e.getMessage());
-			return "";
+			return e.getMessage();
 		}
 	}
 

@@ -61,6 +61,7 @@ services:
        SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
        SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
        JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 #для тестовой среды
+       secretKey: ${secretKey}
     ports:
       - "5005:5005" #для тестовой среды
       - "8089:8089"
@@ -110,6 +111,7 @@ services:
       SPRING_RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER}
       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
       JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5007 #для тестовой среды
+      secretKey: ${secretKey}
     ports:
       - "5007:5007" #для тестовой среды
       - "8085:8085"
