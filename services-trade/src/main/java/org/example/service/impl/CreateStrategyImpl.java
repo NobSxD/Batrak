@@ -1,15 +1,19 @@
 package org.example.service.impl;
 
-import lombok.RequiredArgsConstructor;
-import org.example.dao.NodeOrdersDAO;
-import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
 import org.example.service.CreateStrategy;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.Strategy;
 import org.example.strategy.impl.GridTrading;
 import org.example.websocet.WebSocketCommand;
 import org.example.xchange.BasicChangeInterface;
+
+import lombok.RequiredArgsConstructor;
+
+import org.example.entity.NodeUser;
+
+import org.example.dao.NodeOrdersDAO;
+import org.example.dao.NodeUserDAO;
+
 import org.springframework.stereotype.Service;
 
 @Service
