@@ -40,4 +40,11 @@ public class MessageInfo {
             "Размер депозита успешно изменена. Депозит составляет: $%s";
     public static final String NUMBER_FORMAT_EXCEPTION = "Ведите пожалуйсто число";
 
+    //метод send
+    public static final String USER_NOT_FOUND_MESSAGE = "Мы не смогли найти вас в системе, введите команду /start и попробуйте снова.";
+    public static final String UNKNOWN_COMMAND_MESSAGE_TEMPLATE = "Команда %s не найдена.";
+    public static final String NO_ACCESS_MESSAGE = "У вас нет доступа";
+    public static final String ENCRYPTION_ERROR_MESSAGE = "Ошибка при шифровании пароля";
+    public static final String DATABASE_SAVE_ERROR_MESSAGE = "Ошибка при сохранении в базу данных";
+
 }

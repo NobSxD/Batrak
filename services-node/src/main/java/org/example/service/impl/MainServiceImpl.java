@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.command.CommandService;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.state.UserState;
+import org.example.service.AccessControl;
 import org.example.service.MainService;
 import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerTelegramService;
@@ -15,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Map;
 
+import static org.example.button.MessageInfo.USER_NOT_FOUND_MESSAGE;
 import static org.example.service.impl.ProcessServiceCommandImpl.extractChatIdFromUpdate;
 
 
@@ -27,6 +29,7 @@ public class MainServiceImpl implements MainService {
     private final ProducerTelegramService producerTelegramService;
     private final CommandService commandService;
     private final Map<String, UserState> buttonRegistration;
+    private final AccessControl accessControl;
 
     @Override
     @Transactional
@@ -39,6 +42,8 @@ public class MainServiceImpl implements MainService {
         try {
             NodeUser nodeUser = processServiceCommand.findOrSaveAppUser(update);
             if (nodeUser == null) {
+                producerTelegramService.producerAnswer(USER_NOT_FOUND_MESSAGE, extractChatIdFromUpdate(update));
+                log.error("NodeUser cannot be null in processUpdate");
                 throw new IllegalStateException("NodeUser cannot be null");
             }
 
@@ -48,14 +53,6 @@ public class MainServiceImpl implements MainService {
         } catch (Exception e) {
             log.error("Error processing update: {}", e.getMessage(), e);
         }
-    }
-
-    private boolean isUserInactive(NodeUser user) {
-        return user.getIsActive();
-    }
-
-    private void denyAccess(long chatId) {
-        producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
     }
 
     private String extractTextFromUpdate(Update update) {
@@ -75,17 +72,15 @@ public class MainServiceImpl implements MainService {
     }
 
     private void handleUserActivity(NodeUser nodeUser, Update update) {
-        if (!isUserInactive(nodeUser)) {
+        if (!accessControl.isActive(nodeUser)) {
             return;
         }
 
         Long chatId = nodeUser.getChatId();
         if (chatId == null) {
             chatId = extractChatIdFromUpdate(update);
-            nodeUser.setChatId(chatId);
         }
-
-        denyAccess(chatId);
+        producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
     }
 
     private void processUserCommand(NodeUser nodeUser, String text) {
