@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.entity.collect.ChangeType;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.TradeState;
 import org.example.entity.enams.state.UserState;
 import org.hibernate.annotations.CreationTimestamp;
@@ -65,6 +66,9 @@ public class NodeUser {
     private UserState state;
 
     @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Enumerated(EnumType.STRING)
     private TradeState stateTrade;
 
 
@@ -72,7 +76,7 @@ public class NodeUser {
     public NodeUser(Long id, Long telegramUserId, Long chatId, Date firstLoginDate, String firstName,
                     String lastName, String username, String email, Boolean isActive, Date lastStartTread,
                     Account account, List<NodeOrder> orders, List<Account> accounts, ConfigTrade configTrade,
-                    ChangeType changeType, UserState state, TradeState stateTrade) {
+                    ChangeType changeType, UserState state, TradeState stateTrade, Role role) {
         this.id = id;
         this.telegramUserId = telegramUserId;
         this.chatId = chatId;
@@ -90,6 +94,7 @@ public class NodeUser {
         this.changeType = changeType;
         this.state = state;
         this.stateTrade = stateTrade;
+        this.role = role;
     }
 
     private LocalDateTime convertToLocalDateTime(Date date) {

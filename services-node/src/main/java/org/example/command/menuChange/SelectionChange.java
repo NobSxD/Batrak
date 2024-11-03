@@ -2,8 +2,10 @@ package org.example.command.menuChange;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
 import org.example.entity.collect.ChangeType;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
 
@@ -16,7 +18,7 @@ import static org.example.entity.enams.state.UserState.BASIC_STATE;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class SelectionChange implements Command {
+public class SelectionChange implements Command, RoleProvider {
 	private final ProducerTelegramService producerTelegramService;
 	
 	@Override
@@ -29,7 +31,7 @@ public class SelectionChange implements Command {
 			}
 			nodeUser.setChangeType(type);
 			nodeUser.setState(BASIC_STATE);
-			producerTelegramService.mainMenu(nameChange, nodeUser.getChatId());
+			producerTelegramService.menuMain(nameChange, nodeUser.getChatId());
 			return "";
 		} catch (NullPointerException e){
 			log.error("Объект не найден, message: {}", e.getMessage());
@@ -45,5 +47,8 @@ public class SelectionChange implements Command {
 		return UserState.BOT_CHANGE;
 	}
 
-
+	@Override
+	public Role getRole() {
+		return Role.USER;
+	}
 }

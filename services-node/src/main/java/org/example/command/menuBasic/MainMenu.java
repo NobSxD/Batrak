@@ -1,7 +1,9 @@
 package org.example.command.menuBasic;
 
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
 
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class MainMenu implements Command {
+public class MainMenu implements Command, RoleProvider {
 	private final ProducerTelegramService producerTelegramService;
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
-			producerTelegramService.mainMenu( "Вы в главном меню",nodeUser.getChatId());
+			producerTelegramService.menuMain( "Вы в главном меню",nodeUser.getChatId());
 		}catch (Exception e){
 			log.error("Ошибка: {}", e.getMessage());
 		}
@@ -27,5 +29,10 @@ public class MainMenu implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.BOT_MAIN_MENU;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 }

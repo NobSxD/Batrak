@@ -5,6 +5,7 @@ import org.example.entity.NodeUser;
 import org.example.entity.enams.state.UserState;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.service.AccessControl;
 import org.hibernate.tool.schema.spi.SqlScriptException;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +26,19 @@ import java.util.stream.Collectors;
 public class CommandServiceImpl implements CommandService{
 	private final Map<UserState, Command> stateMap;
 	private final NodeUserDAO nodeUserDAO;
+	private final AccessControl accessControl;
 
 	/**
 	 * Конструктор для CommandServiceImpl.
 	 *
-	 * @param commands Список всех команд.
-	 * @param nodeUserDAO DAO объект для пользователя
+	 * @param commands      Список всех команд.
+	 * @param nodeUserDAO   DAO объект для пользователя
+	 * @param accessControl Объект для контроля доступа к админ панели
 	 */
-	public CommandServiceImpl(List<Command> commands, NodeUserDAO nodeUserDAO) {
+	public CommandServiceImpl(List<Command> commands, NodeUserDAO nodeUserDAO, AccessControl accessControl) {
 		this.stateMap = commands.stream().collect(Collectors.toMap(Command::getType, Function.identity()));
 		this.nodeUserDAO = nodeUserDAO;
+		this.accessControl = accessControl;
 	}
 
 	/**
@@ -55,8 +59,14 @@ public class CommandServiceImpl implements CommandService{
 			}
 			command = stateMap.get(nodeUser.getState());
 			if (command == null){
-				log.error("Пользователь id: {} name: {}, ввел неизвестную команду:{}", nodeUser.getId(), nodeUser.getFirstName(), nodeUser.getState());
+				log.warn("Пользователь id: {} name: {}, ввел неизвестную команду:{}", nodeUser.getId(), nodeUser.getFirstName(), nodeUser.getState());
 				return "команда %s не найденна.".formatted(nodeUser.getState());
+			}
+			boolean hasAccess = accessControl.hasAccess(command, nodeUser.getRole());
+			if (!hasAccess){
+				log.error("Пользователь: {}, с ролью: {}, пытался получить доступ до класса: {}",
+						nodeUser.getFirstName(), nodeUser.getRole(), command.getClass());
+				return "У вас нет доступа";
 			}
 			send = command.send(nodeUser, text);
 			nodeUserDAO.save(nodeUser);

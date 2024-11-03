@@ -1,5 +1,7 @@
 package org.example.command.menuBasic.account;
 
+import org.example.command.RoleProvider;
+import org.example.entity.enams.Role;
 import org.example.factory.account.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class AccountSelection implements Command {
+public class AccountSelection implements Command, RoleProvider {
 	private final ProducerTelegramService producerTelegramService;
 	private final NodeAccount nodeAccount;
 
@@ -27,7 +29,7 @@ public class AccountSelection implements Command {
 			}
 			nodeAccount.saveAccount(changeAccount, nodeUser);
 			nodeUser.setAccount(changeAccount);
-			producerTelegramService.mainMenu("Вы выбрали аккаунт " + changeAccount.getNameAccount(), nodeUser.getChatId());
+			producerTelegramService.menuMain("Вы выбрали аккаунт " + changeAccount.getNameAccount(), nodeUser.getChatId());
 		} catch (Exception e){
 			log.error("Ошибка: {}", e.getMessage());
 			return "Не получилось выбрать аккаунт";
@@ -38,5 +40,10 @@ public class AccountSelection implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.ACCOUNT_SELECT;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 }

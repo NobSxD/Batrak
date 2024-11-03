@@ -6,6 +6,7 @@ import org.example.castom.MessageWrapperDTO;
 import org.example.entity.Account;
 import org.example.entity.NodeChange;
 import org.example.entity.collect.Pair;
+import org.example.entity.enams.menu.MenuAdmin;
 import org.example.entity.enams.menu.MenuBasic;
 import org.example.entity.enams.menu.MenuOperation;
 import org.example.entity.enams.menu.MenuSetting;
@@ -33,7 +34,7 @@ public class ProducerTelegramServiceImpl implements ProducerTelegramService {
     }
 
     @Override
-    public void changeMenu(List<NodeChange> nameChange, String output, Long chatId) {
+    public void menuChange(List<NodeChange> nameChange, String output, Long chatId) {
         CustomMessage customMessage = CustomMessage.builder()
                 .chatId(chatId.toString())
                 .text(output)
@@ -46,7 +47,7 @@ public class ProducerTelegramServiceImpl implements ProducerTelegramService {
     }
 
     @Override
-    public void mainMenu(String output, Long chatId) {
+    public void menuMain(String output, Long chatId) {
         CustomMessage customMessage = CustomMessage.builder()
                 .chatId(chatId.toString())
                 .text(output)
@@ -88,7 +89,7 @@ public class ProducerTelegramServiceImpl implements ProducerTelegramService {
     }
 
     @Override
-    public void accountsMenu(List<Account> accounts, String output, Long chatId) {
+    public void menuAccounts(List<Account> accounts, String output, Long chatId) {
         CustomMessage customMessage = CustomMessage.builder()
                 .chatId(chatId.toString())
                 .text(output)
@@ -102,7 +103,7 @@ public class ProducerTelegramServiceImpl implements ProducerTelegramService {
     }
 
     @Override
-    public void pairMenu(List<Pair> pairs, String output, Long chatId) {
+    public void menuPair(List<Pair> pairs, String output, Long chatId) {
         CustomMessage customMessage = CustomMessage.builder()
                 .chatId(chatId.toString())
                 .text(output)
@@ -113,6 +114,19 @@ public class ProducerTelegramServiceImpl implements ProducerTelegramService {
                 .build();
         rabbitTemplate.convertAndSend(LIST_CUSTOM_MESSAGE, messageWrapperDTO);
 
+    }
+
+    @Override
+    public void menuAdmin(String output, Long chatId) {
+        CustomMessage customMessage = CustomMessage.builder()
+                .chatId(chatId.toString())
+                .text(output)
+                .build();
+        MessageWrapperDTO messageWrapperDTO = MessageWrapperDTO.builder()
+                .customMessage(customMessage)
+                .enumClass(MenuAdmin.class)
+                .build();
+        rabbitTemplate.convertAndSend(ENUM_CUSTOM_MESSAGE, messageWrapperDTO);
     }
 
 }

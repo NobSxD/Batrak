@@ -1,7 +1,9 @@
 package org.example.command.menuBasic.tradeOperation;
 
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerXChangeService;
 
@@ -12,13 +14,12 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TradeCancel implements Command {
+public class TradeCancel implements Command, RoleProvider {
 	private final ProducerXChangeService producerXChangeService;
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		try {
 			producerXChangeService.cancelTread(nodeUser);
-			//TODO продумать отмену ордера
 			return "";
 		}catch (Exception e){
 			log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(),  e.getMessage());
@@ -29,5 +30,10 @@ public class TradeCancel implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.TRADE_CANCEL;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 }

@@ -3,8 +3,10 @@ package org.example.command.menuBasic.tradeOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerXChangeService;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,7 @@ import java.time.LocalDateTime;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TradeStart implements Command {
+public class TradeStart implements Command, RoleProvider {
 
     private final ProducerXChangeService producerXChangeService;
     private final NodeUserDAO nodeUserDAO;
@@ -60,6 +62,11 @@ public class TradeStart implements Command {
     @Override
     public UserState getType() {
         return UserState.TRADE_START;
+    }
+
+    @Override
+    public Role getRole() {
+        return Role.USER;
     }
 
 

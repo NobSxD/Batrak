@@ -19,6 +19,7 @@ public class ButtonLabelManager {
     public static String cancel = "/cancel";
     public static String info = "/info_settings";
     public static String help = "/help";
+    public static String admin = "/admin";
 
     //ButtonMainMenu
     public static final String mainMenu = "В главное мею";
@@ -39,4 +40,13 @@ public class ButtonLabelManager {
 
     //ButtonStrategy
     public static String gridTrading = "Сетка ордеров";
+
+    //ButtonAdmin
+    public static String listAllUsers = "Список всех пользователей";
+    public static String banUser = "Забанить пользователя";
+    public static String unbanUser = "Разбанить пользователя";
+    public static String tradingStatsAllUsers = "Статистика торговли всех";
+    public static String tradingStatsSpecificUser = "Статистика определенного";
+    public static String stopTradingAllUsers = "Остановка трейдинга для всех";
+    public static String grantAdminRights = "Выдать права администратора";
 }

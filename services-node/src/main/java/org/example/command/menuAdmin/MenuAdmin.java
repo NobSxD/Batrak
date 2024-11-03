@@ -1,4 +1,4 @@
-package org.example.command.menuBasic.tradeSettings;
+package org.example.command.menuAdmin;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,30 +13,29 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class MenuTrade implements Command, RoleProvider {
+public class MenuAdmin implements Command, RoleProvider {
     private final ProducerTelegramService producerTelegramService;
 
     @Override
     public String send(NodeUser nodeUser, String text) {
         try {
-            producerTelegramService.menuTrade("Выбирети далейшие настройки", nodeUser.getChatId());
+            producerTelegramService.menuAdmin("Имя: %s, Роль: %s".formatted(nodeUser.getFirstName(), nodeUser.getRole()),
+                    nodeUser.getChatId());
             return "";
 
         } catch (Exception e) {
             log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
-            return "во время настройки трейдинга произошла ошибка, обратитесь к администратору системы.";
+            return "Во время вызова админ меню произошла ошибка, обратитесь к администратору системы.";
         }
     }
 
     @Override
     public UserState getType() {
-        return UserState.TRADE_SETTINGS;
+        return UserState.ADMIN;
     }
 
     @Override
     public Role getRole() {
-        return Role.USER;
+        return Role.ADMIN;
     }
-
-
 }

@@ -1,23 +1,23 @@
 package org.example.command.menuCommand;
 
-import org.example.button.MessageInfo;
-import org.example.command.Command;
-import org.example.entity.Account;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.state.UserState;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.button.MessageInfo;
+import org.example.command.Command;
+import org.example.command.RoleProvider;
+import org.example.entity.Account;
+import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
+import org.example.entity.enams.state.UserState;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.net.InetAddress;
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class BotInfo implements Command {
+public class BotInfo implements Command, RoleProvider {
 
     @Override
     public String send(NodeUser nodeUser, String text) {
@@ -43,9 +43,6 @@ public class BotInfo implements Command {
             double stepBay = nodeUser.getConfigTrade().getStepBay();
             double stepSell = nodeUser.getConfigTrade().getStepSell();
 
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            String ipAddress = inetAddress.getHostAddress();
-
             String enableDemoTrading = "";
             if (nodeUser.getConfigTrade().isEnableDemoTrading()){
                 enableDemoTrading = MessageInfo.DEMO_MODE_ACTIVE;
@@ -63,8 +60,7 @@ public class BotInfo implements Command {
                     .append(MessageInfo.STEP_SELL).append(stepSell).append("%.\n")
                     .append(MessageInfo.DEPOSIT).append(deposit).append("$.\n")
                     .append(MessageInfo.SETTINGS_SEPARATOR)
-                    .append(enableDemoTrading).append(".\n")
-                    .append(MessageInfo.SERVER_IP_ADDRESS).append(ipAddress);
+                    .append(enableDemoTrading);
             return settings.toString();
         } catch (NullPointerException e) {
             log.error("Пользовтель: {}. id: {}. Ошибка: NPE {}", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
@@ -78,5 +74,10 @@ public class BotInfo implements Command {
     @Override
     public UserState getType() {
         return UserState.INFO_SETTINGS;
+    }
+
+    @Override
+    public Role getRole() {
+        return Role.USER;
     }
 }

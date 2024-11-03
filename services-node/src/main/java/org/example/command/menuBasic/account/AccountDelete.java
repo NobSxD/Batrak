@@ -1,5 +1,7 @@
 package org.example.command.menuBasic.account;
 
+import org.example.command.RoleProvider;
+import org.example.entity.enams.Role;
 import org.example.factory.account.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class AccountDelete implements Command {
+public class AccountDelete implements Command, RoleProvider {
 	private final NodeAccount nodeAccount;
 	private final ProducerTelegramService producerTelegramService;
 	@Override
@@ -28,7 +30,7 @@ public class AccountDelete implements Command {
 			if (nodeUser.getAccount().getNameAccount().equals(nameAccount)){
 				nodeUser.setAccount(null);
 			}
-			producerTelegramService.mainMenu(account.getNameAccount() + " данный аккаунт был удален ", nodeUser.getChatId());
+			producerTelegramService.menuMain(account.getNameAccount() + " данный аккаунт был удален ", nodeUser.getChatId()); //TODO стоит расмотреть вернуть это значение а producerTelegramService удалить
 			return "";
 		} catch (NullPointerException e){
 			log.error("аккаунт пользователя под id: {}, не найден. \n Имя аккаунта: {} \n Ошибка: {}", nodeUser.getChatId(), nameAccount, e.getMessage());
@@ -42,5 +44,10 @@ public class AccountDelete implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.ACCOUNT_DELETE;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import org.example.dao.NodeUserDAO;
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.service.ProcessServiceCommand;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -37,6 +38,7 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
                         .configTrade(settingsTrade)
                         .isActive(false)
                         .state(BASIC_STATE)
+                        .role(Role.USER)
                         .build();
                 settingsTrade.setNodeUser(nodeUser);
                 nodeUserDAO.save(nodeUser);

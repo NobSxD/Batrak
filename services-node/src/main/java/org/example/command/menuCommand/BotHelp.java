@@ -2,13 +2,15 @@ package org.example.command.menuCommand;
 
 import lombok.Data;
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class BotHelp implements Command {
+public class BotHelp implements Command, RoleProvider {
 
 
     @Override
@@ -26,6 +28,11 @@ public class BotHelp implements Command {
     @Override
     public UserState getType() {
         return UserState.BOT_HELP;
+    }
+
+    @Override
+    public Role getRole() {
+        return Role.USER;
     }
 
 

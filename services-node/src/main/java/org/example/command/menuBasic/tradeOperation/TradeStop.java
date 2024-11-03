@@ -3,7 +3,9 @@ package org.example.command.menuBasic.tradeOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerXChangeService;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TradeStop implements Command {
+public class TradeStop implements Command, RoleProvider {
 	private final ProducerXChangeService producerXChangeService;
 
 	/**
@@ -33,6 +35,11 @@ public class TradeStop implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.TRADE_STOP;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 
 

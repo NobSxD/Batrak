@@ -1,5 +1,7 @@
 package org.example.command.menuBasic.addAccount;
 
+import org.example.command.RoleProvider;
+import org.example.entity.enams.Role;
 import org.example.factory.account.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
@@ -18,7 +20,7 @@ import static org.example.entity.enams.state.UserState.BASIC_STATE;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class AddSecretKey implements Command {
+public class AddSecretKey implements Command, RoleProvider {
 	private final NodeAccount nodeAccountDAO;
 	private final ProducerTelegramService producerTelegramService;
 
@@ -42,7 +44,7 @@ public class AddSecretKey implements Command {
 			}
 
 			nodeAccountDAO.saveAccount(changeAccount, nodeUser);
-			producerTelegramService.mainMenu("Вы успешго добавили аккаунт - " + changeAccount.getNameAccount(), nodeUser.getChatId());
+			producerTelegramService.menuMain("Вы успешго добавили аккаунт - " + changeAccount.getNameAccount(), nodeUser.getChatId());
 			return "";
 
 		} catch (Exception e) {
@@ -55,5 +57,10 @@ public class AddSecretKey implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.ACCOUNT_ADD_SECRET_API;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 }

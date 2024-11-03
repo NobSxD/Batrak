@@ -1,5 +1,7 @@
 package org.example.command.menuBasic.addAccount;
 
+import org.example.command.RoleProvider;
+import org.example.entity.enams.Role;
 import org.example.factory.account.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
@@ -15,7 +17,7 @@ import static org.example.entity.enams.state.UserState.ACCOUNT_ADD_SECRET_API;
 
 @Component
 @RequiredArgsConstructor
-public class AddPublicKey implements Command {
+public class AddPublicKey implements Command, RoleProvider {
 	private final NodeAccount nodeAccount;
 
 	@Override
@@ -46,5 +48,10 @@ public class AddPublicKey implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.ACCOUNT_ADD_PUBLIC_API;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 }

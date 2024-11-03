@@ -1,6 +1,8 @@
 package org.example.command.menuBasic.account;
 
 import org.example.button.ButtonLabelManager;
+import org.example.command.RoleProvider;
+import org.example.entity.enams.Role;
 import org.example.factory.account.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
@@ -17,7 +19,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class AccountList implements Command {
+public class AccountList implements Command, RoleProvider {
 	
 	private final ProducerTelegramService producerTelegramService;
 	private final NodeAccount nodeAccount;
@@ -31,12 +33,12 @@ public class AccountList implements Command {
 			List<Account> accounts = nodeAccount.getAccounts(nodeUser);
 			if (text.equals(ButtonLabelManager.deleteAccount)) {
 				nodeUser.setState(UserState.ACCOUNT_DELETE);
-				producerTelegramService.accountsMenu(accounts, "Выберите аккаунт для удаления", nodeUser.getChatId());
+				producerTelegramService.menuAccounts(accounts, "Выберите аккаунт для удаления", nodeUser.getChatId());
 				return "";
 			}
 			if (text.equals(ButtonLabelManager.choiceAccount)){
 				nodeUser.setState(UserState.ACCOUNT_SELECT);
-				producerTelegramService.accountsMenu(accounts, "Выберите аккаунт для торговли", nodeUser.getChatId());
+				producerTelegramService.menuAccounts(accounts, "Выберите аккаунт для торговли", nodeUser.getChatId());
 				return "";
 			}
 			log.error("Пользаватель {}, пытался выбрать или удалить аккаунт. text= {}", nodeUser.getId(), text);
@@ -51,5 +53,10 @@ public class AccountList implements Command {
 	public UserState getType() {
 		return UserState.ACCOUNT_LIST;
 	}
-	
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
+	}
+
 }

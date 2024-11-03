@@ -1,7 +1,9 @@
 package org.example.command.menuBasic.tradeOperation;
 
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
 
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MenuOperation implements Command {
+public class MenuOperation implements Command, RoleProvider {
 	private final ProducerTelegramService producerTelegramService;
 	
 	@Override
@@ -22,5 +24,10 @@ public class MenuOperation implements Command {
 	@Override
 	public UserState getType() {
 		return UserState.TRADE_OPERATION;
+	}
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
 	}
 }

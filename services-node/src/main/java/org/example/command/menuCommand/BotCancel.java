@@ -1,7 +1,9 @@
 package org.example.command.menuCommand;
 
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 
 import lombok.RequiredArgsConstructor;
@@ -13,7 +15,7 @@ import static org.example.entity.enams.state.UserState.BASIC_STATE;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class BotCancel implements Command {
+public class BotCancel implements Command, RoleProvider {
 	
 	@Override
 	public String send(NodeUser nodeUser, String text) {
@@ -31,5 +33,10 @@ public class BotCancel implements Command {
 	public UserState getType() {
 		return UserState.BOT_CANCEL;
 	}
-	
+
+	@Override
+	public Role getRole() {
+		return Role.USER;
+	}
+
 }

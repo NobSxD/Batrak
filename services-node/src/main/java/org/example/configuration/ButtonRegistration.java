@@ -22,6 +22,7 @@ public class ButtonRegistration {
         state.put(ButtonLabelManager.cancel, BOT_CANCEL);
         state.put(ButtonLabelManager.info, INFO_SETTINGS);
         state.put(ButtonLabelManager.main, BOT_MAIN_MENU);
+        state.put(ButtonLabelManager.admin, ADMIN);
 
 
         //основное меню
@@ -50,6 +51,15 @@ public class ButtonRegistration {
 
         //выбор стратегии
         state.put(ButtonLabelManager.gridTrading, SETTINGS_SAVE_NAME_STRATEGY);
+
+        //админ меню
+        state.put(ButtonLabelManager.listAllUsers, ADMIN_LIST_ALL_USERS);
+        state.put(ButtonLabelManager.banUser, ADMIN_BAN_USER);
+        state.put(ButtonLabelManager.unbanUser, ADMIN_UNBAN_USER);
+        state.put(ButtonLabelManager.tradingStatsAllUsers, ADMIN_TRADING_STATS_ALL_USERS);
+        state.put(ButtonLabelManager.tradingStatsSpecificUser, ADMIN_TRADING_STATS_SPECIFIC_USER);
+        state.put(ButtonLabelManager.stopTradingAllUsers, ADMIN_STOP_TRADING_ALL_USERS);
+        state.put(ButtonLabelManager.grantAdminRights, ADMIN_GRANT_ADMIN_RIGHTS);
 
         return state;
     }

@@ -1,7 +1,9 @@
 package org.example.command.menuBasic.addAccount;
 
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 
 import jakarta.transaction.Transactional;
@@ -17,7 +19,7 @@ import static org.example.entity.enams.state.UserState.ACCOUNT_ADD_NAME;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class AddAccount implements Command {
+public class AddAccount implements Command, RoleProvider {
 
 	@Override
 	@Transactional
@@ -30,7 +32,10 @@ public class AddAccount implements Command {
 		return UserState.ACCOUNT_ADD_REGISTER;
 	}
 
-
+	@Override
+	public Role getRole() {
+		return Role.USER;
+	}
 
 
 }

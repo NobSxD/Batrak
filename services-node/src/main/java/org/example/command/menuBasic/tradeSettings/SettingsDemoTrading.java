@@ -3,7 +3,9 @@ package org.example.command.menuBasic.tradeSettings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.command.Command;
+import org.example.command.RoleProvider;
 import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class SettingsDemoTrading implements Command {
+public class SettingsDemoTrading implements Command, RoleProvider {
     private final ProducerTelegramService producerTelegramService;
 
     @Override
@@ -26,21 +28,27 @@ public class SettingsDemoTrading implements Command {
     public UserState getType() {
         return UserState.SETTINGS_ENABLE_DEMO_TRADING;
     }
+
+    @Override
+    public Role getRole() {
+        return Role.USER;
+    }
+
     @Component
-    class SaveDemoTrading implements Command{
+    class SaveDemoTrading implements Command, RoleProvider {
 
         @Override
         public String send(NodeUser nodeUser, String text) {
-            if (text.equalsIgnoreCase("да")){
+            if (text.equalsIgnoreCase("да")) {
                 nodeUser.getConfigTrade().setEnableDemoTrading(true);
                 nodeUser.setState(UserState.BASIC_STATE);
-                producerTelegramService.mainMenu("Торговля на демо счет", nodeUser.getChatId());
+                producerTelegramService.menuMain("Торговля на демо счет", nodeUser.getChatId());
                 return "";
             }
-            if (text.equalsIgnoreCase("нет")){
+            if (text.equalsIgnoreCase("нет")) {
                 nodeUser.getConfigTrade().setEnableDemoTrading(false);
                 nodeUser.setState(UserState.BASIC_STATE);
-                producerTelegramService.mainMenu("Торговля на реальный счет", nodeUser.getChatId());
+                producerTelegramService.menuMain("Торговля на реальный счет", nodeUser.getChatId());
                 return "";
             }
             return "Пожалуйста набирите, 'да' или 'нет'";
@@ -49,6 +57,11 @@ public class SettingsDemoTrading implements Command {
         @Override
         public UserState getType() {
             return UserState.SETTINGS_SAVE_ENABLE_DEMO_TRADING;
+        }
+
+        @Override
+        public Role getRole() {
+            return Role.USER;
         }
     }
 }
