@@ -10,7 +10,8 @@ public enum MenuAdmin {
     TradingStatsSpecificUser(ButtonLabelManager.tradingStatsSpecificUser),
     StopTradingAllUsers(ButtonLabelManager.stopTradingAllUsers),
     GrantAdminRights(ButtonLabelManager.grantAdminRights),
-    MainMenu(ButtonLabelManager.mainMenu);
+    MainMenu(ButtonLabelManager.mainMenu),
+    Cache(ButtonLabelManager.cancelCache);
 
     private final String value;
 

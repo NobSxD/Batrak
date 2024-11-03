@@ -1,14 +1,19 @@
 package org.example.service.impl;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import org.example.service.ProcessServiceCommand;
+import org.telegram.telegrambots.meta.api.objects.Update;
+
 import lombok.Data;
-import org.example.dao.NodeUserDAO;
+
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.Role;
-import org.example.service.ProcessServiceCommand;
+
+import org.example.dao.NodeUserDAO;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static org.example.entity.enams.state.UserState.BASIC_STATE;
 
@@ -50,13 +55,23 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
         return nodeUser;
     }
 
-    public static long extractChatIdFromUpdate(Update update) {
+    @Override
+    public long extractChatIdFromUpdate(Update update) {
         if (update.getMessage() != null) {
             return update.getMessage().getChatId();
         } else if (update.getCallbackQuery() != null) {
             return update.getCallbackQuery().getMessage().getChatId();
         }
         return 0;
+    }
+    @Override
+    public void cancelCache(){
+        nodeUserCache.invalidateAll();
+    }
+
+    @Scheduled(fixedRate = 3600000)
+    private void cancelUp(){
+        nodeUserCache.cleanUp();
     }
 
 }

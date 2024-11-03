@@ -1,10 +1,12 @@
 package org.example.service;
 
+import org.example.dto.NodeUserDto;
+
+import java.util.List;
+
 import org.example.entity.Account;
 import org.example.entity.NodeChange;
 import org.example.entity.collect.Pair;
-
-import java.util.List;
 
 public interface ProducerTelegramService {
     void producerAnswer(String output, Long chatId);
@@ -15,6 +17,6 @@ public interface ProducerTelegramService {
     void menuOperation(String output, Long chatId);
     void menuPair(List<Pair> pairs, String output, Long chatId);
     void menuAdmin(String output, Long chatId);
-
+    void menuBan(List<NodeUserDto> userName, String output, Long chatId);
 
 }

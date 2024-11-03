@@ -1,23 +1,24 @@
 package org.example.service.impl;
 
-import lombok.extern.slf4j.Slf4j;
+import jakarta.transaction.Transactional;
 import org.example.command.CommandService;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.state.UserState;
 import org.example.service.AccessControl;
 import org.example.service.MainService;
 import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerTelegramService;
-
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
+import org.example.entity.NodeUser;
+import org.example.entity.enams.state.UserState;
+
+import org.springframework.stereotype.Service;
+
 import static org.example.button.MessageInfo.USER_NOT_FOUND_MESSAGE;
-import static org.example.service.impl.ProcessServiceCommandImpl.extractChatIdFromUpdate;
 
 
 @Service
@@ -42,7 +43,7 @@ public class MainServiceImpl implements MainService {
         try {
             NodeUser nodeUser = processServiceCommand.findOrSaveAppUser(update);
             if (nodeUser == null) {
-                producerTelegramService.producerAnswer(USER_NOT_FOUND_MESSAGE, extractChatIdFromUpdate(update));
+                producerTelegramService.producerAnswer(USER_NOT_FOUND_MESSAGE, processServiceCommand.extractChatIdFromUpdate(update));
                 log.error("NodeUser cannot be null in processUpdate");
                 throw new IllegalStateException("NodeUser cannot be null");
             }
@@ -78,7 +79,7 @@ public class MainServiceImpl implements MainService {
 
         Long chatId = nodeUser.getChatId();
         if (chatId == null) {
-            chatId = extractChatIdFromUpdate(update);
+            chatId = processServiceCommand.extractChatIdFromUpdate(update);
         }
         producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
     }

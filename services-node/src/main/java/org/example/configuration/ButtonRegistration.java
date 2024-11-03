@@ -1,14 +1,44 @@
 package org.example.configuration;
 
 import org.example.button.ButtonLabelManager;
-import org.example.entity.enams.state.UserState;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.example.entity.enams.state.UserState.*;
+import org.example.entity.enams.state.UserState;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import static org.example.entity.enams.state.UserState.ACCOUNT_ADD_REGISTER;
+import static org.example.entity.enams.state.UserState.ACCOUNT_LIST;
+import static org.example.entity.enams.state.UserState.ADMIN;
+import static org.example.entity.enams.state.UserState.ADMIN_BAN_USER;
+import static org.example.entity.enams.state.UserState.ADMIN_CANCEL_CACHE;
+import static org.example.entity.enams.state.UserState.ADMIN_GRANT_ADMIN_RIGHTS;
+import static org.example.entity.enams.state.UserState.ADMIN_LIST_ALL_USERS;
+import static org.example.entity.enams.state.UserState.ADMIN_STOP_TRADING_ALL_USERS;
+import static org.example.entity.enams.state.UserState.ADMIN_TRADING_STATS_ALL_USERS;
+import static org.example.entity.enams.state.UserState.ADMIN_TRADING_STATS_SPECIFIC_USER;
+import static org.example.entity.enams.state.UserState.ADMIN_UNBAN_USER;
+import static org.example.entity.enams.state.UserState.BOT_CANCEL;
+import static org.example.entity.enams.state.UserState.BOT_HELP;
+import static org.example.entity.enams.state.UserState.BOT_MAIN_MENU;
+import static org.example.entity.enams.state.UserState.BOT_START;
+import static org.example.entity.enams.state.UserState.INFO_SETTINGS;
+import static org.example.entity.enams.state.UserState.SETTINGS_AMOUNT_ORDER;
+import static org.example.entity.enams.state.UserState.SETTINGS_DEPOSIT;
+import static org.example.entity.enams.state.UserState.SETTINGS_ENABLE_DEMO_TRADING;
+import static org.example.entity.enams.state.UserState.SETTINGS_NAME_PAIR;
+import static org.example.entity.enams.state.UserState.SETTINGS_NAME_STRATEGY;
+import static org.example.entity.enams.state.UserState.SETTINGS_SAVE_NAME_STRATEGY;
+import static org.example.entity.enams.state.UserState.SETTINGS_STEP_BAY;
+import static org.example.entity.enams.state.UserState.SETTINGS_STEP_SELL;
+import static org.example.entity.enams.state.UserState.TRADE_CANCEL;
+import static org.example.entity.enams.state.UserState.TRADE_OPERATION;
+import static org.example.entity.enams.state.UserState.TRADE_SETTINGS;
+import static org.example.entity.enams.state.UserState.TRADE_START;
+import static org.example.entity.enams.state.UserState.TRADE_STOP;
 
 @Configuration
 public class ButtonRegistration {
@@ -60,6 +90,7 @@ public class ButtonRegistration {
         state.put(ButtonLabelManager.tradingStatsSpecificUser, ADMIN_TRADING_STATS_SPECIFIC_USER);
         state.put(ButtonLabelManager.stopTradingAllUsers, ADMIN_STOP_TRADING_ALL_USERS);
         state.put(ButtonLabelManager.grantAdminRights, ADMIN_GRANT_ADMIN_RIGHTS);
+        state.put(ButtonLabelManager.cancelCache, ADMIN_CANCEL_CACHE);
 
         return state;
     }
