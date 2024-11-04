@@ -18,7 +18,6 @@ import java.util.Map;
 import org.example.entity.NodeUser;
 import org.example.entity.enams.state.TradeState;
 
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 /**
@@ -56,24 +55,21 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
      */
     @Override
     @Transactional
-    public void startTrade(@Payload NodeUser nodeUser) {
+    public void startTrade(NodeUser nodeUser){
         try {
             if (strategyMap.get(nodeUser.getId()) != null) {
                 processServiceCommand.sendAnswer("Трейдинг уже запущен", nodeUser.getChatId());
                 return;
             }
             log.info("Прошел проверку на незапущенность трейдинга");
+
             BasicChangeInterface change = ChangeFactory.createChange(nodeUser);
             if (change == null) {
-                nodeUser.setStateTrade(TradeState.TRADE_BASIC);
-                processServiceCommand.sendAnswer(
-                        "Биржа не найденна: %s, трейденг не запущен".formatted(nodeUser.getChangeType()),
-                        nodeUser.getChatId());
+                processServiceCommand.sendAnswer("Биржа не найденна: %s, трейденг не запущен".
+                                formatted(nodeUser.getChangeType()), nodeUser.getChatId());
                 return;
             }
             log.info("Нашел биржу - {}", change.getClass());
-
-            processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
 
             Strategy strategy = createStrategy.createStrategy(nodeUser, change);
 
@@ -81,13 +77,14 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
                 processServiceCommand.sendAnswer("Не удалось найти стратегию", nodeUser.getChatId());
                 return;
             }
-
             log.info("Создал стратегию  - {}", strategy.getClass());
 
             strategyMap.put(nodeUser.getId(), strategy);
             Start start = new Start(strategy, nodeUser);
             log.info("Создал клас для многопоточки  - {}", start.getClass());
-            start.run();
+            Thread thread = new Thread(start);
+            thread.start();
+            log.info("Завершил метод, отдал RebittMq ответ");
 
         } catch (ExchangeException e) {
             handleTradeException(nodeUser, e, "Проверьте правильность введенных данных, " +
@@ -144,7 +141,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             return true;
         }
     }
-     static class Start implements Runnable{
+     class Start implements Runnable{
         Strategy strategy;
         NodeUser nodeUser;
         public Start(Strategy strategy, NodeUser nodeUser) {
@@ -155,6 +152,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         @Override
         public void run() {
             log.info("Запустил метдод strategy.tradeStart(nodeUser) в отдельном потоке  - {}", this.getClass());
+            processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
             strategy.tradeStart(nodeUser);
         }
     }

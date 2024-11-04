@@ -2,17 +2,21 @@ package org.example.websocet.change_socket;
 
 import info.bitrich.xchangestream.bybit.BybitStreamingExchange;
 import io.reactivex.rxjava3.core.Observable;
-import lombok.RequiredArgsConstructor;
 import org.example.configuration.CurrencyProperties;
-import org.example.entity.NodeOrder;
-import org.example.entity.collect.ChangeType;
 import org.example.websocet.WebSocketChange;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.bybit.dto.BybitCategory;
 import org.knowm.xchange.instrument.Instrument;
-import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
 
 import javax.annotation.PostConstruct;
+
+import java.math.BigDecimal;
+
+import org.example.entity.collect.ChangeType;
+
+import org.springframework.stereotype.Component;
 
 import static org.knowm.xchange.Exchange.USE_SANDBOX;
 
@@ -32,19 +36,13 @@ public class WebSocketByBitChange extends WebSocketBasic implements WebSocketCha
         exchangeSpecification.setShouldLoadRemoteMetaData(false);
         init(ChangeType.Bybit, currencyProperties, exchangeSpecification);
     }
-
-    @Override
-    public Observable<NodeOrder> getCurrencyRateStream() {
-        return subject;
-    }
-
     @Override
     public ChangeType getType() {
         return ChangeType.Bybit;
     }
 
     @Override
-    public Observable<NodeOrder> exchangePair(Instrument instrument){
+    public Observable<BigDecimal> exchangePair(Instrument instrument){
         return exchangeMap.get(instrument);
     }
 

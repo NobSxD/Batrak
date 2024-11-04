@@ -2,12 +2,6 @@ package org.example.strategy.impl;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
-import org.example.dao.NodeOrdersDAO;
-import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeOrder;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.state.OrderState;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.Strategy;
 import org.example.strategy.impl.helper.AssistantMessage;
@@ -18,7 +12,15 @@ import org.example.xchange.BasicChangeInterface;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.exceptions.FundsExceededException;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
+
+import org.example.entity.NodeOrder;
+import org.example.entity.NodeUser;
+
+import org.example.dao.NodeOrdersDAO;
+import org.example.dao.NodeUserDAO;
 
 @Slf4j
 public abstract class StrategyBasic implements Strategy {
@@ -78,10 +80,9 @@ public abstract class StrategyBasic implements Strategy {
 
 
     protected void finalizeOrder(NodeOrder nodeOrder) {
-        log.info("{} : ордер был исполнен по прайсу {}. ", nodeOrder.getOrderId(), nodeOrder.getLimitPrice());
+        log.info("id: {}, ордер был исполнен по прайсу {}. ", nodeOrder.getOrderId(), nodeOrder.getLimitPrice());
         String message = AssistantMessage.messageProcessing(nodeOrder);
         producerServiceExchange.sendAnswer(message, nodeOrder.getNodeUser().getChatId());
-        nodeOrder.setOrderState(OrderState.COMPLETED);
     }
 
     protected void handleFundsExceededException(NodeUser nodeUser, FundsExceededException e) {

@@ -6,25 +6,28 @@ import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
-import lombok.extern.slf4j.Slf4j;
 import org.example.configuration.CurrencyProperties;
-import org.example.entity.NodeOrder;
-import org.example.entity.collect.ChangeType;
-import org.example.entity.collect.Pair;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.dto.marketdata.Trade;
 import org.knowm.xchange.instrument.Instrument;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.example.entity.collect.ChangeType;
+import org.example.entity.collect.Pair;
+
 @Slf4j
 public abstract class WebSocketBasic {
 
-    protected final BehaviorSubject<NodeOrder> subject = BehaviorSubject.create();
-    protected final Map<CurrencyPair, Observable<NodeOrder>> exchangeMap = new HashMap<>();
+    protected final BehaviorSubject<BigDecimal> subject = BehaviorSubject.create();
+    protected final Map<CurrencyPair, Observable<BigDecimal>> exchangeMap = new HashMap<>();
 
     public abstract void streamValue();
 
@@ -59,21 +62,17 @@ public abstract class WebSocketBasic {
                 .build();
 
         exchange.connect(subscription).blockingAwait();
-        Observable<NodeOrder> tradeObservable = exchange.getStreamingMarketDataService()
+        Observable<BigDecimal> tradeObservable = exchange.getStreamingMarketDataService()
                 .getTrades((Instrument) currencyPair)
-                .map(trade -> NodeOrder.builder()//TODO заменить на DTO
-                        .instrument(trade.getInstrument().toString())
-                        .limitPrice(trade.getPrice())
-                        .build())
+                .map(Trade::getPrice)
                 .doOnError(error -> {
                     log.error("Ошибка при получении данных: ", error);
                 })
                 .retryWhen(exponentialBackoff());
-        tradeObservable
-                .subscribe(
-                        subject::onNext,
-                        subject::onError
-                );
+        tradeObservable.subscribe(
+                subject::onNext,
+                subject::onError
+        );
         exchangeMap.put(currencyPair, tradeObservable);
     }
 
