@@ -104,17 +104,12 @@ public class GridTrading extends StrategyBasic {
                     tradeStatusManager.sellLast();
                     lastPrice = null;
                     endPrice = null;
-                    StringBuilder sb = new StringBuilder();
-
-                    for (BigDecimal level : buyLevels) {  //TODO после отладки удалить
-                        sb.append("Buy Level: ").append(level.toString()).append("\n");
-                    }
                     log.info("Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю, \n"
                                     + "tradeStatusManager: {} \n"
                                     + "lastPrice : {} \n"
                                     + "endPrice: {}\n"
                                     + "buyLevels : {}",
-                            tradeStatusManager.getCurrentTradeState(), lastPrice, endPrice, sb);
+                            tradeStatusManager.getCurrentTradeState(), lastPrice, endPrice, buyLevels);
                     Thread.sleep(40000);
                 } catch (InterruptedException e) {
                     log.error("Поток был прерван: ", e);
@@ -158,23 +153,27 @@ public class GridTrading extends StrategyBasic {
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
             endPrice = FinancialCalculator.increaseByPercentage(currentPrice, stepSell);
             nextBay = FinancialCalculator.subtractPercentage(currentPrice, stepBay);
+            nexSell = FinancialCalculator.addPercentage(lastPrice, stepSell);
             tradeStatusManager.runTrading();
-            log.info("FIRST_BAY: bayPrice {}, endPrice: {}, nextBay: {}, nextSell: {} ", currentPrice, endPrice, nextBay, nexSell);
+            log.info("1.FIRST_BAY: bayPrice {}, endPrice: {}, nextBay: {}, nextSell: {}, nodeOrderPrice: {} ",
+                    currentPrice, endPrice, nextBay, nexSell, nodeOrder.getLimitPrice());
         }
         if (shouldBuy(currentPrice)) {
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
             nextBay = FinancialCalculator.subtractPercentage(currentPrice, stepBay);
             nexSell = FinancialCalculator.addPercentage(lastPrice, stepSell);
-            log.info("BAY: bayPrice: {}, nextBay: {}, nextSell: {} ", currentPrice, nextBay, nexSell);
+            log.info("2.BAY: bayPrice: {}, nextBay: {}, nextSell: {}, nodeOrderPrice: {} ",
+                    currentPrice, nextBay, nexSell, nodeOrder.getLimitPrice());
         } else if (shouldSell(currentPrice)) {
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
             nextBay = FinancialCalculator.subtractPercentage(currentPrice, stepBay);
             nexSell = FinancialCalculator.addPercentage(lastPrice, stepSell);
-            log.info("SELL: sellPrice {} nextBay: {}, nextSell: {} ", currentPrice, nextBay, nexSell);
+            log.info("3.SELL: sellPrice {} nextBay: {}, nextSell: {}, nodeOrderPrice: {} ",
+                    currentPrice, nextBay, nexSell, nodeOrder.getLimitPrice());
         } else if (shouldLastSell(currentPrice)) {
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
             tradeStatusManager.getCountDownLatch().countDown();
-            log.info("LAST_SELL: sellPrice: {}", currentPrice);
+            log.info("4.LAST_SELL: sellPrice: {}, nodeOrderPrice: {} ", currentPrice, nodeOrder.getLimitPrice());
         }
         return nodeOrder;
     }
@@ -183,16 +182,18 @@ public class GridTrading extends StrategyBasic {
         boolean canBuy = currentPrice.compareTo(nextBay) <= 0;
         boolean contains = !buyLevels.contains(currentPrice);
         if (canBuy && contains) {
-            log.info("BAY: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ", currentPrice, nextBay, buyLevels);
+            log.info("shouldSell: currentPrice - nextBay = {} <= {}, buyLevels = {}, lastPrice = {} ",
+                    currentPrice, nextBay, buyLevels, lastPrice);
         }
         return canBuy && contains;
     }
 
     public boolean shouldSell(BigDecimal currentPrice) {
-        boolean canSell = currentPrice.compareTo(nextBay) >= 0;
+        boolean canSell = currentPrice.compareTo(nexSell) >= 0;
         boolean contains = buyLevels.contains(lastPrice);
         if (canSell && contains) {
-            log.info("SELL: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ", currentPrice, nextBay, buyLevels);
+            log.info("shouldSell: currentPrice - nexSell = {} >= {}, buyLevels = {}, lastPrice = {} ",
+                    currentPrice, nexSell, buyLevels, lastPrice);
         }
         return canSell && contains;
     }
@@ -201,7 +202,7 @@ public class GridTrading extends StrategyBasic {
         boolean canSell = endPrice.compareTo(currentPrice) <= 0;
         boolean contains = buyLevels.contains(lastPrice);
         if (canSell && contains) {
-            log.info("SELL LAST: currentPrice = {}, endPrice = {}, buyLevels = {} ", currentPrice, endPrice, buyLevels);
+            log.info("SELL LAST:  endPrice - currentPrice = {} <= {}, buyLevels = {} ", endPrice, currentPrice, buyLevels);
         }
         return canSell && contains;
     }
@@ -209,22 +210,12 @@ public class GridTrading extends StrategyBasic {
     public NodeOrder executeBuyOrder(BigDecimal price, NodeUser nodeUser) {
         lastPrice = price;
         buyLevels.add(price);
-        StringBuilder sb = new StringBuilder();
-        for (BigDecimal level : buyLevels) {
-            sb.append("Buy Level: ").append(level.toString()).append("\n");
-        }
-        log.info("price = {} \n buyLevels = {}", price, sb);
         return process(Order.OrderType.BID, nodeUser);
     }
 
     public NodeOrder executeSellOrder(BigDecimal price, NodeUser nodeUser) {
         buyLevels.remove(lastPrice);
         lastPrice = price;
-        StringBuilder sb = new StringBuilder();
-        for (BigDecimal level : buyLevels) {
-            sb.append("Buy Level: ").append(level.toString()).append("\n");
-        }
-        log.info("price = {} \n buyLevels = {}", price, sb);
         return process(Order.OrderType.ASK, nodeUser);
     }
 
@@ -237,9 +228,6 @@ public class GridTrading extends StrategyBasic {
             BigDecimal cryptoQty = CurrencyConverter.convertCurrency(lastPrice, amount, scale);
 
             MarketOrder marketOrder = basicChange.createMarketOrder(orderType, cryptoQty, instrument);
-            if (marketOrder == null) {
-                throw new IllegalStateException("Failed to create market order");
-            }
 
             String idOrder = basicChange.placeMarketOrder(marketOrder);
 
@@ -276,7 +264,6 @@ public class GridTrading extends StrategyBasic {
             log.error("Торговый поток был прерван:", e);
         }
     }
-
     private void cleanUp() {
         lastPrice = null;
         endPrice = null;

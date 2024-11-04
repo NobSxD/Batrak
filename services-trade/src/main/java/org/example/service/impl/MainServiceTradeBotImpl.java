@@ -124,6 +124,8 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         if (checkStrategy(strategy, nodeUser)) {
             strategy.tradeCancel();
         }
+        log.info("Удаляем стратегию из мапы под id: {}, ", nodeUser.getId());
+        strategyMap.remove(nodeUser.getId());
     }
 
     @Override
