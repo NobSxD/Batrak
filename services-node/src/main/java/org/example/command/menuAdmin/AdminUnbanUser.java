@@ -3,6 +3,7 @@ package org.example.command.menuAdmin;
 import org.example.command.Command;
 import org.example.command.RoleProvider;
 import org.example.dto.NodeUserDto;
+import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerTelegramService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Component;
 public class AdminUnbanUser implements Command, RoleProvider {
     private final NodeUserDAO nodeUserDAO;
     private final ProducerTelegramService producerTelegramService;
+    private final ProcessServiceCommand processServiceCommand;
     @Override
     public String send(NodeUser nodeUser, String nameAccount) {
         List<NodeUser> byIsActiveTrue = nodeUserDAO.findByIsActiveTrue();
@@ -59,11 +61,12 @@ public class AdminUnbanUser implements Command, RoleProvider {
                 return "Пользователь для разблокировки не найден";
             }
             NodeUser user = byUsername.get();
-            if (nodeUser.equals(user)){
-                return "Вы не можете разблокировать сам себя";
+            if (nodeUser.getId().equals(user.getId())){
+                return "Вы не можете разблокировки сам себя";
             }
-            user.setIsActive(true);
+            user.setIsActive(false);
             nodeUserDAO.save(user);
+            processServiceCommand.cancelCache();
             return "Пользователь %s успешно разблокирован".formatted(user.getLastName());
         }
 

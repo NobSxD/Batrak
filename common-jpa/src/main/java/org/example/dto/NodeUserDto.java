@@ -1,8 +1,11 @@
 package org.example.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.example.castom.Displayable;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NodeUserDto implements Displayable {
     @JsonProperty("userName")
     private String userName;
@@ -11,7 +14,8 @@ public class NodeUserDto implements Displayable {
         return userName;
     }
 
-    public NodeUserDto(String userName) {
+    @JsonCreator
+    public NodeUserDto(@JsonProperty("userName") String userName) {
         this.userName = userName;
     }
 }

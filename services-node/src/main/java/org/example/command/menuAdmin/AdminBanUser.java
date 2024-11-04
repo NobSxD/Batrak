@@ -3,6 +3,7 @@ package org.example.command.menuAdmin;
 import org.example.command.Command;
 import org.example.command.RoleProvider;
 import org.example.dto.NodeUserDto;
+import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerTelegramService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Component;
 public class AdminBanUser implements Command, RoleProvider {
     private final NodeUserDAO nodeUserDAO;
     private final ProducerTelegramService producerTelegramService;
+    private final ProcessServiceCommand processServiceCommand;
 
     @Override
     public String send(NodeUser nodeUser, String nameAccount) {
@@ -61,11 +63,18 @@ public class AdminBanUser implements Command, RoleProvider {
             }
             NodeUser user = byUsername.get();
 
-            if (nodeUser.equals(user)){
+            if (nodeUser.getId().equals(user.getId())){
                 return "Вы не можете заблокировать сам себя";
+            }
+            if (user.getRole().equals(Role.SUPERUSER)){
+                return "Вы не можете забанить суперюзера";
+            }
+            if (nodeUser.getRole().equals(Role.ADMIN) && user.getRole().equals(Role.ADMIN)){
+                return "Администратор не может заблокировать другового администратора, обратитесь к суперюзеру";
             }
             user.setIsActive(true);
             nodeUserDAO.save(user);
+            processServiceCommand.cancelCache();
             return "Пользователь %s успешно заблокирован".formatted(user.getLastName());
         }
 

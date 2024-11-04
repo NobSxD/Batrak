@@ -2,7 +2,6 @@ package org.example.service.impl;
 
 import jakarta.transaction.Transactional;
 import org.example.command.CommandService;
-import org.example.service.AccessControl;
 import org.example.service.MainService;
 import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerTelegramService;
@@ -30,7 +29,6 @@ public class MainServiceImpl implements MainService {
     private final ProducerTelegramService producerTelegramService;
     private final CommandService commandService;
     private final Map<String, UserState> buttonRegistration;
-    private final AccessControl accessControl;
 
     @Override
     @Transactional
@@ -49,8 +47,11 @@ public class MainServiceImpl implements MainService {
             }
 
             String text = extractTextFromUpdate(update);
-            handleUserActivity(nodeUser, update);
-            processUserCommand(nodeUser, text);
+            if (nodeUser.getIsActive()){
+                producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", nodeUser.getChatId());
+            } else {
+                processUserCommand(nodeUser, text);
+            }
         } catch (Exception e) {
             log.error("Error processing update: {}", e.getMessage(), e);
         }
@@ -70,18 +71,6 @@ public class MainServiceImpl implements MainService {
         if (userState != null) {
             user.setState(userState);
         }
-    }
-
-    private void handleUserActivity(NodeUser nodeUser, Update update) {
-        if (!accessControl.isActive(nodeUser)) {
-            return;
-        }
-
-        Long chatId = nodeUser.getChatId();
-        if (chatId == null) {
-            chatId = processServiceCommand.extractChatIdFromUpdate(update);
-        }
-        producerTelegramService.producerAnswer("В доступе отказанно, активируйте свой аккаунт", chatId);
     }
 
     private void processUserCommand(NodeUser nodeUser, String text) {
