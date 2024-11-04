@@ -1,6 +1,5 @@
 package org.example.xchange;
 
-import lombok.ToString;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
@@ -15,6 +14,8 @@ import org.knowm.xchange.service.trade.params.CancelOrderParams;
 import org.knowm.xchange.service.trade.params.DefaultCancelOrderByInstrumentAndIdParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import lombok.ToString;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -31,16 +32,14 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 
 
 
-	public String placeLimitOrder(LimitOrder limitOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
+	public String placeLimitOrder(LimitOrder limitOrder) { //если false то мы не отпровляем ордер на биржу
 		if (limitOrder == null){
 			throw new IllegalArgumentException("LimitOrder cannot be null");
 		}
 		try {
 			TradeService tradeService = exchange.getTradeService();
-			String orderId = "";
-			if (!trade) {
-				orderId = tradeService.placeLimitOrder(limitOrder);
-			}
+			String orderId = tradeService.placeLimitOrder(limitOrder);
+
 			logger.info(limitOrder.toString());
 			return orderId;
 		} catch (IOException e) {
@@ -49,16 +48,13 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 		}
 	}
 
-	public String placeMarketOrder(MarketOrder marketOrder, boolean trade) { //если false то мы не отпровляем ордер на биржу
+	public String placeMarketOrder(MarketOrder marketOrder) { //если false то мы не отпровляем ордер на биржу
 		if (marketOrder == null){
 			throw new IllegalArgumentException("MarketOrder cannot be null");
 		}
 		try {
 			TradeService tradeService = exchange.getTradeService();
-			String orderId = "";
-			if (!trade) {
-				orderId = tradeService.placeMarketOrder(marketOrder);
-			}
+			String orderId = tradeService.placeMarketOrder(marketOrder);
 			logger.info(marketOrder.toString());
 			return orderId;
 		} catch (IOException e) {

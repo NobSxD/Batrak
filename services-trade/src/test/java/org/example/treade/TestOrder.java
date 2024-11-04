@@ -34,7 +34,7 @@ public class TestOrder {
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"),price);
         LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-        String s = binanceMain.placeLimitOrder(order, true);
+        String s = binanceMain.placeLimitOrder(order);
         System.out.println(s);
     }
     @Test
@@ -44,7 +44,7 @@ public class TestOrder {
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"),price);
         LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-        String s = binanceMain.placeLimitOrder(order, false);
+        String s = binanceMain.placeLimitOrder(order);
         Thread.sleep(2000);
         binanceMain.cancelOrder("BTC/USDT",s);
         System.out.println(s);

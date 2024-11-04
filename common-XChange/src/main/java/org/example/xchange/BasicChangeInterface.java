@@ -17,7 +17,7 @@ public interface BasicChangeInterface {
 	LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType);
 	MarketOrder createMarketOrder(Order.OrderType orderType, BigDecimal summa, Instrument currencyPair);
 	List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders);
-	String placeLimitOrder(LimitOrder limitOrder, boolean trade);
-	String placeMarketOrder(MarketOrder marketOrder, boolean trade);
+	String placeLimitOrder(LimitOrder limitOrder);
+	String placeMarketOrder(MarketOrder marketOrder);
 
 }

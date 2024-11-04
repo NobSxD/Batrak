@@ -73,7 +73,7 @@ class BinanceMainImpIntegratio {
         BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
         Instrument instrument = new CurrencyPair("BTC-USDT");
         MarketOrder marketOrder = binanceMain.createMarketOrder(Order.OrderType.BID, new BigDecimal("0.00017"), instrument);
-        String order = binanceMain.placeMarketOrder(marketOrder,false);
+        String order = binanceMain.placeMarketOrder(marketOrder);
         System.out.println(order);
     }
 
@@ -83,7 +83,7 @@ class BinanceMainImpIntegratio {
         Instrument instrument = new CurrencyPair("BTC-USDT");
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), new BigDecimal("0.00020"));
         LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-        binanceMain.placeLimitOrder(order, true);
+        binanceMain.placeLimitOrder(order);
     }
 
     @Test
@@ -93,7 +93,7 @@ class BinanceMainImpIntegratio {
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), price);
         LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-        binanceMain.placeLimitOrder(order, true);
+        binanceMain.placeLimitOrder(order);
     }
 
     @Test
@@ -103,7 +103,7 @@ class BinanceMainImpIntegratio {
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"), price);
         LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
-        String s = binanceMain.placeLimitOrder(order, true);
+        String s = binanceMain.placeLimitOrder(order);
         System.out.println(s);
     }
 

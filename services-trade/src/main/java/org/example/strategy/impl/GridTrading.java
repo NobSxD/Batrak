@@ -2,13 +2,6 @@ package org.example.strategy.impl;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
-import org.example.dao.NodeOrdersDAO;
-import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeOrder;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.state.OrderState;
-import org.example.entity.enams.state.TradeState;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.impl.helper.TradeStatusManager;
 import org.example.websocet.WebSocketChange;
@@ -22,10 +15,22 @@ import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.exceptions.FundsExceededException;
 import org.knowm.xchange.instrument.Instrument;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+
+import org.example.entity.NodeOrder;
+import org.example.entity.NodeUser;
+import org.example.entity.enams.state.OrderState;
+import org.example.entity.enams.state.TradeState;
+
+import org.example.dao.NodeOrdersDAO;
+import org.example.dao.NodeUserDAO;
 
 /**
  * @params buyLevels - сетка ордеров.
@@ -43,7 +48,6 @@ public class GridTrading extends StrategyBasic {
     public final Set<BigDecimal> buyLevels = new HashSet<>();
     private final Instrument instrument;
     private final BigDecimal coinAmount;
-    private final boolean demoTrade;
     private final double stepSell;
     private final double stepBay;
     private final int scale;
@@ -60,14 +64,12 @@ public class GridTrading extends StrategyBasic {
         this.producerServiceExchange = producerServiceExchange;
         this.instrument = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
         this.coinAmount = nodeUser.getConfigTrade().getAmountOrder();
-        this.demoTrade = nodeUser.getConfigTrade().isEnableDemoTrading();
         this.scale = nodeUser.getConfigTrade().getScale();
         this.stepBay = nodeUser.getConfigTrade().getStepBayD();
         this.stepSell = nodeUser.getConfigTrade().getStepSellD();
         tradeStatusManager.startTrading();
         tradeStatusManager.newCountDownLatch(1);
     }
-
 
 
     @Override
@@ -81,13 +83,17 @@ public class GridTrading extends StrategyBasic {
         try {
             while (true) {
                 if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_STOP) {
+                    log.info("Поступила команда на остановку трейдинга");
                     break;
                 }
 
+                log.info("Начинаю торговлю в методе startTradingCycle");
                 startTradingCycle(nodeUser);
+                log.info("Блокирую поток пока метод startTradingCycle не разблокирует его");
                 awaitLatch(tradeStatusManager.getCountDownLatch());
 
                 if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_CANCEL) {
+                    log.info("Поступила команда на отмену, поток разблокирован, торговля отменена");
                     resultTrade(nodeUser);
                     break;
                 }
@@ -97,6 +103,17 @@ public class GridTrading extends StrategyBasic {
                     tradeStatusManager.sellLast();
                     lastPrice = null;
                     endPrice = null;
+                    StringBuilder sb = new StringBuilder();
+                    for (BigDecimal level : buyLevels) {
+                        sb.append("Buy Level: ").append(level.toString()).append("\n");
+                    }
+                    log.info("Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю, \n"
+                                    + "tradeStatusManager: {} \n"
+                                    + "lastPrice : {} \n"
+                                    + "endPrice: {}\n"
+                                    + "currentPrice: {} \n"
+                                    + "buyLevels : {}", tradeStatusManager.getCurrentTradeState(), lastPrice, endPrice,
+                            currentPrice, sb);
                     Thread.sleep(40000);
                 } catch (InterruptedException e) {
                     log.error("Поток был прерван: ", e);
@@ -113,28 +130,17 @@ public class GridTrading extends StrategyBasic {
     @Transactional
     public void startTradingCycle(NodeUser nodeUser) {
         WebSocketChange webSocketChange = webSocketCommand.webSocketChange(nodeUser);
-
-        // Подписываемся на изменения
         disposable = webSocketChange.exchangePair(instrument)
                 .observeOn(Schedulers.io())
-                .buffer(10, TimeUnit.SECONDS)  // Оптимизация: собираем данные за промежуток времени, чтобы не сохранять каждое изменение
-                .subscribe(rateList -> {
-                    List<NodeOrder> newOrders = new ArrayList<>();
-                    for (NodeOrder rate : rateList) {
-                        BigDecimal currentPrice = rate.getLimitPrice();
-                        NodeOrder nodeOrder = processPrice(currentPrice, nodeUser);
-                        if (nodeOrder != null) {
-                            newOrders.add(nodeOrder);
-                        }
-                    }
-
-                    // Добавляем заказы только если есть новые
-                    if (!newOrders.isEmpty()) {
+                .subscribe(rate -> {
+                    BigDecimal currentPrice = rate.getLimitPrice();
+                    NodeOrder nodeOrder = processPrice(currentPrice, nodeUser);
+                    if (nodeOrder != null) {
                         if (nodeUser.getOrders() == null) {
                             nodeUser.setOrders(new ArrayList<>());
                         }
-                        nodeUser.getOrders().addAll(newOrders);
-                        nodeUserDAO.save(nodeUser);  // Сохраняем изменения только один раз
+                        nodeUser.getOrders().add(nodeOrder);
+                        nodeUserDAO.save(nodeUser);
                     }
                 }, error -> {
                     log.error("Error occurred: {}", error.getMessage());
@@ -148,19 +154,20 @@ public class GridTrading extends StrategyBasic {
         if (state.equals(TradeState.TRADE_START)) {
             log.info("Прайс на первую покупку : {}", currentPrice);
             endPrice = FinancialCalculator.increaseByPercentage(currentPrice, BigDecimal.valueOf(stepSell));
+            log.info("Прайс на завершающию покупку : {}", endPrice);
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
             tradeStatusManager.runTrading();
         }
-         if (shouldBuy(currentPrice)) {
+        if (shouldBuy(currentPrice)) {
             log.info("Прайс на покупку : {}", currentPrice);
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
         } else if (shouldSell(currentPrice)) {
             log.info("Прайс на продажу : {}", currentPrice);
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
-        }else if (shouldLastSell(currentPrice)) {
-             log.info("Прайс на последнию продажу : {}", currentPrice);
-             nodeOrder = executeSellOrder(currentPrice, nodeUser);
-         }
+        } else if (shouldLastSell(currentPrice)) {
+            log.info("Прайс на последнию продажу : {}", currentPrice);
+            nodeOrder = executeSellOrder(currentPrice, nodeUser);
+        }
         return nodeOrder;
     }
 
@@ -179,8 +186,8 @@ public class GridTrading extends StrategyBasic {
         // Проверяем, можно ли купить на этом уровне
         boolean canBuy = currentPrice.compareTo(targetBuyPrice) <= 0;
         boolean contains = !buyLevels.contains(currentPrice);
-        if (canBuy && contains){
-            log.debug("BAY: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ",currentPrice,targetBuyPrice, buyLevels );
+        if (canBuy && contains) {
+            log.debug("BAY: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ", currentPrice, targetBuyPrice, buyLevels);
         }
         return canBuy && contains;
     }
@@ -190,17 +197,18 @@ public class GridTrading extends StrategyBasic {
         // Проверяем, можно ли продать на этом уровне
         boolean canSell = currentPrice.compareTo(targetSellPrice) >= 0;
         boolean contains = buyLevels.contains(lastPrice);
-        if (canSell && contains){
-            log.debug("SELL: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ",currentPrice,targetSellPrice, buyLevels );
+        if (canSell && contains) {
+            log.debug("SELL: currentPrice = {}, targetBuyPrice = {}, buyLevels = {} ", currentPrice, targetSellPrice, buyLevels);
         }
         return canSell && contains;
     }
+
     public boolean shouldLastSell(BigDecimal currentPrice) {
 
         boolean canSell = endPrice.compareTo(currentPrice) <= 0;
         boolean contains = buyLevels.contains(lastPrice);
-        if (canSell && contains){
-            log.debug("SELL LAST: currentPrice = {}, endPrice = {}, buyLevels = {} ",currentPrice,endPrice, buyLevels );
+        if (canSell && contains) {
+            log.debug("SELL LAST: currentPrice = {}, endPrice = {}, buyLevels = {} ", currentPrice, endPrice, buyLevels);
         }
         return canSell && contains;
     }
@@ -209,6 +217,12 @@ public class GridTrading extends StrategyBasic {
         this.currentPrice = price;
         lastPrice = price;
         buyLevels.add(price);
+        StringBuilder sb = new StringBuilder();
+        for (BigDecimal level : buyLevels) {
+            sb.append("Buy Level: ").append(level.toString()).append("\n");
+        }
+        log.info("buyLevels = {}", sb);
+        log.info("price = {}", price);
         return process(Order.OrderType.BID, nodeUser);
     }
 
@@ -216,6 +230,12 @@ public class GridTrading extends StrategyBasic {
         this.currentPrice = price;
         buyLevels.remove(lastPrice);
         lastPrice = price;
+        StringBuilder sb = new StringBuilder();
+        for (BigDecimal level : buyLevels) {
+            sb.append("Buy Level: ").append(level.toString()).append("\n");
+        }
+        log.info("buyLevels = {}", sb);
+        log.info("price = {}", price);
         return process(Order.OrderType.ASK, nodeUser);
     }
 
@@ -232,7 +252,7 @@ public class GridTrading extends StrategyBasic {
                 throw new IllegalStateException("Failed to create market order");
             }
 
-            String idOrder = basicChange.placeMarketOrder(marketOrder, demoTrade);
+            String idOrder = basicChange.placeMarketOrder(marketOrder);
 
             NodeOrder nodeOrder = NodeOrder.builder()
                     .limitPrice(currentPrice)

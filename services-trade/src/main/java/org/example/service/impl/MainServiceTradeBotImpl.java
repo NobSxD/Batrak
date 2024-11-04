@@ -1,10 +1,6 @@
 package org.example.service.impl;
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.state.TradeState;
 import org.example.factory.ChangeFactory;
 import org.example.service.CreateStrategy;
 import org.example.service.MainServiceTradeBot;
@@ -12,11 +8,18 @@ import org.example.service.ProcessServiceCommand;
 import org.example.strategy.Strategy;
 import org.example.xchange.BasicChangeInterface;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.example.entity.NodeUser;
+import org.example.entity.enams.state.TradeState;
+
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Service;
 
 /**
  * PLACED,        // Ордер был выставлен на продажу или покупку, но еще не исполнен.
@@ -59,7 +62,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
                 processServiceCommand.sendAnswer("Трейдинг уже запущен", nodeUser.getChatId());
                 return;
             }
-
+            log.info("Прошел проверку на незапущенность трейдинга");
             BasicChangeInterface change = ChangeFactory.createChange(nodeUser);
             if (change == null) {
                 nodeUser.setStateTrade(TradeState.TRADE_BASIC);
@@ -68,6 +71,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
                         nodeUser.getChatId());
                 return;
             }
+            log.info("Нашел биржу - {}", change.getClass());
 
             processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
 
@@ -77,9 +81,13 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
                 processServiceCommand.sendAnswer("Не удалось найти стратегию", nodeUser.getChatId());
                 return;
             }
+
+            log.info("Создал стратегию  - {}", strategy.getClass());
+
             strategyMap.put(nodeUser.getId(), strategy);
-            strategy.tradeStart(nodeUser);
-            strategyMap.remove(nodeUser.getId());
+            Start start = new Start(strategy, nodeUser);
+            log.info("Создал клас для многопоточки  - {}", start.getClass());
+            start.run();
 
         } catch (ExchangeException e) {
             handleTradeException(nodeUser, e, "Проверьте правильность введенных данных, " +
@@ -134,6 +142,20 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             return false;
         } else {
             return true;
+        }
+    }
+     static class Start implements Runnable{
+        Strategy strategy;
+        NodeUser nodeUser;
+        public Start(Strategy strategy, NodeUser nodeUser) {
+            this.strategy = strategy;
+            this.nodeUser = nodeUser;
+        }
+
+        @Override
+        public void run() {
+            log.info("Запустил метдод strategy.tradeStart(nodeUser) в отдельном потоке  - {}", this.getClass());
+            strategy.tradeStart(nodeUser);
         }
     }
 

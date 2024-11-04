@@ -5,7 +5,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%cyan(%-50c{36})] - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level) [%cyan(%-50c{36})] - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -17,7 +17,7 @@
             <totalSizeCap>10GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%cyan(%-50c{36})] - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level) [%cyan(%-50c{36})] - %msg%n</pattern>
         </encoder>
     </appender>
 
