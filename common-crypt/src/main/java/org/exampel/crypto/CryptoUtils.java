@@ -9,7 +9,7 @@ public class CryptoUtils {
 
 	public CryptoUtils() {
 		encryptor = new BasicTextEncryptor();
-		encryptor.setPassword(System.getenv("secretKey"));
+		encryptor.setPassword(System.getenv("SECRET_KEY_SALT"));
 	}
 
 	public String encryptMessage(String message) {
