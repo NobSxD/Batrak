@@ -66,7 +66,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         NodeUser nodeUser = nodeUserDAO.findById(nodeUserDto.getId()).orElseThrow();
         try {
             Strategy strategy = strategyMap.get(nodeUser.getId());
-            if (checkStrategy(strategy, nodeUserDto)) {
+            if (strategy != null) {
                 processServiceCommand.sendAnswer("Трейдинг уже запущен", nodeUser.getChatId());
                 return;
             }
