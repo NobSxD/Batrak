@@ -6,23 +6,24 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.entity.enams.menu.MenuStrategy;
-import org.example.entity.enams.state.OrderState;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+
+import org.example.entity.enams.menu.MenuStrategy;
+import org.example.entity.enams.state.OrderState;
 
 @Entity
 @Getter
@@ -71,7 +72,7 @@ public class NodeOrder {
 	@JsonProperty("menuStrategy")
 	private MenuStrategy menuStrategy;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JsonBackReference
 	private NodeUser nodeUser;
 	

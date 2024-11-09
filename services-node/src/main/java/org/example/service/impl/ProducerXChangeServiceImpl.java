@@ -1,10 +1,13 @@
 package org.example.service.impl;
 
-import org.example.entity.NodeUser;
+import org.example.dto.NodeUserDto;
 import org.example.service.ProducerXChangeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.example.entity.NodeUser;
+
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,24 +20,29 @@ import static org.example.model.RabbitQueue.TRADE_STOP;
 @RequiredArgsConstructor
 @Slf4j
 public class ProducerXChangeServiceImpl implements ProducerXChangeService {
-	private final RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
-	@Override
-	public void startTrade(NodeUser nodeUser) {
-		rabbitTemplate.convertAndSend(TRADE_MESSAGE, nodeUser);
-	}
+    @Override
+    public void startTrade(NodeUser nodeUser) {
+        NodeUserDto nodeUserDto = new NodeUserDto(nodeUser.getId(), nodeUser.getChatId(), nodeUser.getUsername());
+        rabbitTemplate.convertAndSend(TRADE_MESSAGE, nodeUserDto);
+    }
 
-	@Override
-	public void stopTrade(NodeUser nodeUser) {
-		rabbitTemplate.convertAndSend(TRADE_STOP, nodeUser);
-	}
-	@Override
-	public void infoAccount(NodeUser nodeUser){
-		rabbitTemplate.convertAndSend(INFO_ACCOUNT, nodeUser);
-	}
+    @Override
+    public void stopTrade(NodeUser nodeUser) {
+        NodeUserDto nodeUserDto = new NodeUserDto(nodeUser.getId(), nodeUser.getChatId(), nodeUser.getUsername());
+        rabbitTemplate.convertAndSend(TRADE_STOP, nodeUserDto);
+    }
 
-	@Override
-	public void cancelTread(NodeUser nodeUser) {
-		rabbitTemplate.convertAndSend(TRADE_CANCEL_ORDER, nodeUser);
-	}
+    @Override
+    public void infoAccount(NodeUser nodeUser) {
+        NodeUserDto nodeUserDto = new NodeUserDto(nodeUser.getId(), nodeUser.getChatId(), nodeUser.getUsername());
+        rabbitTemplate.convertAndSend(INFO_ACCOUNT, nodeUserDto);
+    }
+
+    @Override
+    public void cancelTread(NodeUser nodeUser) {
+        NodeUserDto nodeUserDto = new NodeUserDto(nodeUser.getId(), nodeUser.getChatId(), nodeUser.getUsername());
+        rabbitTemplate.convertAndSend(TRADE_CANCEL_ORDER, nodeUserDto);
+    }
 }

@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
 import jakarta.transaction.Transactional;
+import org.example.dto.NodeUserDto;
 import org.example.factory.ChangeFactory;
 import org.example.service.CreateStrategy;
 import org.example.service.MainServiceTradeBot;
@@ -14,10 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import org.example.entity.NodeUser;
 import org.example.entity.enams.state.TradeState;
 
+import org.example.dao.NodeUserDAO;
+
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,6 +46,7 @@ import org.springframework.stereotype.Service;
 public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     private final ProcessServiceCommand processServiceCommand;
     private final CreateStrategy createStrategy;
+    private final NodeUserDAO nodeUserDAO;
     private final Map<Long, Strategy> strategyMap = new HashMap<>();
 
 
@@ -50,13 +56,16 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
      * Метод создает необходимые объекты для взаимодействия с биржей и стратегией
      * для выполнения торговых операций. В случае возникновения ошибок отправляет пользовательские и логгируемые уведомления.
      *
-     * @param nodeUser объект пользователя, для которого запускается трейдинг
+     * @param nodeUserDto объект пользователя, для которого запускается трейдинг
      * @throws ExchangeException если ошибка связана с некорректными данными биржи
      */
     @Override
+    @Async
     @Transactional
-    public void startTrade(NodeUser nodeUser){
+    public void startTrade(NodeUserDto nodeUserDto) {
+        NodeUser nodeUser = nodeUserDAO.findById(nodeUserDto.getId()).orElseThrow();
         try {
+
             if (strategyMap.get(nodeUser.getId()) != null) {
                 processServiceCommand.sendAnswer("Трейдинг уже запущен", nodeUser.getChatId());
                 return;
@@ -66,7 +75,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             BasicChangeInterface change = ChangeFactory.createChange(nodeUser);
             if (change == null) {
                 processServiceCommand.sendAnswer("Биржа не найденна: %s, трейденг не запущен".
-                                formatted(nodeUser.getChangeType()), nodeUser.getChatId());
+                        formatted(nodeUser.getChangeType()), nodeUser.getChatId());
                 return;
             }
             log.info("Нашел биржу - {}", change.getClass());
@@ -80,10 +89,16 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             log.info("Создал стратегию  - {}", strategy.getClass());
 
             strategyMap.put(nodeUser.getId(), strategy);
-            Start start = new Start(strategy, nodeUser);
-            log.info("Создал клас для многопоточки  - {}", start.getClass());
-            Thread thread = new Thread(start);
-            thread.start();
+
+            CompletableFuture.runAsync(() -> {
+                log.info("Запустил метод strategy.tradeStart(nodeUser) в асинхронной задаче - {}", this.getClass());
+                processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
+                strategy.tradeStart(nodeUser);
+            }).exceptionally(ex -> {
+                log.error("Ошибка при выполнении tradeStart: ", ex);
+                return null;
+            });
+
             log.info("Завершил метод, отдал RebittMq ответ");
 
         } catch (ExchangeException e) {
@@ -102,7 +117,8 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     }
 
     @Override
-    public void infoAccount(NodeUser nodeUser) {
+    public void infoAccount(NodeUserDto nodeUserDto) {
+        NodeUser nodeUser = nodeUserDAO.findById(nodeUserDto.getId()).orElseThrow();
         try {
             BasicChangeInterface change = ChangeFactory.createChange(nodeUser);
             if (change == null) {
@@ -111,15 +127,15 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             }
             processServiceCommand.sendAnswer(change.accountInfo(), nodeUser.getChatId());
         } catch (ExchangeException e) {
-            handleTradeException(nodeUser,e,"Проверте правелность введных данных, api public key, api secret key");
+            handleTradeException(nodeUser, e, "Проверте правелность введных данных, api public key, api secret key");
         } catch (Exception e) {
-            handleTradeException(nodeUser,e,"Получили неожиданную ошибку");
+            handleTradeException(nodeUser, e, "Получили неожиданную ошибку");
         }
     }
 
     @Transactional
     @Override
-    public void cancelOrder(NodeUser nodeUser) {
+    public void cancelOrder(NodeUserDto nodeUser) {
         Strategy strategy = strategyMap.get(nodeUser.getId());
         if (checkStrategy(strategy, nodeUser)) {
             strategy.tradeCancel();
@@ -129,33 +145,19 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     }
 
     @Override
-    public void stopTrade(NodeUser nodeUser) {
+    public void stopTrade(NodeUserDto nodeUser) {
         Strategy strategy = strategyMap.get(nodeUser.getId());
         if (checkStrategy(strategy, nodeUser)) {
             strategy.tradeStop();
         }
     }
-    private boolean checkStrategy(Strategy strategy, NodeUser nodeUser){
-        if (strategy == null){
+
+    private boolean checkStrategy(Strategy strategy, NodeUserDto nodeUser) {
+        if (strategy == null) {
             processServiceCommand.sendAnswer("Стратегия не была запущенна", nodeUser.getChatId());
             return false;
         } else {
             return true;
-        }
-    }
-     class Start implements Runnable{
-        Strategy strategy;
-        NodeUser nodeUser;
-        public Start(Strategy strategy, NodeUser nodeUser) {
-            this.strategy = strategy;
-            this.nodeUser = nodeUser;
-        }
-
-        @Override
-        public void run() {
-            log.info("Запустил метдод strategy.tradeStart(nodeUser) в отдельном потоке  - {}", this.getClass());
-            processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
-            strategy.tradeStart(nodeUser);
         }
     }
 

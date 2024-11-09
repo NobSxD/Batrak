@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.entity.NodeUser;
+import org.example.dto.NodeUserDto;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
@@ -12,14 +12,14 @@ import static org.example.model.RabbitQueue.TRADE_STOP;
 public interface MainServiceTradeBot {
 	
 	@RabbitListener(queues =  TRADE_MESSAGE)
-	void startTrade(NodeUser nodeUser);
+	void startTrade(NodeUserDto nodeUser);
 	
 	@RabbitListener(queues = TRADE_CANCEL_ORDER)
-	void cancelOrder(NodeUser nodeUser);
+	void cancelOrder(NodeUserDto nodeUser);
 
 	@RabbitListener(queues = INFO_ACCOUNT)
-	void infoAccount(NodeUser nodeUser);
+	void infoAccount(NodeUserDto nodeUser);
 
 	@RabbitListener(queues = TRADE_STOP)
-	void stopTrade(NodeUser nodeUser);
+	void stopTrade(NodeUserDto nodeUser);
 }

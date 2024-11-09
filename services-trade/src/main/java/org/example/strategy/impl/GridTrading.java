@@ -18,7 +18,6 @@ import org.knowm.xchange.exceptions.FundsExceededException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 
@@ -96,11 +95,12 @@ public class GridTrading extends StrategyBasic {
                     tradeStatusManager.sellLast();
                     marketTradeDetails.setLastPrice(null);
                     marketTradeDetails.setEndPrice(null);
-                    log.info("Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю, \n"
-                                    + "tradeStatusManager: {} \n"
-                                    + "lastPrice : {} \n"
-                                    + "endPrice: {}\n"
-                                    + "buyLevels : {}",
+                    log.info("""
+                                    Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю,
+                                    tradeStatusManager: {}
+                                    lastPrice : {}
+                                    endPrice: {}
+                                    buyLevels : {}""",
                             tradeStatusManager.getCurrentTradeState(), marketTradeDetails.getLastPrice(),
                             marketTradeDetails.getEndPrice(), marketTradeDetails.getBuyLevels());
                     Thread.sleep(40000);
@@ -114,7 +114,6 @@ public class GridTrading extends StrategyBasic {
             log.error("Ошибка в торговом цикле: ", e);
         } finally {
             cleanUp();
-            tradeStatusManager.clearUp();
         }
     }
 
@@ -127,11 +126,9 @@ public class GridTrading extends StrategyBasic {
                 .subscribe(rate -> {
                     NodeOrder nodeOrder = processPrice(rate, nodeUser);
                     if (nodeOrder != null) {
-                        if (nodeUser.getOrders() == null) {
-                            nodeUser.setOrders(new ArrayList<>());
-                        }
-                        nodeUser.getOrders().add(nodeOrder);
+
                         finalizeOrder(nodeOrder);
+                        nodeDAO.nodeOrdersDAO().save(nodeOrder);
                         nodeDAO.nodeUserDAO().save(nodeUser);
                     }
                 }, error -> {
@@ -140,6 +137,7 @@ public class GridTrading extends StrategyBasic {
     }
 
 
+    @Transactional
     public NodeOrder processPrice(BigDecimal currentPrice, NodeUser nodeUser) {
         NodeOrder nodeOrder = null;
         if (tradeStatusManager.getCurrentTradeState().equals(TradeState.TRADE_START)) {
@@ -259,7 +257,10 @@ public class GridTrading extends StrategyBasic {
             log.error("Торговый поток был прерван:", e);
         }
     }
+
     private void cleanUp() {
+        tradeStatusManager.clearUp();
+        tradeStatusManager = null;
         nodeDAO = null;
         marketTradeDetails = null;
         basicChange = null;

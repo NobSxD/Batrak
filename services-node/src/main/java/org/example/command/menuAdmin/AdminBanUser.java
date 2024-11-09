@@ -35,7 +35,7 @@ public class AdminBanUser implements Command, RoleProvider {
             return "Активных пользователей не найденно";
         }
         List<NodeUserDto> nodeUserDto = byIsActiveFalse.stream()
-                .map(user -> new NodeUserDto(user.getUsername()))
+                .map(user -> new NodeUserDto(user.getId(), user.getChatId(), user.getUsername()))
                 .toList();
         producerTelegramService.menuBan(nodeUserDto, "Выберете пользователя что бы его заблокировать", nodeUser.getChatId());
         nodeUser.setState(UserState.BAN);

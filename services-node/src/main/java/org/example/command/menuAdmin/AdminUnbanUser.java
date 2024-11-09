@@ -27,14 +27,15 @@ public class AdminUnbanUser implements Command, RoleProvider {
     private final NodeUserDAO nodeUserDAO;
     private final ProducerTelegramService producerTelegramService;
     private final ProcessServiceCommand processServiceCommand;
+
     @Override
     public String send(NodeUser nodeUser, String nameAccount) {
         List<NodeUser> byIsActiveTrue = nodeUserDAO.findByIsActiveTrue();
-        if (byIsActiveTrue.isEmpty()){
+        if (byIsActiveTrue.isEmpty()) {
             return "Заблокированных пользователей не найденно";
         }
         List<NodeUserDto> nodeUserDto = byIsActiveTrue.stream()
-                .map(user -> new NodeUserDto(user.getUsername()))
+                .map(user -> new NodeUserDto(user.getId(), user.getChatId(), user.getUsername()))
                 .toList();
         producerTelegramService.menuBan(nodeUserDto, "Выберете пользователя что бы его разблакировать", nodeUser.getChatId());
         nodeUser.setState(UserState.U_BAN);
@@ -52,16 +53,16 @@ public class AdminUnbanUser implements Command, RoleProvider {
     }
 
     @Component
-    class UBanUser implements Command, RoleProvider{
+    class UBanUser implements Command, RoleProvider {
 
         @Override
         public String send(NodeUser nodeUser, String text) {
             Optional<NodeUser> byUsername = nodeUserDAO.findByUsername(text);
-            if (byUsername.isEmpty()){
+            if (byUsername.isEmpty()) {
                 return "Пользователь для разблокировки не найден";
             }
             NodeUser user = byUsername.get();
-            if (nodeUser.getId().equals(user.getId())){
+            if (nodeUser.getId().equals(user.getId())) {
                 return "Вы не можете разблокировки сам себя";
             }
             user.setIsActive(false);

@@ -2,18 +2,34 @@ package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.example.entity.collect.ChangeType;
 import org.example.entity.enams.Role;
 import org.example.entity.enams.state.TradeState;
 import org.example.entity.enams.state.UserState;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -47,9 +63,9 @@ public class NodeUser {
     @JsonManagedReference
     protected Account account;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "nodeUser")
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy = "nodeUser")
     @JsonManagedReference
-    private List<NodeOrder> orders;
+    private List<NodeOrder> orders = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, mappedBy = "nodeUser")
     @JsonManagedReference
