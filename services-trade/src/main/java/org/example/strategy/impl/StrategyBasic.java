@@ -2,6 +2,7 @@ package org.example.strategy.impl;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import jakarta.transaction.Transactional;
+import org.example.dto.NodeDAO;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.Strategy;
 import org.example.strategy.impl.helper.AssistantMessage;
@@ -41,16 +42,14 @@ public abstract class StrategyBasic implements Strategy {
     /**
      * Статус трейдинга
      */
-    protected final TradeStatusManager tradeStatusManager;
+    protected TradeStatusManager tradeStatusManager;
 
-    protected final NodeOrdersDAO nodeOrdersDAO;
-    protected final NodeUserDAO nodeUserDAO;
     protected Disposable disposable;
+    protected NodeDAO nodeDAO;
 
     protected StrategyBasic(TradeStatusManager tradeStatusManager, NodeOrdersDAO nodeOrdersDAO, NodeUserDAO nodeUserDAO) {
+        nodeDAO = new NodeDAO(nodeOrdersDAO, nodeUserDAO);
         this.tradeStatusManager = tradeStatusManager;
-        this.nodeOrdersDAO = nodeOrdersDAO;
-        this.nodeUserDAO = nodeUserDAO;
     }
 
     @Override
@@ -70,7 +69,7 @@ public abstract class StrategyBasic implements Strategy {
     public abstract NodeOrder process(Order.OrderType orderType, NodeUser nodeUser);
 
     public void resultTrade(NodeUser nodeUser ){
-        List<NodeOrder> nodeOrders = nodeOrdersDAO.findAllOrdersFromTimestampAndNodeUser( //TODO выбрать только исполненые ордера, учитовать минуты при старте
+        List<NodeOrder> nodeOrders = nodeDAO.nodeOrdersDAO().findAllOrdersFromTimestampAndNodeUser( //TODO выбрать только исполненые ордера, учитовать минуты при старте
                 nodeUser.getLastStartTread(), nodeUser);
         producerServiceExchange.sendAnswer(
                 AssistantMessage.messageResult(

@@ -2,6 +2,7 @@ package org.example.strategy.impl;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import jakarta.transaction.Transactional;
+import org.example.dto.MarketTradeDetails;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.impl.helper.TradeStatusManager;
 import org.example.websocet.WebSocketChange;
@@ -13,15 +14,12 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.exceptions.FundsExceededException;
-import org.knowm.xchange.instrument.Instrument;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 import org.example.entity.NodeOrder;
@@ -45,29 +43,23 @@ import org.example.dao.NodeUserDAO;
  */
 @Slf4j
 public class GridTrading extends StrategyBasic {
-    public final Set<BigDecimal> buyLevels = new HashSet<>();
-    private final Instrument instrument;
-    private final BigDecimal coinAmount;
-    private final double stepSell;
-    private final double stepBay;
-    private final int scale;
-    BigDecimal endPrice;
-    BigDecimal nextBay;
-    BigDecimal nexSell;
-    BigDecimal lastPrice;
+
+    private MarketTradeDetails marketTradeDetails;
 
     public GridTrading(NodeUser nodeUser, BasicChangeInterface basicChange, NodeUserDAO nodeUserDAO,
                        WebSocketCommand webSocketCommand, ProcessServiceCommand producerServiceExchange,
                        NodeOrdersDAO nodeOrdersDAO) {
         super(new TradeStatusManager(), nodeOrdersDAO, nodeUserDAO);
+        marketTradeDetails = new MarketTradeDetails(
+                new CurrencyPair(nodeUser.getConfigTrade().getNamePair()),
+                nodeUser.getConfigTrade().getAmountOrder(),
+                nodeUser.getConfigTrade().getStepSellD(),
+                nodeUser.getConfigTrade().getStepBayD(),
+                nodeUser.getConfigTrade().getScale()
+        );
         this.basicChange = basicChange;
         this.webSocketCommand = webSocketCommand;
         this.producerServiceExchange = producerServiceExchange;
-        this.instrument = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
-        this.coinAmount = nodeUser.getConfigTrade().getAmountOrder();
-        this.scale = nodeUser.getConfigTrade().getScale();
-        this.stepBay = nodeUser.getConfigTrade().getStepBayD();
-        this.stepSell = nodeUser.getConfigTrade().getStepSellD();
         tradeStatusManager.startTrading();
         tradeStatusManager.newCountDownLatch(1);
     }
@@ -100,16 +92,17 @@ public class GridTrading extends StrategyBasic {
                 }
                 // Подождите 40 секунд перед следующим циклом
                 try {
-                    log.info("Достигнута конечная цена, завершаем торговый цикл. : {}", lastPrice);
+                    log.info("Достигнута конечная цена, завершаем торговый цикл. : {}", marketTradeDetails.getLastPrice());
                     tradeStatusManager.sellLast();
-                    lastPrice = null;
-                    endPrice = null;
+                    marketTradeDetails.setLastPrice(null);
+                    marketTradeDetails.setEndPrice(null);
                     log.info("Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю, \n"
                                     + "tradeStatusManager: {} \n"
                                     + "lastPrice : {} \n"
                                     + "endPrice: {}\n"
                                     + "buyLevels : {}",
-                            tradeStatusManager.getCurrentTradeState(), lastPrice, endPrice, buyLevels);
+                            tradeStatusManager.getCurrentTradeState(), marketTradeDetails.getLastPrice(),
+                            marketTradeDetails.getEndPrice(), marketTradeDetails.getBuyLevels());
                     Thread.sleep(40000);
                 } catch (InterruptedException e) {
                     log.error("Поток был прерван: ", e);
@@ -129,7 +122,7 @@ public class GridTrading extends StrategyBasic {
     @Transactional
     public void startTradingCycle(NodeUser nodeUser) {
         WebSocketChange webSocketChange = webSocketCommand.webSocketChange(nodeUser);
-        disposable = webSocketChange.exchangePair(instrument)
+        disposable = webSocketChange.exchangePair(marketTradeDetails.getInstrument())
                 .observeOn(Schedulers.io())
                 .subscribe(rate -> {
                     NodeOrder nodeOrder = processPrice(rate, nodeUser);
@@ -139,7 +132,7 @@ public class GridTrading extends StrategyBasic {
                         }
                         nodeUser.getOrders().add(nodeOrder);
                         finalizeOrder(nodeOrder);
-                        nodeUserDAO.save(nodeUser);
+                        nodeDAO.nodeUserDAO().save(nodeUser);
                     }
                 }, error -> {
                     log.error("Error occurred: {}", error.getMessage());
@@ -151,25 +144,26 @@ public class GridTrading extends StrategyBasic {
         NodeOrder nodeOrder = null;
         if (tradeStatusManager.getCurrentTradeState().equals(TradeState.TRADE_START)) {
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
-            endPrice = FinancialCalculator.increaseByPercentage(currentPrice, stepSell);
-            nextBay = FinancialCalculator.subtractPercentage(currentPrice, stepBay);
-            nexSell = FinancialCalculator.addPercentage(lastPrice, stepSell);
+            marketTradeDetails.setEndPrice(FinancialCalculator.increaseByPercentage(currentPrice, marketTradeDetails.getStepSell()));
+            marketTradeDetails.setNextBay(FinancialCalculator.subtractPercentage(currentPrice, marketTradeDetails.getStepBay()));
+            marketTradeDetails.setNexSell(FinancialCalculator.addPercentage(marketTradeDetails.getLastPrice(), marketTradeDetails.getStepSell()));
             tradeStatusManager.runTrading();
             log.info("1.FIRST_BAY: bayPrice {}, endPrice: {}, nextBay: {}, nextSell: {}, nodeOrderPrice: {} ",
-                    currentPrice, endPrice, nextBay, nexSell, nodeOrder.getLimitPrice());
+                    currentPrice, marketTradeDetails.getEndPrice(), marketTradeDetails.getNextBay(),
+                    marketTradeDetails.getNexSell(), nodeOrder.getLimitPrice());
         }
         if (shouldBuy(currentPrice)) {
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
-            nextBay = FinancialCalculator.subtractPercentage(currentPrice, stepBay);
-            nexSell = FinancialCalculator.addPercentage(lastPrice, stepSell);
+            marketTradeDetails.setNextBay(FinancialCalculator.subtractPercentage(currentPrice, marketTradeDetails.getStepBay()));
+            marketTradeDetails.setNexSell(FinancialCalculator.addPercentage(marketTradeDetails.getLastPrice(), marketTradeDetails.getStepSell()));
             log.info("2.BAY: bayPrice: {}, nextBay: {}, nextSell: {}, nodeOrderPrice: {} ",
-                    currentPrice, nextBay, nexSell, nodeOrder.getLimitPrice());
+                    currentPrice, marketTradeDetails.getNextBay(), marketTradeDetails.getNexSell(), nodeOrder.getLimitPrice());
         } else if (shouldSell(currentPrice)) {
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
-            nextBay = FinancialCalculator.subtractPercentage(currentPrice, stepBay);
-            nexSell = FinancialCalculator.addPercentage(lastPrice, stepSell);
+            marketTradeDetails.setNextBay(FinancialCalculator.subtractPercentage(currentPrice, marketTradeDetails.getStepBay()));
+            marketTradeDetails.setNexSell(FinancialCalculator.addPercentage(marketTradeDetails.getLastPrice(), marketTradeDetails.getStepSell()));
             log.info("3.SELL: sellPrice {} nextBay: {}, nextSell: {}, nodeOrderPrice: {} ",
-                    currentPrice, nextBay, nexSell, nodeOrder.getLimitPrice());
+                    currentPrice, marketTradeDetails.getNextBay(), marketTradeDetails.getNexSell(), nodeOrder.getLimitPrice());
         } else if (shouldLastSell(currentPrice)) {
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
             tradeStatusManager.getCountDownLatch().countDown();
@@ -179,60 +173,61 @@ public class GridTrading extends StrategyBasic {
     }
 
     public boolean shouldBuy(BigDecimal currentPrice) {
-        boolean canBuy = currentPrice.compareTo(nextBay) <= 0;
-        boolean contains = !buyLevels.contains(currentPrice);
+        boolean canBuy = currentPrice.compareTo(marketTradeDetails.getNextBay()) <= 0;
+        boolean contains = !marketTradeDetails.getBuyLevels().contains(currentPrice);
         if (canBuy && contains) {
             log.info("shouldSell: currentPrice - nextBay = {} <= {}, buyLevels = {}, lastPrice = {} ",
-                    currentPrice, nextBay, buyLevels, lastPrice);
+                    currentPrice, marketTradeDetails.getNextBay(), marketTradeDetails.getBuyLevels(), marketTradeDetails.getLastPrice());
         }
         return canBuy && contains;
     }
 
     public boolean shouldSell(BigDecimal currentPrice) {
-        boolean canSell = currentPrice.compareTo(nexSell) >= 0;
-        boolean contains = buyLevels.contains(lastPrice);
+        boolean canSell = currentPrice.compareTo(marketTradeDetails.getNexSell()) >= 0;
+        boolean contains = !marketTradeDetails.getBuyLevels().contains(marketTradeDetails.getLastPrice());
         if (canSell && contains) {
             log.info("shouldSell: currentPrice - nexSell = {} >= {}, buyLevels = {}, lastPrice = {} ",
-                    currentPrice, nexSell, buyLevels, lastPrice);
+                    currentPrice, marketTradeDetails.getNexSell(), marketTradeDetails.getBuyLevels(), marketTradeDetails.getLastPrice());
         }
         return canSell && contains;
     }
 
     public boolean shouldLastSell(BigDecimal currentPrice) {
-        boolean canSell = endPrice.compareTo(currentPrice) <= 0;
-        boolean contains = buyLevels.contains(lastPrice);
+        boolean canSell = marketTradeDetails.getEndPrice().compareTo(currentPrice) <= 0;
+        boolean contains = marketTradeDetails.getBuyLevels().contains(marketTradeDetails.getLastPrice());
         if (canSell && contains) {
-            log.info("SELL LAST:  endPrice - currentPrice = {} <= {}, buyLevels = {} ", endPrice, currentPrice, buyLevels);
+            log.info("SELL LAST:  endPrice - currentPrice = {} <= {}, buyLevels = {} ", marketTradeDetails.getEndPrice(),
+                    currentPrice, marketTradeDetails.getBuyLevels());
         }
         return canSell && contains;
     }
 
     public NodeOrder executeBuyOrder(BigDecimal price, NodeUser nodeUser) {
-        lastPrice = price;
-        buyLevels.add(price);
+        marketTradeDetails.setLastPrice(price);
+        marketTradeDetails.getBuyLevels().add(price);
         return process(Order.OrderType.BID, nodeUser);
     }
 
     public NodeOrder executeSellOrder(BigDecimal price, NodeUser nodeUser) {
-        buyLevels.remove(lastPrice);
-        lastPrice = price;
+        marketTradeDetails.getBuyLevels().remove(marketTradeDetails.getLastPrice());
+        marketTradeDetails.setLastPrice(price);
         return process(Order.OrderType.ASK, nodeUser);
     }
 
     public NodeOrder process(Order.OrderType orderType, NodeUser nodeUser) {
         try {
-            BigDecimal amount = coinAmount;
+            BigDecimal amount = marketTradeDetails.getCoinAmount();
             if (orderType.equals(Order.OrderType.ASK)) {
-                amount = FinancialCalculator.increaseByPercentage(coinAmount, stepSell);
+                amount = FinancialCalculator.increaseByPercentage(marketTradeDetails.getCoinAmount(), marketTradeDetails.getStepSell());
             }
-            BigDecimal cryptoQty = CurrencyConverter.convertCurrency(lastPrice, amount, scale);
+            BigDecimal cryptoQty = CurrencyConverter.convertCurrency(marketTradeDetails.getLastPrice(), amount, marketTradeDetails.getScale());
 
-            MarketOrder marketOrder = basicChange.createMarketOrder(orderType, cryptoQty, instrument);
+            MarketOrder marketOrder = basicChange.createMarketOrder(orderType, cryptoQty, marketTradeDetails.getInstrument());
 
             String idOrder = basicChange.placeMarketOrder(marketOrder);
 
             return NodeOrder.builder()
-                    .limitPrice(lastPrice)
+                    .limitPrice(marketTradeDetails.getLastPrice())
                     .type(orderType.name())
                     .orderId(idOrder)
                     .orderState(OrderState.COMPLETED)
@@ -265,12 +260,15 @@ public class GridTrading extends StrategyBasic {
         }
     }
     private void cleanUp() {
-        lastPrice = null;
-        endPrice = null;
-        buyLevels.clear();
+        nodeDAO = null;
+        marketTradeDetails = null;
         basicChange = null;
         producerServiceExchange = null;
         webSocketCommand = null;
         disposable = null;
+    }
+
+    public MarketTradeDetails getMarketTradeDetails() {
+        return marketTradeDetails;
     }
 }

@@ -1,0 +1,93 @@
+package org.example.dto;
+
+import org.knowm.xchange.instrument.Instrument;
+
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+
+public class MarketTradeDetails {
+    private final Set<BigDecimal> buyLevels = new HashSet<>();
+    private final Instrument instrument;
+    private final BigDecimal coinAmount;
+    private final double stepSell;
+    private final double stepBay;
+    private final int scale;
+    private BigDecimal endPrice;
+    private BigDecimal nextBay;
+    private BigDecimal nexSell;
+    private BigDecimal lastPrice;
+    private String recentAction;
+
+    public MarketTradeDetails(Instrument instrument, BigDecimal coinAmount, double stepSell, double stepBay, int scale) {
+        this.instrument = instrument;
+        this.coinAmount = coinAmount;
+        this.stepSell = stepSell;
+        this.stepBay = stepBay;
+        this.scale = scale;
+    }
+
+    public Set<BigDecimal> getBuyLevels() {
+        return buyLevels;
+    }
+
+    public Instrument getInstrument() {
+        return instrument;
+    }
+
+    public BigDecimal getCoinAmount() {
+        return coinAmount;
+    }
+
+    public double getStepSell() {
+        return stepSell;
+    }
+
+    public double getStepBay() {
+        return stepBay;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public BigDecimal getEndPrice() {
+        return endPrice;
+    }
+
+    public void setEndPrice(BigDecimal endPrice) {
+        this.endPrice = endPrice;
+    }
+
+    public BigDecimal getNextBay() {
+        return nextBay;
+    }
+
+    public void setNextBay(BigDecimal nextBay) {
+        this.nextBay = nextBay;
+    }
+
+    public BigDecimal getNexSell() {
+        return nexSell;
+    }
+
+    public void setNexSell(BigDecimal nexSell) {
+        this.nexSell = nexSell;
+    }
+
+    public BigDecimal getLastPrice() {
+        return lastPrice;
+    }
+
+    public void setLastPrice(BigDecimal lastPrice) {
+        this.lastPrice = lastPrice;
+    }
+
+    public String getRecentAction() {
+        return recentAction;
+    }
+
+    public void setRecentAction(String recentAction) {
+        this.recentAction = recentAction;
+    }
+}

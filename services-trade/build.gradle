@@ -8,7 +8,7 @@ plugins {
     id 'org.springframework.boot' version libs.versions.org.springframework.boot.plagin
     id 'buildlogic.java-conventions'
 }
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << "-parameters"
 }
 
