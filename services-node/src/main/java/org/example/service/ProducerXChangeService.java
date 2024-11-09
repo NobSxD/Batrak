@@ -7,4 +7,5 @@ public interface ProducerXChangeService {
 	void stopTrade(NodeUser nodeUser);
 	void infoAccount(NodeUser nodeUser);
 	void cancelTread(NodeUser nodeUser);
+	void stateTrade(NodeUser nodeUser);
 }

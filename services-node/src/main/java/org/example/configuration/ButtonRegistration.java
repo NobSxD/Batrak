@@ -38,6 +38,7 @@ import static org.example.entity.enams.state.UserState.TRADE_CANCEL;
 import static org.example.entity.enams.state.UserState.TRADE_OPERATION;
 import static org.example.entity.enams.state.UserState.TRADE_SETTINGS;
 import static org.example.entity.enams.state.UserState.TRADE_START;
+import static org.example.entity.enams.state.UserState.TRADE_STATUS;
 import static org.example.entity.enams.state.UserState.TRADE_STOP;
 
 @Configuration
@@ -77,6 +78,7 @@ public class ButtonRegistration {
         state.put(ButtonLabelManager.tradeStart, TRADE_START);
         state.put(ButtonLabelManager.tradeStop, TRADE_STOP);
         state.put(ButtonLabelManager.tradeCancel, TRADE_CANCEL);
+        state.put(ButtonLabelManager.tradeStatus, TRADE_STATUS);
         state.put(ButtonLabelManager.main, BOT_MAIN_MENU);
 
         //выбор стратегии

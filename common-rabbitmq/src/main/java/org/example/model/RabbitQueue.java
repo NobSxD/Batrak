@@ -13,6 +13,7 @@ public class RabbitQueue {
     public static final String RATE = "rate";
     public static final String INFO_ACCOUNT = "info_account";
     public static final String TRADE_STOP = "trade_stop";
+    public static final String TRADE_STATE = "trade_state";
 
 
 }

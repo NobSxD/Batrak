@@ -65,35 +65,29 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     public void startTrade(NodeUserDto nodeUserDto) {
         NodeUser nodeUser = nodeUserDAO.findById(nodeUserDto.getId()).orElseThrow();
         try {
-
-            if (strategyMap.get(nodeUser.getId()) != null) {
+            Strategy strategy = strategyMap.get(nodeUser.getId());
+            if (checkStrategy(strategy, nodeUserDto)) {
                 processServiceCommand.sendAnswer("Трейдинг уже запущен", nodeUser.getChatId());
                 return;
             }
             log.info("Прошел проверку на незапущенность трейдинга");
 
             BasicChangeInterface change = ChangeFactory.createChange(nodeUser);
-            if (change == null) {
-                processServiceCommand.sendAnswer("Биржа не найденна: %s, трейденг не запущен".
-                        formatted(nodeUser.getChangeType()), nodeUser.getChatId());
-                return;
-            }
+            handleNPEException(change, "Биржа не найденна: %s, трейденг не запущен".
+                    formatted(nodeUser.getChangeType()), nodeUser.getChatId());
+
             log.info("Нашел биржу - {}", change.getClass());
-
-            Strategy strategy = createStrategy.createStrategy(nodeUser, change);
-
-            if (strategy == null) {
-                processServiceCommand.sendAnswer("Не удалось найти стратегию", nodeUser.getChatId());
-                return;
-            }
+            strategy = createStrategy.createStrategy(nodeUser, change);
+            handleNPEException(strategy, "Не удалось найти стратегию", nodeUser.getChatId());
             log.info("Создал стратегию  - {}", strategy.getClass());
 
             strategyMap.put(nodeUser.getId(), strategy);
 
+            Strategy finalStrategy = strategy;
             CompletableFuture.runAsync(() -> {
                 log.info("Запустил метод strategy.tradeStart(nodeUser) в асинхронной задаче - {}", this.getClass());
                 processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
-                strategy.tradeStart(nodeUser);
+                finalStrategy.tradeStart(nodeUser);
             }).exceptionally(ex -> {
                 log.error("Ошибка при выполнении tradeStart: ", ex);
                 return null;
@@ -114,6 +108,14 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         nodeUser.setStateTrade(TradeState.TRADE_BASIC);
         processServiceCommand.sendAnswer(userMessage, nodeUser.getChatId());
         log.error("Имя пользователя: {}. id: {}. Ошибка: {}.", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
+    }
+
+    private void handleNPEException(Object object, String text, long id) {
+        if (object == null) {
+            log.error(text);
+            processServiceCommand.sendAnswer(text, id);
+            throw new RuntimeException();
+        }
     }
 
     @Override
@@ -149,6 +151,29 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         Strategy strategy = strategyMap.get(nodeUser.getId());
         if (checkStrategy(strategy, nodeUser)) {
             strategy.tradeStop();
+        }
+    }
+
+    @Override
+    public void stateTrade(NodeUserDto nodeUser) {
+        Strategy strategy = strategyMap.get(nodeUser.getId());
+        if (checkStrategy(strategy, nodeUser)) {
+            String message = """
+                    Текущий статус: %s
+                    Текущий курс: $%s
+                    Прайс на след. покупку: $%s
+                    Прайс на след. продажу: $%s
+                    Прайс на конечную цену: $%s
+                    Последние действие бота: %s
+                    """.formatted(
+                            strategy.getTradeStatusManager().getCurrentTradeState(),
+                    strategy.currentPrice(),
+                    strategy.getMarketTradeDetails().getNextBay(),
+                    strategy.getMarketTradeDetails().getNexSell(),
+                    strategy.getMarketTradeDetails().getEndPrice(),
+                    strategy.getMarketTradeDetails().getRecentAction()
+            );
+            processServiceCommand.sendAnswer(message, nodeUser.getChatId());
         }
     }
 

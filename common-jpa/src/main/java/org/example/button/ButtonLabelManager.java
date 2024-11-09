@@ -28,6 +28,7 @@ public class ButtonLabelManager {
     public static String tradeStart = "Запуск трейдинга";
     public static String tradeStop = "Остановить трейдинг";
     public static String tradeCancel = "Отменить ордер";
+    public static String tradeStatus = "Статус трейдинга";
 
     //ButtonSetting
     public static final String namePair = "Выбор торговой пары";

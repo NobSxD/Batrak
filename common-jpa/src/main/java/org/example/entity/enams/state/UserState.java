@@ -37,6 +37,7 @@ public enum UserState {
 	TRADE_STOP,
 	TRADE_CANCEL,
 	TRADE_OPERATION,
+	TRADE_STATUS,
 
 	//---------------- Найстройка трейдинга
 	SETTINGS_NAME_PAIR,

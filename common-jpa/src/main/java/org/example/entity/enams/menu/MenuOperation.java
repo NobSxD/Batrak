@@ -6,6 +6,7 @@ public enum MenuOperation {
 	TradeStart(ButtonLabelManager.tradeStart),
 	TradeStop(ButtonLabelManager.tradeStop),
 	TradeCancel(ButtonLabelManager.tradeCancel),
+	TradeStatus(ButtonLabelManager.tradeStatus),
 	MainMenu(ButtonLabelManager.mainMenu);
 	
 	private final String value;

@@ -1,5 +1,6 @@
 package org.example.dto;
 
+import org.example.xchange.finance.CurrencyConverter;
 import org.knowm.xchange.instrument.Instrument;
 
 import java.math.BigDecimal;
@@ -52,7 +53,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getEndPrice() {
-        return endPrice;
+        return CurrencyConverter.validUsd(endPrice);
     }
 
     public void setEndPrice(BigDecimal endPrice) {
@@ -60,7 +61,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getNextBay() {
-        return nextBay;
+        return CurrencyConverter.validUsd(nextBay);
     }
 
     public void setNextBay(BigDecimal nextBay) {
@@ -68,7 +69,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getNexSell() {
-        return nexSell;
+        return CurrencyConverter.validUsd(nexSell);
     }
 
     public void setNexSell(BigDecimal nexSell) {
@@ -76,7 +77,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getLastPrice() {
-        return lastPrice;
+        return CurrencyConverter.validUsd(lastPrice);
     }
 
     public void setLastPrice(BigDecimal lastPrice) {

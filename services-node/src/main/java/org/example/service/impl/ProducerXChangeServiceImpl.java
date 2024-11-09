@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import static org.example.model.RabbitQueue.INFO_ACCOUNT;
 import static org.example.model.RabbitQueue.TRADE_CANCEL_ORDER;
 import static org.example.model.RabbitQueue.TRADE_MESSAGE;
+import static org.example.model.RabbitQueue.TRADE_STATE;
 import static org.example.model.RabbitQueue.TRADE_STOP;
 
 @Service
@@ -44,5 +45,11 @@ public class ProducerXChangeServiceImpl implements ProducerXChangeService {
     public void cancelTread(NodeUser nodeUser) {
         NodeUserDto nodeUserDto = new NodeUserDto(nodeUser.getId(), nodeUser.getChatId(), nodeUser.getUsername());
         rabbitTemplate.convertAndSend(TRADE_CANCEL_ORDER, nodeUserDto);
+    }
+
+    @Override
+    public void stateTrade(NodeUser nodeUser) {
+        NodeUserDto nodeUserDto = new NodeUserDto(nodeUser.getId(), nodeUser.getChatId(), nodeUser.getUsername());
+        rabbitTemplate.convertAndSend(TRADE_STATE, nodeUserDto);
     }
 }
