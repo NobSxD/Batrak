@@ -37,6 +37,10 @@ public class TradeStatusManager {
         setCurrentTradeState(TradeState.TRADE_START);
         log.info("Торговля начата.");
     }
+    public void pendingTrading(){
+        setCurrentTradeState(TradeState.TRADE_PENDING);
+        log.info("Депозид для долнейшей покупки исчерпан, ожидаем возвращение курса");
+    }
 
     public void cancelTrading() {
         setCurrentTradeState(TradeState.TRADE_CANCEL);

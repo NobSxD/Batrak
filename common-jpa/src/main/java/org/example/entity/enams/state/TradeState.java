@@ -6,6 +6,7 @@ public enum TradeState {
 	TRADE_STOP,
 	TRADE_BASIC,
 	TRADE_CANCEL,
+	TRADE_PENDING,
 	BUY,
 	SELL
 }

@@ -4,11 +4,8 @@ import org.example.xchange.finance.CurrencyConverter;
 import org.knowm.xchange.instrument.Instrument;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MarketTradeDetails {
-    private final Set<BigDecimal> buyLevels = new HashSet<>();
     private final Instrument instrument;
     private final BigDecimal coinAmount;
     private final double stepSell;
@@ -19,6 +16,8 @@ public class MarketTradeDetails {
     private BigDecimal nexSell;
     private BigDecimal lastPrice;
     private String recentAction;
+    private int countDeal;
+    private int maxCountDeal;
 
     public MarketTradeDetails(Instrument instrument, BigDecimal coinAmount, double stepSell, double stepBay, int scale) {
         this.instrument = instrument;
@@ -26,10 +25,6 @@ public class MarketTradeDetails {
         this.stepSell = stepSell;
         this.stepBay = stepBay;
         this.scale = scale;
-    }
-
-    public Set<BigDecimal> getBuyLevels() {
-        return buyLevels;
     }
 
     public Instrument getInstrument() {
@@ -90,5 +85,21 @@ public class MarketTradeDetails {
 
     public void setRecentAction(String recentAction) {
         this.recentAction = recentAction;
+    }
+
+    public int getCountDeal() {
+        return countDeal;
+    }
+
+    public void setCountDeal(int countDeal) {
+        this.countDeal = countDeal;
+    }
+
+    public int getMaxCountDeal() {
+        return maxCountDeal;
+    }
+
+    public void setMaxCountDeal(int deposit, int amount) {
+        this.maxCountDeal = deposit / amount;
     }
 }
