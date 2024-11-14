@@ -1,6 +1,7 @@
 package org.example.dto;
 
 import org.example.xchange.finance.CurrencyConverter;
+import org.example.xchange.finance.FinancialCalculator;
 import org.knowm.xchange.instrument.Instrument;
 
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public class MarketTradeDetails {
     private String recentAction;
     private int countDeal;
     private int maxCountDeal;
+    private BigDecimal sell;
 
     public MarketTradeDetails(Instrument instrument, BigDecimal coinAmount, double stepSell, double stepBay, int scale) {
         this.instrument = instrument;
@@ -101,5 +103,9 @@ public class MarketTradeDetails {
 
     public void setMaxCountDeal(int deposit, int amount) {
         this.maxCountDeal = deposit / amount;
+    }
+
+    public BigDecimal getSell() {
+        return FinancialCalculator.increaseByPercentage(coinAmount, stepSell);
     }
 }

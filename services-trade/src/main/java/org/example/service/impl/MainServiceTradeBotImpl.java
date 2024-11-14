@@ -63,13 +63,14 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     @Async
     @Transactional
     public void startTrade(NodeUserDto nodeUserDto) {
+
+        if (checkStrategy(nodeUserDto)) {
+            processServiceCommand.sendAnswer("Трейдинг уже запущен", nodeUserDto.getChatId());
+            return;
+        }
+
         NodeUser nodeUser = nodeUserDAO.findById(nodeUserDto.getId()).orElseThrow();
         try {
-            Strategy strategy = strategyMap.get(nodeUser.getId());
-            if (strategy != null) {
-                processServiceCommand.sendAnswer("Трейдинг уже запущен", nodeUser.getChatId());
-                return;
-            }
             log.info("Прошел проверку на незапущенность трейдинга");
 
             BasicChangeInterface change = ChangeFactory.createChange(nodeUser);
@@ -77,17 +78,16 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
                     formatted(nodeUser.getChangeType()), nodeUser.getChatId());
 
             log.info("Нашел биржу - {}", change.getClass());
-            strategy = createStrategy.createStrategy(nodeUser, change);
+            Strategy strategy = createStrategy.createStrategy(nodeUser, change);
             handleNPEException(strategy, "Не удалось найти стратегию", nodeUser.getChatId());
             log.info("Создал стратегию  - {}", strategy.getClass());
 
             strategyMap.put(nodeUser.getId(), strategy);
 
-            Strategy finalStrategy = strategy;
             CompletableFuture.runAsync(() -> {
                 log.info("Запустил метод strategy.tradeStart(nodeUser) в асинхронной задаче - {}", this.getClass());
                 processServiceCommand.sendAnswer("Трейдинг запущен", nodeUser.getChatId());
-                finalStrategy.tradeStart(nodeUser);
+                strategy.tradeStart(nodeUser);
             }).exceptionally(ex -> {
                 log.error("Ошибка при выполнении tradeStart: ", ex);
                 return null;
@@ -99,7 +99,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             handleTradeException(nodeUser, e, "Проверьте правильность введенных данных, " +
                     "API public key, API secret key, или добавьте разрешенный IP сервера");
         } catch (Exception e) {
-            handleTradeException(nodeUser, e, "К сожалению, произошла ошибка в процессе торговли. а");
+            handleTradeException(nodeUser, e, "К сожалению, произошла ошибка в процессе торговли.");
         }
     }
 
@@ -138,52 +138,96 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
     @Transactional
     @Override
     public void cancelOrder(NodeUserDto nodeUser) {
-        Strategy strategy = strategyMap.get(nodeUser.getId());
-        if (checkStrategy(strategy, nodeUser)) {
-            strategy.tradeCancel();
+        try {
+            Strategy strategy = strategyMap.get(nodeUser.getId());
+            if (checkStrategy(strategy, nodeUser)) {
+                strategy.tradeCancel();
+            }
+            log.info("Удаляем стратегию из мапы под id: {}, ", nodeUser.getId());
+            strategyMap.remove(nodeUser.getId());
+        } catch (Exception e) {
+            processServiceCommand.sendAnswer(e.getMessage(), nodeUser.getChatId());
+            log.error("Во время отмены трейдинга произошла ошибка, {}", e.getMessage());
         }
-        log.info("Удаляем стратегию из мапы под id: {}, ", nodeUser.getId());
-        strategyMap.remove(nodeUser.getId());
     }
 
     @Override
     public void stopTrade(NodeUserDto nodeUser) {
-        Strategy strategy = strategyMap.get(nodeUser.getId());
-        if (checkStrategy(strategy, nodeUser)) {
-            strategy.tradeStop();
+        try {
+            Strategy strategy = strategyMap.get(nodeUser.getId());
+            if (checkStrategy(strategy, nodeUser)) {
+                strategy.tradeStop();
+            }
+        } catch (Exception e) {
+            processServiceCommand.sendAnswer(e.getMessage(), nodeUser.getChatId());
+            log.error("Во время остановки трейдинга произошла ошибка, {}", e.getMessage());
         }
     }
 
     @Override
     public void stateTrade(NodeUserDto nodeUser) {
-        Strategy strategy = strategyMap.get(nodeUser.getId());
-        if (checkStrategy(strategy, nodeUser)) {
-            String message = """
-                    Текущий статус: %s
-                    Текущий курс: $%s
-                    Прайс на след. покупку: $%s
-                    Прайс на след. продажу: $%s
-                    Прайс на конечную цену: $%s
-                    Последние действие бота: %s
-                    """.formatted(
-                            strategy.getTradeStatusManager().getCurrentTradeState(),
-                    strategy.currentPrice(),
-                    strategy.getMarketTradeDetails().getNextBay(),
-                    strategy.getMarketTradeDetails().getNexSell(),
-                    strategy.getMarketTradeDetails().getEndPrice(),
-                    strategy.getMarketTradeDetails().getRecentAction()
-            );
-            processServiceCommand.sendAnswer(message, nodeUser.getChatId());
+        try {
+            Strategy strategy = strategyMap.get(nodeUser.getId());
+            if (checkStrategy(strategy, nodeUser)) {
+                String message = """
+                        Текущий статус: %s
+                        Текущий курс: $%s
+                        Прайс на след. покупку: $%s
+                        Прайс на след. продажу: $%s
+                        Прайс на конечную цену: $%s
+                        Последние действие бота: %s
+                        """.formatted(
+                        strategy.getTradeStatusManager().getCurrentTradeState(),
+                        strategy.currentPrice(),
+                        strategy.getMarketTradeDetails().getNextBay(),
+                        strategy.getMarketTradeDetails().getNexSell(),
+                        strategy.getMarketTradeDetails().getEndPrice(),
+                        strategy.getMarketTradeDetails().getRecentAction()
+                );
+                processServiceCommand.sendAnswer(message, nodeUser.getChatId());
+            }
+        } catch (Exception e) {
+            processServiceCommand.sendAnswer(e.getMessage(), nodeUser.getChatId());
+            log.error("Во время запроса состояния трейдинга произошла ошибка, {}", e.getMessage());
         }
     }
 
     private boolean checkStrategy(Strategy strategy, NodeUserDto nodeUser) {
+        long nodeId = nodeUser.getId();
         if (strategy == null) {
             processServiceCommand.sendAnswer("Стратегия не была запущенна", nodeUser.getChatId());
             return false;
-        } else {
+        }
+        TradeState currentTradeState = strategy.getTradeStatusManager().getCurrentTradeState();
+        if (TradeState.TRADE_STOP_OK.equals(currentTradeState)) {
+            strategyMap.remove(nodeId);
+            log.info("Стратегия для пользователя с ID {} была удалена.", nodeId);
+            processServiceCommand.sendAnswer("Торговля была завершина, для запроса состояния начните новую торговлю", nodeUser.getChatId());
+            return false;
+        }
+        else {
             return true;
         }
+    }
+
+    public boolean checkStrategy(NodeUserDto nodeUser) {
+        long nodeId = nodeUser.getId();
+        Strategy strategy = strategyMap.get(nodeId);
+
+        if (strategy == null) {
+            log.info("Стратегия для пользователя с ID {} не найдена.", nodeId);
+            return true;
+        }
+
+        TradeState currentTradeState = strategy.getTradeStatusManager().getCurrentTradeState();
+        if (TradeState.TRADE_STOP_OK.equals(currentTradeState)) {
+            strategyMap.remove(nodeId);
+            log.info("Стратегия для пользователя с ID {} была удалена.", nodeId);
+            processServiceCommand.sendAnswer("Торговля была завершина, для запроса состояния начните новую торговлю", nodeUser.getChatId());
+            return false;
+        }
+
+        return true;
     }
 
 }

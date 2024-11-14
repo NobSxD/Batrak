@@ -4,6 +4,8 @@ import org.example.xchange.BasicChange;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.dto.trade.MarketOrder;
 
+import java.math.BigDecimal;
+
 /**
  * **Класс NoChange предназначен для использования в виртуальной торговле.**
  * <p>
@@ -24,6 +26,16 @@ public class NoChange extends BasicChange {
     @Override
     public String placeMarketOrder(MarketOrder marketOrder) {
         return "";
+    }
+
+    @Override
+    public BigDecimal coinConvertBay(BigDecimal amount, BigDecimal price, int scale) {
+        return amount;
+    }
+
+    @Override
+    public BigDecimal coinConvertSel(BigDecimal amount, BigDecimal price, int scale) {
+        return amount;
     }
 
     /**

@@ -72,7 +72,8 @@ class BinanceMainImpIntegratio {
     void marketOrder(){
         BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
         Instrument instrument = new CurrencyPair("BTC-USDT");
-        MarketOrder marketOrder = binanceMain.createMarketOrder(Order.OrderType.BID, new BigDecimal("0.00017"), instrument);
+        MarketOrder marketOrder = binanceMain.createMarketOrder(Order.OrderType.BID, new BigDecimal("0.00017"),
+                new BigDecimal("70000"), 5, instrument);
         String order = binanceMain.placeMarketOrder(marketOrder);
         System.out.println(order);
     }

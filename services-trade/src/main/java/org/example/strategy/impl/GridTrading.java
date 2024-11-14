@@ -1,5 +1,6 @@
 package org.example.strategy.impl;
 
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import jakarta.transaction.Transactional;
 import org.example.dto.MarketTradeDetails;
@@ -74,7 +75,7 @@ public class GridTrading extends StrategyBasic {
 
     @Override
     @Transactional
-    public void tradeStart(NodeUser nodeUser) {
+    public synchronized void tradeStart(NodeUser nodeUser) {
         try {
             while (true) {
                 if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_STOP) {
@@ -89,15 +90,12 @@ public class GridTrading extends StrategyBasic {
 
                 if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_CANCEL) {
                     log.info("Поступила команда на отмену, поток разблокирован, торговля отменена");
-                    resultTrade(nodeUser);
                     break;
                 }
                 // Подождите 40 секунд перед следующим циклом
                 try {
-                    log.info("Достигнута конечная цена, завершаем торговый цикл. : {}", marketTradeDetails.getLastPrice());
                     tradeStatusManager.sellLast();
-                    marketTradeDetails.setLastPrice(null);
-                    marketTradeDetails.setEndPrice(null);
+                    log.info("Достигнута конечная цена, завершаем торговый цикл. : {}", marketTradeDetails.getLastPrice());
                     log.info("""
                                     Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю,
                                     tradeStatusManager: {}
@@ -105,6 +103,8 @@ public class GridTrading extends StrategyBasic {
                                     endPrice: {}""",
                             tradeStatusManager.getCurrentTradeState(), marketTradeDetails.getLastPrice(),
                             marketTradeDetails.getEndPrice());
+                    marketTradeDetails.setLastPrice(null);
+                    marketTradeDetails.setEndPrice(null);
                     Thread.sleep(40000);
                 } catch (InterruptedException e) {
                     log.error("Поток был прерван: ", e);
@@ -115,6 +115,8 @@ public class GridTrading extends StrategyBasic {
         } catch (Exception e) {
             log.error("Ошибка в торговом цикле: ", e);
         } finally {
+            tradeStatusManager.stopOK();
+            resultTrade(nodeUser);
             cleanUp();
         }
     }
@@ -129,12 +131,11 @@ public class GridTrading extends StrategyBasic {
     public void startTradingCycle(NodeUser nodeUser) {
         WebSocketChange webSocketChange = webSocketCommand.webSocketChange(nodeUser);
         disposable = webSocketChange.exchangePair(marketTradeDetails.getInstrument())
-                .observeOn(Schedulers.io())
+                .observeOn(Schedulers.single())
                 .subscribe(rate -> {
                     NodeOrder nodeOrder = processPrice(rate, nodeUser);
                     currentPrice = rate;
                     if (nodeOrder != null) {
-
                         finalizeOrder(nodeOrder);
                         nodeDAO.nodeOrdersDAO().save(nodeOrder);
                         nodeDAO.nodeUserDAO().save(nodeUser);
@@ -148,7 +149,7 @@ public class GridTrading extends StrategyBasic {
     @Transactional
     public NodeOrder processPrice(BigDecimal currentPrice, NodeUser nodeUser) {
         NodeOrder nodeOrder = null;
-        if (marketTradeDetails.getCountDeal() > marketTradeDetails.getMaxCountDeal()) {
+        if (marketTradeDetails.getCountDeal() >= marketTradeDetails.getMaxCountDeal()) {
             log.info("1.Превышен лимит:  максимальное количество сделок на покупку {}, уже сделанно ордеров на покупку {}",
                     marketTradeDetails.getMaxCountDeal(), marketTradeDetails.getCountDeal());
         } else if (tradeStatusManager.getCurrentTradeState().equals(TradeState.TRADE_START)) {
@@ -165,6 +166,7 @@ public class GridTrading extends StrategyBasic {
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
             marketTradeDetails.setRecentAction("LAST_SELL");
             tradeStatusManager.getCountDownLatch().countDown();
+            dispose(disposable);
             log.info("2.LAST_SELL: sellPrice: {}, nodeOrderPrice: {} ", currentPrice, nodeOrder.getLimitPrice());
         } else if (shouldBuy(currentPrice)) {
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
@@ -194,29 +196,34 @@ public class GridTrading extends StrategyBasic {
             log.info("shouldSell: currentPrice - nextBay = {} <= {}, lastPrice = {}, getCountDeal {}, getMaxCountDeal {}",
                     currentPrice, marketTradeDetails.getNextBay(), marketTradeDetails.getLastPrice(),
                     marketTradeDetails.getCountDeal(), marketTradeDetails.getMaxCountDeal());
+            return true;
         }
-        return canBuy && count;
+        return false;
     }
 
     public boolean shouldSell(BigDecimal currentPrice) {
-        boolean count = marketTradeDetails.getCountDeal() > 0;
+        boolean count = marketTradeDetails.getCountDeal() > 1;
         boolean canSell = currentPrice.compareTo(marketTradeDetails.getNexSell()) >= 0;
         if (canSell && count) {
+            tradeStatusManager.runTrading();
             log.info("shouldSell: currentPrice - nexSell = {} >= {}, lastPrice = {}, count {} ",
                     currentPrice, marketTradeDetails.getNexSell(), marketTradeDetails.getLastPrice()
                     , marketTradeDetails.getCountDeal());
+            return true;
         }
-        return canSell && count;
+        return false;
     }
 
     public boolean shouldLastSell(BigDecimal currentPrice) {
-        boolean count = marketTradeDetails.getCountDeal() == 0;
+        boolean count = marketTradeDetails.getCountDeal() == 1;
         boolean canSell = marketTradeDetails.getEndPrice().compareTo(currentPrice) <= 0;
         if (canSell && count) {
+            tradeStatusManager.runTrading();
             log.info("SELL LAST:  endPrice - currentPrice = {} <= {}, count {}  ", marketTradeDetails.getEndPrice(),
                     currentPrice, marketTradeDetails.getCountDeal());
+            return true;
         }
-        return canSell && count;
+        return false;
     }
 
     public NodeOrder executeBuyOrder(BigDecimal price, NodeUser nodeUser) {
@@ -235,11 +242,11 @@ public class GridTrading extends StrategyBasic {
         try {
             BigDecimal amount = marketTradeDetails.getCoinAmount();
             if (orderType.equals(Order.OrderType.ASK)) {
-                amount = FinancialCalculator.increaseByPercentage(marketTradeDetails.getCoinAmount(), marketTradeDetails.getStepSell());
+                amount = marketTradeDetails.getSell();
             }
-            BigDecimal cryptoQty = CurrencyConverter.convertCurrency(marketTradeDetails.getLastPrice(), amount, marketTradeDetails.getScale());
 
-            MarketOrder marketOrder = basicChange.createMarketOrder(orderType, cryptoQty, marketTradeDetails.getInstrument());
+            MarketOrder marketOrder = basicChange.createMarketOrder(orderType, amount, marketTradeDetails.getLastPrice(),
+                    marketTradeDetails.getScale(), marketTradeDetails.getInstrument());
 
             String idOrder = basicChange.placeMarketOrder(marketOrder);
 
@@ -248,7 +255,7 @@ public class GridTrading extends StrategyBasic {
                     .type(orderType.name())
                     .orderId(idOrder)
                     .orderState(OrderState.COMPLETED)
-                    .originalAmount(cryptoQty)
+                    .originalAmount(CurrencyConverter.convertCurrency(marketTradeDetails.getLastPrice(), amount, marketTradeDetails.getScale()))
                     .usd(amount)
                     .timestamp(new Date())
                     .instrument(nodeUser.getConfigTrade().getNamePair())
@@ -266,6 +273,11 @@ public class GridTrading extends StrategyBasic {
             handleGeneralException(nodeUser, e);
         }
         return null;
+    }
+    public void dispose(Disposable disposable){
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 
     public void awaitLatch(CountDownLatch latch) {

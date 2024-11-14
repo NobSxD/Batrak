@@ -1,31 +1,34 @@
 package org.example.strategy.impl;
 
-import org.exampel.crypto.CryptoUtils;
-import org.example.dao.NodeOrdersDAO;
-import org.example.dao.NodeUserDAO;
-import org.example.entity.ConfigTrade;
-import org.example.entity.NodeUser;
+import org.example.dto.MarketTradeDetails;
 import org.example.service.ProcessServiceCommand;
 import org.example.strategy.impl.helper.TradeStatusManager;
 import org.example.websocet.WebSocketCommand;
 import org.example.xchange.BasicChangeInterface;
-import org.example.xchange.DTO.ChangeUser;
-import org.example.xchange.change.Binance.BinanceMainImpl;
+import org.example.xchange.change.DemoChange.NoChange;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.knowm.xchange.dto.Order;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.example.entity.ConfigTrade;
+import org.example.entity.NodeOrder;
+import org.example.entity.NodeUser;
+
+import org.example.dao.NodeOrdersDAO;
+import org.example.dao.NodeUserDAO;
 
 import static org.example.entity.enams.state.UserState.BASIC_STATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-@Tag("integration")
+//@Tag("integration")
 class GridTradingTest {
     @Mock
     private TradeStatusManager tradeStatusManager;
@@ -42,15 +45,13 @@ class GridTradingTest {
     ProcessServiceCommand producerServiceExchange;
     @Mock
     NodeOrdersDAO nodeOrdersDAO;
-    private List<BigDecimal> buyLevels;
 
     private GridTrading tradingStrategy;
-    ChangeUser changeUser;
+    private MarketTradeDetails marketTradeDetails;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        buyLevels = new ArrayList<>();
         nodeUser = NodeUser.builder()
                 .chatId(1L)
                 .telegramUserId(2L)
@@ -62,16 +63,17 @@ class GridTradingTest {
                 .build();
         ConfigTrade configTrade = new ConfigTrade();
         configTrade.setNodeUser(nodeUser);
+        configTrade.setDeposit(new BigDecimal(300));
+        configTrade.setScale(5);
+        configTrade.setStepSell(1);
+        configTrade.setAmountOrder(new BigDecimal("11"));
+        configTrade.setStepBay(1);
         configTrade.setEnableDemoTrading(true);
         nodeUser.setConfigTrade(configTrade);
-        CryptoUtils cryptoUtils = new CryptoUtils();
-        changeUser = ChangeUser.builder()
-                .botName("Bot")
-                .apiKey(cryptoUtils.encryptMessage(System.getenv("pKey")))
-                .secretKey(cryptoUtils.encryptMessage(System.getenv("sKey")))
-                .build();
-        basicChange = new BinanceMainImpl(changeUser);
+
+        basicChange = new NoChange();
         tradingStrategy = new GridTrading(nodeUser, basicChange, nodeUserDAO, webSocketCommand, producerServiceExchange,nodeOrdersDAO);
+        marketTradeDetails = tradingStrategy.getMarketTradeDetails();
     }
 
     @Test
@@ -84,25 +86,26 @@ class GridTradingTest {
                 new BigDecimal("60030"), // чуть больше необходимой цены для продажи
                 new BigDecimal("60060"),
                 new BigDecimal("59703"),
-                new BigDecimal("60300")
+                new BigDecimal("60600")
         );
 
         // Списки для отслеживания сделок
         List<BigDecimal> buyPrices = new ArrayList<>();
         List<BigDecimal> sellPrices = new ArrayList<>();
-
+        marketTradeDetails.setLastPrice(new BigDecimal("60000"));
+        tradeStatusManager.startTrading();
         for (BigDecimal currentPrice : currentPrices) {
-            if (tradingStrategy.shouldBuy(currentPrice)) {
-                tradeStatusManager.buy();
-                tradingStrategy.executeBuyOrder(currentPrice, nodeUser);
-                buyPrices.add(currentPrice);
-                System.out.println("buy: " + currentPrice);
-            } else if (tradingStrategy.shouldSell(currentPrice)) {
-                tradeStatusManager.sell();
-                tradingStrategy.executeSellOrder(currentPrice, nodeUser);
-                sellPrices.add(currentPrice);
-                System.out.println("sell: " + currentPrice);
+            NodeOrder nodeOrder = tradingStrategy.processPrice(currentPrice, nodeUser);
+            if (nodeOrder != null) {
+                System.out.println("Прайс %s , тип %s".formatted(nodeOrder.getLimitPrice(), nodeOrder.getType()));
+
+                if (nodeOrder.getType().equals(Order.OrderType.BID.toString())) {
+                    buyPrices.add(nodeOrder.getLimitPrice().setScale(0, RoundingMode.HALF_UP));
+                } else{
+                    sellPrices.add(nodeOrder.getLimitPrice().setScale(0, RoundingMode.HALF_UP));
+                }
             }
+
         }
 
         // Ожидаемые покупные цены (снизилась не менее чем на 1%)
@@ -116,7 +119,7 @@ class GridTradingTest {
         // Ожидаемые цены продажи (выросла не менее чем на 0.5%)
         List<BigDecimal> expectedSellPrices = List.of(
                 new BigDecimal("60000"),
-                new BigDecimal("60300")
+                new BigDecimal("60600")
                 // другие цены выше или ниже на меньшее значение
         );
 

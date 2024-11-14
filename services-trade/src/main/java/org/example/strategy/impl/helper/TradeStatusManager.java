@@ -62,6 +62,10 @@ public class TradeStatusManager {
         log.info("Ордер на продажу успешно выполнен. \n" +
                 "Цикл завершился, делаю паузу и начинаю новый цикл торговли.");
     }
+    public void stopOK(){
+        setCurrentTradeState(TradeState.TRADE_STOP_OK);
+        log.info("Торговля завершилась по команде TRADE_STOP, при следующем обращение данная стратегия будет удалена.");
+    }
     public CountDownLatch getCountDownLatch() {
         return countDownLatch;
     }

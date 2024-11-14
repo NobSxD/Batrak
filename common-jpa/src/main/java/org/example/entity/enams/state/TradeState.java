@@ -8,5 +8,5 @@ public enum TradeState {
 	TRADE_CANCEL,
 	TRADE_PENDING,
 	BUY,
-	SELL
+	TRADE_STOP_OK, SELL
 }

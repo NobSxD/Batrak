@@ -12,4 +12,4 @@ currency:
       type: "bybit"
       pairs:
         - namePair: "BTC-USDT"
-          scale: 5
+          scale: 6
