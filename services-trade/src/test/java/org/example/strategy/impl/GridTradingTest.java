@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.example.entity.ConfigTrade;
 import org.example.entity.NodeOrder;
@@ -28,7 +29,6 @@ import static org.example.entity.enams.state.UserState.BASIC_STATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-//@Tag("integration")
 class GridTradingTest {
     @Mock
     private TradeStatusManager tradeStatusManager;
@@ -76,6 +76,31 @@ class GridTradingTest {
         marketTradeDetails = tradingStrategy.getMarketTradeDetails();
     }
 
+
+    private static List<BigDecimal> generateCurrentPrices(int count, BigDecimal initialPrice, BigDecimal minPrice, BigDecimal maxPrice) {
+        List<BigDecimal> prices = new ArrayList<>();
+        Random random = new Random();
+        BigDecimal currentPrice = initialPrice;
+
+        prices.add(currentPrice);
+
+        for (int i = 1; i < count; i++) {
+            // Генерируем случайное изменение в пределах от -2% до +2%
+            double change = -0.02 + (0.04 * random.nextDouble()); // Изменение от -2% до +2%
+            currentPrice = currentPrice.multiply(BigDecimal.ONE.add(BigDecimal.valueOf(change))).setScale(2, BigDecimal.ROUND_HALF_UP);
+
+            // Ограничиваем изменения диапазоном minPrice и maxPrice
+            if (currentPrice.compareTo(minPrice) < 0) {
+                currentPrice = minPrice;
+            } else if (currentPrice.compareTo(maxPrice) > 0) {
+                currentPrice = maxPrice;
+            }
+
+            prices.add(currentPrice);
+        }
+
+        return prices;
+    }
     @Test
     void testTradeStart() {
         List<BigDecimal> currentPrices = List.of(
@@ -89,7 +114,7 @@ class GridTradingTest {
                 new BigDecimal("60600")
         );
 
-        // Списки для отслеживания сделок
+                // Списки для отслеживания сделок
         List<BigDecimal> buyPrices = new ArrayList<>();
         List<BigDecimal> sellPrices = new ArrayList<>();
         marketTradeDetails.setLastPrice(new BigDecimal("60000"));
@@ -128,6 +153,32 @@ class GridTradingTest {
 
         // Проверка, что настоящие и ожидаемые списки продавцов одинаковы
         assertEquals(expectedSellPrices, sellPrices);
+    }
+
+    @Test
+    void testTradeStartRandom() {
+
+        List<BigDecimal> currentPrices = generateCurrentPrices(150, new BigDecimal("60000"), new BigDecimal("50000"), new BigDecimal("65000"));
+
+        // Списки для отслеживания сделок
+        List<BigDecimal> buyPrices = new ArrayList<>();
+        List<BigDecimal> sellPrices = new ArrayList<>();
+        marketTradeDetails.setLastPrice(new BigDecimal("60000"));
+        tradeStatusManager.startTrading();
+        for (BigDecimal currentPrice : currentPrices) {
+            NodeOrder nodeOrder = tradingStrategy.processPrice(currentPrice, nodeUser);
+            if (nodeOrder != null) {
+                System.out.println("Прайс %s , тип %s".formatted(nodeOrder.getLimitPrice(), nodeOrder.getType()));
+
+                if (nodeOrder.getType().equals(Order.OrderType.BID.toString())) {
+                    buyPrices.add(nodeOrder.getLimitPrice().setScale(0, RoundingMode.HALF_UP));
+                } else{
+                    sellPrices.add(nodeOrder.getLimitPrice().setScale(0, RoundingMode.HALF_UP));
+                }
+            }
+        }
+        System.out.println("buyPrices %s".formatted(buyPrices));
+        System.out.println("sellPrices %s".formatted(sellPrices));
     }
 
     @Test
