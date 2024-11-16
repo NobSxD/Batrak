@@ -22,7 +22,7 @@ public class ByBitMainImpl extends BasicChange {
 
 	@Override
 	public BigDecimal coinConvertBay(BigDecimal amount, BigDecimal price, int scale) {
-		return amount;
+		return CurrencyConverter.convertCurrency(price, amount, scale);
 	}
 
 	@Override

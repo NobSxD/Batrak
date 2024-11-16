@@ -88,6 +88,7 @@ public abstract class StrategyBasic implements Strategy {
         producerServiceExchange.sendAnswer("Не достаточно денег на балансе: " + e.getMessage(), nodeUser.getChatId());
         log.error("Insufficient funds error: {}", e.getMessage());
         tradeStatusManager.stopTrading();
+        tradeStatusManager.stopOK();
         throw new RuntimeException(e);
     }
 
@@ -95,18 +96,14 @@ public abstract class StrategyBasic implements Strategy {
         producerServiceExchange.sendAnswer("Ошибка: " + e.getMessage(), nodeUser.getChatId());
         log.error("General error: {}", e.getMessage());
         tradeStatusManager.stopTrading();
+        tradeStatusManager.stopOK();
         throw new RuntimeException(e);
     }
     protected void handleIllegalArgumentException(NodeUser nodeUser, IllegalArgumentException e){
         producerServiceExchange.sendAnswer("Неверный параметр: " + e.getMessage(), nodeUser.getChatId());
         log.error("Invalid argument for user: {}. Error: {}", nodeUser.getId(), e.getMessage());
         tradeStatusManager.stopTrading();
-        throw new RuntimeException(e);
-    }
-    protected void handleIllegalStateException(NodeUser nodeUser,IllegalStateException e){
-        producerServiceExchange.sendAnswer("Неверное состояние объекта: " + e.getMessage(), nodeUser.getChatId());
-        log.error("Illegal state for user: {}. Error: {}", nodeUser.getId(), e.getMessage());
-        tradeStatusManager.stopTrading();
+        tradeStatusManager.stopOK();
         throw new RuntimeException(e);
     }
 

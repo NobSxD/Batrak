@@ -20,8 +20,6 @@ import lombok.ToString;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
 
             logger.info(limitOrder.toString());
             return orderId;
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Ошибка: {}, лимит ордер: {}", e.getMessage(), limitOrder);
             throw new RuntimeException(e);
         }
@@ -64,7 +62,7 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
     }
 
 
-    public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType) {
+    public LimitOrder createOrder(Instrument currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType, int scale) {
         if (currencyPair == null) {
             throw new IllegalArgumentException("CurrencyPair cannot be null");
         }
@@ -74,7 +72,15 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
         if (orderType == null) {
             throw new IllegalArgumentException("OrderType cannot be null");
         }
-        return new LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
+        BigDecimal price = priceAndAmount.get(0);
+        BigDecimal coinAmount = priceAndAmount.get(1);
+        if (orderType.equals(Order.OrderType.BID)) {
+            coinAmount = coinConvertBay(coinAmount, price, scale);
+        }
+        if (orderType.equals(Order.OrderType.ASK)) {
+            coinAmount = coinConvertSel(coinAmount, price, scale);
+        }
+        return new LimitOrder(orderType, coinAmount, currencyPair, "", null, price);
     }
 
     public MarketOrder createMarketOrder(Order.OrderType orderType, BigDecimal coinAmount, BigDecimal price,
@@ -101,22 +107,6 @@ public abstract class BasicChange implements BasicChangeInterface, Serializable 
     public abstract BigDecimal coinConvertBay(BigDecimal amount, BigDecimal price, int scale);
 
     public abstract BigDecimal coinConvertSel(BigDecimal amount, BigDecimal price, int scale);
-
-    public List<LimitOrder> createOrders(Instrument currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders) {
-        List<LimitOrder> limitOrders = new ArrayList<>();
-        for (List<BigDecimal> ask : orders) {
-            checkArgument(
-                    ask.size() == 2, "Expected a pair (price, amount) but got {0} elements.", ask.size());
-            limitOrders.add(createOrder(currencyPair, ask, orderType));
-        }
-        return limitOrders;
-    }
-
-    public void checkArgument(boolean argument, String msgPattern, Object... msgArgs) {
-        if (!argument) {
-            throw new IllegalArgumentException(MessageFormat.format(msgPattern, msgArgs));
-        }
-    }
 
     public OrderBook orderBooksLimitOrders(Integer countLimitOrders, String pairName) {
         OrderBook orderBook = null;

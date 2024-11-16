@@ -1,17 +1,21 @@
 package org.example.command.menuBasic.tradeOperation;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.example.command.Command;
 import org.example.command.RoleProvider;
-import org.example.dao.NodeUserDAO;
+import org.example.service.ProducerXChangeService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import java.time.LocalDateTime;
+
 import org.example.entity.NodeUser;
 import org.example.entity.enams.Role;
 import org.example.entity.enams.state.UserState;
-import org.example.service.ProducerXChangeService;
-import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import org.example.dao.NodeUserDAO;
+
+import org.springframework.stereotype.Component;
 
 /**
  * Класс TradeStart реализует интерфейс Command и отвечает за запуск процесса трейдинга
@@ -40,6 +44,9 @@ public class TradeStart implements Command, RoleProvider {
     @Override
     public String send(NodeUser nodeUser, String text) {
         try {
+            if (nodeUser.getConfigTrade().getNamePair().equals("-")){
+                return "У вас не выбранна валютная пара. Для старта трейдинга выбирите валютную пару.";
+            }
             nodeUser = nodeUserDAO.findById(nodeUser.getId()).orElse(nodeUser);
             nodeUser.setLastStartTread(LocalDateTime.now());
             producerXChangeService.startTrade(nodeUser);
@@ -48,7 +55,7 @@ public class TradeStart implements Command, RoleProvider {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
-            return "во время старта трейдинга произошла ошибка, обратитесь к администратору системы.";
+            return "Во время старта трейдинга произошла ошибка, обратитесь к администратору системы.";
         }
     }
 

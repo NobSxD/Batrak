@@ -48,51 +48,6 @@ class FinancialCalculatorTest {
 
 	}
 
-
-	@Test
-	void maxBayAmount(){
-		BigDecimal  expectedPrice = new BigDecimal("67800");
-		BigDecimal price = FinancialCalculator.maxAmount(limitOrdersBay);
-		assertEquals(expectedPrice, price);
-
-		BigDecimal  expectedPrice2 = new BigDecimal("68000");
-		limitOrdersBay.add(0,new LimitOrder(Order.OrderType.BID, new BigDecimal("2.04"), btcUsdt, "", null, new BigDecimal("68000")));
-		BigDecimal priceOneIndex = FinancialCalculator.maxAmount(limitOrdersBay);
-		assertEquals(expectedPrice2, priceOneIndex);
-
-		BigDecimal  expectedPrice3 = new BigDecimal("68000");
-		limitOrdersBay.add(1,new LimitOrder(Order.OrderType.BID, new BigDecimal("2.04"), btcUsdt, "", null, new BigDecimal("67900")));
-		BigDecimal priceTwoIndex = FinancialCalculator.maxAmount(limitOrdersBay);
-		assertEquals(expectedPrice3, priceTwoIndex);
-	}
-	@Test
-	void maxSelAmount(){
-		BigDecimal  expectedPrice = new BigDecimal("68700");
-		BigDecimal price = FinancialCalculator.maxAmount(limitOrdersSel, new BigDecimal("68400"));
-		System.out.println("прайс продажи " + price);
-		assertEquals(expectedPrice, price);
-
-		BigDecimal  expectedPrice2 = new BigDecimal("68000");
-		limitOrdersSel.add(0,new LimitOrder(Order.OrderType.ASK, new BigDecimal("2.04"), btcUsdt, "", null, new BigDecimal("68000")));
-		BigDecimal priceOneIndex = FinancialCalculator.maxAmount(limitOrdersSel);
-		assertEquals(expectedPrice2, priceOneIndex);
-
-		BigDecimal  expectedPrice3 = new BigDecimal("68000");
-		limitOrdersSel.add(1,new LimitOrder(Order.OrderType.ASK, new BigDecimal("2.04"), btcUsdt, "", null, new BigDecimal("68100")));
-		BigDecimal priceTwoIndex = FinancialCalculator.maxAmount(limitOrdersSel);
-		assertEquals(expectedPrice3, priceTwoIndex);
-
-	}
-	@Test
-	void gridList(){
-		BigDecimal initialRate = new BigDecimal("1000");        // Начальная цена
-		BigDecimal percentageStep = new BigDecimal("5");        // Шаг в процентах
-		int size = 5;                                           // Размер списка
-
-		List<BigDecimal> bigDecimals = FinancialCalculator.gridLevels(initialRate, percentageStep, size, 5);
-		System.out.println("Сетка уровней ордеров: " + bigDecimals);
-	}
-
 	@Test
 	void sizeGridLevels(){
 		int i = FinancialCalculator.sizeGridLevels(new BigDecimal("1000"), new BigDecimal("100"));

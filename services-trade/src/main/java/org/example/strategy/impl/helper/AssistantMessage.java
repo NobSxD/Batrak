@@ -1,11 +1,12 @@
 package org.example.strategy.impl.helper;
 
-import org.example.entity.NodeOrder;
 import org.example.xchange.finance.CurrencyConverter;
 import org.knowm.xchange.dto.Order;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import org.example.entity.NodeOrder;
 
 public class AssistantMessage {
     public static String messageBuy(BigDecimal usd, BigDecimal price) {
@@ -36,7 +37,8 @@ public class AssistantMessage {
         StringBuilder sb = new StringBuilder();
         sb.append("Ордер ").append(bayOrSell).append("\n")
                 .append("Прайс: $").append(CurrencyConverter.validUsd(nodeOrder.getLimitPrice())).append("\n")
-                .append("Сумма: $").append(nodeOrder.getUsd());
+                .append("Сумма: $").append(nodeOrder.getUsd()).append("\n")
+                .append("Coin: ").append(nodeOrder.getOriginalAmount());
         return sb.toString();
     }
 

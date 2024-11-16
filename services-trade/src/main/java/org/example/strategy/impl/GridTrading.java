@@ -13,14 +13,14 @@ import org.example.xchange.finance.CurrencyConverter;
 import org.example.xchange.finance.FinancialCalculator;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.dto.trade.MarketOrder;
+import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.exceptions.FundsExceededException;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.concurrent.CountDownLatch;
+import java.util.List;
 
 import org.example.entity.NodeOrder;
 import org.example.entity.NodeUser;
@@ -29,6 +29,8 @@ import org.example.entity.enams.state.TradeState;
 
 import org.example.dao.NodeOrdersDAO;
 import org.example.dao.NodeUserDAO;
+
+import static java.lang.Thread.sleep;
 
 /**
  * @params buyLevels - сетка ордеров.
@@ -64,7 +66,6 @@ public class GridTrading extends StrategyBasic {
         this.webSocketCommand = webSocketCommand;
         this.producerServiceExchange = producerServiceExchange;
         tradeStatusManager.startTrading();
-        tradeStatusManager.newCountDownLatch(1);
     }
 
 
@@ -86,33 +87,28 @@ public class GridTrading extends StrategyBasic {
                 log.info("Начинаю торговлю в методе startTradingCycle");
                 startTradingCycle(nodeUser);
                 log.info("Блокирую поток пока метод startTradingCycle не разблокирует его");
-                awaitLatch(tradeStatusManager.getCountDownLatch());
+                awaitLatch();
 
                 if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_CANCEL) {
                     log.info("Поступила команда на отмену, поток разблокирован, торговля отменена");
                     break;
                 }
                 // Подождите 40 секунд перед следующим циклом
-                try {
-                    tradeStatusManager.sellLast();
-                    log.info("Достигнута конечная цена, завершаем торговый цикл. : {}", marketTradeDetails.getLastPrice());
-                    log.info("""
-                                    Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю,
-                                    tradeStatusManager: {}
-                                    lastPrice : {}
-                                    endPrice: {}""",
-                            tradeStatusManager.getCurrentTradeState(), marketTradeDetails.getLastPrice(),
-                            marketTradeDetails.getEndPrice());
-                    marketTradeDetails.setLastPrice(null);
-                    marketTradeDetails.setEndPrice(null);
-                    Thread.sleep(40000);
-                } catch (InterruptedException e) {
-                    log.error("Поток был прерван: ", e);
-                    Thread.currentThread().interrupt(); // Восстановление прерывания
-                    break;
-                }
+                log.info("""
+                                Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю,
+                                tradeStatusManager: {}
+                                lastPrice : {}
+                                endPrice: {}
+                                user: {}""",
+                        tradeStatusManager.getCurrentTradeState(), marketTradeDetails.getLastPrice(),
+                        marketTradeDetails.getEndPrice(), nodeUser.getUsername());
+                marketTradeDetails.setLastPrice(null);
+                marketTradeDetails.setEndPrice(null);
+                sleep(40000);
+
             }
         } catch (Exception e) {
+            producerServiceExchange.sendAnswer("Ошибка: " + e.getMessage(), nodeUser.getChatId());
             log.error("Ошибка в торговом цикле: ", e);
         } finally {
             tradeStatusManager.stopOK();
@@ -130,6 +126,7 @@ public class GridTrading extends StrategyBasic {
     @Transactional
     public void startTradingCycle(NodeUser nodeUser) {
         WebSocketChange webSocketChange = webSocketCommand.webSocketChange(nodeUser);
+        log.info("webSocketChange {} ", webSocketChange.getClass().getName());
         disposable = webSocketChange.exchangePair(marketTradeDetails.getInstrument())
                 .observeOn(Schedulers.single())
                 .subscribe(rate -> {
@@ -165,7 +162,9 @@ public class GridTrading extends StrategyBasic {
         } else if (shouldLastSell(currentPrice)) {
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
             marketTradeDetails.setRecentAction("LAST_SELL");
-            tradeStatusManager.getCountDownLatch().countDown();
+            tradeStatusManager.sellLast();
+            tradeStatusManager.startTrading();
+            tradeStatusManager.countDown();
             dispose(disposable);
             log.info("2.LAST_SELL: sellPrice: {}, nodeOrderPrice: {} ", currentPrice, nodeOrder.getLimitPrice());
         } else if (shouldBuy(currentPrice)) {
@@ -244,11 +243,12 @@ public class GridTrading extends StrategyBasic {
             if (orderType.equals(Order.OrderType.ASK)) {
                 amount = marketTradeDetails.getSell();
             }
+            log.info("Тип ордера {}, сумма {}", orderType, amount);
 
-            MarketOrder marketOrder = basicChange.createMarketOrder(orderType, amount, marketTradeDetails.getLastPrice(),
-                    marketTradeDetails.getScale(), marketTradeDetails.getInstrument());
+            List<BigDecimal> priceAndAmount = List.of(marketTradeDetails.getLastPrice(), amount);
+            LimitOrder order = basicChange.createOrder(marketTradeDetails.getInstrument(), priceAndAmount, orderType, marketTradeDetails.getScale());
 
-            String idOrder = basicChange.placeMarketOrder(marketOrder);
+            String idOrder = basicChange.placeLimitOrder(order);
 
             return NodeOrder.builder()
                     .limitPrice(marketTradeDetails.getLastPrice())
@@ -267,22 +267,22 @@ public class GridTrading extends StrategyBasic {
             handleFundsExceededException(nodeUser, e);
         } catch (IllegalArgumentException e) {
             handleIllegalArgumentException(nodeUser, e);
-        } catch (IllegalStateException e) {
-            handleIllegalStateException(nodeUser, e);
         } catch (Exception e) {
             handleGeneralException(nodeUser, e);
         }
         return null;
     }
-    public void dispose(Disposable disposable){
+
+    public void dispose(Disposable disposable) {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
     }
 
-    public void awaitLatch(CountDownLatch latch) {
+    public void awaitLatch() {
         try {
-            latch.await(); // Блокируем текущий поток до завершения задачи
+            tradeStatusManager.newCountDownLatch(1);
+            tradeStatusManager.getCountDownLatch().await(); // Блокируем текущий поток до завершения задачи
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Восстановление статуса прерывания
             log.error("Торговый поток был прерван:", e);

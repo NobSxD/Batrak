@@ -18,7 +18,7 @@ import org.example.entity.collect.ChangeType;
 
 import org.springframework.stereotype.Component;
 
-import static org.knowm.xchange.Exchange.USE_SANDBOX;
+import static info.bitrich.xchangestream.binance.BinanceStreamingExchange.USE_REALTIME_BOOK_TICKER;
 
 @Component
 @RequiredArgsConstructor
@@ -31,8 +31,8 @@ public class WebSocketByBitChange extends WebSocketBasic implements WebSocketCha
         ExchangeSpecification exchangeSpecification = new
                 BybitStreamingExchange().getDefaultExchangeSpecification();
         exchangeSpecification.setExchangeSpecificParametersItem(BybitStreamingExchange.EXCHANGE_TYPE,
-                BybitCategory.LINEAR);
-        exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, true);
+                BybitCategory.SPOT);
+        exchangeSpecification.setExchangeSpecificParametersItem(USE_REALTIME_BOOK_TICKER, true);
         exchangeSpecification.setShouldLoadRemoteMetaData(false);
         init(ChangeType.Bybit, currencyProperties, exchangeSpecification);
     }

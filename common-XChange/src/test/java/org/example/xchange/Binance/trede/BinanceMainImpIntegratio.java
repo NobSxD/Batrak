@@ -65,7 +65,8 @@ class BinanceMainImpIntegratio {
         BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
         Instrument instrument = new CurrencyPair("BTC-USDT");
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), new BigDecimal("10.5"));
-        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID, 5);
+        System.out.println(order);
 
     }
     @Test
@@ -83,7 +84,7 @@ class BinanceMainImpIntegratio {
         BinanceMainImpl binanceMain = new BinanceMainImpl(changeUser);
         Instrument instrument = new CurrencyPair("BTC-USDT");
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), new BigDecimal("0.00020"));
-        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID, 5);
         binanceMain.placeLimitOrder(order);
     }
 
@@ -93,7 +94,7 @@ class BinanceMainImpIntegratio {
         Instrument instrument = new CurrencyPair("BTC-USDT");
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000"), price);
-        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID, 5);
         binanceMain.placeLimitOrder(order);
     }
 
@@ -103,7 +104,7 @@ class BinanceMainImpIntegratio {
         CurrencyPair instrument = new CurrencyPair("BTC-USDT");
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"), price);
-        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID, 5);
         String s = binanceMain.placeLimitOrder(order);
         System.out.println(s);
     }

@@ -63,6 +63,7 @@ class GridTradingTest {
                 .build();
         ConfigTrade configTrade = new ConfigTrade();
         configTrade.setNodeUser(nodeUser);
+        configTrade.setNamePair("BTC-USDT");
         configTrade.setDeposit(new BigDecimal(300));
         configTrade.setScale(5);
         configTrade.setStepSell(1);
@@ -119,6 +120,7 @@ class GridTradingTest {
         List<BigDecimal> sellPrices = new ArrayList<>();
         marketTradeDetails.setLastPrice(new BigDecimal("60000"));
         tradeStatusManager.startTrading();
+        tradingStrategy.tradeStatusManager.newCountDownLatch(1);
         for (BigDecimal currentPrice : currentPrices) {
             NodeOrder nodeOrder = tradingStrategy.processPrice(currentPrice, nodeUser);
             if (nodeOrder != null) {
@@ -165,6 +167,7 @@ class GridTradingTest {
         List<BigDecimal> sellPrices = new ArrayList<>();
         marketTradeDetails.setLastPrice(new BigDecimal("60000"));
         tradeStatusManager.startTrading();
+        tradingStrategy.tradeStatusManager.newCountDownLatch(1);
         for (BigDecimal currentPrice : currentPrices) {
             NodeOrder nodeOrder = tradingStrategy.processPrice(currentPrice, nodeUser);
             if (nodeOrder != null) {

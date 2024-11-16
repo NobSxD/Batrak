@@ -3,15 +3,25 @@ package org.example.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import org.example.castom.Displayable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.castom.Displayable;
-import org.example.entity.enams.menu.MenuStrategy;
 
 import java.math.BigDecimal;
+
+import org.example.entity.enams.menu.MenuStrategy;
 
 @Entity
 @Getter
@@ -26,8 +36,8 @@ public class ConfigTrade  implements Displayable {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	private String namePair = "BTC-USDT";
-	int scale = 5;
+	private String namePair = "-";
+	int scale;
 
 	private BigDecimal amountOrder = new BigDecimal(11);
 	private BigDecimal deposit = new BigDecimal(300);

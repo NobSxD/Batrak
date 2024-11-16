@@ -1,15 +1,14 @@
 package org.example.strategy.impl.helper;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.entity.enams.state.TradeState;
 
 import java.util.concurrent.CountDownLatch;
-
-import org.example.entity.enams.state.TradeState;
 
 @Slf4j
 public class TradeStatusManager {
     private volatile TradeState currentTradeState;
-    public CountDownLatch countDownLatch;
+    private CountDownLatch countDownLatch;
 
     public TradeStatusManager() {
         this.currentTradeState = TradeState.TRADE_START;
@@ -57,9 +56,8 @@ public class TradeStatusManager {
         log.info("Ордер на продажу успешно выполнен.");
     }
     public void sellLast() {
-        setCurrentTradeState(TradeState.TRADE_START);
-        countDownLatch.countDown();
-        log.info("Ордер на продажу успешно выполнен. \n" +
+        setCurrentTradeState(TradeState.TRADE_LAST);
+        log.info("Ордер на последнию продажу успешно выполнен. \n" +
                 "Цикл завершился, делаю паузу и начинаю новый цикл торговли.");
     }
     public void stopOK(){
@@ -68,6 +66,10 @@ public class TradeStatusManager {
     }
     public CountDownLatch getCountDownLatch() {
         return countDownLatch;
+    }
+
+    public void countDown(){
+        countDownLatch.countDown();
     }
 
     public void newCountDownLatch(int size) {

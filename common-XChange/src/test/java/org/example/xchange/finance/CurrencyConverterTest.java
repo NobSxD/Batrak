@@ -58,5 +58,41 @@ class CurrencyConverterTest {
 		
 	}
 
+	@Test
+	public void convertCurrency(){
+		BigDecimal price = new BigDecimal("88710.87");
+		BigDecimal usdt = new BigDecimal("10.6453463");
+		int scale = 6;
+		RoundingMode roundingMode = RoundingMode.HALF_UP;
+
+		BigDecimal result = usdt.divide(price, scale, roundingMode);
+		System.out.println(result);
+
+		BigDecimal bigDecimal = CurrencyConverter.convertCurrency(price, usdt, scale);
+		System.out.println(bigDecimal);
+	}
+
+	@Test
+	public void convertCurrencyPercent(){
+		BigDecimal price = new BigDecimal("88710.87");
+		BigDecimal usdt = new BigDecimal("10.64");
+		BigDecimal percent = FinancialCalculator.increaseByPercentage(usdt, 0.01);
+
+		System.out.println("percent: " + percent);
+
+		BigDecimal convert = CurrencyConverter.convertCurrency(price, percent, 6);
+
+		System.out.println("convert: " + convert);
+
+		int scale = 6;
+		RoundingMode roundingMode = RoundingMode.HALF_UP;
+
+		BigDecimal result = usdt.divide(price, scale, roundingMode);
+		System.out.println(result);
+
+		BigDecimal bigDecimal = CurrencyConverter.convertCurrency(price, usdt, scale);
+		System.out.println(bigDecimal);
+	}
+
 
 }

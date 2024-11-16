@@ -141,6 +141,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         try {
             Strategy strategy = strategyMap.get(nodeUser.getId());
             if (checkStrategy(strategy, nodeUser)) {
+                processServiceCommand.sendAnswer("Отменяю торговлю", nodeUser.getChatId());
                 strategy.tradeCancel();
             }
             log.info("Удаляем стратегию из мапы под id: {}, ", nodeUser.getId());
@@ -216,7 +217,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
 
         if (strategy == null) {
             log.info("Стратегия для пользователя с ID {} не найдена.", nodeId);
-            return true;
+            return false;
         }
 
         TradeState currentTradeState = strategy.getTradeStatusManager().getCurrentTradeState();
