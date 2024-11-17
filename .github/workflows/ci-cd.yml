@@ -53,10 +53,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Build and test
-        run: |
-          ./gradlew test || exit 1
-          docker-compose build
+      - name: Build
+        run: ./gradlew build || exit 1
+
+      - name: build compose
+        run: docker-compose build
 
       - name: Push Docker image
         run: |
