@@ -1,0 +1,42 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master  # Запускать на пуш в ветку master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Используйте последнюю доступную версию Ubuntu
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Проверка кода из репозитория
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github SHA }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build and test
+        run: |
+          # Выполнение тестов (замените на вашу команду тестирования)
+          ./gradlew test || exit 1  # Если у вас Java - используйте Gradle
+          
+          # Если у вас другой язык, например, Node.js, замените на соответствующую команду
+          # npm install
+          # npm test
+
+          # Сборка образа Docker
+          docker-compose build
+
+      - name: Push Docker image
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker-compose push  # Создание образа и публикация его в Docker Hub
