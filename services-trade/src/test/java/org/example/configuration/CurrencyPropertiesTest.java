@@ -1,5 +1,6 @@
 package org.example.configuration;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
+@Tag("integration")
 @SpringBootTest // Используется для настройки тестового контекста
 @Import(CurrencyProperties.class) // Импортируем класс конфигурации для теста
 @EnableConfigurationProperties
