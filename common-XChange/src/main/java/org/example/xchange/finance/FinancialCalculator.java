@@ -44,7 +44,7 @@ public class FinancialCalculator {
         }
         BigDecimal step = BigDecimal.valueOf(percentage);
         BigDecimal increase = amount.multiply(step);
-        return amount.add(increase).setScale(2, RoundingMode.HALF_UP);
+        return amount.add(increase);
     }
     public static BigDecimal subtractPercentage(BigDecimal amount, double stepBay) {
         if (amount == null) {

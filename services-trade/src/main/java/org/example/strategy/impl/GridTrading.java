@@ -139,6 +139,8 @@ public class GridTrading extends StrategyBasic {
                     }
                 }, error -> {
                     log.error("Error occurred: {}", error.getMessage());
+                    tradeStatusManager.stopOK();
+                    producerServiceExchange.sendAnswer(error.getMessage(), nodeUser.getChatId());
                 });
     }
 

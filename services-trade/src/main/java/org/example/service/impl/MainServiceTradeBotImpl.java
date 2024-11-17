@@ -224,7 +224,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         if (TradeState.TRADE_STOP_OK.equals(currentTradeState)) {
             strategyMap.remove(nodeId);
             log.info("Стратегия для пользователя с ID {} была удалена.", nodeId);
-            processServiceCommand.sendAnswer("Торговля была завершина, для запроса состояния начните новую торговлю", nodeUser.getChatId());
+            processServiceCommand.sendAnswer("Старая стратегия была удалена, начинаем новую", nodeUser.getChatId());
             return false;
         }
 

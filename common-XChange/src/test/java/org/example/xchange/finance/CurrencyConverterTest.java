@@ -27,24 +27,26 @@ class CurrencyConverterTest {
 	void checkValidUsd(){
 		BigDecimal bigDecimal = CurrencyConverter.validUsd(new BigDecimal("15.89189456"));
 		assertEquals(new BigDecimal("15.89") , bigDecimal);
+		BigDecimal bigDecimal0 = CurrencyConverter.validUsd(new BigDecimal("0.1547"));
+		assertEquals(new BigDecimal("0.1547") , bigDecimal0);
 		BigDecimal bigDecimal1 = CurrencyConverter.validUsd(new BigDecimal("00.8912364"));
-		assertEquals(new BigDecimal("0.89") , bigDecimal1);
+		assertEquals(new BigDecimal("0.891236") , bigDecimal1);
 		BigDecimal bigDecimal2 = CurrencyConverter.validUsd(new BigDecimal("00.00887456"));
-		assertEquals(new BigDecimal("0.0089") , bigDecimal2);
+		assertEquals(new BigDecimal("0.00887456") , bigDecimal2);
 		BigDecimal bigDecimal3 = CurrencyConverter.validUsd(new BigDecimal("0.00000145621"));
-		assertEquals(new BigDecimal("0.000001") , bigDecimal3);
+		assertEquals(new BigDecimal("0.00000145621") , bigDecimal3);
 		BigDecimal bigDecimal4 = CurrencyConverter.validUsd(new BigDecimal("0.000000014564"));
-		assertEquals(new BigDecimal("0.00000001") , bigDecimal4);
+		assertEquals(new BigDecimal("0.000000014564") , bigDecimal4);
 		BigDecimal bigDecimal5 = CurrencyConverter.validUsd(new BigDecimal("0.00000000016212"));
-		assertEquals(new BigDecimal("0.0000000002") , bigDecimal5);
+		assertEquals(new BigDecimal("0.00000000016212") , bigDecimal5);
 		BigDecimal bigDecimal6 = CurrencyConverter.validUsd(new BigDecimal("0.000000000001234"));
-		assertEquals(new BigDecimal("0.000000000001") , bigDecimal6);
-		BigDecimal bigDecimal7 = CurrencyConverter.validUsd(new BigDecimal("0.0000000000000145621"));
+		assertEquals(new BigDecimal("0.000000000001234") , bigDecimal6);
+		BigDecimal bigDecimal7 = CurrencyConverter.validUsd(new BigDecimal("0.000000000000014562100"));
 		assertEquals(new BigDecimal("0.0000000000000145621") , bigDecimal7);
 		BigDecimal bigDecimal8 = CurrencyConverter.validUsd(new BigDecimal("1.8978757458945"));
-		assertEquals(new BigDecimal("1.90") , bigDecimal8);
+		assertEquals(new BigDecimal("1.89") , bigDecimal8);
 		BigDecimal bigDecimal9 = CurrencyConverter.validUsd(new BigDecimal("150.8987574"));
-		assertEquals(new BigDecimal("150.90") , bigDecimal9);
+		assertEquals(new BigDecimal("150.89") , bigDecimal9);
 		BigDecimal bigDecimal10 = CurrencyConverter.validUsd(new BigDecimal("15.89074575"));
 		assertEquals(new BigDecimal("15.89") , bigDecimal10);
 	}

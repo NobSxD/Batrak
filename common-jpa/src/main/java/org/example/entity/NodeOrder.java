@@ -44,7 +44,7 @@ public class NodeOrder {
 	private String orderId;
 	
 	@JsonProperty("originalAmount")
-	@Column(precision = 10, scale = 10)
+	@Column(precision = 12, scale = 6)
 	private BigDecimal originalAmount;
 	
 	@JsonProperty("limitPrice")
