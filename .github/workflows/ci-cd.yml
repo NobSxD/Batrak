@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github SHA }}
+          key: ${{ runner.os }}-buildx-${{ github.SHA }}
           restore-keys: |
             ${{ runner.os }}-buildx-
 
