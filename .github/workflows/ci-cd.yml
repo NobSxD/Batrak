@@ -8,6 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # Используйте последнюю доступную версию Ubuntu
+    services:
+      docker:
+        image: docker:latest
+        options: >-
+          --mount type=bind,source=${{ github.workspace }},target=/workspace
 
     steps:
       - name: Checkout repository
@@ -18,6 +23,16 @@ jobs:
         with:
           distribution: 'openjdk'
           java-version: '17'
+
+      - uses: actions/checkout@v2
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose
+      - name: Run Docker Compose
+        run: |
+          cd /workspace
+          docker-compose up
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew  # Установка прав на выполнение для gradlew
