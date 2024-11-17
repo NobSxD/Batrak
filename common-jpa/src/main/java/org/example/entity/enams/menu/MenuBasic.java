@@ -8,6 +8,7 @@ public enum MenuBasic {
 	RegisterAccount(ButtonLabelManager.registerAccount),
 	TradeMenu(ButtonLabelManager.tradeOperation),
 	TradeSettings(ButtonLabelManager.tradeSettings),
+	TradeStatistics(ButtonLabelManager.statistics),
 	Info_Settings(ButtonLabelManager.infoSettings);
 	
 	private final String value;

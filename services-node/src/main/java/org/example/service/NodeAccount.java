@@ -1,4 +1,4 @@
-package org.example.factory.account;
+package org.example.service;
 
 
 import org.example.entity.NodeUser;

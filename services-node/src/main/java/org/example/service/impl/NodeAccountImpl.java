@@ -1,13 +1,17 @@
-package org.example.factory.account;
+package org.example.service.impl;
 
-import org.example.dao.AccountBaseDAO;
+import org.example.service.NodeAccount;
+
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.example.entity.Account;
 import org.example.entity.NodeUser;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.example.dao.AccountBaseDAO;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class NodeAccountImpl implements NodeAccount {

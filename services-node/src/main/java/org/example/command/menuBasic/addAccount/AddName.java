@@ -2,7 +2,7 @@ package org.example.command.menuBasic.addAccount;
 
 import org.example.command.RoleProvider;
 import org.example.entity.enams.Role;
-import org.example.factory.account.NodeAccount;
+import org.example.service.NodeAccount;
 import org.example.command.Command;
 import org.example.entity.Account;
 import org.example.entity.NodeUser;

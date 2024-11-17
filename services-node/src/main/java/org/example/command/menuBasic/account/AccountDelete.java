@@ -2,7 +2,7 @@ package org.example.command.menuBasic.account;
 
 import org.example.command.Command;
 import org.example.command.RoleProvider;
-import org.example.factory.account.NodeAccount;
+import org.example.service.NodeAccount;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

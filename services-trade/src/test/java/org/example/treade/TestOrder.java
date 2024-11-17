@@ -33,7 +33,7 @@ public class TestOrder {
         CurrencyPair instrument = new CurrencyPair("BTC-USDT");
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"),price);
-        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID, 5);
         String s = binanceMain.placeLimitOrder(order);
         System.out.println(s);
     }
@@ -43,7 +43,7 @@ public class TestOrder {
         CurrencyPair instrument = new CurrencyPair("BTC-USDT");
         BigDecimal price = CurrencyConverter.convertCurrency(new BigDecimal("53231.39000000"), new BigDecimal("11.2"), 5);
         List<BigDecimal> priceAndAmount = List.of(new BigDecimal("50000.39000000"),price);
-        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID);
+        LimitOrder order = binanceMain.createOrder(instrument, priceAndAmount, Order.OrderType.BID, 5);
         String s = binanceMain.placeLimitOrder(order);
         Thread.sleep(2000);
         binanceMain.cancelOrder("BTC/USDT",s);

@@ -69,8 +69,8 @@ public abstract class StrategyBasic implements Strategy {
     public abstract NodeOrder process(Order.OrderType orderType, NodeUser nodeUser);
 
     public void resultTrade(NodeUser nodeUser ){
-        List<NodeOrder> nodeOrders = nodeDAO.nodeOrdersDAO().findAllOrdersFromTimestampAndNodeUser(
-                nodeUser.getLastStartTread(), nodeUser);
+        List<NodeOrder> nodeOrders = nodeDAO.nodeOrdersDAO().findAllOrdersFromTimestampAndNodeUserId(
+                nodeUser.getLastStartTread(), nodeUser.getId());
         producerServiceExchange.sendAnswer(
                 AssistantMessage.messageResult(
                         AssistantObserver.calculateProfit(nodeOrders),

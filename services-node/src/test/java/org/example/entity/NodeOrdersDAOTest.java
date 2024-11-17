@@ -1,13 +1,15 @@
 package org.example.entity;
 
 import jakarta.persistence.EntityManager;
-import org.example.dao.NodeOrdersDAO;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.example.dao.NodeOrdersDAO;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -45,7 +47,7 @@ class NodeOrdersDAOTest {
 
 		// Act: вызовите метод вашего репозитория
 		LocalDateTime startTime = LocalDateTime.now().minusDays(2);
-		List<NodeOrder> orders = nodeOrdersDAO.findAllOrdersFromTimestampAndNodeUser(startTime, testUser);
+		List<NodeOrder> orders = nodeOrdersDAO.findAllOrdersFromTimestampAndNodeUserId(startTime, testUser.getId());
 
 		// Assert: проверьте результат
 		assertNotNull(orders);

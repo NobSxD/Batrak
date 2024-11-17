@@ -67,6 +67,14 @@ public enum UserState {
 
 
 	BAN,
-	U_BAN;
+	U_BAN,
+
+	//запрос статистики по торговли
+	STATISTICS_SELECT,
+	STATISTICS_TODAY,
+	STATISTICS_WEEK,
+	STATISTICS_MONTH,
+	STATISTICS_HALF_YEAR,
+	STATISTICS_YEAR,
 
 }

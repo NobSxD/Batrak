@@ -51,4 +51,12 @@ public class ButtonLabelManager {
     public static String stopTradingAllUsers = "Остановка трейдинга для всех";
     public static String grantAdminRights = "Выдать права администратора";
     public static String cancelCache = "Сбросить кэш";
+
+    //ButtonStatistics
+    public static String statistics = "Статистика трейдинга";
+    public static String today = "За сегодняшний день";
+    public static String thisOfWeek = "За текущую неделю";
+    public static String thisOfMonth = "За текущий месяц";
+    public static String thisHalfYear = "За последние полгода";
+    public static String thisYear = "За текущий год";
 }

@@ -19,4 +19,5 @@ public interface ProducerTelegramService {
     void menuAdmin(String output, Long chatId);
     void menuBan(List<NodeUserDto> userName, String output, Long chatId);
 
+    void menuStatistics(String output, Long chatId);
 }

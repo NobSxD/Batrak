@@ -34,6 +34,12 @@ import static org.example.entity.enams.state.UserState.SETTINGS_NAME_STRATEGY;
 import static org.example.entity.enams.state.UserState.SETTINGS_SAVE_NAME_STRATEGY;
 import static org.example.entity.enams.state.UserState.SETTINGS_STEP_BAY;
 import static org.example.entity.enams.state.UserState.SETTINGS_STEP_SELL;
+import static org.example.entity.enams.state.UserState.STATISTICS_HALF_YEAR;
+import static org.example.entity.enams.state.UserState.STATISTICS_MONTH;
+import static org.example.entity.enams.state.UserState.STATISTICS_SELECT;
+import static org.example.entity.enams.state.UserState.STATISTICS_TODAY;
+import static org.example.entity.enams.state.UserState.STATISTICS_WEEK;
+import static org.example.entity.enams.state.UserState.STATISTICS_YEAR;
 import static org.example.entity.enams.state.UserState.TRADE_CANCEL;
 import static org.example.entity.enams.state.UserState.TRADE_OPERATION;
 import static org.example.entity.enams.state.UserState.TRADE_SETTINGS;
@@ -93,6 +99,14 @@ public class ButtonRegistration {
         state.put(ButtonLabelManager.stopTradingAllUsers, ADMIN_STOP_TRADING_ALL_USERS);
         state.put(ButtonLabelManager.grantAdminRights, ADMIN_GRANT_ADMIN_RIGHTS);
         state.put(ButtonLabelManager.cancelCache, ADMIN_CANCEL_CACHE);
+
+        //меню статистики
+        state.put(ButtonLabelManager.statistics, STATISTICS_SELECT);
+        state.put(ButtonLabelManager.today, STATISTICS_TODAY);
+        state.put(ButtonLabelManager.thisOfWeek, STATISTICS_WEEK);
+        state.put(ButtonLabelManager.thisOfMonth, STATISTICS_MONTH);
+        state.put(ButtonLabelManager.thisHalfYear, STATISTICS_HALF_YEAR);
+        state.put(ButtonLabelManager.thisYear, STATISTICS_YEAR);
 
         return state;
     }
