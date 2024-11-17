@@ -48,7 +48,7 @@ services:
 
   trade:
     build:
-      context: /services-trade
+      context: ./services-trade
       dockerfile: Dockerfile
     image: nobsxd/batrak:tradebot
     container_name: trade_bot
@@ -74,7 +74,7 @@ services:
 
   telegram:
     build:
-      context: /services-telegram
+      context: ./services-telegram
       dockerfile: Dockerfile
     image: nobsxd/batrak:telegram
     container_name: telegram
@@ -98,7 +98,7 @@ services:
 
   node:
     build:
-      context: /services-node
+      context: ./services-node
       dockerfile: Dockerfile
     image: nobsxd/batrak:node
     container_name: node
