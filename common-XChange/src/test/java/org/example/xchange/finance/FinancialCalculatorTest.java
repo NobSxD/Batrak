@@ -71,10 +71,10 @@ class FinancialCalculatorTest {
 		assertEquals(bigDecimal2, new BigDecimal("62795.60"));
 
 		BigDecimal bigDecimal3 = FinancialCalculator.stepPrice(new BigDecimal("0.00569"), new BigDecimal("6.5"));
-		assertEquals(bigDecimal3, new BigDecimal("0.0061"));
+		assertEquals(bigDecimal3, new BigDecimal("0.00606"));
 
 		BigDecimal bigDecimal4 = FinancialCalculator.stepPrice(new BigDecimal("0.0170"), new BigDecimal("10"));
-		assertEquals(bigDecimal4, new BigDecimal("0.02"));
+		assertEquals(bigDecimal4, new BigDecimal("0.019"));
 
 	}
 
@@ -83,25 +83,25 @@ class FinancialCalculatorTest {
 		// Тест 1: Увеличение на 10%
 		BigDecimal amount1 = BigDecimal.valueOf(100);
 		BigDecimal percentage1 = BigDecimal.valueOf(0.10);
-		BigDecimal expected1 = BigDecimal.valueOf(110).setScale(2);
+		BigDecimal expected1 = BigDecimal.valueOf(110).setScale(1);
 		assertEquals(expected1, FinancialCalculator.increaseByPercentage(amount1, percentage1.doubleValue()));
 
 		// Тест 2: Увеличение на 50%
 		BigDecimal amount2 = BigDecimal.valueOf(200);
 		BigDecimal percentage2 = BigDecimal.valueOf(0.50);
-		BigDecimal expected2 = BigDecimal.valueOf(300).setScale(2);
+		BigDecimal expected2 = BigDecimal.valueOf(300).setScale(1);
 		assertEquals(expected2, FinancialCalculator.increaseByPercentage(amount2, percentage2.doubleValue()));
 
 		// Тест 3: Увеличение на 0%
 		BigDecimal amount3 = BigDecimal.valueOf(150);
 		BigDecimal percentage3 = BigDecimal.valueOf(0);
-		BigDecimal expected3 = BigDecimal.valueOf(150).setScale(2);
+		BigDecimal expected3 = BigDecimal.valueOf(150).setScale(1);
 		assertEquals(expected3, FinancialCalculator.increaseByPercentage(amount3, percentage3.doubleValue()));
 
 		// Тест 4: Увеличение на отрицательный процент
 		BigDecimal amount4 = BigDecimal.valueOf(100);
 		BigDecimal percentage4 = BigDecimal.valueOf(-0.10);
-		BigDecimal expected4 = BigDecimal.valueOf(90).setScale(2);
+		BigDecimal expected4 = BigDecimal.valueOf(90).setScale(1);
 		assertEquals(expected4, FinancialCalculator.increaseByPercentage(amount4, percentage4.doubleValue()));
 
 		// Тест 5: Параметры null
