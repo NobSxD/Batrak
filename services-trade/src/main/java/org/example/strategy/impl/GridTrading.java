@@ -148,10 +148,7 @@ public class GridTrading extends StrategyBasic {
     @Transactional
     public NodeOrder processPrice(BigDecimal currentPrice, NodeUser nodeUser) {
         NodeOrder nodeOrder = null;
-        if (marketTradeDetails.getCountDeal() >= marketTradeDetails.getMaxCountDeal()) {
-            log.info("1.Превышен лимит:  максимальное количество сделок на покупку {}, уже сделанно ордеров на покупку {}",
-                    marketTradeDetails.getMaxCountDeal(), marketTradeDetails.getCountDeal());
-        } else if (tradeStatusManager.getCurrentTradeState().equals(TradeState.TRADE_START)) {
+        if (tradeStatusManager.getCurrentTradeState().equals(TradeState.TRADE_START)) {
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
             marketTradeDetails.setEndPrice(FinancialCalculator.increaseByPercentage(currentPrice, marketTradeDetails.getStepSell()));
             marketTradeDetails.setNextBay(FinancialCalculator.subtractPercentage(currentPrice, marketTradeDetails.getStepBay()));
@@ -192,6 +189,7 @@ public class GridTrading extends StrategyBasic {
         boolean canBuy = currentPrice.compareTo(marketTradeDetails.getNextBay()) <= 0;
         if (!count) {
             tradeStatusManager.pendingTrading();
+            return false;
         }
         if (canBuy && count) {
             log.info("shouldSell: currentPrice - nextBay = {} <= {}, lastPrice = {}, getCountDeal {}, getMaxCountDeal {}",
