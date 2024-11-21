@@ -1,9 +1,10 @@
 package org.example.strategy.impl.helper;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.entity.enams.state.TradeState;
 
 import java.util.concurrent.CountDownLatch;
+
+import org.example.entity.enams.state.TradeState;
 
 @Slf4j
 public class TradeStatusManager {
@@ -24,8 +25,10 @@ public class TradeStatusManager {
     }
 
     public void runTrading() {
-        setCurrentTradeState(TradeState.TRADE_RUNNING);
-        log.info("Торговля в процессе.");
+        if (!currentTradeState.equals(TradeState.TRADE_RUNNING)) {
+            setCurrentTradeState(TradeState.TRADE_RUNNING);
+            log.info("Торговля в процессе.");
+        }
     }
 
     public void stopTrading() {
@@ -37,8 +40,10 @@ public class TradeStatusManager {
         log.info("Торговля начата.");
     }
     public void pendingTrading(){
-        setCurrentTradeState(TradeState.TRADE_PENDING);
-        log.info("Депозид для долнейшей покупки исчерпан, ожидаем возвращение курса");
+        if (!currentTradeState.equals(TradeState.TRADE_PENDING)) {
+            setCurrentTradeState(TradeState.TRADE_PENDING);
+            log.info("Депозид для долнейшей покупки исчерпан, ожидаем возвращение курса");
+        }
     }
 
     public void cancelTrading() {

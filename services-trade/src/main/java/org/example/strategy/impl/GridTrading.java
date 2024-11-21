@@ -185,13 +185,13 @@ public class GridTrading extends StrategyBasic {
     }
 
     public boolean shouldBuy(BigDecimal currentPrice) {
-        boolean count = marketTradeDetails.getCountDeal() <= marketTradeDetails.getMaxCountDeal();
+        boolean count = marketTradeDetails.getCountDeal() < marketTradeDetails.getMaxCountDeal();
         boolean canBuy = currentPrice.compareTo(marketTradeDetails.getNextBay()) <= 0;
         if (!count) {
             tradeStatusManager.pendingTrading();
             return false;
         }
-        if (canBuy && count) {
+        if (canBuy) {
             log.info("shouldSell: currentPrice - nextBay = {} <= {}, lastPrice = {}, getCountDeal {}, getMaxCountDeal {}",
                     currentPrice, marketTradeDetails.getNextBay(), marketTradeDetails.getLastPrice(),
                     marketTradeDetails.getCountDeal(), marketTradeDetails.getMaxCountDeal());
