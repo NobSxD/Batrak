@@ -69,7 +69,7 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             return;
         }
 
-        NodeUser nodeUser = nodeUserDAO.findById(nodeUserDto.getId()).orElseThrow();
+        NodeUser nodeUser = getUser(nodeUserDto);
         try {
             log.info("Прошел проверку на незапущенность трейдинга");
 
@@ -229,6 +229,15 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
         }
 
         return true;
+    }
+    private NodeUser getUser(NodeUserDto nodeUserDto){
+        NodeUser nodeUser = nodeUserDAO.findById(nodeUserDto.getId()).orElse(null);
+        if (nodeUser == null){
+            processServiceCommand.sendAnswer("Пользователь %s не найден".formatted(nodeUserDto.getDisplayName()), nodeUserDto.getChatId());
+            throw new RuntimeException();
+        }
+
+        return nodeUser;
     }
 
 }

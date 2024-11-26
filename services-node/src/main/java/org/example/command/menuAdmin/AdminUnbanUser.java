@@ -3,7 +3,6 @@ package org.example.command.menuAdmin;
 import org.example.command.Command;
 import org.example.command.RoleProvider;
 import org.example.dto.NodeUserDto;
-import org.example.service.ProcessServiceCommand;
 import org.example.service.ProducerTelegramService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Component;
 public class AdminUnbanUser implements Command, RoleProvider {
     private final NodeUserDAO nodeUserDAO;
     private final ProducerTelegramService producerTelegramService;
-    private final ProcessServiceCommand processServiceCommand;
 
     @Override
     public String send(NodeUser nodeUser, String nameAccount) {
@@ -67,7 +65,6 @@ public class AdminUnbanUser implements Command, RoleProvider {
             }
             user.setIsActive(false);
             nodeUserDAO.save(user);
-            processServiceCommand.cancelCache();
             return "Пользователь %s успешно разблокирован".formatted(user.getLastName());
         }
 
