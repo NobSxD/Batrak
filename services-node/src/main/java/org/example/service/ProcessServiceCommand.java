@@ -7,6 +7,5 @@ import org.example.entity.NodeUser;
 public interface ProcessServiceCommand {
 	NodeUser findOrSaveAppUser(Update update);
 	long extractChatIdFromUpdate(Update update);
-	void cancelCache();
 
 }

@@ -1,6 +1,5 @@
 package org.example.service.impl;
 
-import com.github.benmanes.caffeine.cache.Cache;
 import org.example.service.ProcessServiceCommand;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -12,7 +11,6 @@ import org.example.entity.enams.Role;
 
 import org.example.dao.NodeUserDAO;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import static org.example.entity.enams.state.UserState.BASIC_STATE;
@@ -22,37 +20,32 @@ import static org.example.entity.enams.state.UserState.BASIC_STATE;
 public class ProcessServiceCommandImpl implements ProcessServiceCommand {
 
     private final NodeUserDAO nodeUserDAO;
-    private final Cache<Long, NodeUser> nodeUserCache;
 
 
     @Override
     public NodeUser findOrSaveAppUser(Update update) {
 
         var telegramUser = update.getMessage() == null ? update.getCallbackQuery().getFrom() : update.getMessage().getFrom();
-        NodeUser nodeUser = nodeUserCache.getIfPresent(telegramUser.getId());
-        if (nodeUser == null) {
-            var appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId());
-            if (appUserOpt.isEmpty()) {
-                ConfigTrade settingsTrade = new ConfigTrade();
-                nodeUser = NodeUser.builder()
-                        .chatId(extractChatIdFromUpdate(update))
-                        .telegramUserId(telegramUser.getId())
-                        .username(telegramUser.getUserName())
-                        .firstName(telegramUser.getFirstName())
-                        .lastName(telegramUser.getLastName())
-                        .configTrade(settingsTrade)
-                        .isActive(false)
-                        .state(BASIC_STATE)
-                        .role(Role.USER)
-                        .build();
-                settingsTrade.setNodeUser(nodeUser);
-                nodeUserDAO.save(nodeUser);
-            } else {
-                nodeUser = appUserOpt.get();
-                nodeUserCache.put(telegramUser.getId(), nodeUser);
-            }
+
+        var appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId()).orElse(null);
+        if (appUserOpt == null) {
+            ConfigTrade settingsTrade = new ConfigTrade();
+            appUserOpt = NodeUser.builder()
+                    .chatId(extractChatIdFromUpdate(update))
+                    .telegramUserId(telegramUser.getId())
+                    .username(telegramUser.getUserName())
+                    .firstName(telegramUser.getFirstName())
+                    .lastName(telegramUser.getLastName())
+                    .configTrade(settingsTrade)
+                    .isActive(false)
+                    .state(BASIC_STATE)
+                    .role(Role.USER)
+                    .build();
+            settingsTrade.setNodeUser(appUserOpt);
+            nodeUserDAO.save(appUserOpt);
         }
-        return nodeUser;
+
+        return appUserOpt;
     }
 
     @Override
@@ -63,15 +56,6 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
             return update.getCallbackQuery().getMessage().getChatId();
         }
         return 0;
-    }
-    @Override
-    public void cancelCache(){
-        nodeUserCache.invalidateAll();
-    }
-
-    @Scheduled(fixedRate = 3600000)
-    private void cancelUp(){
-        nodeUserCache.cleanUp();
     }
 
 }

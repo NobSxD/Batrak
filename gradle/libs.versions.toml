@@ -27,13 +27,15 @@ org-springframework-boot-spring-boot-starter-amqp = "3.0.1"
 org-springframework-boot-spring-boot-starter-data-jpa = "3.0.1"
 org-springframework-boot-spring-boot-starter-test = "3.0.1"
 org-springframework-boot-spring-boot-starter-web = "3.0.1"
+org-springframework-boot-spring-boot-starter-data-redis = "3.0.1"
+org-springframework-boot-spring-boot-starter-cache = "3.0.1"
 org-springframework-boot-plagin = "3.0.1"
 org-telegram-telegrambots-longpolling = "7.2.0"
 org-telegram-telegrambots-spring-boot-starter = "6.9.7.1"
 com-fasterxml-jackson-datatype-jsr310 = "2.14.3"
 
 [libraries]
-com-fasterxml-jackson-datatype-jackson-datatype-jsr310 = {module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "com-fasterxml-jackson-datatype-jsr310"}
+com-fasterxml-jackson-datatype-jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "com-fasterxml-jackson-datatype-jsr310" }
 com-fasterxml-jackson-core-jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "com-fasterxml-jackson-core-jackson-annotations" }
 com-fasterxml-jackson-core-jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "com-fasterxml-jackson-core-jackson-core" }
 com-fasterxml-jackson-core-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "com-fasterxml-jackson-core-jackson-databind" }
@@ -61,3 +63,5 @@ org-springframework-boot-spring-boot-starter-test = { module = "org.springframew
 org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "org-springframework-boot-spring-boot-starter-web" }
 org-telegram-telegrambots-longpolling = { module = "org.telegram:telegrambots-longpolling", version.ref = "org-telegram-telegrambots-longpolling" }
 org-telegram-telegrambots-spring-boot-starter = { module = "org.telegram:telegrambots-spring-boot-starter", version.ref = "org-telegram-telegrambots-spring-boot-starter" }
+org-springframework-boot-spring-boot-starter-data-redis = { module = "org.springframework.boot:spring-boot-starter-data-redis", version.ref = "org-springframework-boot-spring-boot-starter-data-redis" }
+org-springframework-boot-spring-boot-starter-cache = { module = "org.springframework.boot:spring-boot-starter-cache", version.ref = "org-springframework-boot-spring-boot-starter-cache" }
