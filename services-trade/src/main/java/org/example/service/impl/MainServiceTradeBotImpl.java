@@ -220,8 +220,8 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
             return false;
         }
 
-        TradeState currentTradeState = strategy.getTradeStatusManager().getCurrentTradeState();
-        if (TradeState.TRADE_STOP_OK.equals(currentTradeState)) {
+        if (strategy.getTradeStatusManager() == null
+                || TradeState.TRADE_STOP_OK.equals(strategy.getTradeStatusManager().getCurrentTradeState())) {
             strategyMap.remove(nodeId);
             log.info("Стратегия для пользователя с ID {} была удалена.", nodeId);
             processServiceCommand.sendAnswer("Старая стратегия была удалена, начинаем новую", nodeUser.getChatId());
