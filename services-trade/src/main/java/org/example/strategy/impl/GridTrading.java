@@ -79,7 +79,7 @@ public class GridTrading extends StrategyBasic {
     public synchronized void tradeStart(NodeUser nodeUser) {
         try {
             while (true) {
-                if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_STOP) {
+                if (tradeStatusManager.isStop()) {
                     log.info("Поступила команда на остановку трейдинга");
                     break;
                 }

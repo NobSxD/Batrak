@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import static org.example.model.RabbitQueue.ANSWER_MESSAGE;
 import static org.example.model.RabbitQueue.ENUM_CUSTOM_MESSAGE;
 import static org.example.model.RabbitQueue.LIST_CUSTOM_MESSAGE;
+import static org.example.model.RabbitQueue.REBUT_TELEGRAM;
 
 
 @Service
@@ -38,6 +39,15 @@ public class ProducerTelegramServiceImpl implements ProducerTelegramService {
                 .text(output)
                 .build();
         rabbitTemplate.convertAndSend(ANSWER_MESSAGE, customMessage);
+    }
+
+    @Override
+    public void producerRebutTelegram(String output, Long chatId) {
+        CustomMessage customMessage = CustomMessage.builder()
+                .chatId(chatId.toString())
+                .text(output)
+                .build();
+        rabbitTemplate.convertAndSend(REBUT_TELEGRAM, customMessage);
     }
 
     @Override

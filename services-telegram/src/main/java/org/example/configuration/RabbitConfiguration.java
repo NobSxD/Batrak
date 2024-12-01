@@ -34,5 +34,7 @@ public class RabbitConfiguration {
     @Bean Queue infoAccount(){return new Queue(INFO_ACCOUNT);}
     @Bean Queue trade_stop(){return new Queue(TRADE_STOP);}
     @Bean Queue trade_state(){return new Queue(TRADE_STATE);}
+    @Bean Queue rebut_telegram(){return new Queue(REBUT_TELEGRAM);}
+    @Bean Queue rebut_trade(){return new Queue(REBUT_TRADE);}
 
 }

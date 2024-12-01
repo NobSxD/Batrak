@@ -4,8 +4,7 @@ import org.example.castom.CustomMessage;
 import org.example.castom.Displayable;
 import org.example.castom.MessageWrapperDTO;
 import org.example.controller.UpdateController;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Service;
+import org.example.service.Rebut;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -13,17 +12,34 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.model.RabbitQueue.*;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
+
+import static org.example.model.RabbitQueue.ANSWER_MESSAGE;
+import static org.example.model.RabbitQueue.ENUM_CUSTOM_MESSAGE;
+import static org.example.model.RabbitQueue.LIST_CUSTOM_MESSAGE;
+import static org.example.model.RabbitQueue.REBUT_TELEGRAM;
 
 
 @Service
 public class AnswerConsumerImpl{
     private final UpdateController updateController;
+    private final Rebut rebut;
 
-    public AnswerConsumerImpl(UpdateController updateController) {
+    public AnswerConsumerImpl(UpdateController updateController, Rebut rebut) {
         this.updateController = updateController;
+        this.rebut = rebut;
     }
 
+    @RabbitListener(queues = REBUT_TELEGRAM)
+    public void rebutService(CustomMessage customMessage) {
+        SendMessage sendMessage = SendMessage.builder()
+                .chatId(customMessage.getChatId())
+                .text(customMessage.getText())
+                .build();
+        updateController.setView(sendMessage);
+        rebut.restartApplication();
+    }
 
     @RabbitListener(queues = ANSWER_MESSAGE)
     public void consumer(CustomMessage customMessage) {

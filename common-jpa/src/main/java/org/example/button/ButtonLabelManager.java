@@ -50,7 +50,9 @@ public class ButtonLabelManager {
     public static String tradingStatsSpecificUser = "Статистика определенного";
     public static String stopTradingAllUsers = "Остановка трейдинга для всех";
     public static String grantAdminRights = "Выдать права администратора";
-    public static String cancelCache = "Сбросить кэш";
+    public static String rebutNode = "Перезапустить Node";
+    public static String rebutTelegram = "Перезапустить Telegram";
+    public static String rebutTrade = "Перезапустить Trade";
 
     //ButtonStatistics
     public static String statistics = "Статистика трейдинга";

@@ -10,6 +10,7 @@ import org.example.entity.collect.Pair;
 
 public interface ProducerTelegramService {
     void producerAnswer(String output, Long chatId);
+    void producerRebutTelegram(String output, Long chatId);
     void menuChange(List<NodeChange> nameChange, String output, Long chatId);
     void menuMain(String output, Long chatId);
     void menuTrade(String output, Long chatId);

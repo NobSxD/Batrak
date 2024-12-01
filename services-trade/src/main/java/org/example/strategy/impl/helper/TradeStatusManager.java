@@ -10,12 +10,17 @@ import org.example.entity.enams.state.TradeState;
 public class TradeStatusManager {
     private volatile TradeState currentTradeState;
     private CountDownLatch countDownLatch;
+    private boolean stop;
 
     public TradeStatusManager() {
+        stop = false;
         this.currentTradeState = TradeState.TRADE_START;
     }
 
     public TradeState getCurrentTradeState() {
+        if(currentTradeState == null){
+            throw new RuntimeException("Состояние трейденга = null");
+        }
         return currentTradeState;
     }
 
@@ -32,6 +37,7 @@ public class TradeStatusManager {
     }
 
     public void stopTrading() {
+        setStop(true);
         setCurrentTradeState(TradeState.TRADE_STOP);
         log.info("Торговля остановлена.");
     }
@@ -86,4 +92,11 @@ public class TradeStatusManager {
         currentTradeState = null;
     }
 
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
 }
