@@ -36,6 +36,7 @@ public class OrdersThisYear implements Command, RoleProvider {
             LocalDateTime startOfYear = LocalDateTime.now().withDayOfYear(1).with(LocalTime.MIN);
             List<NodeOrder> allOrdersThisYear =
                     nodeOrdersDAO.findAllOrdersThisYear(startOfYear, nodeUser.getId(), nodeUser.getConfigTrade().isEnableDemoTrading());
+            nodeUser.setState(UserState.BASIC_STATE);
 
             return messageStatistics(allOrdersThisYear, ButtonLabelManager.thisYear);
         } catch (Exception e) {

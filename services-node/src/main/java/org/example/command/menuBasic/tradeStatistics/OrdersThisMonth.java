@@ -35,6 +35,7 @@ public class OrdersThisMonth implements Command, RoleProvider {
         try {
             LocalDateTime startOfMonth = LocalDateTime.now().withDayOfMonth(1).with(LocalTime.MIN);
             List<NodeOrder> allOrdersThisMonth = nodeOrdersDAO.findAllOrdersThisMonth(startOfMonth, nodeUser.getId(), nodeUser.getConfigTrade().isEnableDemoTrading());
+            nodeUser.setState(UserState.BASIC_STATE);
             return messageStatistics(allOrdersThisMonth, ButtonLabelManager.thisOfMonth);
         } catch (Exception e) {
             log.error("В методе OrdersThisYear произошла ошибка {}", e.getMessage());

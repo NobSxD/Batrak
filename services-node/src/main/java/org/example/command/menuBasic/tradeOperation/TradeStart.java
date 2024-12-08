@@ -30,17 +30,6 @@ public class TradeStart implements Command, RoleProvider {
     private final ProducerXChangeService producerXChangeService;
     private final NodeUserDAO nodeUserDAO;
 
-    /**
-     * Этот метод используется для обновления закешированных данных о пользователе
-     * для получения актуальной информации о состоянии трейдинга. В зависимости от
-     * обновленных данных определяет, нужно ли запускать трейдинг для данного пользователя
-     * через ProducerXChangeService.
-     *
-     * @param nodeUser объект пользователя, для которого выполняется команда
-     * @param text     дополнительный текст, сопровождающий команду (не используется)
-     * @return Пустую строку, если трейдинг успешно запущен, или сообщение об ошибке,
-     * если трейдинг уже был запущен или возникли проблемы.
-     */
     @Override
     public String send(NodeUser nodeUser, String text) {
         try {
@@ -50,6 +39,7 @@ public class TradeStart implements Command, RoleProvider {
             nodeUser = nodeUserDAO.findById(nodeUser.getId()).orElse(nodeUser);
             nodeUser.setLastStartTread(LocalDateTime.now());
             producerXChangeService.startTrade(nodeUser);
+            nodeUser.setState(UserState.BASIC_STATE);
             return "";
 
         } catch (Exception e) {
@@ -58,14 +48,6 @@ public class TradeStart implements Command, RoleProvider {
             return "Во время старта трейдинга произошла ошибка, обратитесь к администратору системы.";
         }
     }
-
-
-
-    /**
-     * Получает тип текущей команды.
-     *
-     * @return UserState.TRADE_START, обозначающий тип команды
-     */
     @Override
     public UserState getType() {
         return UserState.TRADE_START;

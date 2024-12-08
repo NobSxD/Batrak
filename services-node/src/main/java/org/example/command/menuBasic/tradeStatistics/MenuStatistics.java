@@ -24,6 +24,7 @@ public class MenuStatistics implements Command, RoleProvider {
 
         try {
             producerTelegramService.menuStatistics("Выбирети пириуд: ", nodeUser.getChatId());
+            nodeUser.setState(UserState.BASIC_STATE);
             return "";
 
         } catch (Exception e) {

@@ -2,12 +2,14 @@ package org.example.command.menuBasic.tradeOperation;
 
 import org.example.command.Command;
 import org.example.command.RoleProvider;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.Role;
-import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerTelegramService;
 
 import lombok.RequiredArgsConstructor;
+
+import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
+import org.example.entity.enams.state.UserState;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +20,7 @@ public class MenuOperation implements Command, RoleProvider {
 	@Override
 	public String send(NodeUser nodeUser, String text) {
 		producerTelegramService.menuOperation(text, nodeUser.getChatId());
+		nodeUser.setState(UserState.BASIC_STATE);
 		return "";
 	}
 	

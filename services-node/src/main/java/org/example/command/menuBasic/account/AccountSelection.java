@@ -1,17 +1,21 @@
 package org.example.command.menuBasic.account;
 
-import org.example.command.RoleProvider;
-import org.example.entity.enams.Role;
-import org.example.service.NodeAccount;
 import org.example.command.Command;
-import org.example.entity.Account;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.state.UserState;
+import org.example.command.RoleProvider;
+import org.example.service.NodeAccount;
 import org.example.service.ProducerTelegramService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.example.entity.Account;
+import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
+import org.example.entity.enams.state.UserState;
+
 import org.springframework.stereotype.Component;
+
+import static org.example.entity.enams.state.UserState.BASIC_STATE;
 
 @Component
 @RequiredArgsConstructor
@@ -30,6 +34,7 @@ public class AccountSelection implements Command, RoleProvider {
 			nodeAccount.saveAccount(changeAccount, nodeUser);
 			nodeUser.setAccount(changeAccount);
 			producerTelegramService.menuMain("Вы выбрали аккаунт " + changeAccount.getNameAccount(), nodeUser.getChatId());
+			nodeUser.setState(BASIC_STATE);
 		} catch (Exception e){
 			log.error("Ошибка: {}", e.getMessage());
 			return "Не получилось выбрать аккаунт";

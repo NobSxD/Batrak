@@ -1,0 +1,19 @@
+20:30:08.326 [34mINFO [0;39m [[36mo.s.t.c.s.AnnotationConfigContextLoaderUtils      [0;39m] - Could not detect default configuration classes for test class [org.example.entity.NodeOrdersDAOTest]: NodeOrdersDAOTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:30:08.491 [34mINFO [0;39m [[36mo.s.b.t.c.SpringBootTestContextBootstrapper       [0;39m] - Found @SpringBootConfiguration org.example.NodeApplication for test class org.example.entity.NodeOrdersDAOTest
+20:30:08.983 [34mINFO [0;39m [[36mo.example.entity.NodeOrdersDAOTest                [0;39m] - Starting NodeOrdersDAOTest using Java 17.0.12 with PID 2432 (started by Batrak in D:\project\new\treadeBot\services-node)
+20:30:08.990 [34mINFO [0;39m [[36mo.example.entity.NodeOrdersDAOTest                [0;39m] - No active profile set, falling back to 1 default profile: "default"
+20:30:09.521 [34mINFO [0;39m [[36mo.s.d.r.c.RepositoryConfigurationDelegate         [0;39m] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:30:09.641 [34mINFO [0;39m [[36mo.s.d.r.c.RepositoryConfigurationDelegate         [0;39m] - Finished Spring Data repository scanning in 108 ms. Found 6 JPA repository interfaces.
+20:30:09.724 [34mINFO [0;39m [[36mo.s.b.t.a.j.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor[0;39m] - Replacing 'dataSource' DataSource bean with embedded version
+20:30:09.959 [34mINFO [0;39m [[36mo.s.j.d.e.EmbeddedDatabaseFactory                 [0;39m] - Starting embedded database: url='jdbc:h2:mem:e808a4eb-e7d6-4702-a9ca-af5cb466e559;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+20:30:10.372 [34mINFO [0;39m [[36mo.h.jpa.internal.util.LogHelper                   [0;39m] - HHH000204: Processing PersistenceUnitInfo [name: default]
+20:30:10.449 [34mINFO [0;39m [[36morg.hibernate.Version                             [0;39m] - HHH000412: Hibernate ORM core version 6.1.6.Final
+20:30:10.693 [31mWARN [0;39m [[36morg.hibernate.orm.deprecation                     [0;39m] - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+20:30:10.906 [34mINFO [0;39m [[36mSQL dialect                                       [0;39m] - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+20:30:12.314 [34mINFO [0;39m [[36mo.h.e.t.j.p.i.JtaPlatformInitiator                [0;39m] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+20:30:12.328 [34mINFO [0;39m [[36mo.s.o.j.LocalContainerEntityManagerFactoryBean    [0;39m] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:30:12.789 [31mWARN [0;39m [[36mo.s.c.LocalVariableTableParameterNameDiscoverer   [0;39m] - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: org.example.dao.AccountBaseDAO
+20:30:12.939 [31mWARN [0;39m [[36mo.s.c.LocalVariableTableParameterNameDiscoverer   [0;39m] - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: org.example.dao.NodeChangeDAO
+20:30:13.478 [31mWARN [0;39m [[36mo.s.c.LocalVariableTableParameterNameDiscoverer   [0;39m] - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: org.example.dao.NodeUserDAO
+20:30:13.570 [34mINFO [0;39m [[36mo.example.entity.NodeOrdersDAOTest                [0;39m] - Started NodeOrdersDAOTest in 4.989 seconds (process running for 6.937)
+20:30:14.077 [34mINFO [0;39m [[36mo.s.o.j.LocalContainerEntityManagerFactoryBean    [0;39m] - Closing JPA EntityManagerFactory for persistence unit 'default'

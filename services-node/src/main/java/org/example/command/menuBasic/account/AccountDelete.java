@@ -14,6 +14,8 @@ import org.example.entity.enams.state.UserState;
 
 import org.springframework.stereotype.Component;
 
+import static org.example.entity.enams.state.UserState.BASIC_STATE;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -30,6 +32,7 @@ public class AccountDelete implements Command, RoleProvider {
 			if (nodeUser.getAccount().getNameAccount().equals(nameAccount)){
 				nodeUser.setAccount(null);
 			}
+			nodeUser.setState(BASIC_STATE);
 			return account.getNameAccount() + " данный аккаунт был удален.";
 		} catch (NullPointerException e){
 			log.error("аккаунт пользователя под id: {}, не найден. \n Имя аккаунта: {} \n Ошибка: {}", nodeUser.getChatId(), nameAccount, e.getMessage());

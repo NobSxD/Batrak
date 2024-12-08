@@ -2,13 +2,15 @@ package org.example.command.menuBasic.tradeOperation;
 
 import org.example.command.Command;
 import org.example.command.RoleProvider;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.Role;
-import org.example.entity.enams.state.UserState;
 import org.example.service.ProducerXChangeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.example.entity.NodeUser;
+import org.example.entity.enams.Role;
+import org.example.entity.enams.state.UserState;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,6 +22,7 @@ public class TradeCancel implements Command, RoleProvider {
 	public String send(NodeUser nodeUser, String text) {
 		try {
 			producerXChangeService.cancelTread(nodeUser);
+			nodeUser.setState(UserState.BASIC_STATE);
 			return "";
 		}catch (Exception e){
 			log.error("Пользовтель: {}. id: {}. Ошибка: {}", nodeUser.getUsername(), nodeUser.getId(),  e.getMessage());
