@@ -19,7 +19,6 @@ public class MarketTradeDetails {
     private String recentAction;
     private int countDeal;
     private int maxCountDeal;
-    private BigDecimal sell;
 
     public MarketTradeDetails(Instrument instrument, BigDecimal coinAmount, double stepSell, double stepBay, int scale) {
         this.instrument = instrument;
@@ -34,7 +33,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getCoinAmount() {
-        return coinAmount;
+        return CurrencyConverter.validScale(coinAmount);
     }
 
     public double getStepSell() {
@@ -50,7 +49,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getEndPrice() {
-        return CurrencyConverter.validUsd(endPrice);
+        return CurrencyConverter.validScale(endPrice);
     }
 
     public void setEndPrice(BigDecimal endPrice) {
@@ -58,7 +57,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getNextBay() {
-        return CurrencyConverter.validUsd(nextBay);
+        return CurrencyConverter.validScale(nextBay);
     }
 
     public void setNextBay(BigDecimal nextBay) {
@@ -66,7 +65,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getNexSell() {
-        return CurrencyConverter.validUsd(nexSell);
+        return CurrencyConverter.validScale(nexSell);
     }
 
     public void setNexSell(BigDecimal nexSell) {
@@ -74,7 +73,7 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getLastPrice() {
-        return CurrencyConverter.validUsd(lastPrice);
+        return CurrencyConverter.validScale(lastPrice);
     }
 
     public void setLastPrice(BigDecimal lastPrice) {
@@ -106,6 +105,6 @@ public class MarketTradeDetails {
     }
 
     public BigDecimal getSell() {
-        return FinancialCalculator.increaseByPercentage(coinAmount, stepSell);
+        return CurrencyConverter.validScale(FinancialCalculator.increaseByPercentage(coinAmount, stepSell));
     }
 }

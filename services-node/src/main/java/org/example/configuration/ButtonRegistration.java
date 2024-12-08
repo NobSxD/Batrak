@@ -52,7 +52,7 @@ import static org.example.entity.enams.state.UserState.TRADE_STOP;
 @Configuration
 public class ButtonRegistration {
     @Bean
-    Map<String, UserState> buttonMap() {
+    public Map<String, UserState> buttonMap() {
         Map<String, UserState> state = new HashMap<>();
 
         //команды текстом
@@ -62,7 +62,7 @@ public class ButtonRegistration {
         state.put(ButtonLabelManager.info, INFO_SETTINGS);
         state.put(ButtonLabelManager.main, BOT_MAIN_MENU);
         state.put(ButtonLabelManager.admin, ADMIN);
-
+        state.put(ButtonLabelManager.stateTrade, TRADE_STATUS);
 
         //основное меню
         state.put(ButtonLabelManager.infoSettings, INFO_SETTINGS);

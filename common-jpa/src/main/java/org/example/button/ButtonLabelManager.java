@@ -20,6 +20,7 @@ public class ButtonLabelManager {
     public static String info = "/info_settings";
     public static String help = "/help";
     public static String admin = "/admin";
+    public static String stateTrade = "/state_trade";
 
     //ButtonMainMenu
     public static final String mainMenu = "В главное мею";

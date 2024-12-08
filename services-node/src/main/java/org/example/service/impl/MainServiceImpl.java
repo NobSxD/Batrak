@@ -33,10 +33,6 @@ public class MainServiceImpl implements MainService {
     @Override
     @Transactional
     public void processUpdate(Update update) {
-        if (update == null) {
-            log.error("Update object is null");
-            return;
-        }
 
         try {
             NodeUser nodeUser = processServiceCommand.findOrSaveAppUser(update);

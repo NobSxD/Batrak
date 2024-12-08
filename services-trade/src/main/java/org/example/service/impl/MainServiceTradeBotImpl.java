@@ -105,7 +105,6 @@ public class MainServiceTradeBotImpl implements MainServiceTradeBot {
 
     private void handleTradeException(NodeUser nodeUser, Exception e, String userMessage) {
         strategyMap.remove(nodeUser.getId());
-        nodeUser.setStateTrade(TradeState.TRADE_BASIC);
         processServiceCommand.sendAnswer(userMessage, nodeUser.getChatId());
         log.error("Имя пользователя: {}. id: {}. Ошибка: {}.", nodeUser.getUsername(), nodeUser.getId(), e.getMessage());
     }

@@ -84,9 +84,6 @@ public class NodeUser {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Enumerated(EnumType.STRING)
-    private TradeState stateTrade;
-
 
     @Builder
     public NodeUser(Long id, Long telegramUserId, Long chatId, Date firstLoginDate, String firstName,
@@ -109,7 +106,6 @@ public class NodeUser {
         this.configTrade = configTrade;
         this.changeType = changeType;
         this.state = state;
-        this.stateTrade = stateTrade;
         this.role = role;
     }
 

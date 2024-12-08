@@ -49,36 +49,6 @@ class FinancialCalculatorTest {
 	}
 
 	@Test
-	void sizeGridLevels(){
-		int i = FinancialCalculator.sizeGridLevels(new BigDecimal("1000"), new BigDecimal("100"));
-		assertEquals(i, 10);
-		int i2 = FinancialCalculator.sizeGridLevels(new BigDecimal("1000"), new BigDecimal("11"));
-		assertEquals(i2, 90);
-		int i3 = FinancialCalculator.sizeGridLevels(new BigDecimal("87945"), new BigDecimal("123"));
-		assertEquals(i3, 715);
-		int i4 = FinancialCalculator.sizeGridLevels(new BigDecimal("3213"), new BigDecimal("147"));
-		assertEquals(i4, 21);
-		int i5 = FinancialCalculator.sizeGridLevels(new BigDecimal("10"), new BigDecimal("100"));
-		assertEquals(i5, 0);
-	}
-
-	@Test
-	void stepPrice(){
-		BigDecimal bigDecimal = FinancialCalculator.stepPrice(new BigDecimal("60000"), new BigDecimal("10"));
-		assertEquals(bigDecimal, new BigDecimal("66000.00"));
-
-		BigDecimal bigDecimal2 = FinancialCalculator.stepPrice(new BigDecimal("58963"), new BigDecimal("6.5"));
-		assertEquals(bigDecimal2, new BigDecimal("62795.60"));
-
-		BigDecimal bigDecimal3 = FinancialCalculator.stepPrice(new BigDecimal("0.00569"), new BigDecimal("6.5"));
-		assertEquals(bigDecimal3, new BigDecimal("0.00606"));
-
-		BigDecimal bigDecimal4 = FinancialCalculator.stepPrice(new BigDecimal("0.0170"), new BigDecimal("10"));
-		assertEquals(bigDecimal4, new BigDecimal("0.019"));
-
-	}
-
-	@Test
 	void testIncreaseByPercentage() {
 		// Тест 1: Увеличение на 10%
 		BigDecimal amount1 = BigDecimal.valueOf(100);

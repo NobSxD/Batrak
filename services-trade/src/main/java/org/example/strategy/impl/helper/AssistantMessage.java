@@ -1,6 +1,5 @@
 package org.example.strategy.impl.helper;
 
-import org.example.xchange.finance.CurrencyConverter;
 import org.knowm.xchange.dto.Order;
 
 import java.math.BigDecimal;
@@ -36,24 +35,18 @@ public class AssistantMessage {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Ордер ").append(bayOrSell).append("\n")
-                .append("Прайс: $").append(CurrencyConverter.validUsd(nodeOrder.getLimitPrice())).append("\n")
+                .append("Прайс: $").append(nodeOrder.getLimitPrice()).append("\n")
                 .append("Сумма: $").append(nodeOrder.getUsd()).append("\n")
-                .append("Coin: ").append(nodeOrder.getOriginalAmount());
+                .append("Coin: ").append(nodeOrder.getOriginalAmount()).append("\n");
         return sb.toString();
     }
 
-    public static String messageResult(BigDecimal profit, int size) {
+    public static String messageResult(BigDecimal profit, BigDecimal inCoin, int size, String pair) {
         StringBuilder sb = new StringBuilder();
         sb.append("[Резултат торговли]**\n")
                 .append("_Количество сделок: ").append(size).append("\n")
-                .append("Профит: $").append(profit);
-        return sb.toString();
-    }
-
-    public static String messageCancel(String orderId) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[Ордер Id: ").append(orderId).append("]\n")
-                .append("Был отменен ");
+                .append("Профит: $").append(profit).append("\n")
+                .append("Осталось в ").append(pair).append(": $").append(inCoin);
         return sb.toString();
     }
 
