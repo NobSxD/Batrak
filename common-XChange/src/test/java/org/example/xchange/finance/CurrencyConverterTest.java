@@ -14,15 +14,15 @@ class CurrencyConverterTest {
 	@ParameterizedTest
 	@CsvSource({
 
-			"67773.2, 67.74, 5, 0.00100",
-			"50000, 50, 6, 0.001000",
-			"45000, 90, 8, 0.00200000",
-			"10000, 100, 5, 0.01000",
-			"60000, 60, 4, 0.0010",
-			"70000, 70, 5, 0.00100",
+			"67773.2, 67.74, 5, 0.001",
+			"50000, 50, 6, 0.001",
+			"45000, 90, 8, 0.002",
+			"10000, 100, 5, 0.01",
+			"60000, 60, 4, 0.001",
+			"70000, 70, 5, 0.001",
 			"45000, 45.5, 6, 0.001011",
-			"61000, 61, 10, 0.0010000000",
-			"67773.2, 33.87, 5, 0.00050",
+			"61000, 61, 10, 0.001",
+			"67773.2, 33.87, 5, 0.0005",
 			"5000, 5, 3, 0.001",
 			"0.15173, 100.00, 2, 659.07",
 			"0.15264, 100.60, 2 , 659.07",
@@ -30,7 +30,7 @@ class CurrencyConverterTest {
 			"0.15019, 100.00, 2, 665.82"
 	})
 
-	void converUsdt(String priceBTC, String cash, int scale, String expectedBTC) {
+	void convertUsdt(String priceBTC, String cash, int scale, String expectedBTC) {
 		// Перевод значений из строкового представления в BigDecimal
 		BigDecimal price = new BigDecimal(priceBTC);
 		BigDecimal cashAmount = new BigDecimal(cash);
