@@ -14,20 +14,12 @@ public class CurrencyConverter {
         RoundingMode roundingMode = RoundingMode.HALF_UP;
         BigDecimal result = usdt.divide(price, scale, roundingMode);
         log.info("usdt={} / price={} равно={}", usdt, price, result);
-        return result;
+
+        return validScale(result);
 
     }
 
-    public static BigDecimal convertUsdt(BigDecimal price, BigDecimal coinAmount) {
-        int scale = 2;
-        RoundingMode roundingMode = RoundingMode.HALF_UP;
-        BigDecimal result = coinAmount.multiply(price).setScale(scale, roundingMode);
-        log.info("Криптавалюта={} * price={} равно={}", coinAmount, price, result);
-        return result;
-
-    }
-
-    public static BigDecimal validUsd(BigDecimal value) {
+    public static BigDecimal validScale(BigDecimal value) {
         if (value == null) {
             return null;
         }

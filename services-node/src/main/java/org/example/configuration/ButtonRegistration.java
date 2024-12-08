@@ -14,9 +14,11 @@ import static org.example.entity.enams.state.UserState.ACCOUNT_ADD_REGISTER;
 import static org.example.entity.enams.state.UserState.ACCOUNT_LIST;
 import static org.example.entity.enams.state.UserState.ADMIN;
 import static org.example.entity.enams.state.UserState.ADMIN_BAN_USER;
-import static org.example.entity.enams.state.UserState.ADMIN_CANCEL_CACHE;
 import static org.example.entity.enams.state.UserState.ADMIN_GRANT_ADMIN_RIGHTS;
 import static org.example.entity.enams.state.UserState.ADMIN_LIST_ALL_USERS;
+import static org.example.entity.enams.state.UserState.ADMIN_REBUT_NODE;
+import static org.example.entity.enams.state.UserState.ADMIN_REBUT_TELEGRAM;
+import static org.example.entity.enams.state.UserState.ADMIN_REBUT_TRADE;
 import static org.example.entity.enams.state.UserState.ADMIN_STOP_TRADING_ALL_USERS;
 import static org.example.entity.enams.state.UserState.ADMIN_TRADING_STATS_ALL_USERS;
 import static org.example.entity.enams.state.UserState.ADMIN_TRADING_STATS_SPECIFIC_USER;
@@ -50,7 +52,7 @@ import static org.example.entity.enams.state.UserState.TRADE_STOP;
 @Configuration
 public class ButtonRegistration {
     @Bean
-    Map<String, UserState> buttonMap() {
+    public Map<String, UserState> buttonMap() {
         Map<String, UserState> state = new HashMap<>();
 
         //команды текстом
@@ -60,7 +62,7 @@ public class ButtonRegistration {
         state.put(ButtonLabelManager.info, INFO_SETTINGS);
         state.put(ButtonLabelManager.main, BOT_MAIN_MENU);
         state.put(ButtonLabelManager.admin, ADMIN);
-
+        state.put(ButtonLabelManager.stateTrade, TRADE_STATUS);
 
         //основное меню
         state.put(ButtonLabelManager.infoSettings, INFO_SETTINGS);
@@ -98,7 +100,9 @@ public class ButtonRegistration {
         state.put(ButtonLabelManager.tradingStatsSpecificUser, ADMIN_TRADING_STATS_SPECIFIC_USER);
         state.put(ButtonLabelManager.stopTradingAllUsers, ADMIN_STOP_TRADING_ALL_USERS);
         state.put(ButtonLabelManager.grantAdminRights, ADMIN_GRANT_ADMIN_RIGHTS);
-        state.put(ButtonLabelManager.cancelCache, ADMIN_CANCEL_CACHE);
+        state.put(ButtonLabelManager.rebutNode, ADMIN_REBUT_NODE);
+        state.put(ButtonLabelManager.rebutTelegram, ADMIN_REBUT_TELEGRAM);
+        state.put(ButtonLabelManager.rebutTrade, ADMIN_REBUT_TRADE);
 
         //меню статистики
         state.put(ButtonLabelManager.statistics, STATISTICS_SELECT);

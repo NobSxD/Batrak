@@ -9,6 +9,7 @@ import org.example.strategy.impl.helper.TradeStatusManager;
 import org.example.websocet.WebSocketChange;
 import org.example.websocet.WebSocketCommand;
 import org.example.xchange.BasicChangeInterface;
+import org.example.xchange.DTO.WalletDTO;
 import org.example.xchange.finance.CurrencyConverter;
 import org.example.xchange.finance.FinancialCalculator;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -53,8 +54,9 @@ public class GridTrading extends StrategyBasic {
                        WebSocketCommand webSocketCommand, ProcessServiceCommand producerServiceExchange,
                        NodeOrdersDAO nodeOrdersDAO) {
         super(new TradeStatusManager(), nodeOrdersDAO, nodeUserDAO);
+        CurrencyPair currencyPair = new CurrencyPair(nodeUser.getConfigTrade().getNamePair());
         marketTradeDetails = new MarketTradeDetails(
-                new CurrencyPair(nodeUser.getConfigTrade().getNamePair()),
+                currencyPair,
                 nodeUser.getConfigTrade().getAmountOrder(),
                 nodeUser.getConfigTrade().getStepSellD(),
                 nodeUser.getConfigTrade().getStepBayD(),
@@ -65,6 +67,7 @@ public class GridTrading extends StrategyBasic {
         this.basicChange = basicChange;
         this.webSocketCommand = webSocketCommand;
         this.producerServiceExchange = producerServiceExchange;
+        this.walletDTO = new WalletDTO(nodeUser.getConfigTrade().getDeposit(), currencyPair);
         tradeStatusManager.startTrading();
     }
 
@@ -79,7 +82,7 @@ public class GridTrading extends StrategyBasic {
     public synchronized void tradeStart(NodeUser nodeUser) {
         try {
             while (true) {
-                if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_STOP) {
+                if (tradeStatusManager.isStop()) {
                     log.info("Поступила команда на остановку трейдинга");
                     break;
                 }
@@ -89,7 +92,7 @@ public class GridTrading extends StrategyBasic {
                 log.info("Блокирую поток пока метод startTradingCycle не разблокирует его");
                 awaitLatch();
 
-                if (tradeStatusManager.getCurrentTradeState() == TradeState.TRADE_CANCEL) {
+                if (tradeStatusManager.isCancel()) {
                     log.info("Поступила команда на отмену, поток разблокирован, торговля отменена");
                     break;
                 }
@@ -112,14 +115,14 @@ public class GridTrading extends StrategyBasic {
             log.error("Ошибка в торговом цикле: ", e);
         } finally {
             tradeStatusManager.stopOK();
-            resultTrade(nodeUser);
+            resultTrade(walletDTO, nodeUser, currentPrice());
             cleanUp();
         }
     }
 
     @Override
     public BigDecimal currentPrice() {
-        return CurrencyConverter.validUsd(currentPrice);
+        return CurrencyConverter.validScale(currentPrice);
     }
 
 
@@ -145,7 +148,6 @@ public class GridTrading extends StrategyBasic {
     }
 
 
-    @Transactional
     public NodeOrder processPrice(BigDecimal currentPrice, NodeUser nodeUser) {
         NodeOrder nodeOrder = null;
         if (tradeStatusManager.getCurrentTradeState().equals(TradeState.TRADE_START)) {
@@ -243,19 +245,22 @@ public class GridTrading extends StrategyBasic {
             if (orderType.equals(Order.OrderType.ASK)) {
                 amount = marketTradeDetails.getSell();
             }
+            BigDecimal coin = CurrencyConverter.convertCurrency(marketTradeDetails.getLastPrice(), amount, marketTradeDetails.getScale());
+            walletDTO.set(amount, coin, orderType);
             log.info("Тип ордера {}, сумма {}", orderType, amount);
 
             List<BigDecimal> priceAndAmount = List.of(marketTradeDetails.getLastPrice(), amount);
             LimitOrder order = basicChange.createOrder(marketTradeDetails.getInstrument(), priceAndAmount, orderType, marketTradeDetails.getScale());
 
             String idOrder = basicChange.placeLimitOrder(order);
+            walletDTO.addCountDelay();
 
             return NodeOrder.builder()
                     .limitPrice(marketTradeDetails.getLastPrice())
                     .type(orderType.name())
                     .orderId(idOrder)
                     .orderState(OrderState.COMPLETED)
-                    .originalAmount(CurrencyConverter.convertCurrency(marketTradeDetails.getLastPrice(), amount, marketTradeDetails.getScale()))
+                    .originalAmount(coin)
                     .usd(amount)
                     .timestamp(new Date())
                     .instrument(nodeUser.getConfigTrade().getNamePair())

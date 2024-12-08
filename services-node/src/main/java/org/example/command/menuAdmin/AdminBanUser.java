@@ -71,7 +71,6 @@ public class AdminBanUser implements Command, RoleProvider {
                 return "Администратор не может заблокировать другового администратора, обратитесь к суперюзеру";
             }
             user.setIsActive(true);
-            nodeUserDAO.save(user);
             return "Пользователь %s успешно заблокирован".formatted(user.getLastName());
         }
 

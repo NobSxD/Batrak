@@ -41,7 +41,6 @@ public class AdminListAllUsers implements Command, RoleProvider {
                 4. UserState: %s
                 5. Role: %s
                 6. Last_tread: %s
-                7. State_trade: %s
                 """.formatted(
                         user.getId(),
                         user.getLastName(),
@@ -51,8 +50,7 @@ public class AdminListAllUsers implements Command, RoleProvider {
                         user.getRole(),
                         user.getLastStartTread() != null
                                 ? user.getLastStartTread().format(formatter)
-                                : "null",
-                        user.getStateTrade()
+                                : "null"
                 ))
                 .collect(Collectors.joining("\n\n")) + "\n---";
     }

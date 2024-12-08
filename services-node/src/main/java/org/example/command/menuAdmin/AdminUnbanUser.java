@@ -64,7 +64,6 @@ public class AdminUnbanUser implements Command, RoleProvider {
                 return "Вы не можете разблокировки сам себя";
             }
             user.setIsActive(false);
-            nodeUserDAO.save(user);
             return "Пользователь %s успешно разблокирован".formatted(user.getLastName());
         }
 

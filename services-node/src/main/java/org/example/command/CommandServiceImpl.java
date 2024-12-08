@@ -1,19 +1,26 @@
 package org.example.command;
 
-import lombok.extern.slf4j.Slf4j;
-import org.example.dao.NodeUserDAO;
-import org.example.entity.NodeUser;
-import org.example.entity.enams.state.UserState;
 import org.example.service.AccessControl;
 import org.hibernate.tool.schema.spi.SqlScriptException;
-import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static org.example.button.MessageInfo.*;
+import org.example.entity.NodeUser;
+import org.example.entity.enams.state.UserState;
+
+import org.example.dao.NodeUserDAO;
+
+import org.springframework.stereotype.Service;
+
+import static org.example.button.MessageInfo.DATABASE_SAVE_ERROR_MESSAGE;
+import static org.example.button.MessageInfo.ENCRYPTION_ERROR_MESSAGE;
+import static org.example.button.MessageInfo.NO_ACCESS_MESSAGE;
+import static org.example.button.MessageInfo.UNKNOWN_COMMAND_MESSAGE_TEMPLATE;
 
 /**
  * **CommandServiceImpl**.
@@ -29,26 +36,12 @@ public class CommandServiceImpl implements CommandService {
     private final NodeUserDAO nodeUserDAO;
     private final AccessControl accessControl;
 
-    /**
-     * Конструктор для CommandServiceImpl.
-     *
-     * @param commands      Список всех команд.
-     * @param nodeUserDAO   DAO объект для пользователя
-     * @param accessControl Объект для контроля доступа к админ панели
-     */
     public CommandServiceImpl(List<Command> commands, NodeUserDAO nodeUserDAO, AccessControl accessControl) {
         this.stateMap = commands.stream().collect(Collectors.toMap(Command::getType, Function.identity()));
         this.nodeUserDAO = nodeUserDAO;
         this.accessControl = accessControl;
     }
 
-    /**
-     * Метод для отправки команды.
-     *
-     * @param nodeUser Пользователь, отправляющий команду.
-     * @param text     Текст команды.
-     * @return Ответ на команду.
-     */
     @Override
     public String send(NodeUser nodeUser, String text) {
         Command command = stateMap.get(nodeUser.getState());

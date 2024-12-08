@@ -10,8 +10,10 @@ public enum MenuAdmin {
     TradingStatsSpecificUser(ButtonLabelManager.tradingStatsSpecificUser),
     StopTradingAllUsers(ButtonLabelManager.stopTradingAllUsers),
     GrantAdminRights(ButtonLabelManager.grantAdminRights),
-    MainMenu(ButtonLabelManager.mainMenu),
-    Cache(ButtonLabelManager.cancelCache);
+    RebutNode(ButtonLabelManager.rebutNode),
+    RebutTelegram(ButtonLabelManager.rebutTelegram),
+    RebutTrade(ButtonLabelManager.rebutTrade),
+    MainMenu(ButtonLabelManager.mainMenu);
 
     private final String value;
 

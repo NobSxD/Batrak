@@ -10,12 +10,19 @@ import org.example.entity.enams.state.TradeState;
 public class TradeStatusManager {
     private volatile TradeState currentTradeState;
     private CountDownLatch countDownLatch;
+    private boolean stop;
+    private boolean cancel;
 
     public TradeStatusManager() {
+        setStop(false);
+        setCancel(false);
         this.currentTradeState = TradeState.TRADE_START;
     }
 
     public TradeState getCurrentTradeState() {
+        if (currentTradeState == null) {
+            throw new RuntimeException("Состояние трейденга = null");
+        }
         return currentTradeState;
     }
 
@@ -32,14 +39,17 @@ public class TradeStatusManager {
     }
 
     public void stopTrading() {
+        setStop(true);
         setCurrentTradeState(TradeState.TRADE_STOP);
         log.info("Торговля остановлена.");
     }
+
     public void startTrading() {
         setCurrentTradeState(TradeState.TRADE_START);
         log.info("Торговля начата.");
     }
-    public void pendingTrading(){
+
+    public void pendingTrading() {
         if (!currentTradeState.equals(TradeState.TRADE_PENDING)) {
             setCurrentTradeState(TradeState.TRADE_PENDING);
             log.info("Депозид для долнейшей покупки исчерпан, ожидаем возвращение курса");
@@ -47,6 +57,7 @@ public class TradeStatusManager {
     }
 
     public void cancelTrading() {
+        setCancel(true);
         setCurrentTradeState(TradeState.TRADE_CANCEL);
         countDownLatch.countDown();
         log.info("Торговля отменена.");
@@ -56,24 +67,28 @@ public class TradeStatusManager {
         setCurrentTradeState(TradeState.BUY);
         log.info("Ордер на покупку успешно выполнен.");
     }
+
     public void sell() {
         setCurrentTradeState(TradeState.SELL);
         log.info("Ордер на продажу успешно выполнен.");
     }
+
     public void sellLast() {
         setCurrentTradeState(TradeState.TRADE_LAST);
         log.info("Ордер на последнию продажу успешно выполнен. \n" +
                 "Цикл завершился, делаю паузу и начинаю новый цикл торговли.");
     }
-    public void stopOK(){
+
+    public void stopOK() {
         setCurrentTradeState(TradeState.TRADE_STOP_OK);
         log.info("Торговля завершилась по команде TRADE_STOP, при следующем обращение данная стратегия будет удалена.");
     }
+
     public CountDownLatch getCountDownLatch() {
         return countDownLatch;
     }
 
-    public void countDown(){
+    public void countDown() {
         countDownLatch.countDown();
     }
 
@@ -81,9 +96,24 @@ public class TradeStatusManager {
         countDownLatch = new CountDownLatch(size);
     }
 
-    public void clearUp(){
+    public void clearUp() {
         countDownLatch = null;
         currentTradeState = null;
     }
 
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    public boolean isCancel() {
+        return cancel;
+    }
+
+    public void setCancel(boolean cancel) {
+        this.cancel = cancel;
+    }
 }

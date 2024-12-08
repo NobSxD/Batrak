@@ -45,18 +45,6 @@ services:
     networks:
       - tradebot-network
 
-  redis:
-    image: redis:6.2
-    container_name: redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./volume/redis:/data
-    environment:
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-    command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]
-    networks:
-      - tradebot-network
 
 
 networks:
