@@ -18,10 +18,12 @@ public class BotHelp implements Command, RoleProvider {
 
     @Override
     public String send(NodeUser nodeUser, String text) {
+        nodeUser.setState(UserState.BASIC_STATE);
         return """
                 Выбирите действие:
                 /start - выбор биржи
                 /main - вызвать главное меню
+                /state_trade
                 /info_settings - посмотреть текущие настройки
                 /cancel - отмена выполнения текущей команды;
                 адрес сайта: http://batrak.zapto.org/

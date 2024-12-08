@@ -26,6 +26,7 @@ public class AdminBanUser implements Command, RoleProvider {
     private final NodeUserDAO nodeUserDAO;
     private final ProducerTelegramService producerTelegramService;
 
+
     @Override
     public String send(NodeUser nodeUser, String nameAccount) {
         List<NodeUser> byIsActiveFalse = nodeUserDAO.findByIsActiveFalse();

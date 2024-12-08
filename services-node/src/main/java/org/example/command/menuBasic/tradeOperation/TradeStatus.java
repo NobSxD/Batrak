@@ -23,6 +23,7 @@ public class TradeStatus implements Command, RoleProvider {
         try {
             log.info("Пользователь {}, запросил состояние трейдинга", nodeUser.getUsername());
             producerXChangeService.stateTrade(nodeUser);
+            nodeUser.setState(UserState.BASIC_STATE);
         } catch (Exception e){
             log.error("Произошла неожиданная ошибка в {}", e.getMessage());
         }

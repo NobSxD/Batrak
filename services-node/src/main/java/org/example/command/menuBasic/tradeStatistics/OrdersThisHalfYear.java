@@ -35,6 +35,7 @@ public class OrdersThisHalfYear implements Command, RoleProvider {
         try {
             LocalDateTime startOfHalfYear = LocalDateTime.now().minusMonths(6).with(LocalTime.MIN);
             List<NodeOrder> allOrdersThisHalfYear = nodeOrdersDAO.findAllOrdersThisHalfYear(startOfHalfYear, nodeUser.getId(), nodeUser.getConfigTrade().isEnableDemoTrading());
+            nodeUser.setState(UserState.BASIC_STATE);
             return messageStatistics(allOrdersThisHalfYear, ButtonLabelManager.thisHalfYear);
         } catch (Exception e) {
             log.error("В методе OrdersThisYear произошла ошибка {}", e.getMessage());

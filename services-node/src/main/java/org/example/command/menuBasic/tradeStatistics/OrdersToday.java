@@ -35,6 +35,7 @@ public class OrdersToday implements Command, RoleProvider {
         try {
             LocalDateTime today = LocalDateTime.now().with(LocalTime.MIN);
             List<NodeOrder> allOrdersToday = nodeOrdersDAO.findAllOrdersToday(today, nodeUser.getId(), nodeUser.getConfigTrade().isEnableDemoTrading());
+            nodeUser.setState(UserState.BASIC_STATE);
 
             return messageStatistics(allOrdersToday, ButtonLabelManager.today);
         } catch (Exception e) {

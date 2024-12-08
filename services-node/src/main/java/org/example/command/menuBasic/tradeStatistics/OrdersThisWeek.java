@@ -36,6 +36,7 @@ public class OrdersThisWeek implements Command, RoleProvider {
         try {
             LocalDateTime startOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK, 1).with(LocalTime.MIN);
             List<NodeOrder> allOrdersThisWeek = nodeOrdersDAO.findAllOrdersThisWeek(startOfWeek, nodeUser.getId(), nodeUser.getConfigTrade().isEnableDemoTrading());
+            nodeUser.setState(UserState.BASIC_STATE);
             return messageStatistics(allOrdersThisWeek, ButtonLabelManager.thisOfWeek);
         } catch (Exception e) {
             log.error("В методе OrdersThisYear произошла ошибка {}", e.getMessage());
