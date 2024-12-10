@@ -28,20 +28,20 @@ public class WalletDTO {
         switch (orderType) {
             case BID -> {
                 // Если BID, проверяем, хватает ли средств на депозите
-                if (deposit.compareTo(amount) >= 0) {
+                if (deposit.compareTo(amount) > 0) {
                     deposit = deposit.subtract(amount); // уменьшаем депозит
                     this.coin = this.coin.add(coin);    // увеличиваем количество монет
                 } else {
-                    throw new IllegalArgumentException("Not enough funds in deposit for BID operation");
+                    deposit = BigDecimal.valueOf(0);
                 }
             }
             case ASK -> {
                 // Если ASK, проверяем, хватает ли монет для продажи
-                if (this.coin.compareTo(coin) >= 0) {
+                if (this.coin.compareTo(coin) > 0) {
                     this.coin = this.coin.subtract(coin); // уменьшаем количество монет
                     deposit = deposit.add(amount);        // добавляем к депозиту
                 } else {
-                    throw new IllegalArgumentException("Not enough coins for ASK operation");
+                    deposit = BigDecimal.valueOf(0);
                 }
             }
             default -> throw new IllegalStateException("Unsupported order type: " + orderType);
