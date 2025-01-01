@@ -2,6 +2,7 @@ package org.example.service.impl;
 
 import org.example.service.ProcessServiceCommand;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 
 import lombok.Data;
 
@@ -25,9 +26,9 @@ public class ProcessServiceCommandImpl implements ProcessServiceCommand {
     @Override
     public NodeUser findOrSaveAppUser(Update update) {
 
-        var telegramUser = update.getMessage() == null ? update.getCallbackQuery().getFrom() : update.getMessage().getFrom();
+        User telegramUser = update.getMessage() == null ? update.getCallbackQuery().getFrom() : update.getMessage().getFrom();
 
-        var appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId()).orElse(null);
+        NodeUser appUserOpt = nodeUserDAO.findByTelegramUserId(telegramUser.getId()).orElse(null);
         if (appUserOpt == null) {
             ConfigTrade settingsTrade = new ConfigTrade();
             appUserOpt = NodeUser.builder()
