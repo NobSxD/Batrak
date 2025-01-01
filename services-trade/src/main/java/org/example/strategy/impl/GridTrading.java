@@ -87,7 +87,6 @@ public class GridTrading extends StrategyBasic {
                     break;
                 }
 
-                log.info("Начинаю торговлю в методе startTradingCycle");
                 startTradingCycle(nodeUser);
                 log.info("Блокирую поток пока метод startTradingCycle не разблокирует его");
                 awaitLatch();
@@ -97,12 +96,8 @@ public class GridTrading extends StrategyBasic {
                     break;
                 }
                 // Подождите 40 секунд перед следующим циклом
-                log.info("""
-                                Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю,
-                                tradeStatusManager: {}
-                                lastPrice : {}
-                                endPrice: {}
-                                user: {}""",
+                log.info("Цикл завершился, ожидаем 40 секунда и начинаем новую торговлю");
+                log.info("tradeStatusManager: {}, lastPrice : {}, endPrice: {}, user: {}",
                         tradeStatusManager.getCurrentTradeState(), marketTradeDetails.getLastPrice(),
                         marketTradeDetails.getEndPrice(), nodeUser.getUsername());
                 marketTradeDetails.setLastPrice(null);
@@ -151,6 +146,7 @@ public class GridTrading extends StrategyBasic {
     public NodeOrder processPrice(BigDecimal currentPrice, NodeUser nodeUser) {
         NodeOrder nodeOrder = null;
         if (tradeStatusManager.getCurrentTradeState().equals(TradeState.TRADE_START)) {
+            log.info("-------------------------------------------------------");
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
             marketTradeDetails.setEndPrice(FinancialCalculator.increaseByPercentage(currentPrice, marketTradeDetails.getStepSell()));
             marketTradeDetails.setNextBay(FinancialCalculator.subtractPercentage(currentPrice, marketTradeDetails.getStepBay()));
@@ -161,6 +157,7 @@ public class GridTrading extends StrategyBasic {
                     currentPrice, marketTradeDetails.getEndPrice(), marketTradeDetails.getNextBay(),
                     marketTradeDetails.getNexSell(), nodeOrder.getLimitPrice());
         } else if (shouldLastSell(currentPrice)) {
+            log.info("-------------------------------------------------------");
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
             marketTradeDetails.setRecentAction("LAST_SELL");
             tradeStatusManager.sellLast();
@@ -169,6 +166,7 @@ public class GridTrading extends StrategyBasic {
             dispose(disposable);
             log.info("2.LAST_SELL: sellPrice: {}, nodeOrderPrice: {} ", currentPrice, nodeOrder.getLimitPrice());
         } else if (shouldBuy(currentPrice)) {
+            log.info("-------------------------------------------------------");
             nodeOrder = executeBuyOrder(currentPrice, nodeUser);
             marketTradeDetails.setNextBay(FinancialCalculator.subtractPercentage(currentPrice, marketTradeDetails.getStepBay()));
             marketTradeDetails.setNexSell(FinancialCalculator.addPercentage(marketTradeDetails.getLastPrice(), marketTradeDetails.getStepSell()));
@@ -176,6 +174,7 @@ public class GridTrading extends StrategyBasic {
             log.info("3.BAY: bayPrice: {}, nextBay: {}, nextSell: {}, nodeOrderPrice: {} ",
                     currentPrice, marketTradeDetails.getNextBay(), marketTradeDetails.getNexSell(), nodeOrder.getLimitPrice());
         } else if (shouldSell(currentPrice)) {
+            log.info("-------------------------------------------------------");
             nodeOrder = executeSellOrder(currentPrice, nodeUser);
             marketTradeDetails.setNextBay(FinancialCalculator.subtractPercentage(currentPrice, marketTradeDetails.getStepBay()));
             marketTradeDetails.setNexSell(FinancialCalculator.addPercentage(marketTradeDetails.getLastPrice(), marketTradeDetails.getStepSell()));
@@ -194,7 +193,7 @@ public class GridTrading extends StrategyBasic {
             return false;
         }
         if (canBuy) {
-            log.info("shouldSell: currentPrice - nextBay = {} <= {}, lastPrice = {}, getCountDeal {}, getMaxCountDeal {}",
+            log.info("shouldBuy: currentPrice - nextBay = {} <= {}, lastPrice = {}, getCountDeal {}, getMaxCountDeal {}",
                     currentPrice, marketTradeDetails.getNextBay(), marketTradeDetails.getLastPrice(),
                     marketTradeDetails.getCountDeal(), marketTradeDetails.getMaxCountDeal());
             return true;

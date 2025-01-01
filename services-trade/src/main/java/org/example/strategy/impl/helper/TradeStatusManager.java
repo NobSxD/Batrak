@@ -75,7 +75,7 @@ public class TradeStatusManager {
 
     public void sellLast() {
         setCurrentTradeState(TradeState.TRADE_LAST);
-        log.info("Ордер на последнию продажу успешно выполнен. \n" +
+        log.info("Ордер на последнию продажу успешно выполнен. " +
                 "Цикл завершился, делаю паузу и начинаю новый цикл торговли.");
     }
 
