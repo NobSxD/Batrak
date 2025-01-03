@@ -41,7 +41,7 @@ public class WalletDTO {
                     this.coin = this.coin.subtract(coin); // уменьшаем количество монет
                     deposit = deposit.add(amount);        // добавляем к депозиту
                 } else {
-                    deposit = BigDecimal.valueOf(0);
+                    this.coin = BigDecimal.valueOf(0);
                 }
             }
             default -> throw new IllegalStateException("Unsupported order type: " + orderType);
